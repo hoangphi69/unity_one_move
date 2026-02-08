@@ -1,0 +1,15 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/title_ui_style.uss?fileID=7433441132597879392&amp;guid=33f35e47f5c8f4900b5342057d7a081c&amp;type=3#title_ui_style"/>
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0.6); right: auto; width: 36%; height: auto; top: 0; left: 0; padding-top: 48px; padding-right: 48px; padding-bottom: 48px; padding-left: 48px;">
+        <ui:VisualElement name="title" style="flex-grow: 0; position: relative; top: auto; left: auto; flex-direction: row; align-items: center; justify-content: center; padding-bottom: 58px; padding-top: 42px;">
+            <ui:Label text="One move" name="" style="font-size: 54px; -unity-font-style: bold; -unity-text-align: upper-center;"/>
+            <ui:Label text="demo" style="font-size: 28px; -unity-font-style: bold; -unity-text-align: upper-center; margin-left: 16px; padding-top: 16px; padding-right: 16px; padding-bottom: 16px; padding-left: 16px; align-items: stretch; color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="menu" style="flex-grow: 1;">
+            <ui:Button text="Continue" name="continue" class="menu-btn"/>
+            <ui:Button text="New game" name="new_game" class="menu-btn"/>
+            <ui:Button text="Settings" name="settings" class="menu-btn"/>
+        </ui:VisualElement>
+        <ui:Button text="Quit" name="quit" class="menu-btn"/>
+    </ui:VisualElement>
+</ui:UXML>

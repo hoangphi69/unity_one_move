@@ -1,0 +1,65 @@
+:root {
+}
+
+.pause-option-text {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    padding-top: 0;
+    padding-right: 8px;
+    padding-bottom: 32px;
+    padding-left: 0;
+    -unity-text-align: upper-left;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.pause-option-text:hover {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    padding-top: 0;
+    padding-right: 8px;
+    padding-bottom: 32px;
+    padding-left: 0;
+    -unity-text-align: upper-left;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-font-style: italic;
+}
+
+.pause-option-text:focus {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    padding-top: 0;
+    padding-right: 8px;
+    padding-bottom: 32px;
+    padding-left: 0;
+    -unity-text-align: upper-left;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-font-style: italic;
+}
+
+.pause-option-text.selected {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    padding-top: 0;
+    padding-right: 8px;
+    padding-bottom: 32px;
+    padding-left: 0;
+    -unity-text-align: upper-left;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-font-style: bold;
+}

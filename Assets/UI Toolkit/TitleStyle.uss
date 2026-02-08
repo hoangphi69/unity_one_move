@@ -1,0 +1,22 @@
+:root {
+}
+
+.menu-btn {
+    padding-top: 24px;
+    padding-right: 12px;
+    padding-bottom: 24px;
+    padding-left: 12px;
+    -unity-font-style: bold;
+    font-size: 48px;
+    margin-bottom: 24px;
+}
+
+.menu-btn:hover {
+    background-color: rgb(229, 229, 229);
+}
+
+
+
+.menu-btn:focus {
+    background-color: rgb(229, 229, 229);
+}
