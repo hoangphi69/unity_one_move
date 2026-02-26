@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,10 +12,9 @@ public class InputActionsManager : MonoBehaviour
 {
   public static InputActionsManager Instance { get; private set; }
 
-  // Reference to your generated Input Action class
   public InputActions inputActions;
-
   public InputState CurrentState { get; private set; }
+  public event Func<bool> OnUIBackRequested;
 
   void Awake()
   {
@@ -24,7 +24,6 @@ public class InputActionsManager : MonoBehaviour
 
   void OnEnable()
   {
-    // Centralized Escape/Back Handler
     inputActions.Player.Escape.performed += OnEscapeTriggered;
     inputActions.UI.Escape.performed += OnEscapeTriggered;
 
@@ -43,7 +42,6 @@ public class InputActionsManager : MonoBehaviour
   {
     CurrentState = newState;
 
-    // Reset all first to ensure clean slate
     inputActions.Player.Disable();
     inputActions.UI.Disable();
 
@@ -57,19 +55,23 @@ public class InputActionsManager : MonoBehaviour
         break;
     }
 
-    // Debug.Log($"Input State Switched to: {newState}");
+    print($"Input State: {CurrentState}");
   }
 
   private void OnEscapeTriggered(InputAction.CallbackContext context)
   {
-    // Route the Escape key based on context
     switch (CurrentState)
     {
       case InputState.World:
         GameSceneManager.Instance.TogglePause();
         break;
       case InputState.UI:
-        GameSceneManager.Instance.TogglePause();
+        bool backRequested = OnUIBackRequested?.Invoke() ?? false;
+        if (!backRequested)
+        {
+          print("escape");
+          GameSceneManager.Instance.TogglePause();
+        }
         break;
     }
   }

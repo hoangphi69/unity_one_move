@@ -21,7 +21,6 @@ public class DialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onEnterDialogue += EnterDialogue;
     GameEventsManager.Instance.dialogueEvents.onChoiceSelected += SelectChoice;
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged += SetTypingState;
-    InputActionsManager.Instance.inputActions.UI.Submit.performed += ContinueDialogue;
   }
 
   void OnDisable()
@@ -29,7 +28,6 @@ public class DialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onEnterDialogue -= EnterDialogue;
     GameEventsManager.Instance.dialogueEvents.onChoiceSelected -= SelectChoice;
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged -= SetTypingState;
-    InputActionsManager.Instance.inputActions.UI.Submit.performed -= ContinueDialogue;
   }
 
   void SetTypingState(bool isTyping) => this.isTyping = isTyping;
@@ -41,6 +39,7 @@ public class DialogueManager : MonoBehaviour
 
     dialogueActive = true;
     InputActionsManager.Instance.SetState(InputState.UI);
+    InputActionsManager.Instance.inputActions.UI.Submit.performed += ContinueDialogue;
     GameEventsManager.Instance.dialogueEvents.StartDialogue();
     story.ChoosePathString(knotName);
     ContinueDialogue();
@@ -49,6 +48,7 @@ public class DialogueManager : MonoBehaviour
   void ContinueDialogue(InputAction.CallbackContext context) => ContinueDialogue();
   void ContinueDialogue()
   {
+    if (!dialogueActive) return;
     if (story.currentChoices.Count > 0) return;
     if (isTyping) return;
     if (story.canContinue)
@@ -66,6 +66,7 @@ public class DialogueManager : MonoBehaviour
   {
     dialogueActive = false;
     GameEventsManager.Instance.dialogueEvents.EndDialogue();
+    InputActionsManager.Instance.inputActions.UI.Submit.performed -= ContinueDialogue;
     InputActionsManager.Instance.SetState(InputState.World);
   }
 

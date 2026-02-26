@@ -197,8 +197,6 @@ public class GameSceneManager : MonoBehaviour
 
   public void TogglePause()
   {
-    print("TogglePause");
-    // Don't pause if loading, or if we are on the Title screen
     if (_isLoading || _currentOverlayScene == _titleScene) return;
 
     if (_currentOverlayScene == _pauseScene)

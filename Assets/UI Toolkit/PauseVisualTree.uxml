@@ -1,12 +1,52 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/PauseStyle.uss?fileID=7433441132597879392&amp;guid=31b4fb66182c14d03a55c458aa2f6694&amp;type=3#PauseStyle"/>
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.97);">
-        <ui:VisualElement style="flex-grow: 1; position: absolute; height: auto; width: 900px; top: 239px; left: 174px;">
-            <ui:Label text="Paused" name="title" style="color: rgb(255, 255, 255); font-size: 48px; padding-bottom: 18px; border-top-width: 0; border-right-width: 0; border-bottom-width: 2px; border-left-width: 0; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); margin-bottom: 60px;"/>
-            <ui:Button text="Resume" name="resume" class="pause-option-text"/>
-            <ui:Button text="Restart" name="restart" class="pause-option-text"/>
-            <ui:Button text="Options" name="options" class="pause-option-text"/>
-            <ui:Button text="Return to Title" name="return_to_title" class="pause-option-text" style="margin-top: 72px;"/>
+        <ui:VisualElement name="panel-main" enabled="true" class="panel">
+            <ui:Label text="PAUSED" name="title" class="title"/>
+            <ui:Button text="Resume" name="resume" class="option-text"/>
+            <ui:Button text="Restart" name="restart" class="pause-option-text option-text"/>
+            <ui:Button text="Options" name="options" class="pause-option-text option-text"/>
+            <ui:Button text="Return to Title" name="return_to_title" class="pause-option-text option-text" style="margin-top: 72px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="panel-options" class="panel">
+            <ui:Label text="OPTIONS" name="title" class="title"/>
+            <ui:Button text="Graphics" name="graphics" class="option-text"/>
+            <ui:Button text="Audio" name="audio" class="pause-option-text option-text"/>
+            <ui:Button text="Language" name="language" class="pause-option-text option-text"/>
+            <ui:Button text="Credits" name="credits" class="pause-option-text option-text"/>
+            <ui:Button text="Back" name="back" class="option-text" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; right: 208px; bottom: 148px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="panel-graphics" class="panel">
+            <ui:Label text="GRAPHICS" name="title" class="title"/>
+            <ui:VisualElement name="preset" class="option-field">
+                <ui:Label text="Preset"/>
+                <ui:VisualElement class="select-box" style="width: 352px;">
+                    <ui:Button name="" class="arrow-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1008301579157283121&amp;guid=cd522062e2bec442492422704804c73a&amp;type=3#arrow-left@2x&quot;);"/>
+                    <ui:Label text="Medium" style="flex-grow: 1; -unity-text-align: middle-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
+                    <ui:Button name="" class="arrow-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1087164816274819069&amp;guid=cd522062e2bec442492422704804c73a&amp;type=3#arrow-right@2x&quot;);"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="resolution" class="option-field">
+                <ui:Label text="Resolution"/>
+                <ui:VisualElement class="select-box" style="width: 352px;">
+                    <ui:Button name="" class="arrow-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1008301579157283121&amp;guid=cd522062e2bec442492422704804c73a&amp;type=3#arrow-left@2x&quot;);"/>
+                    <ui:Label text="1920x1080" name="Label" style="flex-grow: 1; -unity-text-align: middle-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
+                    <ui:Button name="" class="arrow-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1087164816274819069&amp;guid=cd522062e2bec442492422704804c73a&amp;type=3#arrow-right@2x&quot;);"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="fullscreen" class="option-field">
+                <ui:Label text="Fullscreen"/>
+                <ui:VisualElement>
+                    <ui:Toggle label="ON" name="switch-toggle" value="true" style="align-items: center;">
+                        <ui:VisualElement name="knob" class="switch-knob" style="right: 54px;"/>
+                    </ui:Toggle>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="brightness" class="option-field">
+                <ui:Label text="Brightness"/>
+                <ui:SliderInt label="100" value="42" high-value="100" name="custom-slider" fill="true" style="align-items: center; width: 375px;"/>
+            </ui:VisualElement>
+            <ui:Button text="Back" name="back" class="option-text" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; right: 208px; bottom: 148px;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
