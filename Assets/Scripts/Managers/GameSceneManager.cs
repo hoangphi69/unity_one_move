@@ -31,7 +31,7 @@ public class GameSceneManager : MonoBehaviour
   {
     if (Instance != null) { Destroy(gameObject); return; }
     Instance = this;
-    DontDestroyOnLoad(gameObject);
+    // DontDestroyOnLoad(gameObject);
     _cts = new CancellationTokenSource();
   }
 
@@ -241,7 +241,8 @@ public class GameSceneManager : MonoBehaviour
     await UnloadAsync(_currentWorldScene);
     await LoadAdditiveAsync(_currentWorldScene);
 
-    // await UnloadAsync(_loadingScene);
+    InputActionsManager.Instance.SetState(InputState.World);
+
     _isLoading = false;
   }
 

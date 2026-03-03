@@ -28,6 +28,10 @@
     flex-grow: 1;
 }
 
+.hidden {
+    display: none;
+}
+
 .title {
     color: rgb(255, 255, 255);
     font-size: 48px;
@@ -109,7 +113,95 @@
     justify-content: space-between;
 }
 
-.arrow-btn {
+.int-slider {
+    width: 376px;
+    height: 40px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.int-slider__value {
+    color: white;
+    width: 45px;
+    margin-right: 32px;
+    -unity-text-align: middle-right;
+}
+
+.int-slider__input {
+    flex-grow: 1;
+}
+
+.int-slider .unity-base-slider__tracker {
+    background-color: #333;
+    height: 8px;
+}
+
+.int-slider .unity-base-slider__fill {
+    background-color: white;
+}
+
+.int-slider .unity-base-slider__dragger {
+    background-color: white;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    top: 30%;
+    rotate: 45deg;
+    border-width: 0px;
+}
+
+.switch-toggle {
+    flex-direction: row;
+    align-items: center;
+}
+
+.switch-toggle__value {
+    color: #aaa; 
+    -unity-font-style: bold;
+    margin-right: 32px;
+    -unity-text-align: middle-right; 
+    transition-property: color;
+    transition-duration: 0.2s;
+}
+
+.switch-toggle__track {
+    width: 96px;
+    height: 48px;
+    padding: 6px;
+    background-color: #555;
+    justify-content: center;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+}
+
+.switch-toggle__knob {
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    transition-property: background-color, translate;
+    transition-duration: 0.2s;
+    translate: 0 0;
+}
+
+.switch-toggle.checked .switch-toggle__track {
+    background-color: white;
+}
+
+.switch-toggle.checked .switch-toggle__knob {
+    translate: 48px 0;
+    background-color: #0d0d0d;
+}
+
+.switch-toggle.checked .switch-toggle__label {
+    color: white; 
+}
+
+.horizontal-selector {
+    flex-direction: row;
+    width: 352px;
+}
+
+.horizontal-selector__button {
     background-color: rgba(255, 255, 255, 0);
     margin-top: 0;
     margin-right: 0;
@@ -128,68 +220,15 @@
     border-left-width: 0;
 }
 
-.select-box {
-    flex-direction: row;
-    width: 320px;
-}
-
-#custom-slider Label {
-    min-width: auto;
-    margin-right: 32px;
-    margin-bottom: 0;
+.horizontal-selector__value {
+    flex-grow: 1;
+    -unity-text-align: middle-center;
     margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
     margin-left: 0;
-    color: white;
-}
-
-#custom-slider #unity-dragger {
-    width: 32px;
-    height: 32px;
-    position: relative;
-    top: 30%;
-    rotate: 45deg;
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-}
-
-#switch-toggle .unity-toggle__checkmark {
-    width: 96px;
-    height: 48px;
-    background-color: rgb(61, 61, 61);
-    border-width: 0;
-    background-image: none;
-    padding: 4px;
-    transition-property: background-color;
-    transition-duration: 0.2s;
-}
-
-#knob {
-    width: 36px;
-    height: 36px;
-    background-color: rgb(240, 240, 240);
-    position: absolute;
-    transition-property: translate, background-color;
-    transition-duration: 0.2s;
-    right: 4px;
-}
-
-#switch-toggle:checked #knob {
-    translate: 48px 0;
-    background-color: rgb(13, 13, 13);
-}
-
-#switch-toggle:checked .unity-toggle__checkmark {
-    background-color: rgb(255, 255, 255);
-}
-
-#switch-toggle .unity-label {
-    margin-right: 32px;
-    min-width: auto;
-    color: white;
-}
-
-.hidden {
-    display: none;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
 }

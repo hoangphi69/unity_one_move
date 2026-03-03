@@ -51,6 +51,7 @@ public class DialogueManager : MonoBehaviour
     if (!dialogueActive) return;
     if (story.currentChoices.Count > 0) return;
     if (isTyping) return;
+    print("debug");
     if (story.canContinue)
     {
       GameEventsManager.Instance.dialogueEvents.DisplayDialogue(

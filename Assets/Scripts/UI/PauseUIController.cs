@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,7 +21,13 @@ public class PauseUIController : MonoBehaviour
 
   // -- Graphics panel --
   private VisualElement _graphicsPanel;
+  private HorizontalSelector _graphicsQualitySelector;
+  private HorizontalSelector _graphicsResolutionSelector;
+  private SwitchToggle _graphicsFullscreenToggle;
+  private IntSlider _graphicsBrightnessSlider;
   private Button _graphicsBackButton;
+
+  private Resolution[] _resolutions;
 
   // -- Navigation --
   private Stack<VisualElement> _navigationHistory = new Stack<VisualElement>();
@@ -29,7 +36,6 @@ public class PauseUIController : MonoBehaviour
   void Awake()
   {
     _root = GetComponent<UIDocument>().rootVisualElement;
-
 
     // -- Main Panel --
     _mainPanel = _root.Q("panel-main");
@@ -45,11 +51,16 @@ public class PauseUIController : MonoBehaviour
 
     // -- Graphics Panel --
     _graphicsPanel = _root.Q("panel-graphics");
+    _graphicsQualitySelector = _graphicsPanel.Q<HorizontalSelector>("quality-selector");
+    _graphicsResolutionSelector = _graphicsPanel.Q<HorizontalSelector>("resolution-selector");
+    _graphicsFullscreenToggle = _graphicsPanel.Q<SwitchToggle>("fullscreen-toggle");
+    _graphicsBrightnessSlider = _graphicsPanel.Q<IntSlider>("brightness-slider");
     _graphicsBackButton = _graphicsPanel.Q<Button>("back");
 
-    // _mainPanel.AddToClassList("menu-panel");
-    // _optionsPanel.AddToClassList("menu-panel");
-    // _graphicsPanel.AddToClassList("menu-panel");
+    InitializeQuality();
+    InitializeResolutions();
+    InitializeFullScreen();
+    InitializeBrightness();
     ShowRootPanel();
   }
 
@@ -63,6 +74,10 @@ public class PauseUIController : MonoBehaviour
     _graphicsButton.clicked += () => SwitchPanel(_graphicsPanel);
     _optionsBackButton.clicked += GoBack;
 
+    _graphicsQualitySelector.RegisterValueChangedCallback(ChangeQuality);
+    _graphicsResolutionSelector.RegisterValueChangedCallback(ChangeResolution);
+    _graphicsFullscreenToggle.RegisterValueChangedCallback(ChangeFullScreen);
+    _graphicsBrightnessSlider.RegisterValueChangedCallback(ChangeBrightness);
     _graphicsBackButton.clicked += GoBack;
 
     InputActionsManager.Instance.OnUIBackRequested += HandleEscapeAction;
@@ -76,12 +91,79 @@ public class PauseUIController : MonoBehaviour
 
     _optionsBackButton.clicked -= GoBack;
 
+    _graphicsResolutionSelector.UnregisterValueChangedCallback(ChangeResolution);
+    _graphicsQualitySelector.UnregisterValueChangedCallback(ChangeQuality);
+    _graphicsFullscreenToggle.UnregisterValueChangedCallback(ChangeFullScreen);
+    _graphicsBrightnessSlider.UnregisterValueChangedCallback(ChangeBrightness);
     _graphicsBackButton.clicked -= GoBack;
 
     InputActionsManager.Instance.OnUIBackRequested -= HandleEscapeAction;
   }
 
-  private void ShowRootPanel()
+  void ChangeQuality(ChangeEvent<string> evt)
+  {
+    QualitySettings.SetQualityLevel(_graphicsQualitySelector.selectedIndex);
+  }
+
+  void ChangeResolution(ChangeEvent<string> evt)
+  {
+    Resolution r = _resolutions[_graphicsResolutionSelector.selectedIndex];
+    Screen.SetResolution(r.width, r.height, Screen.fullScreen);
+  }
+
+  void ChangeFullScreen(ChangeEvent<bool> evt)
+  {
+    Screen.fullScreen = evt.newValue;
+  }
+
+  void ChangeBrightness(ChangeEvent<int> evt)
+  {
+    Screen.brightness = evt.newValue * 0.01f;
+  }
+
+  void InitializeBrightness()
+  {
+    _graphicsBrightnessSlider.minValue = 0;
+    _graphicsBrightnessSlider.maxValue = 100;
+    _graphicsBrightnessSlider.fill = true;
+    _graphicsBrightnessSlider.SetValueWithoutNotify((int)(Screen.brightness * 100));
+  }
+
+  void InitializeFullScreen()
+  {
+    _graphicsFullscreenToggle.SetValueWithoutNotify(Screen.fullScreen);
+  }
+
+  void InitializeQuality()
+  {
+    _graphicsQualitySelector.choices = QualitySettings.names.ToList();
+    _graphicsQualitySelector.selectedIndex = QualitySettings.GetQualityLevel();
+  }
+
+  void InitializeResolutions()
+  {
+    _resolutions = Screen.resolutions
+            .Select(r => new Resolution { width = r.width, height = r.height })
+            .Distinct()
+            .ToArray();
+
+    // Convert the array of structs into a list of strings for the UI
+    _graphicsResolutionSelector.choices = _resolutions
+        .Select(r => $"{r.width}x{r.height}")
+        .ToList();
+
+    // Find current resolution
+    for (int i = 0; i < _resolutions.Length; i++)
+    {
+      if (_resolutions[i].width == Screen.width && _resolutions[i].height == Screen.height)
+      {
+        _graphicsResolutionSelector.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  void ShowRootPanel()
   {
     _navigationHistory.Clear();
 
@@ -95,7 +177,7 @@ public class PauseUIController : MonoBehaviour
 
   // --- Navigation Logic ---
 
-  private void SwitchPanel(VisualElement targetPanel)
+  void SwitchPanel(VisualElement targetPanel)
   {
     if (_currentPanel == targetPanel) return;
 
@@ -111,7 +193,7 @@ public class PauseUIController : MonoBehaviour
     _currentPanel = targetPanel;
   }
 
-  private void GoBack()
+  void GoBack()
   {
     if (_navigationHistory.Count > 0)
     {
@@ -127,7 +209,7 @@ public class PauseUIController : MonoBehaviour
     }
   }
 
-  private bool HandleEscapeAction()
+  bool HandleEscapeAction()
   {
     if (_navigationHistory.Count > 0)
     {

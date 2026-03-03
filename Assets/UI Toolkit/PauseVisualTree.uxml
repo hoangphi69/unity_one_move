@@ -18,33 +18,21 @@
         </ui:VisualElement>
         <ui:VisualElement name="panel-graphics" class="panel">
             <ui:Label text="GRAPHICS" name="title" class="title"/>
-            <ui:VisualElement name="preset" class="option-field">
-                <ui:Label text="Preset"/>
-                <ui:VisualElement class="select-box" style="width: 352px;">
-                    <ui:Button name="" class="arrow-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1008301579157283121&amp;guid=cd522062e2bec442492422704804c73a&amp;type=3#arrow-left@2x&quot;);"/>
-                    <ui:Label text="Medium" style="flex-grow: 1; -unity-text-align: middle-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
-                    <ui:Button name="" class="arrow-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1087164816274819069&amp;guid=cd522062e2bec442492422704804c73a&amp;type=3#arrow-right@2x&quot;);"/>
-                </ui:VisualElement>
+            <ui:VisualElement name="quality" class="option-field">
+                <ui:Label text="Quality"/>
+                <HorizontalSelector name="quality-selector"/>
             </ui:VisualElement>
             <ui:VisualElement name="resolution" class="option-field">
                 <ui:Label text="Resolution"/>
-                <ui:VisualElement class="select-box" style="width: 352px;">
-                    <ui:Button name="" class="arrow-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1008301579157283121&amp;guid=cd522062e2bec442492422704804c73a&amp;type=3#arrow-left@2x&quot;);"/>
-                    <ui:Label text="1920x1080" name="Label" style="flex-grow: 1; -unity-text-align: middle-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
-                    <ui:Button name="" class="arrow-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1087164816274819069&amp;guid=cd522062e2bec442492422704804c73a&amp;type=3#arrow-right@2x&quot;);"/>
-                </ui:VisualElement>
+                <HorizontalSelector name="resolution-selector"/>
             </ui:VisualElement>
             <ui:VisualElement name="fullscreen" class="option-field">
                 <ui:Label text="Fullscreen"/>
-                <ui:VisualElement>
-                    <ui:Toggle label="ON" name="switch-toggle" value="true" style="align-items: center;">
-                        <ui:VisualElement name="knob" class="switch-knob" style="right: 54px;"/>
-                    </ui:Toggle>
-                </ui:VisualElement>
+                <SwitchToggle name="fullscreen-toggle"/>
             </ui:VisualElement>
             <ui:VisualElement name="brightness" class="option-field">
                 <ui:Label text="Brightness"/>
-                <ui:SliderInt label="100" value="42" high-value="100" name="custom-slider" fill="true" style="align-items: center; width: 375px;"/>
+                <IntSlider name="brightness-slider" max-value="10"/>
             </ui:VisualElement>
             <ui:Button text="Back" name="back" class="option-text" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; right: 208px; bottom: 148px;"/>
         </ui:VisualElement>
