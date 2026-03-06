@@ -15,12 +15,12 @@ MonoBehaviour:
   mappings:
   - value: 1
     scene:
-      m_SceneAsset: {fileID: 102900000, guid: 9d35536fcc265424ca9c9bb85c0033bf, type: 3}
-      m_SceneName: Lobby_1
+      m_SceneAsset: {fileID: 102900000, guid: e88b0be1049a1ac4c834a560b0b990ba, type: 3}
+      m_SceneName: Gameplay
   - value: 1.1
     scene:
-      m_SceneAsset: {fileID: 102900000, guid: 982d4f4ebbbcb4652b2b8497ec34fd0b, type: 3}
-      m_SceneName: Gameplay_1
+      m_SceneAsset: {fileID: 102900000, guid: e88b0be1049a1ac4c834a560b0b990ba, type: 3}
+      m_SceneName: Gameplay
   - value: 2
     scene:
       m_SceneAsset: {fileID: 102900000, guid: 3fb53c59d05534f9696d9241508856ee, type: 3}

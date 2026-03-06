@@ -57,17 +57,12 @@ public class GameSceneManager : MonoBehaviour
     InputActionsManager.Instance.SetState(InputState.UI);
 
     await GameDataManager.Instance.LoadGameAsync();
-
     if (!GameDataManager.Instance.HasData())
-    {
-      await LoadAdditiveAsync(_firstLobbyScene);
-      _currentWorldScene = _firstLobbyScene;
-    }
+      GameplayManager.Instance.LoadStageAsync(_firstLobbyScene);
     else
     {
-      SceneField lobbyScene = GameDataManager.Instance.GetLobbyScene();
-      await LoadAdditiveAsync(lobbyScene);
-      _currentWorldScene = lobbyScene;
+      string stageName = GameDataManager.Instance.GetProgressScene();
+      GameplayManager.Instance.LoadStageAsync(stageName);
     }
 
     await LoadAdditiveAsync(_titleScene);
@@ -133,7 +128,7 @@ public class GameSceneManager : MonoBehaviour
   #region 2. Transition Logic (Lobby <-> Gameplay)
 
   // SCENARIO: Lobby <-> Gameplay with Cutscene sandwich
-  public async void TravelToScene(SceneField nextScene, string cutsceneId)
+  public async void TravelToScene(string nextScene, string cutsceneId)
   {
     if (_isLoading) return;
     _isLoading = true;
@@ -150,7 +145,7 @@ public class GameSceneManager : MonoBehaviour
       // Trigger your Dialogue/Cutscene system here
       // GameEvents.TriggerCutscene(cutsceneId); 
       // Debug.Log($"Playing Cutscene: {cutsceneId}");
-      GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutsceneId);
+      GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutsceneId, DialogueMode.Cutscene);
 
       // 2. Unload Old World (Behind the cutscene)
       if (!string.IsNullOrEmpty(_currentWorldScene))
@@ -268,11 +263,11 @@ public class GameSceneManager : MonoBehaviour
       await UnloadAsync(_currentWorldScene);
 
     // 4. Load Title + Lobby (Progress Saved state)
-    SceneField lobbyScene = GameDataManager.Instance.GetLobbyScene();
-    await LoadAdditiveAsync(lobbyScene);
+    string worldScene = GameDataManager.Instance.GetProgressScene();
+    await LoadAdditiveAsync(worldScene);
     await LoadAdditiveAsync(_titleScene);
 
-    _currentWorldScene = lobbyScene;
+    _currentWorldScene = worldScene;
     _currentOverlayScene = _titleScene;
 
     // 5. Hide Loading

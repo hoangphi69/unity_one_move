@@ -55,7 +55,7 @@ public class InputActionsManager : MonoBehaviour
         break;
     }
 
-    print($"Input State: {CurrentState}");
+    print($"Input: {CurrentState}");
   }
 
   private void OnEscapeTriggered(InputAction.CallbackContext context)
@@ -69,7 +69,6 @@ public class InputActionsManager : MonoBehaviour
         bool backRequested = OnUIBackRequested?.Invoke() ?? false;
         if (!backRequested)
         {
-          print("escape");
           GameSceneManager.Instance.TogglePause();
         }
         break;

@@ -6,10 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Manager.unity
+    guid: 59fa02a2d65bd4178b2b3398108d7658
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 97a7893c54fae48ca9a400e5b85522f4
+  - enabled: 1
     path: Assets/Scenes/Cutscene.unity
     guid: 0689bd5fc616e4517aeb21fc8a2360e7
   - enabled: 1
-    path: Assets/Scenes/Gameplay_1.unity
+    path: Assets/Scenes/Gameplay.unity
+    guid: e88b0be1049a1ac4c834a560b0b990ba
+  - enabled: 1
+    path: Assets/Scenes/Hallway1_1.unity
+    guid: ba45dd192ecf0e7458a29f582335ad3b
+  - enabled: 1
+    path: Assets/Scenes/Stage1_2.unity
     guid: 982d4f4ebbbcb4652b2b8497ec34fd0b
   - enabled: 1
     path: Assets/Scenes/Gameplay_2.unity
@@ -21,14 +33,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay_4.unity
     guid: 821b8053321204f6889e6631d4f8931a
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
-    guid: 97a7893c54fae48ca9a400e5b85522f4
-  - enabled: 1
-    path: Assets/Scenes/Manager.unity
-    guid: 59fa02a2d65bd4178b2b3398108d7658
-  - enabled: 1
     path: Assets/Scenes/Lobby_1.unity
     guid: 9d35536fcc265424ca9c9bb85c0033bf
+  - enabled: 1
+    path: Assets/Scenes/Hallway1_2.unity
+    guid: 1d5787706cede14409f47475bf2474e8
+  - enabled: 1
+    path: Assets/Scenes/Hallway1_3.unity
+    guid: 16cec4e6185bccc4fb58dc1aca865188
+  - enabled: 1
+    path: Assets/Scenes/Stage1_1.unity
+    guid: 6d9890e52c4720b48a3f9c81f12f4dcf
+  - enabled: 1
+    path: Assets/Scenes/Stage1_3.unity
+    guid: be3f1332206a3714eac718117e871586
   - enabled: 1
     path: Assets/Scenes/Lobby_2.unity
     guid: 3fb53c59d05534f9696d9241508856ee

@@ -1225,16 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb79e8c9a1ba249cd9d5ffec3e485a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 10
-  collectibleMask:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 128
-  interactableMask:
-    serializedVersion: 2
-    m_Bits: 256
+  moveDuration: 0.2
 --- !u!4 &986153205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7042655551232734956, guid: 44b965d26f2ef4f33a72234bea6009f5, type: 3}
@@ -1840,6 +1831,22 @@ PrefabInstance:
       propertyPath: cutsceneName
       value: npc
       objectReference: {fileID: 0}
+    - target: {fileID: -3111601699361738456, guid: 6efc5b1555b1546e199eef29e5f2b0b7, type: 3}
+      propertyPath: nextStage.m_SceneName
+      value: Hallway1_1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3111601699361738456, guid: 6efc5b1555b1546e199eef29e5f2b0b7, type: 3}
+      propertyPath: nextStage.m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: ba45dd192ecf0e7458a29f582335ad3b, type: 3}
+    - target: {fileID: 464289688672852151, guid: 6efc5b1555b1546e199eef29e5f2b0b7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051872460422698382, guid: 6efc5b1555b1546e199eef29e5f2b0b7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7853463921507304061, guid: 6efc5b1555b1546e199eef29e5f2b0b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.5
@@ -1883,6 +1890,10 @@ PrefabInstance:
     - target: {fileID: 8144360686439305549, guid: 6efc5b1555b1546e199eef29e5f2b0b7, type: 3}
       propertyPath: m_Name
       value: Goal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144360686439305549, guid: 6efc5b1555b1546e199eef29e5f2b0b7, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

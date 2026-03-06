@@ -3,14 +3,14 @@ using System;
 [Serializable]
 public class GameData
 {
-  public float progress;
+  public string progress;
   public string[] collectibles;
   public int level;
 
   public GameData()
   {
     level = 1;
-    progress = 1.0f;
+    progress = "Lobby_1";
     collectibles = new string[0];
   }
 }

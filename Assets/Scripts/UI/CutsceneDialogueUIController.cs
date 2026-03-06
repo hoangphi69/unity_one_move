@@ -67,8 +67,9 @@ public class CutsceneDialogueUIController : MonoBehaviour
   }
 
   // Marked as 'async void' to be compatible with event delegates
-  async void DialogueStart()
+  async void DialogueStart(DialogueMode mode)
   {
+    if (mode != DialogueMode.Cutscene) return;
     // Kill existing animation if user triggers start while fading out
     activeFadeTween?.Kill();
 
@@ -118,7 +119,7 @@ public class CutsceneDialogueUIController : MonoBehaviour
 
       // Disable layout strictly AFTER fade out completes
       root.style.display = DisplayStyle.None;
-      GameSceneManager.Instance.FinishCutscene();
+      CutsceneManager.Instance.EndCutscene();
     }
     catch (OperationCanceledException)
     {

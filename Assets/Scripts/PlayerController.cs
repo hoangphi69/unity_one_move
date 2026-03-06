@@ -1,43 +1,35 @@
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
-    private Transform pivot;
+    // Configs
+    [SerializeField] float moveDuration = .2f;
 
-    private float cellSize = 1f;
-
+    private bool isMoving = false;
     private IInteractable nearbyInteractable;
-
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private LayerMask collectibleMask;
-    [SerializeField] private LayerMask obstacleMask;
-    [SerializeField] private LayerMask interactableMask;
-
-    void Awake()
-    {
-        GameObject point = new("MovePoint");
-        pivot = point.transform;
-        pivot.position = transform.position;
-    }
 
     void OnEnable()
     {
-        InputActionsManager.Instance.inputActions.Player.Move.performed += MovePivot;
+        InputActionsManager.Instance.inputActions.Player.Move.performed += TakeTurn;
         InputActionsManager.Instance.inputActions.Player.Interact.started += Interact;
     }
 
     void OnDisable()
     {
-        InputActionsManager.Instance.inputActions.Player.Move.performed -= MovePivot;
+        InputActionsManager.Instance.inputActions.Player.Move.performed -= TakeTurn;
         InputActionsManager.Instance.inputActions.Player.Interact.started -= Interact;
     }
 
-    void MovePivot(InputAction.CallbackContext ctx)
+    async void TakeTurn(InputAction.CallbackContext ctx)
     {
         Vector2 input = ctx.ReadValue<Vector2>();
+
         // Busy check
-        if (Vector3.Distance(transform.position, pivot.position) > 0.05f) return;
+        if (GameplayManager.Instance.turn != Turn.Player) return;
         if (input.sqrMagnitude < 0.1f) return;
 
         // Pre-process input (exclude diagonal movement)
@@ -47,32 +39,81 @@ public class PlayerController : MonoBehaviour
         else
             direction = new Vector3(0, 0, Mathf.Sign(input.y));
 
-        transform.rotation = Quaternion.LookRotation(direction);
-
-        // Interact with objects
-        if (!CanMove(direction)) return;
-
-        // Move pivot
-        pivot.position += direction;
-
-        // Look for interactibles
+        Rotate(direction);
+        await TryMove(direction);
         ScanSurroundings();
+        GameEventsManager.Instance.turnEvents.PlayerTurnEnd();
     }
 
-    void FixedUpdate()
+    void Rotate(Vector3 direction)
     {
-        transform.position = Vector3.MoveTowards(transform.position, pivot.position, speed * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    async Task TryMove(Vector3 direction)
+    {
+        // Interact with objects
+        if (isMoving) return;
+        if (!CanMove(direction)) return;
+
+        // Move
+        Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
+        await SmoothMoveAsync(location, destroyCancellationToken);
+    }
+
+    async Task SmoothMoveAsync(Vector3 location, CancellationToken token)
+    {
+        isMoving = true;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < moveDuration)
+        {
+            if (token.IsCancellationRequested) return;
+            transform.position = Vector3.Lerp(transform.position, location, elapsedTime / moveDuration);
+            elapsedTime += Time.deltaTime;
+            await Task.Yield();
+        }
+
+        if (token.IsCancellationRequested) return;
+        transform.position = location;
+        isMoving = false;
     }
 
     bool CanMove(Vector3 direction)
     {
         Vector3 position = transform.position;
 
-        if (Physics.Raycast(position, direction, cellSize, collectibleMask)) return true;
-        else if (Physics.Raycast(position, direction, cellSize, interactableMask)) return false;
-        else if (Physics.Raycast(position, direction, cellSize, obstacleMask)) return false;
+        if (!IsGround(position + direction)) return false;
+
+        if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
+        {
+            if (hit.collider.TryGetComponent(out IObstacle obstacle))
+            {
+                return !obstacle.IsSolid();
+            }
+
+            if (hit.collider.TryGetComponent(out ICollectible collectible))
+            {
+                collectible.Collect();
+                return true;
+            }
+
+            if (hit.collider.TryGetComponent(out IGateway gateway))
+            {
+                gateway.Transition();
+                return true;
+            }
+        }
 
         return true;
+    }
+
+    bool IsGround(Vector3 position)
+    {
+        Tilemap ground = GameplayManager.Instance.environment;
+        if (ground == null) return true;
+        Vector3Int cell = ground.WorldToCell(position);
+        return ground.HasTile(cell);
     }
 
     void ScanSurroundings()
@@ -83,7 +124,7 @@ public class PlayerController : MonoBehaviour
         Vector3[] directions = { Vector3.forward, Vector3.left, Vector3.right, Vector3.back };
         foreach (Vector3 direction in directions)
         {
-            if (Physics.Raycast(pivot.position, direction, out RaycastHit hit, cellSize))
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
             {
                 if (hit.transform.TryGetComponent(out IInteractable interactable))
                 {
@@ -106,9 +147,9 @@ public class PlayerController : MonoBehaviour
         if (!context.started || nearbyInteractable == null) return;
 
         // Face the object
-        Vector3 dir = nearbyInteractable.GetPosition() - transform.position;
-        dir.y = 0; // Keep the player upright
-        transform.rotation = Quaternion.LookRotation(dir);
+        Vector3 direction = nearbyInteractable.GetPosition() - transform.position;
+        direction.y = 0; // Keep the player upright
+        Rotate(direction);
 
         nearbyInteractable.OnInteract();
     }

@@ -2,6 +2,8 @@ using Ink.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum DialogueMode { Cutscene, InGame }
+
 public class DialogueManager : MonoBehaviour
 {
   [Header("Ink Story")]
@@ -32,7 +34,7 @@ public class DialogueManager : MonoBehaviour
 
   void SetTypingState(bool isTyping) => this.isTyping = isTyping;
 
-  void EnterDialogue(string knotName)
+  void EnterDialogue(string knotName, DialogueMode mode)
   {
     if (dialogueActive) return;
     if (knotName.Equals("")) return;
@@ -40,7 +42,7 @@ public class DialogueManager : MonoBehaviour
     dialogueActive = true;
     InputActionsManager.Instance.SetState(InputState.UI);
     InputActionsManager.Instance.inputActions.UI.Submit.performed += ContinueDialogue;
-    GameEventsManager.Instance.dialogueEvents.StartDialogue();
+    GameEventsManager.Instance.dialogueEvents.StartDialogue(mode);
     story.ChoosePathString(knotName);
     ContinueDialogue();
   }
@@ -51,7 +53,6 @@ public class DialogueManager : MonoBehaviour
     if (!dialogueActive) return;
     if (story.currentChoices.Count > 0) return;
     if (isTyping) return;
-    print("debug");
     if (story.canContinue)
     {
       GameEventsManager.Instance.dialogueEvents.DisplayDialogue(

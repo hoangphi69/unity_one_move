@@ -213,7 +213,6 @@ public class PauseUIController : MonoBehaviour
   {
     if (_navigationHistory.Count > 0)
     {
-      print("go back");
       GoBack();
       return true;
     }

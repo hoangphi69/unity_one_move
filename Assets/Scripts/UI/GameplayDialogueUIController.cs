@@ -54,8 +54,9 @@ public class GameplayDialogueUIController : MonoBehaviour
     InputActionsManager.Instance.inputActions.UI.Submit.performed -= SkipLine;
   }
 
-  void DialogueStart()
+  void DialogueStart(DialogueMode mode)
   {
+    if (mode != DialogueMode.InGame) return;
     root.style.display = DisplayStyle.Flex;
     ClearDialogue();
   }

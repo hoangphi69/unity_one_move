@@ -34,6 +34,6 @@ public class NPC : MonoBehaviour, IInteractable
 
   public void EnterDialogue()
   {
-    GameEventsManager.Instance.dialogueEvents.EnterDialogue(knotName);
+    GameEventsManager.Instance.dialogueEvents.EnterDialogue(knotName, DialogueMode.InGame);
   }
 }

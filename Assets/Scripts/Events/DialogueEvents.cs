@@ -4,11 +4,11 @@ using Ink.Runtime;
 
 public class DialogueEvents
 {
-    public event Action<string> onEnterDialogue;
-    public void EnterDialogue(string knotName) => onEnterDialogue?.Invoke(knotName);
+    public event Action<string, DialogueMode> onEnterDialogue;
+    public void EnterDialogue(string knotName, DialogueMode mode) => onEnterDialogue?.Invoke(knotName, mode);
 
-    public event Action onDialogueStarted;
-    public void StartDialogue() => onDialogueStarted?.Invoke();
+    public event Action<DialogueMode> onDialogueStarted;
+    public void StartDialogue(DialogueMode mode) => onDialogueStarted?.Invoke(mode);
 
     public event Action onDialogueEnded;
     public void EndDialogue() => onDialogueEnded?.Invoke();
