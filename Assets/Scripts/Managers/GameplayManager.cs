@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 
 public enum Turn { Player, Enemy };
 
@@ -15,16 +14,18 @@ public class GameplayManager : MonoBehaviour
   [SerializeField] public LayerMask entityMask;
   [SerializeField] public float cellSize = 1f;
 
-  // Environment
-  public Tilemap environment;
-
   // Turn Manager
   public Turn turn { get; private set; }
   private List<EnemyController> activeEnemies = new();
 
   // Stage
-  private string _currentStage = null;
+  public StageManager stageManager { get; private set; } = null;
+  public string _currentStage = null;
   private bool _isLoading = false;
+
+  // Player
+  [SerializeField] private GameObject playerPrefab;
+  public PlayerController activePlayer { get; private set; }
 
   private void Awake()
   {
@@ -44,14 +45,14 @@ public class GameplayManager : MonoBehaviour
     GameEventsManager.Instance.turnEvents.onEnemyTurnEnd -= PlayerTurnStart;
   }
 
-  public async void LoadStageAsync(string scene)
+  public async Task LoadStageAsync(string scene)
   {
-    await Utility.LoadAdditiveAsync(scene);
     await Utility.UnloadAsync(_currentStage);
+    await Utility.LoadAdditiveAsync(scene);
     _currentStage = scene;
   }
 
-  public async void LoadStageAsync(string scene, string cutsceneKnot)
+  public async Task LoadStageAsync(string scene, string cutsceneKnot)
   {
     if (_isLoading) return;
     _isLoading = true;
@@ -88,7 +89,19 @@ public class GameplayManager : MonoBehaviour
     }
   }
 
-  public void RegisterEnvironment(Tilemap environment) => this.environment = environment;
+  public async Task RestartStageAsync()
+  {
+    if (!isPuzzleStage()) return;
+    await LoadStageAsync(_currentStage);
+    SpawnPlayer();
+  }
+
+  public bool isPuzzleStage()
+  {
+    return stageManager.isPuzzle;
+  }
+
+  public void RegisterStage(StageManager stage) => stageManager = stage;
 
   public void RegisterEnemy(EnemyController enemy)
   {
@@ -100,6 +113,26 @@ public class GameplayManager : MonoBehaviour
   {
     if (!activeEnemies.Contains(enemy)) return;
     activeEnemies.Remove(enemy);
+  }
+
+  public void SpawnPlayer()
+  {
+    if (playerPrefab == null)
+    {
+      Debug.LogError("Player prefab missing");
+      return;
+    }
+
+    if (activePlayer != null)
+    {
+      Destroy(activePlayer.gameObject);
+      activePlayer = null;
+    }
+
+    Vector3 position = stageManager.defaultPlayerPosition;
+    Quaternion rotation = Quaternion.identity;
+    GameObject playerObj = Instantiate(playerPrefab, position, rotation);
+    activePlayer = playerObj.GetComponent<PlayerController>();
   }
 
   void PlayerTurnStart()

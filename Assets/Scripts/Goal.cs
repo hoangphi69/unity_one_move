@@ -5,7 +5,7 @@ public class Goal : MonoBehaviour, IInteractable
 {
   private Canvas bubble;
 
-  [SerializeField] private string cutsceneName;
+  [SerializeField] private string cutscene;
   [SerializeField] private SceneField nextStage;
 
   void Awake()
@@ -36,8 +36,9 @@ public class Goal : MonoBehaviour, IInteractable
 
   private async Task CompleteGoal()
   {
-    await GameDataManager.Instance.SaveProgress(nextStage);
-    string nextScene = GameDataManager.Instance.GetProgressScene();
-    GameplayManager.Instance.LoadStageAsync(nextScene, cutsceneName);
+    await GameDataManager.Instance.SaveProgress(this.nextStage);
+    string nextStage = GameDataManager.Instance.GetProgress();
+    await GameplayManager.Instance.LoadStageAsync(nextStage, cutscene);
+    GameplayManager.Instance.SpawnPlayer();
   }
 }

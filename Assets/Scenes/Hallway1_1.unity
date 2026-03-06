@@ -1082,6 +1082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cecf46dcefc414e4193019af7557345e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
+  defaultPlayerPosition: {x: 2.5, y: 0.5, z: 12.5}
+  isPuzzle: 0
 --- !u!1 &1436303653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,7 +1179,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1128502559521287811, guid: 20464a019798b7b4599f0997e95132b8, type: 3}
       propertyPath: _nextStage.m_SceneName
-      value: Stage1_1
+      value: Puzzle1_1
       objectReference: {fileID: 0}
     - target: {fileID: 1128502559521287811, guid: 20464a019798b7b4599f0997e95132b8, type: 3}
       propertyPath: _nextStage.m_SceneAsset

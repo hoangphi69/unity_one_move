@@ -173,6 +173,12 @@ public class PauseUIController : MonoBehaviour
 
     _mainPanel.RemoveFromClassList("hidden");
     _currentPanel = _mainPanel;
+
+    // Addition: Show restart button when in puzzle
+    if (GameplayManager.Instance.isPuzzleStage())
+      _restartButton.RemoveFromClassList("hidden");
+    else
+      _restartButton.AddToClassList("hidden");
   }
 
   // --- Navigation Logic ---

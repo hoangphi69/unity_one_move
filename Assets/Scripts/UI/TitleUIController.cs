@@ -34,8 +34,7 @@ public class TitleUIController : MonoBehaviour
 
   void Start()
   {
-    GameData data = GameDataManager.Instance.data;
-    if (data == null)
+    if (!GameDataManager.Instance.HasData())
     {
       continueGame.style.display = DisplayStyle.None;
       root.schedule.Execute(() => newGame.Focus());

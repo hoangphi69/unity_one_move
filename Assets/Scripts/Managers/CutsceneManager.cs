@@ -19,6 +19,7 @@ public class CutsceneManager : MonoBehaviour
   {
     _cutsceneTask = new();
     await Utility.LoadAdditiveAsync(cutscene);
+    if (string.IsNullOrEmpty(knot)) Debug.LogError("No cutscene knot specified.");
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(knot, DialogueMode.Cutscene);
     await _cutsceneTask.Task;
   }

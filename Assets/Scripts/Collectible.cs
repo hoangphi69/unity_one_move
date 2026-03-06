@@ -10,9 +10,7 @@ public class Collectible : MonoBehaviour
   {
     if (collider.gameObject.tag == "Player")
     {
-      // PlayerStats playerStats = collider.gameObject.GetComponent<PlayerStats>();
-      // playerStats.IncreaseLevel(levelPoint);
-      GameSceneManager.Instance.TravelToScene(scene, cutsceneName);
+      print("Collected");
     }
   }
 }

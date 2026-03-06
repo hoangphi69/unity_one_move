@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 941549150617768323}
   - component: {fileID: 6032768945031627106}
   - component: {fileID: 8747553681646072732}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 6151776876018956573}
   - component: {fileID: 7948437804096557299}
   - component: {fileID: 5837540108921916000}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 4422962394518102246}
   - component: {fileID: 6380436118719465463}
   - component: {fileID: -3111601699361738456}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e2e23120c9304d3a8fe8d75e921e868, type: 2}
+  - {fileID: 2100000, guid: 60fe32a4969ed4330a9b4c0babe7a249, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -304,4 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Goal
   cutsceneName: 
-  nextLevel: 0
+  nextStage:
+    m_SceneAsset: {fileID: 0}
+    m_SceneName: 

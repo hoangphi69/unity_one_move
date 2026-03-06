@@ -14,11 +14,7 @@ public class GameDataFileHandler
 
   public async Task<GameData> LoadFile()
   {
-    if (!File.Exists(path))
-    {
-      Debug.LogError($"File {path} does not exist");
-      return null;
-    }
+    if (!File.Exists(path)) return null;
 
     try
     {

@@ -103,7 +103,7 @@ public class EnemyController : MonoBehaviour
 
   bool IsGround(Vector3 position)
   {
-    Tilemap ground = GameplayManager.Instance.environment;
+    Tilemap ground = GameplayManager.Instance.stageManager.environment;
     if (ground == null) return true;
     Vector3Int cell = ground.WorldToCell(position);
     return ground.HasTile(cell);
