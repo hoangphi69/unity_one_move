@@ -80,7 +80,7 @@ public class PauseUIController : MonoBehaviour
     _graphicsBrightnessSlider.RegisterValueChangedCallback(ChangeBrightness);
     _graphicsBackButton.clicked += GoBack;
 
-    InputActionsManager.Instance.OnUIBackRequested += HandleEscapeAction;
+    GameSceneManager.Instance.OnUIBackRequested += HandleEscapeAction;
   }
 
   void OnDisable()
@@ -97,7 +97,7 @@ public class PauseUIController : MonoBehaviour
     _graphicsBrightnessSlider.UnregisterValueChangedCallback(ChangeBrightness);
     _graphicsBackButton.clicked -= GoBack;
 
-    InputActionsManager.Instance.OnUIBackRequested -= HandleEscapeAction;
+    GameSceneManager.Instance.OnUIBackRequested -= HandleEscapeAction;
   }
 
   void ChangeQuality(ChangeEvent<string> evt)

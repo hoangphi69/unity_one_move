@@ -1,77 +1,35 @@
-using System;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
-public enum InputState
-{
-  World,
-  UI,
-}
+public enum InputState { Gameplay, UI }
 
 public class InputActionsManager : MonoBehaviour
 {
   public static InputActionsManager Instance { get; private set; }
-
   public InputActions inputActions;
   public InputState CurrentState { get; private set; }
-  public event Func<bool> OnUIBackRequested;
+
+  private Dictionary<InputState, InputActionMap> _maps;
 
   void Awake()
   {
     Instance = this;
     inputActions = new();
+    _maps = new()
+      {
+        { InputState.Gameplay, inputActions.Player },
+        { InputState.UI, inputActions.UI },
+      };
   }
 
-  void OnEnable()
-  {
-    inputActions.Player.Escape.performed += OnEscapeTriggered;
-    inputActions.UI.Escape.performed += OnEscapeTriggered;
-
-    // Always start with UI (Title Screen)
-    SetState(InputState.UI);
-  }
-
-  void OnDisable()
-  {
-    inputActions.Player.Escape.performed -= OnEscapeTriggered;
-    inputActions.UI.Escape.performed -= OnEscapeTriggered;
-    inputActions.Disable();
-  }
+  void OnDisable() => inputActions.Disable();
 
   public void SetState(InputState newState)
   {
     CurrentState = newState;
-
-    inputActions.Player.Disable();
-    inputActions.UI.Disable();
-
-    switch (newState)
-    {
-      case InputState.World:
-        inputActions.Player.Enable();
-        break;
-      case InputState.UI:
-        inputActions.UI.Enable();
-        break;
-    }
-
+    foreach (var map in _maps.Values) map.Disable();
+    _maps[newState].Enable();
     print($"Input: {CurrentState}");
-  }
-
-  private void OnEscapeTriggered(InputAction.CallbackContext context)
-  {
-    switch (CurrentState)
-    {
-      case InputState.World:
-        GameSceneManager.Instance.TogglePause();
-        break;
-      case InputState.UI:
-        bool backRequested = OnUIBackRequested?.Invoke() ?? false;
-        if (!backRequested)
-        {
-          GameSceneManager.Instance.TogglePause();
-        }
-        break;
-    }
   }
 }

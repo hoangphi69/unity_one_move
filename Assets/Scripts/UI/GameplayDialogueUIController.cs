@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Ink.Runtime;
 using UnityEngine;
@@ -43,7 +45,7 @@ public class GameplayDialogueUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onDialogueStarted += DialogueStart;
     GameEventsManager.Instance.dialogueEvents.onDialogueEnded += DialogueEnd;
     GameEventsManager.Instance.dialogueEvents.onDialogueDisplayed += DialogueDisplay;
-    InputActionsManager.Instance.inputActions.UI.Submit.performed += SkipLine;
+    GameEventsManager.Instance.dialogueEvents.onRequestSkipLine += SkipLine;
   }
 
   void OnDisable()
@@ -51,7 +53,7 @@ public class GameplayDialogueUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onDialogueStarted -= DialogueStart;
     GameEventsManager.Instance.dialogueEvents.onDialogueEnded -= DialogueEnd;
     GameEventsManager.Instance.dialogueEvents.onDialogueDisplayed -= DialogueDisplay;
-    InputActionsManager.Instance.inputActions.UI.Submit.performed -= SkipLine;
+    GameEventsManager.Instance.dialogueEvents.onRequestSkipLine -= SkipLine;
   }
 
   void DialogueStart(DialogueMode mode)
@@ -66,30 +68,38 @@ public class GameplayDialogueUIController : MonoBehaviour
     root.style.display = DisplayStyle.None;
   }
 
-  void SkipLine(InputAction.CallbackContext ctx) => skipLine = true;
+  void SkipLine() => skipLine = true;
 
-  async void DialogueDisplay(string text, List<string> tags, List<Choice> choices)
+  async void DialogueDisplay(string text, List<string> tags, List<Choice> choices, CancellationToken token)
   {
     ClearDialogue();
     DisplayTags(tags);
-    await DisplayTypingText(text);
-    DisplayChoices(choices);
+
+    try
+    {
+      await DisplayTypingText(text, token);
+      DisplayChoices(choices);
+    }
+    catch (OperationCanceledException) { }
   }
 
-  async Task DisplayTypingText(string text)
+  async Task DisplayTypingText(string text, CancellationToken token)
   {
     skipLine = false;
     GameEventsManager.Instance.dialogueEvents.SetTypingState(true);
+
     foreach (char c in text)
     {
+      if (token.IsCancellationRequested) return;
       if (skipLine)
       {
         dialogueText.text = text;
         break;
       }
       dialogueText.text += c;
-      await Task.Delay(typingSpeed);
+      await Task.Delay(typingSpeed, token);
     }
+
     GameEventsManager.Instance.dialogueEvents.SetTypingState(false);
   }
 

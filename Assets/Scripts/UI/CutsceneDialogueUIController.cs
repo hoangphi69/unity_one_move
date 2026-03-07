@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Ink.Runtime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class CutsceneDialogueUIController : MonoBehaviour
@@ -45,12 +45,10 @@ public class CutsceneDialogueUIController : MonoBehaviour
 
   void OnEnable()
   {
-    if (GameEventsManager.Instance == null) return;
-
     GameEventsManager.Instance.dialogueEvents.onDialogueStarted += DialogueStart;
     GameEventsManager.Instance.dialogueEvents.onDialogueEnded += DialogueEnd;
     GameEventsManager.Instance.dialogueEvents.onDialogueDisplayed += DialogueDisplay;
-    InputActionsManager.Instance.inputActions.UI.Submit.performed += SkipLine;
+    GameEventsManager.Instance.dialogueEvents.onRequestSkipLine += SkipLine;
   }
 
   void OnDisable()
@@ -58,12 +56,10 @@ public class CutsceneDialogueUIController : MonoBehaviour
     // Kill any active tweens to prevent memory leaks or errors
     activeFadeTween?.Kill();
 
-    if (GameEventsManager.Instance == null) return;
-
     GameEventsManager.Instance.dialogueEvents.onDialogueStarted -= DialogueStart;
     GameEventsManager.Instance.dialogueEvents.onDialogueEnded -= DialogueEnd;
     GameEventsManager.Instance.dialogueEvents.onDialogueDisplayed -= DialogueDisplay;
-    InputActionsManager.Instance.inputActions.UI.Submit.performed -= SkipLine;
+    GameEventsManager.Instance.dialogueEvents.onRequestSkipLine -= SkipLine;
   }
 
   // Marked as 'async void' to be compatible with event delegates
@@ -127,30 +123,38 @@ public class CutsceneDialogueUIController : MonoBehaviour
     }
   }
 
-  void SkipLine(InputAction.CallbackContext ctx) => skipLine = true;
+  void SkipLine() => skipLine = true;
 
-  async void DialogueDisplay(string text, List<string> tags, List<Choice> choices)
+  async void DialogueDisplay(string text, List<string> tags, List<Choice> choices, CancellationToken token)
   {
     ClearDialogue();
     DisplayTags(tags);
-    await DisplayTypingText(text);
-    DisplayChoices(choices);
+
+    try
+    {
+      await DisplayTypingText(text, token);
+      DisplayChoices(choices);
+    }
+    catch (OperationCanceledException) { }
   }
 
-  async Task DisplayTypingText(string text)
+  async Task DisplayTypingText(string text, CancellationToken token)
   {
     skipLine = false;
     GameEventsManager.Instance.dialogueEvents.SetTypingState(true);
+
     foreach (char c in text)
     {
+      if (token.IsCancellationRequested) return;
       if (skipLine)
       {
         line.text = text;
         break;
       }
       line.text += c;
-      await Task.Delay(typingSpeed);
+      await Task.Delay(typingSpeed, token);
     }
+
     GameEventsManager.Instance.dialogueEvents.SetTypingState(false);
   }
 

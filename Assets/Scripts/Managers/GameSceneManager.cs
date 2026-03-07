@@ -1,6 +1,8 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class GameSceneManager : MonoBehaviour
   // Track state
   private string _currentOverlayScene; // Tracks Title or Pause
 
+  public event Func<bool> OnUIBackRequested;
+
   private bool _isLoading;
   private float _timeScaleCache = 1f;
 
@@ -22,7 +26,7 @@ public class GameSceneManager : MonoBehaviour
   private CancellationTokenSource _cts;
 
 
-  private void Awake()
+  void Awake()
   {
     if (Instance != null) { Destroy(gameObject); return; }
     Instance = this;
@@ -30,13 +34,25 @@ public class GameSceneManager : MonoBehaviour
     _cts = new CancellationTokenSource();
   }
 
-  private void OnDestroy()
+  void OnDestroy()
   {
     _cts?.Cancel();
     _cts?.Dispose();
   }
 
-  private void Start()
+  void OnEnable()
+  {
+    InputActionsManager.Instance.inputActions.Player.Escape.performed += TogglePause;
+    InputActionsManager.Instance.inputActions.UI.Escape.performed += NavigateBack;
+  }
+
+  void OnDisable()
+  {
+    InputActionsManager.Instance.inputActions.Player.Escape.performed -= TogglePause;
+    InputActionsManager.Instance.inputActions.UI.Escape.performed -= NavigateBack;
+  }
+
+  void Start()
   {
     // SCENARIO: First time open application
     _ = BootApplicationAsync();
@@ -79,7 +95,7 @@ public class GameSceneManager : MonoBehaviour
     _currentOverlayScene = null;
 
     // Optional: Notify Lobby to enable player controls here
-    InputActionsManager.Instance.SetState(InputState.World);
+    InputActionsManager.Instance.SetState(InputState.Gameplay);
 
     _isLoading = false;
   }
@@ -107,7 +123,7 @@ public class GameSceneManager : MonoBehaviour
     await GameplayManager.Instance.LoadStageAsync(_firstLobbyScene, "ch1_Cutscene1");
     GameplayManager.Instance.SpawnPlayer();
 
-    InputActionsManager.Instance.SetState(InputState.World);
+    InputActionsManager.Instance.SetState(InputState.Gameplay);
 
     _isLoading = false;
   }
@@ -116,9 +132,21 @@ public class GameSceneManager : MonoBehaviour
 
   #region 3. Pause & Restart Logic
 
+  public void NavigateBack(InputAction.CallbackContext _) => NavigateBack();
+
+  public void NavigateBack()
+  {
+    bool backRequested = OnUIBackRequested?.Invoke() ?? false;
+    if (!backRequested) TogglePause();
+  }
+
+  public void TogglePause(InputAction.CallbackContext _) => TogglePause();
+
   public void TogglePause()
   {
-    if (_isLoading || _currentOverlayScene == _titleScene) return;
+    if (_isLoading) return;
+    if (_currentOverlayScene == _titleScene) return;
+    if (GameplayManager.Instance.isCutscene()) return;
 
     if (_currentOverlayScene == _pauseScene)
     {
@@ -127,7 +155,7 @@ public class GameSceneManager : MonoBehaviour
       _currentOverlayScene = null;
       Time.timeScale = _timeScaleCache;
 
-      InputActionsManager.Instance.SetState(InputState.World);
+      InputActionsManager.Instance.SetState(InputState.Gameplay);
     }
     else
     {
@@ -158,7 +186,7 @@ public class GameSceneManager : MonoBehaviour
 
     await GameplayManager.Instance.RestartStageAsync();
 
-    InputActionsManager.Instance.SetState(InputState.World);
+    InputActionsManager.Instance.SetState(InputState.Gameplay);
 
     _isLoading = false;
   }

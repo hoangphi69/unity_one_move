@@ -575,7 +575,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -681,6 +681,33 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be"",
                     ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DialogueAdvance"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3279d0b-d169-42b3-80bd-73bac00b206e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DialogueSkip"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8335bd3-af7f-4f35-8dbe-3d96f2c94e4a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DialogueAuto"",
+                    ""type"": ""Button"",
+                    ""id"": ""7594ccd0-f831-4d24-939b-decc90c8ee9b"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -953,6 +980,72 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a3753fdf-67f0-42a4-8bf7-87324f513536"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DialogueSkip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05ebb874-1f1c-4734-b825-73249ef3d711"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""DialogueSkip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a9d6420-0bfb-4627-8690-1b1689f51ca6"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DialogueAdvance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f7648a6-4b1c-4de7-9cbb-7a3b99f49663"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DialogueAdvance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94638d11-c019-418e-9a6b-02c467c1e2ab"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DialogueAdvance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d6bae76-c5dc-4629-9643-72430e24c479"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""DialogueAdvance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1df74111-fdc8-47da-889a-eb0e497d0cb3"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -965,10 +1058,21 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9e92bb26-7e3b-4ec4-b06b-3c8f8e498ddc"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b6303f5-a25d-497c-80ee-38c314677392"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1115,6 +1219,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""TrackedDeviceOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73718651-3347-40c5-89da-18f1b24dd75a"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DialogueAuto"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10f3f0dd-cbb2-490c-aba7-d98304ee1473"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""DialogueAuto"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1207,6 +1333,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_UI_DialogueAdvance = m_UI.FindAction("DialogueAdvance", throwIfNotFound: true);
+        m_UI_DialogueSkip = m_UI.FindAction("DialogueSkip", throwIfNotFound: true);
+        m_UI_DialogueAuto = m_UI.FindAction("DialogueAuto", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -1494,6 +1623,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_ScrollWheel;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
+    private readonly InputAction m_UI_DialogueAdvance;
+    private readonly InputAction m_UI_DialogueSkip;
+    private readonly InputAction m_UI_DialogueAuto;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1549,6 +1681,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/TrackedDeviceOrientation".
         /// </summary>
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/DialogueAdvance".
+        /// </summary>
+        public InputAction @DialogueAdvance => m_Wrapper.m_UI_DialogueAdvance;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/DialogueSkip".
+        /// </summary>
+        public InputAction @DialogueSkip => m_Wrapper.m_UI_DialogueSkip;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/DialogueAuto".
+        /// </summary>
+        public InputAction @DialogueAuto => m_Wrapper.m_UI_DialogueAuto;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1608,6 +1752,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+            @DialogueAdvance.started += instance.OnDialogueAdvance;
+            @DialogueAdvance.performed += instance.OnDialogueAdvance;
+            @DialogueAdvance.canceled += instance.OnDialogueAdvance;
+            @DialogueSkip.started += instance.OnDialogueSkip;
+            @DialogueSkip.performed += instance.OnDialogueSkip;
+            @DialogueSkip.canceled += instance.OnDialogueSkip;
+            @DialogueAuto.started += instance.OnDialogueAuto;
+            @DialogueAuto.performed += instance.OnDialogueAuto;
+            @DialogueAuto.canceled += instance.OnDialogueAuto;
         }
 
         /// <summary>
@@ -1652,6 +1805,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
+            @DialogueAdvance.started -= instance.OnDialogueAdvance;
+            @DialogueAdvance.performed -= instance.OnDialogueAdvance;
+            @DialogueAdvance.canceled -= instance.OnDialogueAdvance;
+            @DialogueSkip.started -= instance.OnDialogueSkip;
+            @DialogueSkip.performed -= instance.OnDialogueSkip;
+            @DialogueSkip.canceled -= instance.OnDialogueSkip;
+            @DialogueAuto.started -= instance.OnDialogueAuto;
+            @DialogueAuto.performed -= instance.OnDialogueAuto;
+            @DialogueAuto.canceled -= instance.OnDialogueAuto;
         }
 
         /// <summary>
@@ -1912,5 +2074,26 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DialogueAdvance" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDialogueAdvance(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DialogueSkip" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDialogueSkip(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DialogueAuto" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDialogueAuto(InputAction.CallbackContext context);
     }
 }

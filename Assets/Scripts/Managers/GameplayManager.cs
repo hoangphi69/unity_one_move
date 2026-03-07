@@ -20,8 +20,8 @@ public class GameplayManager : MonoBehaviour
 
   // Stage
   public StageManager stageManager { get; private set; } = null;
-  public string _currentStage = null;
-  private bool _isLoading = false;
+  private string _currentStage = null;
+  private bool _isCutscene = false;
 
   // Player
   [SerializeField] private GameObject playerPrefab;
@@ -54,8 +54,8 @@ public class GameplayManager : MonoBehaviour
 
   public async Task LoadStageAsync(string scene, string cutsceneKnot)
   {
-    if (_isLoading) return;
-    _isLoading = true;
+    if (_isCutscene) return;
+    _isCutscene = true;
 
     try
     {
@@ -77,7 +77,7 @@ public class GameplayManager : MonoBehaviour
 
       await CutsceneManager.Instance.HideCutscene();
 
-      InputActionsManager.Instance.SetState(InputState.World);
+      InputActionsManager.Instance.SetState(InputState.Gameplay);
     }
     catch (Exception e)
     {
@@ -85,7 +85,7 @@ public class GameplayManager : MonoBehaviour
     }
     finally
     {
-      _isLoading = false;
+      _isCutscene = false;
     }
   }
 
@@ -94,6 +94,11 @@ public class GameplayManager : MonoBehaviour
     if (!isPuzzleStage()) return;
     await LoadStageAsync(_currentStage);
     SpawnPlayer();
+  }
+
+  public bool isCutscene()
+  {
+    return _isCutscene;
   }
 
   public bool isPuzzleStage()
