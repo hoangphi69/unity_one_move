@@ -189,11 +189,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3849317915540726047, guid: 20464a019798b7b4599f0997e95132b8, type: 3}
   m_PrefabInstance: {fileID: 487015444}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &506184532 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2938483712088360443, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-  m_PrefabInstance: {fileID: 946414703}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &624263121
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,92 +249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
   defaultPlayerPosition: {x: -8.5, y: 0.5, z: 24.5}
   isPuzzle: 0
---- !u!1001 &946414703
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1981471698}
-    m_Modifications:
-    - target: {fileID: 2938483712088360443, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_Name
-      value: Sphere
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 33.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7716457038121483626, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2938483712088360443, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1274350061}
-  m_SourcePrefab: {fileID: 100100000, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
---- !u!4 &1274350057 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5579865597147434291, guid: 57a4f7ed0ee2949b2bfa2d9ee43bec82, type: 3}
-  m_PrefabInstance: {fileID: 946414703}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1274350061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 506184532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9343fc4d4dcff459e9710fe8b5b35fbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectible
-  levelPoint: 1
-  cutsceneName: npc
-  scene:
-    m_SceneAsset: {fileID: 102900000, guid: 3fb53c59d05534f9696d9241508856ee, type: 3}
-    m_SceneName: Lobby_2
 --- !u!1 &1981471697
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +280,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1274350057}
   - {fileID: 487015445}
   m_Father: {fileID: 624263123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

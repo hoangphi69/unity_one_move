@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ink.Runtime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class GameplayDialogueUIController : MonoBehaviour

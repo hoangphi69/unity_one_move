@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using Ink.Runtime;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class CutsceneDialogueUIController : MonoBehaviour
@@ -26,6 +27,10 @@ public class CutsceneDialogueUIController : MonoBehaviour
 
   [SerializeField] private int typingSpeed = 5;
 
+  [SerializeField] private GameObject skipContainer;
+  [SerializeField] private UnityEngine.UI.Image skipProgressRing;
+  private InputAction skipAction;
+
   [SerializeField] private float fadeDuration = 0.5f;
   private Tween activeFadeTween;
 
@@ -41,6 +46,8 @@ public class CutsceneDialogueUIController : MonoBehaviour
 
     root.style.opacity = 0;
     root.style.display = DisplayStyle.None;
+
+    skipAction = InputActionsManager.Instance.inputActions.UI.DialogueSkip;
   }
 
   void OnEnable()
@@ -60,6 +67,40 @@ public class CutsceneDialogueUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onDialogueEnded -= DialogueEnd;
     GameEventsManager.Instance.dialogueEvents.onDialogueDisplayed -= DialogueDisplay;
     GameEventsManager.Instance.dialogueEvents.onRequestSkipLine -= SkipLine;
+  }
+
+  void Update()
+  {
+    // 1. Only run this if we are in a Cutscene and the button is being held
+    if (skipAction.IsPressed())
+    {
+      UpdateSkipProgress();
+    }
+    else if (skipContainer.activeSelf)
+    {
+      // 2. Hide and reset if the button is released
+      ResetSkipUI();
+    }
+  }
+
+  void UpdateSkipProgress()
+  {
+    // The Input System tracks how long the current phase has lasted
+    float elapsed = (float)skipAction.GetTimeoutCompletionPercentage();
+
+    // Show container once we have any progress
+    if (!skipContainer.activeSelf && elapsed > 0)
+    {
+      skipContainer.SetActive(true);
+    }
+
+    skipProgressRing.fillAmount = elapsed;
+  }
+
+  void ResetSkipUI()
+  {
+    skipProgressRing.fillAmount = 0;
+    skipContainer.SetActive(false);
   }
 
   // Marked as 'async void' to be compatible with event delegates
