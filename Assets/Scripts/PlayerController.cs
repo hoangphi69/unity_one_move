@@ -153,4 +153,11 @@ public class PlayerController : MonoBehaviour
 
         nearbyInteractable.OnInteract();
     }
+
+    public async Task Die()
+    {
+        print("Failed");
+        await Task.Delay(300);
+        await GameplayManager.Instance.RestartStageAsync();
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +27,7 @@ public class GameplayManager : MonoBehaviour
   // Player
   [SerializeField] private GameObject playerPrefab;
   public PlayerController activePlayer { get; private set; }
+  public CinemachineCamera playerCam;
 
   private void Awake()
   {
@@ -92,8 +94,13 @@ public class GameplayManager : MonoBehaviour
   public async Task RestartStageAsync()
   {
     if (!isPuzzleStage()) return;
+
+    playerCam.gameObject.SetActive(false);
+
     await LoadStageAsync(_currentStage);
     SpawnPlayer();
+
+    playerCam.gameObject.SetActive(true);
   }
 
   public bool isCutscene()
@@ -120,6 +127,13 @@ public class GameplayManager : MonoBehaviour
     activeEnemies.Remove(enemy);
   }
 
+  public void SetCameraTarget(Transform target)
+  {
+    if (playerCam == null) return;
+    playerCam.Follow = target;
+    playerCam.LookAt = target;
+  }
+
   public void SpawnPlayer()
   {
     if (playerPrefab == null)
@@ -130,6 +144,7 @@ public class GameplayManager : MonoBehaviour
 
     if (activePlayer != null)
     {
+      SetCameraTarget(null);
       Destroy(activePlayer.gameObject);
       activePlayer = null;
     }
@@ -137,7 +152,9 @@ public class GameplayManager : MonoBehaviour
     Vector3 position = stageManager.defaultPlayerPosition;
     Quaternion rotation = Quaternion.identity;
     GameObject playerObj = Instantiate(playerPrefab, position, rotation);
+
     activePlayer = playerObj.GetComponent<PlayerController>();
+    SetCameraTarget(playerObj.transform);
   }
 
   void PlayerTurnStart()

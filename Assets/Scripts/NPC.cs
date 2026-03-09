@@ -14,7 +14,7 @@ public class NPC : MonoBehaviour, IInteractable
 
   void Start()
   {
-    bubble.transform.LookAt(bubble.transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
+    // bubble.transform.LookAt(bubble.transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
   }
 
   public void OnDetected() => ShowBubble();

@@ -10,7 +10,7 @@ public class Collectible : MonoBehaviour
   {
     if (collider.gameObject.tag == "Player")
     {
-      print("Collected");
+      Destroy(gameObject);
     }
   }
 }

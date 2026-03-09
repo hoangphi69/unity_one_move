@@ -91,10 +91,9 @@ public class EnemyController : MonoBehaviour
         return !obstacle.IsSolid();
       }
 
-      if (hit.collider.TryGetComponent(out ICollectible collectible))
+      if (hit.collider.TryGetComponent(out PlayerController player))
       {
-        collectible.Collect();
-        return true;
+        _ = player.Die();
       }
     }
 
