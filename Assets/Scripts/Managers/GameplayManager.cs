@@ -134,6 +134,14 @@ public class GameplayManager : MonoBehaviour
     playerCam.LookAt = target;
   }
 
+  public void DespawnPlayer()
+  {
+    if (activePlayer == null) return;
+    SetCameraTarget(null);
+    Destroy(activePlayer.gameObject);
+    activePlayer = null;
+  }
+
   public void SpawnPlayer()
   {
     if (playerPrefab == null)

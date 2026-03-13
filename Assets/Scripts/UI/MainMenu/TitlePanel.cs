@@ -19,6 +19,7 @@ public class TitlePanel : MonoBehaviour
     savesButton.onClick.AddListener(savesClicked);
     quitButton.onClick.AddListener(quitClicked);
 
+    continueButton.gameObject.SetActive(GameDataManager.Instance.HasData());
     savesButton.GetComponentInParent<TextMeshProUGUI>().text = $"Save [{GameDataManager.Instance.selectedProfileID}]";
   }
 
@@ -29,11 +30,6 @@ public class TitlePanel : MonoBehaviour
     optionsButton.onClick.RemoveListener(optionsClicked);
     savesButton.onClick.RemoveListener(savesClicked);
     quitButton.onClick.RemoveListener(quitClicked);
-  }
-
-  void Start()
-  {
-    continueButton.gameObject.SetActive(GameDataManager.Instance.HasData());
   }
 
   void continueClicked() => GameSceneManager.Instance.OnTitleContinue();

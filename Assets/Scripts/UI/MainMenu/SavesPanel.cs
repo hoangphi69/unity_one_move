@@ -11,7 +11,7 @@ public class SavesPanel : MonoBehaviour
   [Header("Buttons")]
   [SerializeField] private Button newGameButton;
   [SerializeField] private Button loadButton;
-  [SerializeField] private Button deleteButton;
+  [SerializeField] private Button eraseButton;
   [SerializeField] private Button backButton;
 
   void Awake()
@@ -27,6 +27,7 @@ public class SavesPanel : MonoBehaviour
     backButton.onClick.AddListener(backClicked);
     newGameButton.onClick.AddListener(newGameClicked);
     loadButton.onClick.AddListener(loadClicked);
+    eraseButton.onClick.AddListener(eraseClicked);
   }
 
   void OnDisable()
@@ -34,6 +35,7 @@ public class SavesPanel : MonoBehaviour
     backButton.onClick.RemoveListener(backClicked);
     newGameButton.onClick.RemoveListener(newGameClicked);
     loadButton.onClick.RemoveListener(loadClicked);
+    eraseButton.onClick.RemoveListener(eraseClicked);
   }
 
   async void InitializeSaveSlots()
@@ -63,14 +65,14 @@ public class SavesPanel : MonoBehaviour
       // Case: Data exists
       newGameButton.gameObject.SetActive(false);
       loadButton.gameObject.SetActive(true);
-      deleteButton.gameObject.SetActive(true);
+      eraseButton.gameObject.SetActive(true);
     }
     else
     {
       // Case: Empty slot
       newGameButton.gameObject.SetActive(true);
       loadButton.gameObject.SetActive(false);
-      deleteButton.gameObject.SetActive(false);
+      eraseButton.gameObject.SetActive(false);
     }
   }
 
@@ -79,20 +81,39 @@ public class SavesPanel : MonoBehaviour
     selectedSlot = null;
     newGameButton.gameObject.SetActive(false);
     loadButton.gameObject.SetActive(false);
-    deleteButton.gameObject.SetActive(false);
+    eraseButton.gameObject.SetActive(false);
   }
 
   async void loadClicked()
   {
     if (selectedSlot == null) return;
+
     SetActiveSlot(selectedSlot);
     await GameDataManager.Instance.SwitchProfile(activeSlot.GetProfileID());
     await GameSceneManager.Instance.LoadTitleGameplay();
   }
 
+  void eraseClicked()
+  {
+    if (selectedSlot == null) return;
+
+    TitleScreenManager.Instance.OpenConfirm(
+      "Erase save?",
+      $"You are about to erase all of your progress in <color=#D57B19>save no. {selectedSlot.GetProfileID()}</color>. This action cannot be undone.",
+      async () =>
+      {
+        GameDataManager.Instance.EraseProfile(selectedSlot.GetProfileID());
+        if (activeSlot == selectedSlot) await GameSceneManager.Instance.LoadTitleGameplay();
+        selectedSlot.Display(null);
+        ClearSelection();
+      }
+    );
+  }
+
   async void newGameClicked()
   {
     if (selectedSlot == null) return;
+
     SetActiveSlot(selectedSlot);
     await GameDataManager.Instance.SwitchProfile(activeSlot.GetProfileID());
     GameSceneManager.Instance.OnTitleNewGame();

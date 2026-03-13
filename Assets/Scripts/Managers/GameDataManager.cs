@@ -18,7 +18,6 @@ public class GameDataManager : MonoBehaviour
   {
     Instance = this;
     dataFileHandler = new(Application.persistentDataPath, fileName);
-    InitializeProfile();
   }
 
   void OnApplicationQuit()
@@ -26,9 +25,10 @@ public class GameDataManager : MonoBehaviour
     _ = SaveGame();
   }
 
-  async void InitializeProfile()
+  public async Task Initialize()
   {
     string profileID = await dataFileHandler.GetRecentlyUpdatedProfileID();
+    print($"active profileID: {profileID}");
     if (string.IsNullOrEmpty(profileID)) profileID = "1";
     await SwitchProfile(profileID);
   }
@@ -51,6 +51,13 @@ public class GameDataManager : MonoBehaviour
   {
     selectedProfileID = profileID;
     await LoadGame();
+  }
+
+  public void EraseProfile(string profileID)
+  {
+    dataFileHandler.DeleteFile(profileID);
+
+    if (selectedProfileID == profileID) data = null;
   }
 
   public async Task<Dictionary<string, GameData>> GetAllProfiles()

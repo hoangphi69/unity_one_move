@@ -67,13 +67,9 @@ public class GameSceneManager : MonoBehaviour
 
     InputActionsManager.Instance.SetState(InputState.UI);
 
-    await GameDataManager.Instance.LoadGame();
-    if (!GameDataManager.Instance.HasData())
-      await GameplayManager.Instance.LoadStageAsync(_firstLobbyScene);
-    else
-    {
-      await LoadTitleGameplay();
-    }
+    await GameDataManager.Instance.Initialize();
+
+    await LoadTitleGameplay();
 
     await Utility.LoadAdditiveAsync(_titleScene);
     _currentOverlayScene = _titleScene;
@@ -85,9 +81,17 @@ public class GameSceneManager : MonoBehaviour
 
   public async Task LoadTitleGameplay()
   {
-    string stageName = GameDataManager.Instance.GetProgress();
-    await GameplayManager.Instance.LoadStageAsync(stageName);
-    GameplayManager.Instance.SpawnPlayer();
+    if (!GameDataManager.Instance.HasData())
+    {
+      GameplayManager.Instance.DespawnPlayer();
+      await GameplayManager.Instance.LoadStageAsync(_firstLobbyScene);
+    }
+    else
+    {
+      string stageName = GameDataManager.Instance.GetProgress();
+      await GameplayManager.Instance.LoadStageAsync(stageName);
+      GameplayManager.Instance.SpawnPlayer();
+    }
   }
 
   // SCENARIO: Title -> Continue (Remove Title, keep Lobby)
@@ -125,6 +129,7 @@ public class GameSceneManager : MonoBehaviour
     await Task.Delay(1000);
     await Utility.UnloadAsync(_loadingScene);
 
+    GameplayManager.Instance.DespawnPlayer();
     await GameplayManager.Instance.LoadStageAsync(_firstLobbyScene, "ch1_Cutscene1");
     GameplayManager.Instance.SpawnPlayer();
 
