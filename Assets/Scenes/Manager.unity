@@ -836,7 +836,7 @@ MonoBehaviour:
     m_SceneName: Title
   _firstLobbyScene:
     m_SceneAsset: {fileID: 102900000, guid: 9d35536fcc265424ca9c9bb85c0033bf, type: 3}
-    m_SceneName: Lobby_1
+    m_SceneName: chapter1_lobby
 --- !u!114 &503166213001906820
 MonoBehaviour:
   m_ObjectHideFlags: 0

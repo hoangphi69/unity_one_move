@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +10,7 @@ public class GameDataManager : MonoBehaviour
   // Configs
   [SerializeField] private string fileName = "data.game";
 
+  public string selectedProfileID = "";
   public GameData data { get; private set; }
   private GameDataFileHandler dataFileHandler;
 
@@ -15,11 +18,19 @@ public class GameDataManager : MonoBehaviour
   {
     Instance = this;
     dataFileHandler = new(Application.persistentDataPath, fileName);
+    InitializeProfile();
   }
 
   void OnApplicationQuit()
   {
-    _ = SaveGameAsync();
+    _ = SaveGame();
+  }
+
+  async void InitializeProfile()
+  {
+    string profileID = await dataFileHandler.GetRecentlyUpdatedProfileID();
+    if (string.IsNullOrEmpty(profileID)) profileID = "1";
+    await SwitchProfile(profileID);
   }
 
   public bool HasData()
@@ -31,14 +42,25 @@ public class GameDataManager : MonoBehaviour
   public async Task SaveProgress(string stageName)
   {
     data.progress = stageName;
-    await SaveGameAsync();
+    await SaveGame();
   }
 
   public string GetProgress() => data.progress;
 
-  public async Task LoadGameAsync()
+  public async Task SwitchProfile(string profileID)
   {
-    data = await dataFileHandler.LoadFile();
+    selectedProfileID = profileID;
+    await LoadGame();
+  }
+
+  public async Task<Dictionary<string, GameData>> GetAllProfiles()
+  {
+    return await dataFileHandler.LoadAllProfiles();
+  }
+
+  public async Task LoadGame()
+  {
+    data = await dataFileHandler.LoadFile(selectedProfileID);
 
     if (data == null)
     {
@@ -50,16 +72,17 @@ public class GameDataManager : MonoBehaviour
     }
   }
 
-  public async Task SaveGameAsync()
+  public async Task SaveGame()
   {
     if (data == null) return;
-    await dataFileHandler.SaveFile(data);
+    data.lastUpdated = DateTime.Now.ToBinary();
+    await dataFileHandler.SaveFile(data, selectedProfileID);
     print("Game Saved.");
   }
 
   public void NewGame()
   {
     data = new();
-    _ = SaveGameAsync();
+    _ = SaveGame();
   }
 }

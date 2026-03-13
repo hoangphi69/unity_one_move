@@ -19,7 +19,7 @@ public class GameplayDialogueUIController : MonoBehaviour
 
   private const string SPEAKER_TAG = "speaker";
   private const string SPRITE_TAG = "sprite";
-  private const string SPRITE_DIR = "Assets/Sprites/";
+  private const string SPRITE_DIR = "Sprites/";
 
   [SerializeField] private int typingSpeed = 5;
 
@@ -118,7 +118,8 @@ public class GameplayDialogueUIController : MonoBehaviour
         case SPRITE_TAG:
           // StyleBackground image = new(Resources.Load<Sprite>(SPRITE_DIR + value));
           // sprite.style.backgroundImage = image;
-          sprite.sprite = Resources.Load<Sprite>(SPRITE_DIR + value);
+          // sprite.sprite = Resources.Load<Sprite>(SPRITE_DIR + value);
+          sprite.style.backgroundImage = new StyleBackground(Resources.Load<Sprite>(SPRITE_DIR + value));
           sprite.style.display = DisplayStyle.Flex;
           break;
       }

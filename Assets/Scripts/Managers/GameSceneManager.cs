@@ -67,14 +67,12 @@ public class GameSceneManager : MonoBehaviour
 
     InputActionsManager.Instance.SetState(InputState.UI);
 
-    await GameDataManager.Instance.LoadGameAsync();
+    await GameDataManager.Instance.LoadGame();
     if (!GameDataManager.Instance.HasData())
       await GameplayManager.Instance.LoadStageAsync(_firstLobbyScene);
     else
     {
-      string stageName = GameDataManager.Instance.GetProgress();
-      await GameplayManager.Instance.LoadStageAsync(stageName);
-      GameplayManager.Instance.SpawnPlayer();
+      await LoadTitleGameplay();
     }
 
     await Utility.LoadAdditiveAsync(_titleScene);
@@ -83,6 +81,13 @@ public class GameSceneManager : MonoBehaviour
     // Hide Loading
     await Task.Delay(1000);
     await Utility.UnloadAsync(_loadingScene);
+  }
+
+  public async Task LoadTitleGameplay()
+  {
+    string stageName = GameDataManager.Instance.GetProgress();
+    await GameplayManager.Instance.LoadStageAsync(stageName);
+    GameplayManager.Instance.SpawnPlayer();
   }
 
   // SCENARIO: Title -> Continue (Remove Title, keep Lobby)
@@ -210,9 +215,7 @@ public class GameSceneManager : MonoBehaviour
       await Utility.UnloadAsync(_currentOverlayScene);
 
     // Load lobby/hallway gameplay
-    string stage = GameDataManager.Instance.GetProgress();
-    await GameplayManager.Instance.LoadStageAsync(stage);
-    GameplayManager.Instance.SpawnPlayer();
+    await LoadTitleGameplay();
 
     // Load title
     await Utility.LoadAdditiveAsync(_titleScene);
