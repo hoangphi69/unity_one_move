@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
   private DialogueMode currentMode;
   private bool dialogueActive = false;
   private bool isTyping = false;
-  private CancellationTokenSource _typing;
+  private CancellationTokenSource _displaying;
 
   void Awake()
   {
@@ -58,7 +58,6 @@ public class DialogueManager : MonoBehaviour
   void ContinueDialogue()
   {
     if (!dialogueActive) return;
-    if (story.currentChoices.Count > 0) return;
 
     if (isTyping)
     {
@@ -66,28 +65,30 @@ public class DialogueManager : MonoBehaviour
       return;
     }
 
+    if (story.currentChoices.Count > 0) return;
+
     if (story.canContinue)
     {
-      CancelTyping();
-      _typing = new();
+      CancelDisplaying();
+      _displaying = new();
 
       GameEventsManager.Instance.dialogueEvents.DisplayDialogue(
         story.Continue(),
         story.currentTags,
         story.currentChoices,
-        _typing.Token
+        _displaying.Token
       );
     }
     else ExitDialogue();
   }
 
-  void CancelTyping()
+  void CancelDisplaying()
   {
-    if (_typing != null)
+    if (_displaying != null)
     {
-      _typing.Cancel();
-      _typing.Dispose();
-      _typing = null;
+      _displaying.Cancel();
+      _displaying.Dispose();
+      _displaying = null;
     }
   }
 
@@ -99,7 +100,8 @@ public class DialogueManager : MonoBehaviour
 
   void ExitDialogue()
   {
-    CancelTyping();
+    CancelDisplaying();
+    SetTypingState(false);
     dialogueActive = false;
     GameEventsManager.Instance.dialogueEvents.EndDialogue();
     InputActionsManager.Instance.SetState(InputState.Gameplay);

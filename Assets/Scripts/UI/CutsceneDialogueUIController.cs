@@ -23,7 +23,7 @@ public class CutsceneDialogueUIController : MonoBehaviour
   private const string SPEAKER_TAG = "speaker";
   private const string SPRITE_TAG = "sprite";
   private const string BG_TAG = "bg";
-  private const string SPRITE_DIR = "Assets/Sprites/";
+  private const string SPRITE_DIR = "Sprites/CutsceneDialogue/";
 
   [SerializeField] private int typingSpeed = 5;
 
@@ -213,11 +213,13 @@ public class CutsceneDialogueUIController : MonoBehaviour
           speaker.style.display = DisplayStyle.Flex;
           break;
         case SPRITE_TAG:
-          character.sprite = Resources.Load<Sprite>(SPRITE_DIR + value);
+          Texture2D texture = Resources.Load<Texture2D>(SPRITE_DIR + value);
+          character.style.backgroundImage = new StyleBackground(texture);
           character.style.display = DisplayStyle.Flex;
           break;
         case BG_TAG:
-          background.sprite = Resources.Load<Sprite>(SPRITE_DIR + value);
+          Texture2D bg = Resources.Load<Texture2D>(SPRITE_DIR + value);
+          background.style.backgroundImage = new StyleBackground(bg);
           background.style.display = DisplayStyle.Flex;
           break;
       }

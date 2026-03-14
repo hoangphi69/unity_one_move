@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isMoving = false;
     private IInteractable nearbyInteractable;
+    private OutlineHighlight currentHighlight;
 
     void OnEnable()
     {
@@ -119,6 +121,7 @@ public class PlayerController : MonoBehaviour
     void ScanSurroundings()
     {
         IInteractable found = null;
+        OutlineHighlight foundHighlight = null;
 
         // Look for interactibles in 4 directions
         Vector3[] directions = { Vector3.forward, Vector3.left, Vector3.right, Vector3.back };
@@ -126,6 +129,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
             {
+                if (hit.transform.TryGetComponent(out OutlineHighlight highlight))
+                {
+                    foundHighlight = highlight;
+                }
+
                 if (hit.transform.TryGetComponent(out IInteractable interactable))
                 {
                     found = interactable;
@@ -139,6 +147,13 @@ public class PlayerController : MonoBehaviour
             nearbyInteractable?.OnLost();
             nearbyInteractable = found;
             nearbyInteractable?.OnDetected();
+        }
+
+        if (foundHighlight != currentHighlight)
+        {
+            currentHighlight?.Hide(); 
+            currentHighlight = foundHighlight;
+            currentHighlight?.Show();
         }
     }
 

@@ -12,40 +12,27 @@ VAR chose_book1 = false
 VAR chose_book2 = false
 VAR chose_book3 = false
 
-=== npc ===
-{npc > 1: -> casual}
-It's dangerous outside. #speaker:NPC #sprite:agnes
-Take this with you. #speaker:Phạm Nhật Vượng #sprite:agnes
--> choices
 
-== choices
-
-* [Lấy luôn em ơi]
-    You got an item.
-* [Thôi em ơi]
-    You declined the NPC.
-- -> END
-
-== casual
-The NPC has nothing to say.
--> END
-
+// ----------- Cutscene đầu ch1 ----------
 === ch1_Cutscene1 ===
+#bg:dom
 Màn hình máy tính sáng lên trong căn phòng trọ bao bọc trong tĩnh lặng và bóng tối. 
-Chỉ có tiếng nhạc game đơn điệu phát ra từ máy tính cùng âm thanh gõ bàn phím lạch cạch của Nam. #bg:dom
+Chỉ có tiếng nhạc game đơn điệu phát ra từ máy tính cùng âm thanh gõ bàn phím lạch cạch của Nam.
 
 Thực tập xong rồi. Môn cũng hết rồi. #speaker:Nam #sprite:nam_thinking
 Mọi thứ đáng lẽ phải nhẹ nhõm hơn chứ? #speaker:Nam #sprite:nam_thinking
 Vậy mà sao mình lại thấy trống rỗng thế này... #speaker:Nam #sprite:nam_bored
 
 * [Tiếp tục chơi game]
-    Cứ chơi thêm một ván nữa. Rồi lại một ván nữa. #bg:black
+    #bg:black
+    Cứ chơi thêm một ván nữa. Rồi lại một ván nữa. 
     Cái cảm giác vô định này... #speaker:Nam #sprite:nam_bored
     Mình không thích nó!! #speaker:Nam #sprite:nam_angry
     Haizzz... Chán thật. #speaker:Nam #sprite:nam_bored #bg:dom
     -> touchgrass
 
 * [Nhìn ra ngoài cửa sổ]
+    #bg:dom_pull_curtain
     Sau khi kéo rèm cửa, ánh sáng chiếu rọi khắp phòng, trải lên khuôn mặt Nam một màu vàng nhạt. #bg:dom_pull_curtain
     Mình đang làm gì với đời vậy nhờ?? #speaker:Nam #sprite:nam_thinking
     -> touchgrass
@@ -55,7 +42,8 @@ Không thể cứ lầm lì mãi một chỗ được. #speaker:Nam #sprite:nam_
 Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinking
 #bg:nam_touchgrass
 -> DONE
-
+    
+// ----------- Tại lobby tương tác với điện thoại ----------
 === ch1_Lobby1 ===
 { interact_phone == false:
     ~ interact_phone = true
@@ -97,11 +85,9 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 
 
 // ----------- Cutscene sau lobby1 ----------
-=== ch1_OneWeekLater ===
-#bg:one_week_later
--> ch1_Cutscene2
-
 === ch1_Cutscene2 ===
+ #bg:one_week_later 
+#bg:friend_dom
 Đồ án làm thử AI không? #speaker:Phong #sprite:phong_talk 
 Hả? Làm thử? Mày tính làm thử AI á? #speaker:Nam #sprite:nam_talk
 Mày biết đồ án AI nặng cỡ nào không?  #speaker:Nam #sprite:nam_talk
@@ -152,3 +138,164 @@ Kay. #speaker:Nam #sprite:nam_talk
     Có nhiều sách mới nhập về, em xem thử có sách của em không? #speaker:Thủ thư #sprite:libarian_talk
     -> DONE
 }
+
+// ----------- Trong map1 hallway2 ----------
+=== ch1_Hallway2 ===
+{ talked_hallway2 == false:
+    ~ talked_hallway2 = true
+    Cả tủ sách chỉ có 3 cuốn là xài được. #speaker:Nam #sprite:nam_thinking
+    Mình nên lấy cuốn nào đây ta? #speaker:Nam #sprite:nam_talk
+    -> choose_book
+
+- else:
+    Có một cuốn sách bị thiếu trên kệ có lẽ đang nằm trong tay bạn.
+    -> DONE
+}
+
+= choose_book
+{ pick_any_book:
+    Tiếp theo là cuốn nào đây? #speaker:Nam #sprite:nam_thinking
+}
+
+{ not chose_book1:
+    + [300 bài code thanh niên]
+    ~ chose_book1 = true
+    ~ pick_any_book = true
+    Nội dung hơi chung chung, cuốn này không xài được rồi, haizz... #speaker:Nam #sprite:nam_thinking
+    -> choose_book
+}
+
+{ not chose_book2:
+    + [Sáng tạo trong IT, hãy bùng nổ kiến thức]
+    ~ chose_book2 = true
+    ~ pick_any_book = true
+    "....Để trở nên sáng tạo trong lập trình, hãy lập trình những thứ mà mình thích và tận hưởng những khó khăn của nó."
+    Hmm... #speaker:Nam #sprite:nam_thinking
+    Vẫn chưa kiếm ra ý tưởng từ sách này. #speaker:Nam #sprite:nam_thinking
+    -> choose_book
+}
+
+{ not chose_book3:
+    + [Hướng dẫn xây dựng thế giới từ 0 và 1]
+    ~ chose_book3 = true
+    Ra đây là sách hướng dẫn lập trình game à!? #speaker:Nam #sprite:nam_thinking
+    Cũng thú vị, để mang vể đọc thử. #speaker:Nam #sprite:nam_thinking
+    -> after_choose_book
+}
+
+= after_choose_book
+_"Ring Ring!!!"_
+Mày kiếm được gì rồi à? #speaker:Nam #sprite:nam_talk
+Tao kiếm được.... #speaker:Phong #sprite:phong_talk
+Dark Soup 3 mới ra mắt, chơi luôn không cu. #speaker:Phong #sprite:phong_talk
+Nghe nói game lần này giải đố nhiều lắm đấy! #speaker:Phong #sprite:phong_talk
+Uầy hay, tao với mày đợi game cũng phải nửa năm rồi đấy!! #speaker:Nam #sprite:nam_talk
+Đợi tao về chơi luôn, tao cấm mày chơi trước!! #speaker:Nam #sprite:nam_talk
+OKê! #speaker:Phong #sprite:phong_smile
+-> DONE
+
+// ----------- Trong map1 hallway3 ----------
+=== ch1_Hallway3 ===
+{ talked_hallway3 == false:
+    ~ talked_hallway3 = true
+    Em kiếm được sách của em chưa? #speaker:Thủ thư #sprite:libarian_talk
+    Có rồi chị ơi. #speaker:Nam #sprite:nam_talk
+    Em thấy cuốn này cũng hay nên định mang về đọc thử. #speaker:Nam #sprite:nam_talk
+
+    ... #speaker:Thủ thư #sprite:libarian_talk
+    Hướng dẫn làm game à, làm chị nhớ đến khoá trước cũng có người làm đồ án game. #speaker: Thủ thư #sprite:libarian_smile
+    
+    Thật vậy hả chị? #speaker:Nam #sprite:nam_surprise
+    
+    Ừ. #speaker:Thủ thư #sprite:libarian_talk
+    Mấy bạn đó cũng từng quanh quẩn ở khu cuối thư viện để tìm tài liệu thêm. #speaker:Thủ thư #sprite:libarian_talk
+     
+    ... #speaker:Nam #sprite:nam_thinking
+    Vậy từ từ để em xem thêm một vòng thử nha chị. #speaker:Nam #sprite:nam_talk
+
+    Vậy thì chị đánh dấu cuốn này lại cho em trước. #speaker:Thủ thư #sprite:libarian_talk
+    Có mà lấy thêm sách nhớ quay lại chỗ chị nhá. #speaker:Thủ thư #sprite:libarian_talk
+    À vâng. #speaker:Nam #sprite:nam_talk
+    Của em đây nha, nhớ trả sách vào tuần sau nhé. #speaker:Thủ thư #sprite:libarian_talk
+    Em cảm ơn chị! #speaker:Nam #sprite:nam_talk
+    -> DONE
+
+- else:
+    Nhớ trả sách vào tuần sau nhé. #speaker:Thủ thư #sprite:libarian_talk
+    -> DONE
+}
+
+// ----------- Tại đích ----------
+=== ch1_At_Goal ===
+_"Ring Ring!!!"_
+Về chưa đấy. #speaker:Phong #sprite:phong_talk
+Không về nhanh cẩn thận tao chơi trước đấy nhá. #speaker:Phong #sprite:phong_talk
+-> DONE
+
+// ----------- Cutscene sau khi chơi game xong tại phòng trọ ----------
+=== ch1_Cutscene3 ===
+#bg: dom_friend
+Game cuốn thật. #speaker:Nam #sprite:nam_talk
+Nhìn đơn giản vậy mà giải đố cũng căng phết. #speaker:Phong #sprite:phong_talk
+Ừ. #speaker:Nam #sprite:nam_talk
+
+Cơ mà tao lại thích kiểu puzzle nhanh gọn hơn. #speaker:Phong #sprite:phong_smile
+Kiểu mỗi màn giải một cái là xong ấy. #speaker:Phong #sprite:phong_smile
+
+Giống tao. #speaker:Nam #sprite:nam_smile
+... #speaker:Nam #sprite:nam_thinking
+
+À mà. #speaker:Nam #sprite:nam_thinking
+Hồi chiều tao lên thư viện ấy. #speaker:Nam #sprite:nam_talk
+Kiếm được gì không? #speaker:Phong #sprite:phong_talk
+Ban đầu toàn sách linh tinh thôi. #speaker:Nam #sprite:nam_talk
+
+{chose_book2:
+    Cơ mà nãy tao kiếm được 1 câu cũng hay. #speaker:Nam #sprite:nam_talk
+    "Nếu muốn sáng tạo, hãy làm thứ mà mình thật sự thích." #speaker:Nam #sprite:nam_talk
+    Ban đầu nó không liên quan tới đồ án nên tao cũng không để tâm lắm. #speaker:Nam #sprite:nam_talk
+    Giờ nghĩ lại thì câu đấy nó lại đúng trong trường hợp này. #speaker:Nam #sprite:nam_talk
+    ... #speaker:Phong #sprite:phong_thinking
+}
+
+Trong đống linh tinh đấy thì tao kiếm được cuốn hướng dẫn lập trình game. #speaker:Nam #sprite:nam_talk
+Thấy thú vị thì tao mang về xem thử. #speaker:Nam #sprite:nam_talk
+
+À mà nhắc mới nhớ. #speaker:Nam #sprite:nam_surprise
+Hồi nãy chị thủ thư kể khoá trước cũng từng có nhóm làm đồ án game rồi. #speaker:Nam #sprite:nam_talk
+Nghe nói làm cũng ổn phết. #speaker:Nam #sprite:nam_talk
+Thật à! #speaker:Phong #sprite:phong_surprise
+
+Ừ. #speaker:Nam #sprite:nam_smile
+Mà nghĩ lại thì... #speaker:Nam #sprite:nam_thinking
+Cả tao với mày đều thích game mà nhỉ. #speaker:Nam #sprite:nam_talk
+
+Ừ thì... thích thật. #speaker:Phong #sprite:phong_smile
+Hai đứa mình cũng cày nát bao nhiêu game rồi còn gì. #speaker:Phong #sprite:phong_talk
+
+Ừ. #speaker:Nam #sprite:nam_smile
+Thế nên tao mới nghĩ... #speaker:Nam #sprite:nam_talk
+
+Hay là... #speaker:Nam #sprite:nam_thinking
+ĐỒ ÁN TỐT NGHIỆP, làm con puzzle game như cái cách tao với mày muốn. #speaker:Nam #sprite:nam_talk
+Tao thấy nó thú vị đấy chứ. #speaker:Nam #sprite:nam_talk
+... #speaker:Phong #sprite:phong_surprise
+... #speaker:Phong #sprite:phong_thinking
+... #speaker:Phong #sprite:phong_surprise
+Tao cũng thấy ý tưởng thú vị đấy. #speaker:Phong #sprite:phong_smile
+Biết đâu sau này có người khác lại chơi game của tụi mình. #speaker:Phong #sprite:phong_smile
+Thế bắt đầu từ đâu đây? #speaker:Phong #sprite:phong_talk
+
+Từ cái đơn giản nhất thôi. #speaker:Nam #sprite:nam_smile
+Nghĩ gameplay trước. #speaker:Nam #sprite:nam_talk
+Sau đó mới tới map với cốt truyện. #speaker:Nam #sprite:nam_talk
+
+... #speaker:Nam #sprite:nam_smile
+... #speaker:Phong #sprite:phong_smile
+// TODO: dan sang chapter 2
+-> DONE
+
+// ----------- Nhặt được vật phẩm ----------
+=== ch1_GetItem ===
+Bạn vừa nhặt được 1 vật phẩm.
+-> END 

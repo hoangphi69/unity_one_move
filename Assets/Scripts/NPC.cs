@@ -3,6 +3,7 @@ using UnityEngine;
 public class NPC : MonoBehaviour, IInteractable
 {
   private Canvas bubble;
+  private OutlineHighlight outlineHighlight;
 
   [SerializeField] private string knotName;
 

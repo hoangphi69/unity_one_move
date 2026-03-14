@@ -359,11 +359,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7042655551232734956, guid: 44b965d26f2ef4f33a72234bea6009f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.996
       objectReference: {fileID: 0}
     - target: {fileID: 7042655551232734956, guid: 44b965d26f2ef4f33a72234bea6009f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: 0.506
       objectReference: {fileID: 0}
     - target: {fileID: 7042655551232734956, guid: 44b965d26f2ef4f33a72234bea6009f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1285,6 +1285,7 @@ GameObject:
   - component: {fileID: 1399715929372222593}
   - component: {fileID: 7547687812004025734}
   - component: {fileID: 2110170550222847786}
+  - component: {fileID: 7547687812004025735}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -1308,14 +1309,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3476921468385782024}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 5.5, y: 0.5, z: -0.5}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1256580093}
   m_Father: {fileID: 714233521}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &7547687812004025734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1337,6 +1338,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7547687812004025735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3476921468385782024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f6ec14ca7fe354fa6e4382ec0962d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineHighlight
+  highlightColor: {r: 1, g: 0, b: 0, a: 1}
+  emissionIntensity: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
