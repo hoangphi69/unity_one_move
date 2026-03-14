@@ -1209,7 +1209,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1128502559521287811, guid: 20464a019798b7b4599f0997e95132b8, type: 3}
       propertyPath: _nextStage.m_SceneName
-      value: Puzzle1_1
+      value: chapter1_puzzle1
       objectReference: {fileID: 0}
     - target: {fileID: 1128502559521287811, guid: 20464a019798b7b4599f0997e95132b8, type: 3}
       propertyPath: _nextStage.m_SceneAsset
