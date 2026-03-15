@@ -19,11 +19,7 @@ public class GameplayDialogueUIController : MonoBehaviour
 
   private const string SPEAKER_TAG = "speaker";
   private const string SPRITE_TAG = "sprite";
-<<<<<<< HEAD
   private const string SPRITE_DIR = "Sprites/InGameDialogue/";
-=======
-  private const string SPRITE_DIR = "Sprites/";
->>>>>>> fff7a4672d7db8e108ed490b0d096c8b9a4d1c87
 
   [SerializeField] private int typingSpeed = 5;
 

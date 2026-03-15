@@ -1285,7 +1285,7 @@ GameObject:
   - component: {fileID: 1399715929372222593}
   - component: {fileID: 7547687812004025734}
   - component: {fileID: 2110170550222847786}
-  - component: {fileID: 7547687812004025735}
+  - component: {fileID: 7547687812004025736}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -1338,20 +1338,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7547687812004025735
+--- !u!114 &7547687812004025736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3476921468385782024}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f6ec14ca7fe354fa6e4382ec0962d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OutlineHighlight
-  highlightColor: {r: 1, g: 0, b: 0, a: 1}
-  emissionIntensity: 10
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 0, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

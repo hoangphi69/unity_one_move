@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7042655551232734956, guid: 44b965d26f2ef4f33a72234bea6009f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.499998
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7042655551232734956, guid: 44b965d26f2ef4f33a72234bea6009f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1025,10 +1025,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 895691131}
     m_Modifications:
-    - target: {fileID: -2147749037539212496, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2110170548490554506, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
       propertyPath: knotName
       value: ch1_Hallway1

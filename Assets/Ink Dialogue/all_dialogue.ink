@@ -86,7 +86,7 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 
 // ----------- Cutscene sau lobby1 ----------
 === ch1_Cutscene2 ===
- #bg:one_week_later 
+#bg:one_week_later 
 #bg:friend_dom
 Đồ án làm thử AI không? #speaker:Phong #sprite:phong_talk 
 Hả? Làm thử? Mày tính làm thử AI á? #speaker:Nam #sprite:nam_talk
