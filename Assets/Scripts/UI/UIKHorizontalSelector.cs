@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [UxmlElement]
-public partial class HorizontalSelector : VisualElement, INotifyValueChanged<string>
+public partial class UIKHorizontalSelector : VisualElement, INotifyValueChanged<string>
 {
   // Visual
   private readonly Button _leftButton;
@@ -59,7 +59,7 @@ public partial class HorizontalSelector : VisualElement, INotifyValueChanged<str
   }
 
   // Constructor
-  public HorizontalSelector()
+  public UIKHorizontalSelector()
   {
     _leftButton = new Button(OnLeftClicked) { text = "◄" };
     _valueLabel = new Label() { text = "-" };
