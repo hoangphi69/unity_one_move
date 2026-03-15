@@ -1,7 +1,7 @@
 using UnityEngine.UIElements;
 
 [UxmlElement]
-public partial class SwitchToggle : VisualElement, INotifyValueChanged<bool>
+public partial class UIKSwitchToggle : VisualElement, INotifyValueChanged<bool>
 {
   // Visual
   readonly Label _stateLabel;
@@ -49,7 +49,7 @@ public partial class SwitchToggle : VisualElement, INotifyValueChanged<bool>
   }
 
   // Constructor
-  public SwitchToggle()
+  public UIKSwitchToggle()
   {
     // Initialize parts
     _stateLabel = new Label();

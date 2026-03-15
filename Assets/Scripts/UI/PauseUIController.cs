@@ -21,9 +21,9 @@ public class PauseUIController : MonoBehaviour
 
   // -- Graphics panel --
   private VisualElement _graphicsPanel;
-  private HorizontalSelector _graphicsQualitySelector;
-  private HorizontalSelector _graphicsResolutionSelector;
-  private SwitchToggle _graphicsFullscreenToggle;
+  private UIKHorizontalSelector _graphicsQualitySelector;
+  private UIKHorizontalSelector _graphicsResolutionSelector;
+  private UIKSwitchToggle _graphicsFullscreenToggle;
   private IntSlider _graphicsBrightnessSlider;
   private Button _graphicsBackButton;
 
@@ -51,9 +51,9 @@ public class PauseUIController : MonoBehaviour
 
     // -- Graphics Panel --
     _graphicsPanel = _root.Q("panel-graphics");
-    _graphicsQualitySelector = _graphicsPanel.Q<HorizontalSelector>("quality-selector");
-    _graphicsResolutionSelector = _graphicsPanel.Q<HorizontalSelector>("resolution-selector");
-    _graphicsFullscreenToggle = _graphicsPanel.Q<SwitchToggle>("fullscreen-toggle");
+    _graphicsQualitySelector = _graphicsPanel.Q<UIKHorizontalSelector>("quality-selector");
+    _graphicsResolutionSelector = _graphicsPanel.Q<UIKHorizontalSelector>("resolution-selector");
+    _graphicsFullscreenToggle = _graphicsPanel.Q<UIKSwitchToggle>("fullscreen-toggle");
     _graphicsBrightnessSlider = _graphicsPanel.Q<IntSlider>("brightness-slider");
     _graphicsBackButton = _graphicsPanel.Q<Button>("back");
 
