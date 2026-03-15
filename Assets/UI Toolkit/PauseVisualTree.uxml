@@ -20,15 +20,15 @@
             <ui:Label text="GRAPHICS" name="title" class="title"/>
             <ui:VisualElement name="quality" class="option-field">
                 <ui:Label text="Quality"/>
-                <HorizontalSelector name="quality-selector"/>
+                <UIKHorizontalSelector name="quality-selector"/>
             </ui:VisualElement>
             <ui:VisualElement name="resolution" class="option-field">
                 <ui:Label text="Resolution"/>
-                <HorizontalSelector name="resolution-selector"/>
+                <UIKHorizontalSelector name="resolution-selector"/>
             </ui:VisualElement>
             <ui:VisualElement name="fullscreen" class="option-field">
                 <ui:Label text="Fullscreen"/>
-                <SwitchToggle name="fullscreen-toggle"/>
+                <UIKSwitchToggle name="fullscreen-toggle"/>
             </ui:VisualElement>
             <ui:VisualElement name="brightness" class="option-field">
                 <ui:Label text="Brightness"/>
