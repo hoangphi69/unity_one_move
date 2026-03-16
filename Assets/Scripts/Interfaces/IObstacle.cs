@@ -1,4 +1,6 @@
 public interface IObstacle
 {
-  bool IsSolid();
+  bool IsPlayerBlocking();
+  bool IsEnemyBlocking();
+  bool IsEnemySightBlocking();
 }

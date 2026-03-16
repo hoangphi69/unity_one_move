@@ -3,14 +3,26 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PushBox : MonoBehaviour, IObstacle, IPushable
+public class Pushable : MonoBehaviour, IObstacle, IPushable
 {
-    [SerializeField] float moveDuration = .2f;
-    [SerializeField] bool isPushable = true;
+    [Header("Player")] 
+    [SerializeField] bool blockPlayer = true;
+    [SerializeField] bool isPushable = false;
+
+    [Header("Enemy")]
+    [SerializeField] bool blockEnemy = true;
+    [SerializeField] bool blockEnemySight = true;
+
+    [Header("Movement")]
+    [SerializeField] float moveDuration = 0.1f;
 
     private bool isMoving = false;
 
-    public bool IsSolid() => !isPushable;
+    
+    //IObstacle
+    public bool IsPlayerBlocking() => blockPlayer;
+    public bool IsEnemyBlocking() => blockEnemy;
+    public bool IsEnemySightBlocking() => blockEnemySight;
 
     public async Task Push(Vector3 direction)
     {

@@ -92,16 +92,16 @@ public class PlayerController : MonoBehaviour
             if (hit.collider.TryGetComponent(out IPushable pushable))
             {
                 _ = pushable.Push(direction);
-                if (hit.collider.TryGetComponent(out IObstacle obs))
-                {
-                    return !obs.IsSolid();
-                }    
+                // if (hit.collider.TryGetComponent(out IObstacle obs))
+                // {
+                //     return !obs.IsPlayerBlocking();
+                // }    
                 return true;
             }
 
             if (hit.collider.TryGetComponent(out IObstacle obstacle))
             {
-                return !obstacle.IsSolid();
+                return !obstacle.IsPlayerBlocking();
             }
 
             if (hit.collider.TryGetComponent(out ICollectible collectible))

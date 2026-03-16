@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -34,16 +35,41 @@ public class EnemyController : MonoBehaviour
   {
     foreach (Vector3 direction in sightDirections)
     {
-      if (Physics.Raycast(transform.position, direction, out RaycastHit hit, sightDistance, GameplayManager.Instance.entityMask))
+      RaycastHit[] hits = Physics.RaycastAll
+      (
+        transform.position,
+        direction,
+        sightDistance,
+        GameplayManager.Instance.entityMask
+      );
+      
+      System.Array.Sort(hits, (a,b) => a.distance.CompareTo(b.distance));
+      foreach (RaycastHit hit in hits)
       {
+        if (hit.collider.TryGetComponent(out IObstacle obstacle))
+        {
+          if (obstacle.IsEnemySightBlocking()) break;
+          else continue;
+        }
+
         if (hit.collider.TryGetComponent(out PlayerController _))
         {
           return direction;
         }
       }
     }
-
     return null;
+    // foreach (Vector3 direction in sightDirections)
+    // {
+    //   if (Physics.Raycast(transform.position, direction, out RaycastHit hit, sightDistance, GameplayManager.Instance.entityMask))
+    //   {
+
+    //     if (hit.collider.TryGetComponent(out PlayerController _))
+    //     {
+    //       return direction;
+    //     }
+    //   }
+    // }
   }
 
   void Rotate(Vector3 direction)
@@ -88,7 +114,7 @@ public class EnemyController : MonoBehaviour
     {
       if (hit.collider.TryGetComponent(out IObstacle obstacle))
       {
-        return !obstacle.IsSolid();
+        return !obstacle.IsPlayerBlocking();
       }
 
       if (hit.collider.TryGetComponent(out PlayerController player))
