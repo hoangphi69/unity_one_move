@@ -14,7 +14,7 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable
     [SerializeField] bool blockEnemySight = true;
 
     [Header("Movement")]
-    [SerializeField] float moveDuration = 0.1f;
+    [SerializeField] float moveDuration = 0.2f;
 
     private bool isMoving = false;
 
@@ -24,16 +24,17 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable
     public bool IsEnemyBlocking() => blockEnemy;
     public bool IsEnemySightBlocking() => blockEnemySight;
 
-    public async Task Push(Vector3 direction)
+    public async Task<bool> Push(Vector3 direction)
     {
-        if (!isPushable) return;
-        if (isMoving) return;
+        if (!isPushable) return false;
+        if (isMoving) return false;
 
         Vector3 target = transform.position + direction * GameplayManager.Instance.cellSize;
 
-        if (!CanPushTo(direction, target)) return;
+        if (!CanPushTo(direction, target)) return false;
 
         await SmoothMoveAsync(target, destroyCancellationToken);
+        return true;
     }
 
     bool CanPushTo(Vector3 direction, Vector3 target)

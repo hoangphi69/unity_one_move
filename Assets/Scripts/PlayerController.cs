@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         // Interact with objects
         if (isMoving) return;
-        if (!CanMove(direction)) return;
+        if (!await CanMove(direction)) return;
 
         // Move
         Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    bool CanMove(Vector3 direction)
+    async Task<bool> CanMove(Vector3 direction)
     {
         Vector3 position = transform.position;
 
@@ -91,12 +91,12 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out IPushable pushable))
             {
-                _ = pushable.Push(direction);
+                return await pushable.Push(direction);
                 // if (hit.collider.TryGetComponent(out IObstacle obs))
                 // {
                 //     return !obs.IsPlayerBlocking();
                 // }    
-                return true;
+                // return true;
             }
 
             if (hit.collider.TryGetComponent(out IObstacle obstacle))
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
     void ScanSurroundings()
     {
         IInteractable found = null;
-        OutlineHighlight foundHighlight = null;
+        // OutlineHighlight foundHighlight = null;
 
         // Look for interactibles in 4 directions
         Vector3[] directions = { Vector3.forward, Vector3.left, Vector3.right, Vector3.back };
@@ -139,10 +139,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
             {
-                if (hit.transform.TryGetComponent(out OutlineHighlight highlight))
-                {
-                    foundHighlight = highlight;
-                }
+                // if (hit.transform.TryGetComponent(out OutlineHighlight highlight))
+                // {
+                //     foundHighlight = highlight;
+                // }
 
                 if (hit.transform.TryGetComponent(out IInteractable interactable))
                 {
@@ -159,12 +159,12 @@ public class PlayerController : MonoBehaviour
             nearbyInteractable?.OnDetected();
         }
 
-        if (foundHighlight != currentHighlight)
-        {
-            currentHighlight?.Hide(); 
-            currentHighlight = foundHighlight;
-            currentHighlight?.Show();
-        }
+        // if (foundHighlight != currentHighlight)
+        // {
+        //     currentHighlight?.Hide(); 
+        //     currentHighlight = foundHighlight;
+        //     currentHighlight?.Show();
+        // }
     }
 
     void Interact(InputAction.CallbackContext context)
