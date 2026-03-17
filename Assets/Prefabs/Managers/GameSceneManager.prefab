@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1130813945796440350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7685440244247983125}
+  - component: {fileID: 5835346691026403878}
+  m_Layer: 0
+  m_Name: GameSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7685440244247983125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130813945796440350}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.88648987, y: 0, z: -1.11166}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5835346691026403878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130813945796440350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea1edb88486249d99616f16493742fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
+  _loadingScene:
+    m_SceneAsset: {fileID: 102900000, guid: 97a7893c54fae48ca9a400e5b85522f4, type: 3}
+    m_SceneName: Loading
+  _pauseScene:
+    m_SceneAsset: {fileID: 102900000, guid: 92cb02d4941184e9fbe262e5a4e99eff, type: 3}
+    m_SceneName: Pause
+  _titleScene:
+    m_SceneAsset: {fileID: 102900000, guid: f7a3b131b4c1d47bdb0dc8553e593ff2, type: 3}
+    m_SceneName: Title
+  _firstLobbyScene:
+    m_SceneAsset: {fileID: 102900000, guid: 9d35536fcc265424ca9c9bb85c0033bf, type: 3}
+    m_SceneName: chapter1_lobby

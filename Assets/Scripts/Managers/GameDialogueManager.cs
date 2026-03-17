@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public enum DialogueMode { Cutscene, InGame }
 
-public class DialogueManager : MonoBehaviour
+public class GameDialogueManager : MonoBehaviour
 {
   [Header("Ink Story")]
   [SerializeField] private TextAsset inkJSON;
@@ -26,8 +26,8 @@ public class DialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onEnterDialogue += EnterDialogue;
     GameEventsManager.Instance.dialogueEvents.onChoiceSelected += SelectChoice;
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged += SetTypingState;
-    InputActionsManager.Instance.inputActions.UI.DialogueAdvance.performed += ContinueDialogue;
-    InputActionsManager.Instance.inputActions.UI.DialogueSkip.performed += SkipCutsceneDialogue;
+    GameInputManager.Instance.Actions.UI.DialogueAdvance.performed += ContinueDialogue;
+    GameInputManager.Instance.Actions.UI.DialogueSkip.performed += SkipCutsceneDialogue;
   }
 
   void OnDisable()
@@ -35,8 +35,8 @@ public class DialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onEnterDialogue -= EnterDialogue;
     GameEventsManager.Instance.dialogueEvents.onChoiceSelected -= SelectChoice;
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged -= SetTypingState;
-    InputActionsManager.Instance.inputActions.UI.DialogueAdvance.performed -= ContinueDialogue;
-    InputActionsManager.Instance.inputActions.UI.DialogueSkip.performed -= SkipCutsceneDialogue;
+    GameInputManager.Instance.Actions.UI.DialogueAdvance.performed -= ContinueDialogue;
+    GameInputManager.Instance.Actions.UI.DialogueSkip.performed -= SkipCutsceneDialogue;
   }
 
   void SetTypingState(bool isTyping) => this.isTyping = isTyping;
@@ -48,7 +48,7 @@ public class DialogueManager : MonoBehaviour
 
     dialogueActive = true;
     currentMode = mode;
-    InputActionsManager.Instance.SetState(InputState.UI);
+    GameInputManager.Instance.SetState(InputState.UI);
     GameEventsManager.Instance.dialogueEvents.StartDialogue(mode);
     story.ChoosePathString(knotName);
     ContinueDialogue();
@@ -104,7 +104,7 @@ public class DialogueManager : MonoBehaviour
     SetTypingState(false);
     dialogueActive = false;
     GameEventsManager.Instance.dialogueEvents.EndDialogue();
-    InputActionsManager.Instance.SetState(InputState.Gameplay);
+    GameInputManager.Instance.SetState(InputState.Gameplay);
   }
 
   void SelectChoice(int choiceIndex)

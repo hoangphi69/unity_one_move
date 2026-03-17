@@ -26,8 +26,10 @@ public class GameplayManager : MonoBehaviour
 
   // Player
   [SerializeField] private GameObject playerPrefab;
+  [SerializeField] private CinemachineCamera cameraPrefab;
+
   public PlayerController activePlayer { get; private set; }
-  public CinemachineCamera playerCam;
+  public CinemachineCamera playerCam { get; private set; }
 
   private void Awake()
   {
@@ -61,7 +63,7 @@ public class GameplayManager : MonoBehaviour
 
     try
     {
-      InputActionsManager.Instance.SetState(InputState.UI);
+      GameInputManager.Instance.SetState(InputState.UI);
 
       Task cutsceneFinished = CutsceneManager.Instance.StartCutscene(cutsceneKnot);
 
@@ -79,7 +81,7 @@ public class GameplayManager : MonoBehaviour
 
       await CutsceneManager.Instance.HideCutscene();
 
-      InputActionsManager.Instance.SetState(InputState.Gameplay);
+      GameInputManager.Instance.SetState(InputState.Gameplay);
     }
     catch (Exception e)
     {
@@ -95,12 +97,12 @@ public class GameplayManager : MonoBehaviour
   {
     if (!isPuzzleStage()) return;
 
-    playerCam.gameObject.SetActive(false);
+    if (playerCam != null) playerCam.gameObject.SetActive(false);
 
     await LoadStageAsync(_currentStage);
     SpawnPlayer();
 
-    playerCam.gameObject.SetActive(true);
+    if (playerCam != null) playerCam.gameObject.SetActive(true);
   }
 
   public bool isCutscene()
@@ -127,6 +129,14 @@ public class GameplayManager : MonoBehaviour
     activeEnemies.Remove(enemy);
   }
 
+  void InitializeCamera()
+  {
+    if (cameraPrefab != null && playerCam == null)
+    {
+      playerCam = Instantiate(cameraPrefab, transform);
+    }
+  }
+
   public void SetCameraTarget(Transform target)
   {
     if (playerCam == null) return;
@@ -150,18 +160,16 @@ public class GameplayManager : MonoBehaviour
       return;
     }
 
-    if (activePlayer != null)
-    {
-      SetCameraTarget(null);
-      Destroy(activePlayer.gameObject);
-      activePlayer = null;
-    }
+    if (activePlayer != null) DespawnPlayer();
+
+    InitializeCamera();
 
     Vector3 position = stageManager.defaultPlayerPosition;
     Quaternion rotation = Quaternion.identity;
-    GameObject playerObj = Instantiate(playerPrefab, position, rotation);
 
+    GameObject playerObj = Instantiate(playerPrefab, position, rotation);
     activePlayer = playerObj.GetComponent<PlayerController>();
+
     SetCameraTarget(playerObj.transform);
   }
 

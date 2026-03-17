@@ -47,7 +47,7 @@ public class CutsceneDialogueUIController : MonoBehaviour
     root.style.opacity = 0;
     root.style.display = DisplayStyle.None;
 
-    skipAction = InputActionsManager.Instance.inputActions.UI.DialogueSkip;
+    skipAction = GameInputManager.Instance.Actions.UI.DialogueSkip;
   }
 
   void OnEnable()
