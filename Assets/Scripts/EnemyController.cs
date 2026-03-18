@@ -46,6 +46,7 @@ public class EnemyController : MonoBehaviour
       System.Array.Sort(hits, (a,b) => a.distance.CompareTo(b.distance));
       foreach (RaycastHit hit in hits)
       {
+        if (hit.collider.TryGetComponent(out EnemyController _)) break;
         if (hit.collider.TryGetComponent(out IObstacle obstacle))
         {
           if (obstacle.IsEnemySightBlocking()) break;

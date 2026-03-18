@@ -11,7 +11,7 @@ public class Goal : MonoBehaviour, IInteractable
   void Awake()
   {
     bubble = GetComponentInChildren<Canvas>();
-    bubble.enabled = false;
+    bubble.enabled = true;
   }
 
   void Start()

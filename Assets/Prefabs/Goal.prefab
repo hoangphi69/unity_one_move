@@ -190,8 +190,6 @@ GameObject:
   - component: {fileID: 4422962394518102246}
   - component: {fileID: 6380436118719465463}
   - component: {fileID: -3111601699361738456}
-  - component: {fileID: -3528308295130556719}
-  - component: {fileID: 3634333344330601513}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -309,35 +307,3 @@ MonoBehaviour:
   nextStage:
     m_SceneAsset: {fileID: 0}
     m_SceneName: 
---- !u!114 &-3528308295130556719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8144360686439305549}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f6ec14ca7fe354fa6e4382ec0962d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OutlineHighlight
-  highlightColor: {r: 1, g: 0, b: 0, a: 1}
-  emissionIntensity: 10
---- !u!114 &3634333344330601513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8144360686439305549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []

@@ -5,13 +5,13 @@ public class NPC : MonoBehaviour, IInteractable
   private Canvas bubble;
   private OutlineHighlight outlineHighlight;
   private Outline outline;
-
   [SerializeField] private string knotName;
+  private bool hasInteracted = false;
 
   void Awake()
   {
     bubble = GetComponentInChildren<Canvas>();
-    bubble.enabled = false;
+    bubble.enabled = true;
 
     outline = GetComponent<Outline>();
     outline.enabled = false;
@@ -24,15 +24,19 @@ public class NPC : MonoBehaviour, IInteractable
 
   public void OnDetected()
   {
-    ShowBubble();
     ShowOutline();
   } 
   public void OnLost()
   {
-    HideBubble();
     HideOutline();
+    if (hasInteracted) HideBubble();
   } 
-  public void OnInteract() => EnterDialogue();
+  public void OnInteract()
+  {
+    hasInteracted = true;
+    HideBubble();
+    EnterDialogue();
+  }
   public Vector3 GetPosition() => transform.position;
 
   public void ShowBubble()

@@ -125,5 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5c7d57a9ae0914f96bf15ea58ece86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PushBox
-  moveDuration: 0.1
+  blockPlayer: 1
   isPushable: 1
+  blockEnemy: 1
+  blockEnemySight: 1
+  moveDuration: 0.1
