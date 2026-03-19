@@ -26,12 +26,12 @@ public class NPC : MonoBehaviour, IInteractable
   {
     ShowBubble();
     ShowOutline();
-  } 
+  }
   public void OnLost()
   {
     HideBubble();
     HideOutline();
-  } 
+  }
   public void OnInteract() => EnterDialogue();
   public Vector3 GetPosition() => transform.position;
 

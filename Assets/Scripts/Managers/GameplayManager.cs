@@ -61,36 +61,37 @@ public class GameplayManager : MonoBehaviour
     if (_isCutscene) return;
     _isCutscene = true;
 
+    var tcs = new TaskCompletionSource<bool>();
+    Action cutSceneEnd = null;
+    cutSceneEnd = () =>
+    {
+      GameEventsManager.Instance.dialogueEvents.onLeaveDialogue -= cutSceneEnd;
+      tcs.TrySetResult(true);
+    };
+
+    GameEventsManager.Instance.dialogueEvents.onLeaveDialogue += cutSceneEnd;
+    GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutsceneKnot, DialogueMode.Cutscene);
+
     try
     {
-      GameInputManager.Instance.SetState(InputState.UI);
-
-      Task cutsceneFinished = CutsceneManager.Instance.StartCutscene(cutsceneKnot);
-
       await Utility.UnloadAsync(_currentStage);
 
       var loadOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
       loadOp.allowSceneActivation = false;
 
-      await cutsceneFinished;
+      await tcs.Task;
 
       loadOp.allowSceneActivation = true;
       while (!loadOp.isDone) await Task.Yield();
 
       _currentStage = scene;
-
-      await CutsceneManager.Instance.HideCutscene();
-
-      GameInputManager.Instance.SetState(InputState.Gameplay);
     }
     catch (Exception e)
     {
+      GameEventsManager.Instance.dialogueEvents.onLeaveDialogue -= cutSceneEnd;
       Debug.LogError($"Transition Error: {e}");
     }
-    finally
-    {
-      _isCutscene = false;
-    }
+    finally { _isCutscene = false; }
   }
 
   public async Task RestartStageAsync()

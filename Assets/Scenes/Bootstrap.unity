@@ -158,8 +158,7 @@ MonoBehaviour:
   _gameSceneManager: {fileID: 5835346691026403878, guid: c633d58139c990845ba56bfa41a88be3, type: 3}
   _gameplayManager: {fileID: 3042829178732120442, guid: b14c2dfeab839044b97acd15ab9d6c61, type: 3}
   _gameDialogueManager: {fileID: 3912481516373756540, guid: 4bd8c5d99828fd249908f2836717d3ca, type: 3}
-  _playerCamera: {fileID: 8963750700295800934, guid: dc96575badb6be4478de0bfd74501ff2, type: 3}
-  _cutsceneManager: {fileID: 7069010185470407724, guid: 385706889f48c5449bd617f3724d429a, type: 3}
+  _CutsceneCanvas: {fileID: 4597980501287112666, guid: 9c2182dda2b483e4cb35c62e73e504fc, type: 3}
   _IGDialogue: {fileID: 6920197084878189602, guid: 3db4b330a2b99e941818063e7b8db721, type: 3}
 --- !u!4 &1859662552
 Transform:

@@ -51,7 +51,7 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
     _"Ting!!!!!"_
     "Bạn có một thông báo mới từ Discord." #bg:black_with_phone
 
-    "Êy cu, làm đồ án tốt nghiệp với tao ko?" #speaker:Phong 
+    "Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
     "Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
     "Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
 

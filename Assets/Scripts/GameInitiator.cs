@@ -21,7 +21,6 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private GameplayManager _gameplayManager;
   [SerializeField] private GameDialogueManager _gameDialogueManager;
 
-  [SerializeField] private CutsceneManager _cutsceneManager;
   [SerializeField] private GameObject _IGDialogue;
 
 
@@ -61,7 +60,6 @@ public class GameInitiator : MonoBehaviour
     _gameplayManager = Instantiate(_gameplayManager);
     _gameDialogueManager = Instantiate(_gameDialogueManager);
 
-    _cutsceneManager = Instantiate(_cutsceneManager);
     _IGDialogue = Instantiate(_IGDialogue);
   }
 
