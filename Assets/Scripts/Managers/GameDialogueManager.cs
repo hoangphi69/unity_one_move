@@ -1,17 +1,20 @@
+using System.Collections.Generic;
 using System.Threading;
 using Ink.Runtime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public enum DialogueMode { Cutscene, InGame }
 
-public class DialogueManager : MonoBehaviour
+public class GameDialogueManager : MonoBehaviour
 {
   [Header("Ink Story")]
   [SerializeField] private TextAsset inkJSON;
-  private Story story;
 
-  private DialogueMode currentMode;
+  [Header("UI prefabs")]
+  [SerializeField] private CutsceneUIController _cutscenePrefab;
+
+  private Story story;
+  private Dictionary<DialogueMode, MonoBehaviour> _uiInstances = new();
   private bool dialogueActive = false;
   private bool isTyping = false;
   private CancellationTokenSource _displaying;
@@ -26,8 +29,8 @@ public class DialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onEnterDialogue += EnterDialogue;
     GameEventsManager.Instance.dialogueEvents.onChoiceSelected += SelectChoice;
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged += SetTypingState;
-    InputActionsManager.Instance.inputActions.UI.DialogueAdvance.performed += ContinueDialogue;
-    InputActionsManager.Instance.inputActions.UI.DialogueSkip.performed += SkipCutsceneDialogue;
+    GameEventsManager.Instance.dialogueEvents.onAdvanceDialogue += ContinueDialogue;
+    GameEventsManager.Instance.dialogueEvents.onLeaveDialogue += LeaveDialogue;
   }
 
   void OnDisable()
@@ -35,26 +38,45 @@ public class DialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onEnterDialogue -= EnterDialogue;
     GameEventsManager.Instance.dialogueEvents.onChoiceSelected -= SelectChoice;
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged -= SetTypingState;
-    InputActionsManager.Instance.inputActions.UI.DialogueAdvance.performed -= ContinueDialogue;
-    InputActionsManager.Instance.inputActions.UI.DialogueSkip.performed -= SkipCutsceneDialogue;
+    GameEventsManager.Instance.dialogueEvents.onAdvanceDialogue -= ContinueDialogue;
+    GameEventsManager.Instance.dialogueEvents.onLeaveDialogue -= LeaveDialogue;
   }
 
   void SetTypingState(bool isTyping) => this.isTyping = isTyping;
 
   void EnterDialogue(string knotName, DialogueMode mode)
   {
-    if (dialogueActive) return;
-    if (knotName.Equals("")) return;
+    if (dialogueActive || string.IsNullOrEmpty(knotName)) return;
+
+    GameObject activeUI = GetOrCreateUI(mode);
+    if (activeUI == null) return;
+    activeUI.SetActive(true);
+    print("Active UI: " + activeUI.name);
+
+    GameInputManager.Instance.SetState(InputState.UI);
+    GameEventsManager.Instance.dialogueEvents.StartDialogue(mode);
 
     dialogueActive = true;
-    currentMode = mode;
-    InputActionsManager.Instance.SetState(InputState.UI);
-    GameEventsManager.Instance.dialogueEvents.StartDialogue(mode);
     story.ChoosePathString(knotName);
     ContinueDialogue();
   }
 
-  void ContinueDialogue(InputAction.CallbackContext context) => ContinueDialogue();
+  GameObject GetOrCreateUI(DialogueMode mode)
+  {
+    if (_uiInstances.TryGetValue(mode, out var instance)) return instance.gameObject;
+
+    MonoBehaviour newInstance = mode switch
+    {
+      DialogueMode.Cutscene => Instantiate(_cutscenePrefab),
+      // DialogueMode.InGame => Instantiate(_inGameDialoguePrefab)
+      _ => null
+    };
+
+    if (newInstance != null) _uiInstances.Add(mode, newInstance);
+    return newInstance?.gameObject;
+  }
+
+  // void ContinueDialogue(InputAction.CallbackContext context) => ContinueDialogue();
   void ContinueDialogue()
   {
     if (!dialogueActive) return;
@@ -79,7 +101,7 @@ public class DialogueManager : MonoBehaviour
         _displaying.Token
       );
     }
-    else ExitDialogue();
+    else GameEventsManager.Instance.dialogueEvents.EndDialogue();
   }
 
   void CancelDisplaying()
@@ -92,19 +114,12 @@ public class DialogueManager : MonoBehaviour
     }
   }
 
-  void SkipCutsceneDialogue(InputAction.CallbackContext context)
-  {
-    if (currentMode != DialogueMode.Cutscene) return;
-    ExitDialogue();
-  }
-
-  void ExitDialogue()
+  void LeaveDialogue()
   {
     CancelDisplaying();
     SetTypingState(false);
     dialogueActive = false;
-    GameEventsManager.Instance.dialogueEvents.EndDialogue();
-    InputActionsManager.Instance.SetState(InputState.Gameplay);
+    GameInputManager.Instance.SetState(InputState.Gameplay);
   }
 
   void SelectChoice(int choiceIndex)

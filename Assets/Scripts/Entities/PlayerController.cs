@@ -16,14 +16,14 @@ public class PlayerController : MonoBehaviour
 
     void OnEnable()
     {
-        InputActionsManager.Instance.inputActions.Player.Move.performed += TakeTurn;
-        InputActionsManager.Instance.inputActions.Player.Interact.started += Interact;
+        GameInputManager.Instance.Actions.Player.Move.performed += TakeTurn;
+        GameInputManager.Instance.Actions.Player.Interact.started += Interact;
     }
 
     void OnDisable()
     {
-        InputActionsManager.Instance.inputActions.Player.Move.performed -= TakeTurn;
-        InputActionsManager.Instance.inputActions.Player.Interact.started -= Interact;
+        GameInputManager.Instance.Actions.Player.Move.performed -= TakeTurn;
+        GameInputManager.Instance.Actions.Player.Interact.started -= Interact;
     }
 
     async void TakeTurn(InputAction.CallbackContext ctx)

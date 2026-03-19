@@ -17,6 +17,9 @@ public class DialogueEvents
     public event Action onLeaveDialogue;
     public void LeaveDialogue() => onLeaveDialogue?.Invoke();
 
+    public event Action onAdvanceDialogue;
+    public void AdvanceDialogue() => onAdvanceDialogue?.Invoke();
+
     public event Action<string, List<string>, List<Choice>, CancellationToken> onDialogueDisplayed;
     public void DisplayDialogue(string text, List<string> tags, List<Choice> choices, CancellationToken token) => onDialogueDisplayed?.Invoke(text, tags, choices, token);
 

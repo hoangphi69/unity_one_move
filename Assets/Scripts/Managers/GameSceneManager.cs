@@ -42,41 +42,22 @@ public class GameSceneManager : MonoBehaviour
 
   void OnEnable()
   {
-    InputActionsManager.Instance.inputActions.Player.Escape.performed += TogglePause;
-    InputActionsManager.Instance.inputActions.UI.Escape.performed += NavigateBack;
+    GameInputManager.Instance.Actions.Player.Escape.performed += TogglePause;
+    GameInputManager.Instance.Actions.UI.Escape.performed += NavigateBack;
   }
 
   void OnDisable()
   {
-    InputActionsManager.Instance.inputActions.Player.Escape.performed -= TogglePause;
-    InputActionsManager.Instance.inputActions.UI.Escape.performed -= NavigateBack;
-  }
-
-  void Start()
-  {
-    // SCENARIO: First time open application
-    _ = BootApplicationAsync();
+    GameInputManager.Instance.Actions.Player.Escape.performed -= TogglePause;
+    GameInputManager.Instance.Actions.UI.Escape.performed -= NavigateBack;
   }
 
   #region 1. Boot & Title Logic
 
-  private async Task BootApplicationAsync()
+  public async Task LoadTitleScene()
   {
-    // Show Loading Overlay
-    await Utility.LoadAdditiveAsync(_loadingScene);
-
-    InputActionsManager.Instance.SetState(InputState.UI);
-
-    await GameDataManager.Instance.Initialize();
-
-    await LoadTitleGameplay();
-
     await Utility.LoadAdditiveAsync(_titleScene);
     _currentOverlayScene = _titleScene;
-
-    // Hide Loading
-    await Task.Delay(1000);
-    await Utility.UnloadAsync(_loadingScene);
   }
 
   public async Task LoadTitleGameplay()
@@ -104,7 +85,7 @@ public class GameSceneManager : MonoBehaviour
     _currentOverlayScene = null;
 
     // Optional: Notify Lobby to enable player controls here
-    InputActionsManager.Instance.SetState(InputState.Gameplay);
+    GameInputManager.Instance.SetState(InputState.Gameplay);
 
     _isLoading = false;
   }
@@ -118,7 +99,7 @@ public class GameSceneManager : MonoBehaviour
     _isLoading = true;
     await Utility.LoadAdditiveAsync(_loadingScene);
 
-    InputActionsManager.Instance.SetState(InputState.UI);
+    GameInputManager.Instance.SetState(InputState.UI);
 
     GameDataManager.Instance.NewGame();
 
@@ -133,7 +114,7 @@ public class GameSceneManager : MonoBehaviour
     await GameplayManager.Instance.LoadStageAsync(_firstLobbyScene, "ch1_Cutscene1");
     GameplayManager.Instance.SpawnPlayer();
 
-    InputActionsManager.Instance.SetState(InputState.Gameplay);
+    GameInputManager.Instance.SetState(InputState.Gameplay);
 
     _isLoading = false;
   }
@@ -165,7 +146,7 @@ public class GameSceneManager : MonoBehaviour
       _currentOverlayScene = null;
       Time.timeScale = _timeScaleCache;
 
-      InputActionsManager.Instance.SetState(InputState.Gameplay);
+      GameInputManager.Instance.SetState(InputState.Gameplay);
     }
     else
     {
@@ -175,7 +156,7 @@ public class GameSceneManager : MonoBehaviour
       _ = Utility.LoadAdditiveAsync(_pauseScene);
       _currentOverlayScene = _pauseScene;
 
-      InputActionsManager.Instance.SetState(InputState.UI);
+      GameInputManager.Instance.SetState(InputState.UI);
     }
   }
 
@@ -196,7 +177,7 @@ public class GameSceneManager : MonoBehaviour
 
     await GameplayManager.Instance.RestartStageAsync();
 
-    InputActionsManager.Instance.SetState(InputState.Gameplay);
+    GameInputManager.Instance.SetState(InputState.Gameplay);
 
     _isLoading = false;
   }
@@ -204,7 +185,7 @@ public class GameSceneManager : MonoBehaviour
   // SCENARIO: Return to Title (from Pause)
   public async void ReturnToTitle()
   {
-    InputActionsManager.Instance.SetState(InputState.UI);
+    GameInputManager.Instance.SetState(InputState.UI);
     Time.timeScale = 1f; // Reset time
     if (_isLoading) return;
     _isLoading = true;

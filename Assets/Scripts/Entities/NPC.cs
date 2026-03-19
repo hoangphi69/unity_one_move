@@ -25,7 +25,7 @@ public class NPC : MonoBehaviour, IInteractable
   public void OnDetected()
   {
     ShowOutline();
-  } 
+  }
   public void OnLost()
   {
     HideOutline();

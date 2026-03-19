@@ -26,8 +26,10 @@ public class GameplayManager : MonoBehaviour
 
   // Player
   [SerializeField] private GameObject playerPrefab;
+  [SerializeField] private CinemachineCamera cameraPrefab;
+
   public PlayerController activePlayer { get; private set; }
-  public CinemachineCamera playerCam;
+  public CinemachineCamera playerCam { get; private set; }
 
   private void Awake()
   {
@@ -59,48 +61,49 @@ public class GameplayManager : MonoBehaviour
     if (_isCutscene) return;
     _isCutscene = true;
 
+    var tcs = new TaskCompletionSource<bool>();
+    Action cutSceneEnd = null;
+    cutSceneEnd = () =>
+    {
+      GameEventsManager.Instance.dialogueEvents.onLeaveDialogue -= cutSceneEnd;
+      tcs.TrySetResult(true);
+    };
+
+    GameEventsManager.Instance.dialogueEvents.onLeaveDialogue += cutSceneEnd;
+    GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutsceneKnot, DialogueMode.Cutscene);
+
     try
     {
-      InputActionsManager.Instance.SetState(InputState.UI);
-
-      Task cutsceneFinished = CutsceneManager.Instance.StartCutscene(cutsceneKnot);
-
       await Utility.UnloadAsync(_currentStage);
 
       var loadOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
       loadOp.allowSceneActivation = false;
 
-      await cutsceneFinished;
+      await tcs.Task;
 
       loadOp.allowSceneActivation = true;
       while (!loadOp.isDone) await Task.Yield();
 
       _currentStage = scene;
-
-      await CutsceneManager.Instance.HideCutscene();
-
-      InputActionsManager.Instance.SetState(InputState.Gameplay);
     }
     catch (Exception e)
     {
+      GameEventsManager.Instance.dialogueEvents.onLeaveDialogue -= cutSceneEnd;
       Debug.LogError($"Transition Error: {e}");
     }
-    finally
-    {
-      _isCutscene = false;
-    }
+    finally { _isCutscene = false; }
   }
 
   public async Task RestartStageAsync()
   {
     if (!isPuzzleStage()) return;
 
-    playerCam.gameObject.SetActive(false);
+    if (playerCam != null) playerCam.gameObject.SetActive(false);
 
     await LoadStageAsync(_currentStage);
     SpawnPlayer();
 
-    playerCam.gameObject.SetActive(true);
+    if (playerCam != null) playerCam.gameObject.SetActive(true);
   }
 
   public bool isCutscene()
@@ -127,6 +130,14 @@ public class GameplayManager : MonoBehaviour
     activeEnemies.Remove(enemy);
   }
 
+  void InitializeCamera()
+  {
+    if (cameraPrefab != null && playerCam == null)
+    {
+      playerCam = Instantiate(cameraPrefab, transform);
+    }
+  }
+
   public void SetCameraTarget(Transform target)
   {
     if (playerCam == null) return;
@@ -150,18 +161,16 @@ public class GameplayManager : MonoBehaviour
       return;
     }
 
-    if (activePlayer != null)
-    {
-      SetCameraTarget(null);
-      Destroy(activePlayer.gameObject);
-      activePlayer = null;
-    }
+    if (activePlayer != null) DespawnPlayer();
+
+    InitializeCamera();
 
     Vector3 position = stageManager.defaultPlayerPosition;
     Quaternion rotation = Quaternion.identity;
-    GameObject playerObj = Instantiate(playerPrefab, position, rotation);
 
+    GameObject playerObj = Instantiate(playerPrefab, position, rotation);
     activePlayer = playerObj.GetComponent<PlayerController>();
+
     SetCameraTarget(playerObj.transform);
   }
 
