@@ -90,20 +90,20 @@ public class SavesPanel : MonoBehaviour
 
     SetActiveSlot(selectedSlot);
     await GameDataManager.Instance.SwitchProfile(activeSlot.GetProfileID());
-    await GameSceneManager.Instance.LoadTitleGameplay();
+    GameEventsManager.Instance.flowEvents.LoadGame();
   }
 
   void eraseClicked()
   {
     if (selectedSlot == null) return;
 
-    TitleScreenManager.Instance.OpenConfirm(
+    TitleScreenUIController.Instance.OpenConfirm(
       "Erase save?",
       $"You are about to erase all of your progress in <color=#D57B19>save no. {selectedSlot.GetProfileID()}</color>. This action cannot be undone.",
       async () =>
       {
         GameDataManager.Instance.EraseProfile(selectedSlot.GetProfileID());
-        if (activeSlot == selectedSlot) await GameSceneManager.Instance.LoadTitleGameplay();
+        if (activeSlot == selectedSlot) GameEventsManager.Instance.flowEvents.LoadGame();
         selectedSlot.Display(null);
         ClearSelection();
       }
@@ -116,11 +116,13 @@ public class SavesPanel : MonoBehaviour
 
     SetActiveSlot(selectedSlot);
     await GameDataManager.Instance.SwitchProfile(activeSlot.GetProfileID());
-    GameSceneManager.Instance.OnTitleNewGame();
+    TitleScreenUIController.Instance.CloseCurrentPanel();
+    TitleScreenUIController.Instance.Hide();
+    GameEventsManager.Instance.flowEvents.NewGame();
   }
 
   void backClicked()
   {
-    TitleScreenManager.Instance.CloseCurrentPanel();
+    TitleScreenUIController.Instance.CloseCurrentPanel();
   }
 }

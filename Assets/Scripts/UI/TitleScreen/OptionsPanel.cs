@@ -18,6 +18,6 @@ public class OptionsPanel : MonoBehaviour
 
   void backClicked()
   {
-    TitleScreenManager.Instance.CloseCurrentPanel();
+    TitleScreenUIController.Instance.CloseCurrentPanel();
   }
 }

@@ -32,9 +32,19 @@ public class TitlePanel : MonoBehaviour
     quitButton.onClick.RemoveListener(quitClicked);
   }
 
-  void continueClicked() => GameSceneManager.Instance.OnTitleContinue();
-  void newGameClicked() => GameSceneManager.Instance.OnTitleNewGame();
-  void optionsClicked() => TitleScreenManager.Instance.OpenOptions();
-  void savesClicked() => TitleScreenManager.Instance.OpenSaves();
+  void continueClicked()
+  {
+    TitleScreenUIController.Instance.Hide();
+    GameEventsManager.Instance.flowEvents.ContinueGame();
+  }
+
+  void newGameClicked()
+  {
+    TitleScreenUIController.Instance.Hide();
+    GameEventsManager.Instance.flowEvents.NewGame();
+  }
+
+  void optionsClicked() => TitleScreenUIController.Instance.OpenOptions();
+  void savesClicked() => TitleScreenUIController.Instance.OpenSaves();
   void quitClicked() => Application.Quit();
 }

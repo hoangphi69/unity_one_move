@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using System;
 
-public class TitleScreenManager : MonoBehaviour
+public class TitleScreenUIController : MonoBehaviour
 {
-  public static TitleScreenManager Instance { get; private set; }
+  public static TitleScreenUIController Instance { get; private set; }
 
   [Header("All Canvas Panels")]
+  [SerializeField] private GameObject uiContainer;
   [SerializeField] private GameObject titlePanel;
   [SerializeField] private GameObject optionsPanel;
   [SerializeField] private GameObject savesPanel;
@@ -31,6 +31,16 @@ public class TitleScreenManager : MonoBehaviour
 
     if (titlePanel != null)
       OpenPanel(titlePanel);
+  }
+
+  public void Show()
+  {
+    uiContainer.SetActive(true);
+  }
+
+  public void Hide()
+  {
+    uiContainer.SetActive(false);
   }
 
   // Public methods for navigation. Your panels just call these.

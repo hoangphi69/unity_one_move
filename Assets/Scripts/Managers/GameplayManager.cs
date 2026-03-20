@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public enum Turn { Player, Enemy };
@@ -13,7 +14,8 @@ public class GameplayManager : MonoBehaviour
 
   // Configs
   [SerializeField] public LayerMask entityMask;
-  [SerializeField] public float cellSize = 1f;
+  public SceneField newGameStage;
+  public float cellSize { get; private set; } = 1f;
 
   // Turn Manager
   public Turn turn { get; private set; }
@@ -41,12 +43,20 @@ public class GameplayManager : MonoBehaviour
   {
     GameEventsManager.Instance.turnEvents.onPlayerTurnEnd += EnemyTurnStart;
     GameEventsManager.Instance.turnEvents.onEnemyTurnEnd += PlayerTurnStart;
+    GameEventsManager.Instance.turnEvents.onStageRestart += () => _ = RestartStageAsync();
+    GameInputManager.Instance.Actions.Player.Escape.performed += PauseGame;
   }
 
   void OnDisable()
   {
     GameEventsManager.Instance.turnEvents.onPlayerTurnEnd -= EnemyTurnStart;
     GameEventsManager.Instance.turnEvents.onEnemyTurnEnd -= PlayerTurnStart;
+    GameInputManager.Instance.Actions.Player.Escape.performed -= PauseGame;
+  }
+
+  void PauseGame(InputAction.CallbackContext context)
+  {
+    GameEventsManager.Instance.flowEvents.PauseGame();
   }
 
   public async Task LoadStageAsync(string scene)
@@ -85,6 +95,7 @@ public class GameplayManager : MonoBehaviour
       while (!loadOp.isDone) await Task.Yield();
 
       _currentStage = scene;
+      SpawnPlayer();
     }
     catch (Exception e)
     {
@@ -94,7 +105,7 @@ public class GameplayManager : MonoBehaviour
     finally { _isCutscene = false; }
   }
 
-  public async Task RestartStageAsync()
+  async Task RestartStageAsync()
   {
     if (!isPuzzleStage()) return;
 

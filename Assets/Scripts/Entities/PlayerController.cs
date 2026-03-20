@@ -183,6 +183,6 @@ public class PlayerController : MonoBehaviour
     {
         print("Failed");
         await Task.Delay(300);
-        await GameplayManager.Instance.RestartStageAsync();
+        GameEventsManager.Instance.turnEvents.RestartStage();
     }
 }
