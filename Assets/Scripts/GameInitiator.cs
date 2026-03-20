@@ -22,9 +22,8 @@ public class GameInitiator : MonoBehaviour
 
   [Header("UI")]
   [SerializeField] private LoadingScreenUIController _loadingScreen;
-  [SerializeField] private GameObject _titleScreen;
-  [SerializeField] private GameObject _pauseScreen;
-  [SerializeField] private GameObject _IGDialogue;
+  [SerializeField] private TitleScreenUIController _titleScreen;
+  [SerializeField] private PauseScreenUIController _pauseScreen;
 
 
   async void Start()
@@ -62,10 +61,8 @@ public class GameInitiator : MonoBehaviour
     _gameFlowManager = Instantiate(_gameFlowManager);
 
     // UI
-    _IGDialogue = Instantiate(_IGDialogue);
     _titleScreen = Instantiate(_titleScreen);
     _pauseScreen = Instantiate(_pauseScreen);
-
   }
 
   void StartGame()

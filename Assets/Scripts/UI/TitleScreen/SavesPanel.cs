@@ -100,7 +100,7 @@ public class SavesPanel : MonoBehaviour
     TitleScreenUIController.Instance.OpenConfirm(
       "Erase save?",
       $"You are about to erase all of your progress in <color=#D57B19>save no. {selectedSlot.GetProfileID()}</color>. This action cannot be undone.",
-      async () =>
+      () =>
       {
         GameDataManager.Instance.EraseProfile(selectedSlot.GetProfileID());
         if (activeSlot == selectedSlot) GameEventsManager.Instance.flowEvents.LoadGame();

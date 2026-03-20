@@ -42,8 +42,8 @@ public class CutsceneUIController : MonoBehaviour
   [SerializeField] private Image skipProgressRing;
 
   [Header("Config")]
-  [SerializeField] private int typingSpeed = 5;
-  [SerializeField] private float autoAdvanceDelay = 2.0f; // Seconds
+  [SerializeField] private int typingSpeed = 50;
+  [SerializeField] private float autoAdvanceDelay = 1.0f; // Seconds
   // State
   private bool isAutoMode = false;
   private CancellationTokenSource autoAdvanceCTS;
@@ -208,7 +208,6 @@ public class CutsceneUIController : MonoBehaviour
     ClearDialogue();
     logPanel.ClearEntries();
     canvas.SetActive(true);
-    print("shown");
 
     GameInputManager.Instance.Actions.UI.DialogueAdvance.performed += AdvanceDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.performed += SkipDialogue;

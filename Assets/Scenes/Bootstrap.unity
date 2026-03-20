@@ -154,14 +154,12 @@ MonoBehaviour:
   _gameEventsManager: {fileID: 595936989135355200, guid: ace50e900ac02004e90a9e0d93993507, type: 3}
   _gameInputManager: {fileID: 1260438475120492109, guid: 3a6da647ea7c6174d910cfadda9307c8, type: 3}
   _gameDataManager: {fileID: 2265597028612923474, guid: 46d538d5bfb14df43b63801e7407bbda, type: 3}
-  _gameSceneManager: {fileID: 5835346691026403878, guid: c633d58139c990845ba56bfa41a88be3, type: 3}
   _gameplayManager: {fileID: 3042829178732120442, guid: b14c2dfeab839044b97acd15ab9d6c61, type: 3}
   _gameDialogueManager: {fileID: 3912481516373756540, guid: 4bd8c5d99828fd249908f2836717d3ca, type: 3}
   _gameFlowManager: {fileID: 2944949520488624248, guid: aba3e7a70100eb443b41e910e945e306, type: 3}
   _loadingScreen: {fileID: -6942197916002871455, guid: 393189e42df69a246bdc9a99dd6c3c47, type: 3}
-  _titleScreen: {fileID: 2326278002172053812, guid: 6d0285e242081224e9d39a87660d3939, type: 3}
-  _pauseScreen: {fileID: 6118193915181148070, guid: 09a28427d84b8f54ca9308f7e1ff2876, type: 3}
-  _IGDialogue: {fileID: 6920197084878189602, guid: 3db4b330a2b99e941818063e7b8db721, type: 3}
+  _titleScreen: {fileID: 3856630017822471713, guid: 6d0285e242081224e9d39a87660d3939, type: 3}
+  _pauseScreen: {fileID: 4113078293066160034, guid: 09a28427d84b8f54ca9308f7e1ff2876, type: 3}
 --- !u!4 &1859662552
 Transform:
   m_ObjectHideFlags: 0
