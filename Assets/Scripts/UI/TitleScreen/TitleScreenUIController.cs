@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 
 public class TitleScreenUIController : MonoBehaviour
 {
@@ -9,9 +8,8 @@ public class TitleScreenUIController : MonoBehaviour
   [Header("All Canvas Panels")]
   [SerializeField] private GameObject uiContainer;
   [SerializeField] private GameObject titlePanel;
-  [SerializeField] private GameObject optionsPanel;
+  [SerializeField] private OptionsPanel optionsPanel;
   [SerializeField] private GameObject savesPanel;
-  [SerializeField] private ConfirmOverlay confirmOverlay;
 
   // The stack keeps track of our menu history
   private Stack<GameObject> menuStack = new Stack<GameObject>();
@@ -24,52 +22,33 @@ public class TitleScreenUIController : MonoBehaviour
 
   private void Start()
   {
-    // Ensure everything is turned off initially except the title panel
-    optionsPanel.SetActive(false);
+    optionsPanel.gameObject.SetActive(false);
+    optionsPanel.OnCloseRequested += CloseCurrentPanel;
+
     savesPanel.SetActive(false);
-    confirmOverlay.Hide();
 
-    if (titlePanel != null)
-      OpenPanel(titlePanel);
+    if (titlePanel != null) OpenTitle();
   }
 
-  public void Show()
-  {
-    uiContainer.SetActive(true);
-  }
+  public void Show() => uiContainer.SetActive(true);
+  public void Hide() => uiContainer.SetActive(false);
 
-  public void Hide()
-  {
-    uiContainer.SetActive(false);
-  }
-
-  // Public methods for navigation. Your panels just call these.
   public void OpenTitle() => OpenPanel(titlePanel);
-  public void OpenOptions() => OpenPanel(optionsPanel);
+  public void OpenOptions() => OpenPanel(optionsPanel.gameObject);
   public void OpenSaves() => OpenPanel(savesPanel);
-  public void OpenConfirm(string title, string message, Action onConfirm) => confirmOverlay.Show(title, message, onConfirm);
 
   private void OpenPanel(GameObject newPanel)
   {
-    if (menuStack.Count > 0)
-    {
-      menuStack.Peek().SetActive(false);
-    }
+    if (menuStack.Count > 0) menuStack.Peek().SetActive(false);
 
     menuStack.Push(newPanel);
     newPanel.SetActive(true);
-
-    // EventSystem.current.SetSelectedGameObject(null);
   }
 
   public void CloseCurrentPanel()
   {
-    if (menuStack.Count > 1)
-    {
-      GameObject currentPanel = menuStack.Pop();
-      currentPanel.SetActive(false);
-
-      menuStack.Peek().SetActive(true);
-    }
+    if (menuStack.Count <= 1) return;
+    menuStack.Pop().SetActive(false);
+    menuStack.Peek().SetActive(true);
   }
 }

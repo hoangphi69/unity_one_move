@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -42,8 +41,8 @@ public class EnemyController : MonoBehaviour
         sightDistance,
         GameplayManager.Instance.entityMask
       );
-      
-      System.Array.Sort(hits, (a,b) => a.distance.CompareTo(b.distance));
+
+      System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
       foreach (RaycastHit hit in hits)
       {
         if (hit.collider.TryGetComponent(out EnemyController _)) break;

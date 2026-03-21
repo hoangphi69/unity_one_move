@@ -97,7 +97,7 @@ public class SavesPanel : MonoBehaviour
   {
     if (selectedSlot == null) return;
 
-    TitleScreenUIController.Instance.OpenConfirm(
+    ConfirmOverlayUIController.Instance.Show(
       "Erase save?",
       $"You are about to erase all of your progress in <color=#D57B19>save no. {selectedSlot.GetProfileID()}</color>. This action cannot be undone.",
       () =>

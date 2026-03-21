@@ -14,6 +14,7 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private GameEventsManager _gameEventsManager;
   [SerializeField] private GameInputManager _gameInputManager;
   [SerializeField] private GameDataManager _gameDataManager;
+  [SerializeField] private GameSettingsManager _gameSettingsManager;
 
   [Header("Managers")]
   [SerializeField] private GameplayManager _gameplayManager;
@@ -24,6 +25,7 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private LoadingScreenUIController _loadingScreen;
   [SerializeField] private TitleScreenUIController _titleScreen;
   [SerializeField] private PauseScreenUIController _pauseScreen;
+  [SerializeField] private ConfirmOverlayUIController _confirmOverlay;
 
 
   async void Start()
@@ -32,16 +34,17 @@ public class GameInitiator : MonoBehaviour
     _loadingScreen.Show();
     await InitializeServices();
     InitializeManagers();
+    InitializeUI();
     StartGame();
   }
 
   void Bindings()
   {
+    // Prioritize loading screen first
     _loadingScreen = Instantiate(_loadingScreen);
     _mainCamera = Instantiate(_mainCamera);
     _mainDirectionalLight = Instantiate(_mainDirectionalLight);
     _mainEventSystem = Instantiate(_mainEventSystem);
-
   }
 
   async Task InitializeServices()
@@ -49,8 +52,10 @@ public class GameInitiator : MonoBehaviour
     _gameEventsManager = Instantiate(_gameEventsManager);
     _gameInputManager = Instantiate(_gameInputManager);
     _gameDataManager = Instantiate(_gameDataManager);
+    _gameSettingsManager = Instantiate(_gameSettingsManager);
 
     _gameInputManager.SetState(InputState.UI);
+    _gameSettingsManager.Initialize();
     await _gameDataManager.Initialize();
   }
 
@@ -60,9 +65,13 @@ public class GameInitiator : MonoBehaviour
     _gameDialogueManager = Instantiate(_gameDialogueManager);
     _gameFlowManager = Instantiate(_gameFlowManager);
 
-    // UI
+  }
+
+  void InitializeUI()
+  {
     _titleScreen = Instantiate(_titleScreen);
     _pauseScreen = Instantiate(_pauseScreen);
+    _confirmOverlay = Instantiate(_confirmOverlay);
   }
 
   void StartGame()
