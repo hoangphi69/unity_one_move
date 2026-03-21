@@ -6,6 +6,7 @@ public class GameEventsManager : MonoBehaviour
 
   public DialogueEvents dialogueEvents;
   public TurnEvents turnEvents;
+  public FlowEvents flowEvents;
 
   void Awake()
   {
@@ -14,5 +15,6 @@ public class GameEventsManager : MonoBehaviour
     // initialize the events
     dialogueEvents = new();
     turnEvents = new();
+    flowEvents = new();
   }
 }

@@ -12,6 +12,7 @@ public class GameDialogueManager : MonoBehaviour
 
   [Header("UI prefabs")]
   [SerializeField] private CutsceneUIController _cutscenePrefab;
+  [SerializeField] private DialogueBoxUIController _dialogueBoxPrefab;
 
   private Story story;
   private Dictionary<DialogueMode, MonoBehaviour> _uiInstances = new();
@@ -68,7 +69,7 @@ public class GameDialogueManager : MonoBehaviour
     MonoBehaviour newInstance = mode switch
     {
       DialogueMode.Cutscene => Instantiate(_cutscenePrefab),
-      // DialogueMode.InGame => Instantiate(_inGameDialoguePrefab)
+      DialogueMode.InGame => Instantiate(_dialogueBoxPrefab),
       _ => null
     };
 

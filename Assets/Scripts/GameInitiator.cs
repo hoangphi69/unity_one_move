@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 public class GameInitiator : MonoBehaviour
 {
-  [SerializeField] private Canvas _loadingScreen;
 
   [Header("Main")]
   [SerializeField] private Camera _mainCamera;
@@ -17,22 +16,23 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private GameDataManager _gameDataManager;
 
   [Header("Managers")]
-  [SerializeField] private GameSceneManager _gameSceneManager;
   [SerializeField] private GameplayManager _gameplayManager;
   [SerializeField] private GameDialogueManager _gameDialogueManager;
+  [SerializeField] private GameFlowManager _gameFlowManager;
 
-  [SerializeField] private GameObject _IGDialogue;
+  [Header("UI")]
+  [SerializeField] private LoadingScreenUIController _loadingScreen;
+  [SerializeField] private TitleScreenUIController _titleScreen;
+  [SerializeField] private PauseScreenUIController _pauseScreen;
 
 
   async void Start()
   {
     Bindings();
-    _loadingScreen.gameObject.SetActive(true);
+    _loadingScreen.Show();
     await InitializeServices();
     InitializeManagers();
-    await Creation();
-    await Task.Delay(1000);
-    _loadingScreen.gameObject.SetActive(false);
+    StartGame();
   }
 
   void Bindings()
@@ -56,16 +56,17 @@ public class GameInitiator : MonoBehaviour
 
   void InitializeManagers()
   {
-    _gameSceneManager = Instantiate(_gameSceneManager);
     _gameplayManager = Instantiate(_gameplayManager);
     _gameDialogueManager = Instantiate(_gameDialogueManager);
+    _gameFlowManager = Instantiate(_gameFlowManager);
 
-    _IGDialogue = Instantiate(_IGDialogue);
+    // UI
+    _titleScreen = Instantiate(_titleScreen);
+    _pauseScreen = Instantiate(_pauseScreen);
   }
 
-  async Task Creation()
+  void StartGame()
   {
-    await _gameSceneManager.LoadTitleScene();
-    await _gameSceneManager.LoadTitleGameplay();
+    _gameFlowManager.BootTitle();
   }
 }

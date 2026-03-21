@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cecf46dcefc414e4193019af7557345e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
-  defaultPlayerPosition: {x: 1.5, y: 0.5, z: 16.5}
+  defaultPlayerPosition: {x: 1.5, y: 0, z: 16.5}
   isPuzzle: 1
 --- !u!1001 &678870554
 PrefabInstance:

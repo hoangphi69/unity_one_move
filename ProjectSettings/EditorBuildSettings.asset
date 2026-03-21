@@ -9,32 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Bootstrap.unity
     guid: 59fa02a2d65bd4178b2b3398108d7658
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
-    guid: 97a7893c54fae48ca9a400e5b85522f4
-  - enabled: 1
-    path: Assets/Scenes/Cutscene.unity
-    guid: 0689bd5fc616e4517aeb21fc8a2360e7
-  - enabled: 1
-    path: Assets/Scenes/Gameplay.unity
-    guid: e88b0be1049a1ac4c834a560b0b990ba
+    path: Assets/Scenes/chapter1_lobby.unity
+    guid: 9d35536fcc265424ca9c9bb85c0033bf
   - enabled: 1
     path: Assets/Scenes/chapter1_hallway1.unity
     guid: ba45dd192ecf0e7458a29f582335ad3b
-  - enabled: 1
-    path: Assets/Scenes/chapter1_puzzle2.unity
-    guid: 982d4f4ebbbcb4652b2b8497ec34fd0b
-  - enabled: 1
-    path: Assets/Scenes/Gameplay_2.unity
-    guid: b68b7e6d3523b497392ed6be411c1b67
-  - enabled: 1
-    path: Assets/Scenes/Gameplay_3.unity
-    guid: 4435dc28d65a949419a260efcaa6e2ca
-  - enabled: 1
-    path: Assets/Scenes/Gameplay_4.unity
-    guid: 821b8053321204f6889e6631d4f8931a
-  - enabled: 1
-    path: Assets/Scenes/chapter1_lobby.unity
-    guid: 9d35536fcc265424ca9c9bb85c0033bf
   - enabled: 1
     path: Assets/Scenes/chapter1_hallway2.unity
     guid: 1d5787706cede14409f47475bf2474e8
@@ -45,8 +24,20 @@ EditorBuildSettings:
     path: Assets/Scenes/chapter1_puzzle1.unity
     guid: 6d9890e52c4720b48a3f9c81f12f4dcf
   - enabled: 1
+    path: Assets/Scenes/chapter1_puzzle2.unity
+    guid: 982d4f4ebbbcb4652b2b8497ec34fd0b
+  - enabled: 1
     path: Assets/Scenes/chapter1_puzzle3.unity
     guid: be3f1332206a3714eac718117e871586
+  - enabled: 1
+    path: Assets/Scenes/Gameplay_2.unity
+    guid: b68b7e6d3523b497392ed6be411c1b67
+  - enabled: 1
+    path: Assets/Scenes/Gameplay_3.unity
+    guid: 4435dc28d65a949419a260efcaa6e2ca
+  - enabled: 1
+    path: Assets/Scenes/Gameplay_4.unity
+    guid: 821b8053321204f6889e6631d4f8931a
   - enabled: 1
     path: Assets/Scenes/Lobby_2.unity
     guid: 3fb53c59d05534f9696d9241508856ee
@@ -56,12 +47,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lobby_4.unity
     guid: 6fa1ca7d275ae482b979ba2001490db7
-  - enabled: 1
-    path: Assets/Scenes/Title.unity
-    guid: f7a3b131b4c1d47bdb0dc8553e593ff2
-  - enabled: 1
-    path: Assets/Scenes/Pause.unity
-    guid: 92cb02d4941184e9fbe262e5a4e99eff
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
