@@ -1,9 +1,10 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Pushable : MonoBehaviour, IObstacle, IPushable
+public class Pushable : MonoBehaviour, IObstacle, IPushable, IInteractable
 {
     [Header("Player")] 
     [SerializeField] bool blockPlayer = true;
@@ -15,14 +16,15 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable
 
     [Header("Movement")]
     [SerializeField] float moveDuration = 0.2f;
-
-    private bool isMoving = false;
-
     
     //IObstacle
     public bool IsPlayerBlocking() => blockPlayer;
     public bool IsEnemyBlocking() => blockEnemy;
     public bool IsEnemySightBlocking() => blockEnemySight;
+
+
+    private bool isMoving = false;
+    private Outline outline;
 
     public async Task<bool> Push(Vector3 direction)
     {
@@ -74,4 +76,25 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable
         transform.position = target;
         isMoving = false;
     }
+
+    void Awake()
+    {
+        outline = GetComponent<Outline>();
+        if (outline != null) outline.enabled = false;
+    }
+
+    // IInteractable
+    public void OnDetected()
+    {
+        if (outline != null) outline.enabled = true;
+    }
+
+    public void OnLost()
+    {
+        if (outline != null) outline.enabled = false;
+    }
+
+    public void OnInteract() {}
+
+    public Vector3 GetPosition() => transform.position;
 }

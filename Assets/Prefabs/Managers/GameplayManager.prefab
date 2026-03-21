@@ -48,5 +48,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   cellSize: 1
-  playerPrefab: {fileID: 514489095257725362, guid: 414cfff92f826d54bb4408ee30fb5d22, type: 3}
+  playerPrefab: {fileID: 1354441816882244767, guid: f71c3ed14ab25454f8d1fd7324920215, type: 3}
   cameraPrefab: {fileID: 1070790957166581366, guid: dc96575badb6be4478de0bfd74501ff2, type: 3}
