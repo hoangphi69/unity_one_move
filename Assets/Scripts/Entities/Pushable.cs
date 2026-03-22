@@ -26,17 +26,24 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable, IInteractable
     private bool isMoving = false;
     private Outline outline;
 
-    public async Task<bool> Push(Vector3 direction)
+    void Awake()
     {
-        if (!isPushable) return false;
-        if (isMoving) return false;
+        outline = GetComponent<Outline>();
+        if (outline != null) outline.enabled = false;
+    }
 
+    public async Task Push(Vector3 direction)
+    {
         Vector3 target = transform.position + direction * GameplayManager.Instance.cellSize;
-
-        if (!CanPushTo(direction, target)) return false;
-
         await SmoothMoveAsync(target, destroyCancellationToken);
-        return true;
+    }
+
+    public bool CanPush(Vector3 direction)
+    {
+        if(!isPushable) return false;
+        if(isMoving) return false;
+        Vector3 target = transform.position + direction * GameplayManager.Instance.cellSize;
+        return CanPushTo(direction, target);
     }
 
     bool CanPushTo(Vector3 direction, Vector3 target)
@@ -77,24 +84,15 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable, IInteractable
         isMoving = false;
     }
 
-    void Awake()
-    {
-        outline = GetComponent<Outline>();
-        if (outline != null) outline.enabled = false;
-    }
-
     // IInteractable
     public void OnDetected()
     {
         if (outline != null) outline.enabled = true;
     }
-
     public void OnLost()
     {
         if (outline != null) outline.enabled = false;
     }
-
     public void OnInteract() {}
-
     public Vector3 GetPosition() => transform.position;
 }

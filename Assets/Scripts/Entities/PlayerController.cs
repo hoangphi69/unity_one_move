@@ -56,11 +56,15 @@ public class PlayerController : MonoBehaviour
     {
         // Interact with objects
         if (isMoving) return;
-        if (!await CanMove(direction)) return;
+        (bool canMove, Task pushTask) = await CanMove(direction);
+        if (!canMove) return;
 
         // Move
         Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
-        await SmoothMoveAsync(location, destroyCancellationToken);
+        await Task.WhenAll(
+            SmoothMoveAsync(location, destroyCancellationToken),
+            pushTask ?? Task.CompletedTask
+        );
     }
 
     async Task SmoothMoveAsync(Vector3 location, CancellationToken token)
@@ -81,38 +85,40 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    async Task<bool> CanMove(Vector3 direction)
+    async Task<(bool canMove, Task pushTask)> CanMove(Vector3 direction)
     {
         Vector3 position = transform.position;
 
-        if (!IsGround(position + direction)) return false;
+        if (!IsGround(position + direction)) return (false, null);
 
         if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
         {
             if (hit.collider.TryGetComponent(out IPushable pushable))
             {
-                return await pushable.Push(direction);
+                if (!pushable.CanPush(direction)) return (false, null);
+                Task pushTask = pushable.Push(direction);
+                return (true, pushTask);
             }
 
             if (hit.collider.TryGetComponent(out IObstacle obstacle))
             {
-                return !obstacle.IsPlayerBlocking();
+                return (!obstacle.IsPlayerBlocking(), null);
             }
 
             if (hit.collider.TryGetComponent(out ICollectible collectible))
             {
                 collectible.Collect();
-                return true;
+                return (true, null);
             }
 
             if (hit.collider.TryGetComponent(out IGateway gateway))
             {
                 gateway.Transition();
-                return true;
+                return (true, null);
             }
         }
 
-        return true;
+        return (true, null);
     }
 
     bool IsGround(Vector3 position)
