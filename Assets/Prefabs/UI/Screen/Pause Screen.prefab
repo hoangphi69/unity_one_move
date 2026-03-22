@@ -334,6 +334,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f574f8799739f418725afbca33f92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OptionsPanel
+  qualityField: {fileID: 0}
+  qualitySelector: {fileID: 0}
+  saveButton: {fileID: 0}
+  resetButton: {fileID: 0}
   backButton: {fileID: 6576480687541390280}
 --- !u!1 &3019540148012059464
 GameObject:
@@ -516,7 +520,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 72, y: -216.46411}
-  m_SizeDelta: {x: 215.91, y: 72.4641}
+  m_SizeDelta: {x: 0, y: 72.4641}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6861649946869145221
 CanvasRenderer:
@@ -1271,7 +1275,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 72, y: -72}
-  m_SizeDelta: {x: 188.12, y: 72.4641}
+  m_SizeDelta: {x: 0, y: 72.4641}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8890277970511250905
 CanvasRenderer:

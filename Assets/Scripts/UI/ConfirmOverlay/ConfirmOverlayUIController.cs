@@ -3,15 +3,29 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConfirmOverlay : MonoBehaviour
+public class ConfirmOverlayUIController : MonoBehaviour
 {
+  public static ConfirmOverlayUIController Instance { get; private set; }
+
   [Header("Visual")]
   [SerializeField] private TextMeshProUGUI title;
   [SerializeField] private TextMeshProUGUI message;
   [SerializeField] private Button confirmButton;
   [SerializeField] private Button cancelButton;
 
-  public void Show(string title, string message, Action onConfirm)
+  private void Awake()
+  {
+    if (Instance != null && Instance != this)
+    {
+      Destroy(gameObject);
+      return;
+    }
+    Instance = this;
+
+    Hide();
+  }
+
+  public void Show(string title, string message, Action onConfirm, Action onCancel = null)
   {
     this.message.text = message;
     this.title.text = title;
@@ -25,7 +39,11 @@ public class ConfirmOverlay : MonoBehaviour
       Hide();
     });
 
-    cancelButton.onClick.AddListener(Hide);
+    cancelButton.onClick.AddListener(() =>
+    {
+      onCancel?.Invoke();
+      Hide();
+    });
 
     gameObject.SetActive(true);
   }

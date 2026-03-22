@@ -101,7 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalSelector
   leftButton: {fileID: 5290010652995298616}
   rightButton: {fileID: 5544184755599437228}
-  value: {fileID: 1524601430595154500}
+  valueText: {fileID: 1524601430595154500}
+  OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3717418978026319585
 GameObject:
   m_ObjectHideFlags: 0
