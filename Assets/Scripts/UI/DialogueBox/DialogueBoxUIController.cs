@@ -27,7 +27,7 @@ public class DialogueBoxUIController : MonoBehaviour
 
   private const string SPEAKER_TAG = "speaker";
   private const string SPRITE_TAG = "sprite";
-  private const string SPRITE_DIR = "Sprites/InGameDialogue/";
+  private const string SPRITE_DIR = "Sprites/";
 
   void OnEnable()
   {

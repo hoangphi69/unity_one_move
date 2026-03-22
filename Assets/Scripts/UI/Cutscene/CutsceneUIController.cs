@@ -54,7 +54,7 @@ public class CutsceneUIController : MonoBehaviour
   private const string SPEAKER_TAG = "speaker";
   private const string SPRITE_TAG = "sprite";
   private const string BG_TAG = "bg";
-  private const string SPRITE_DIR = "Sprites/CutsceneDialogue/";
+  private const string SPRITE_DIR = "Sprites/";
   private const string BG_SPRITE_FALLBACK = "Sprites/CutsceneDialogue/bg_fallback";
 
 

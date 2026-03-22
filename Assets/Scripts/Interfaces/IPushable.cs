@@ -3,5 +3,6 @@ using System.Threading.Tasks;
 
 public interface IPushable
 {
-    Task<bool> Push(Vector3 direction);
+    bool CanPush(Vector3 direction);
+    Task Push(Vector3 direction);
 }
