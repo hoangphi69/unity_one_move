@@ -1,74 +1,71 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
-public class PauseScreenUIController : MonoBehaviour
+public static class PauseScreenRoutes
 {
+  public const string PAUSE = "pause";
+  public const string OPTIONS = "options";
+}
 
-  [SerializeField] private GameObject uiContainer;
-  [SerializeField] private Button restartButton;
-  [SerializeField] private Button resumeButton;
-  [SerializeField] private Button optionsButton;
-  [SerializeField] private Button saveButton;
-  [SerializeField] private Button returnTitleButton;
-  [SerializeField] private Button backButton;
+public class PauseScreenUIController : NavigationUIController
+{
+  [Header("Panels")]
+  [SerializeField] private NavigationPanel pausePanel;
+  [SerializeField] private NavigationPanel optionsPanel;
+
+  void Awake()
+  {
+    RegisterPanel(PauseScreenRoutes.PAUSE, pausePanel);
+    RegisterPanel(PauseScreenRoutes.OPTIONS, optionsPanel);
+  }
+
+  void OnDestroy() => UnregisterAllPanels();
 
   void OnEnable()
   {
     GameEventsManager.Instance.flowEvents.onGamePaused += Show;
-    restartButton.onClick.AddListener(onRestartClicked);
-    resumeButton.onClick.AddListener(onResumeClicked);
-    backButton.onClick.AddListener(onResumeClicked);
-    returnTitleButton.onClick.AddListener(onReturnTitleClicked);
   }
 
   void OnDisable()
   {
     GameEventsManager.Instance.flowEvents.onGamePaused -= Show;
-    restartButton.onClick.RemoveAllListeners();
-    resumeButton.onClick.RemoveAllListeners();
-    returnTitleButton.onClick.RemoveAllListeners();
-    backButton.onClick.RemoveAllListeners();
   }
 
-  void Start() => Hide();
+  void Start() => Hide(); // Ensure it starts hidden
 
-  void Show()
+  public override void Show()
   {
-    uiContainer.SetActive(true);
+    base.Show();
+    ClearStack();
+    NavigateToPanel(PauseScreenRoutes.PAUSE);
+
+    // Pause time and start listening for UI escape presses
     Time.timeScale = 0f;
     GameInputManager.Instance.Actions.UI.Escape.performed += HandleEscape;
-    restartButton.gameObject.SetActive(GameplayManager.Instance.isPuzzleStage());
   }
 
-  void Hide()
+  public override void Hide()
   {
-    uiContainer.SetActive(false);
+    base.Hide();
+    ClearStack();
+
+    // Resume time and stop listening for UI escape presses
     Time.timeScale = 1f;
     GameInputManager.Instance.Actions.UI.Escape.performed -= HandleEscape;
   }
 
-  void HandleEscape(InputAction.CallbackContext context)
+  private void HandleEscape(InputAction.CallbackContext context)
   {
-    Hide();
-    GameEventsManager.Instance.flowEvents.ContinueGame();
-  }
-
-  void onRestartClicked()
-  {
-    Hide();
-    GameEventsManager.Instance.turnEvents.RestartStage();
-  }
-
-  void onResumeClicked()
-  {
-    Hide();
-    GameEventsManager.Instance.flowEvents.ContinueGame();
-  }
-
-  void onReturnTitleClicked()
-  {
-    Hide();
-    GameEventsManager.Instance.flowEvents.ReturnToTitle();
+    // If we are deep in a menu (like Options), just go back one screen
+    if (menuStack.Count > 1)
+    {
+      CloseCurrentPanel();
+    }
+    else
+    {
+      // If we are at the root (the main Pause panel), unpause the game
+      CloseEntireUI();
+      GameEventsManager.Instance.flowEvents.ContinueGame();
+    }
   }
 }

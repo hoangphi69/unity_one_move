@@ -8,7 +8,7 @@ public abstract class NavigationUIController : MonoBehaviour
 
   // The Registry: Maps string names to panel instances
   private Dictionary<string, IPanel> panelRegistry = new Dictionary<string, IPanel>();
-  private Stack<IPanel> menuStack = new Stack<IPanel>();
+  protected Stack<IPanel> menuStack = new Stack<IPanel>();
 
   public virtual void Show() => uiContainer.SetActive(true);
   public virtual void Hide() => uiContainer.SetActive(false);
@@ -53,14 +53,14 @@ public abstract class NavigationUIController : MonoBehaviour
     }
   }
 
-  private void CloseCurrentPanel()
+  protected void CloseCurrentPanel()
   {
     if (menuStack.Count <= 1) return;
     menuStack.Pop().Hide();
     menuStack.Peek().Show();
   }
 
-  private void CloseEntireUI()
+  protected void CloseEntireUI()
   {
     ClearStack();
     Hide();
