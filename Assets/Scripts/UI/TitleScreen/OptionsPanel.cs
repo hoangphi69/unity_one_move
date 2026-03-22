@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionsPanel : MonoBehaviour
+public class OptionsPanel : NavigationPanel
 {
   [Header("Settings UI")]
   [SerializeField] private InputField qualityField;
@@ -20,8 +20,6 @@ public class OptionsPanel : MonoBehaviour
   [SerializeField] private Button saveButton;
   [SerializeField] private Button resetButton;
   [SerializeField] private Button backButton;
-
-  public event Action OnCloseRequested;
 
   private GraphicsSettings currentGraphics;
   private GraphicsSettings defaultGraphics;
@@ -128,33 +126,23 @@ public class OptionsPanel : MonoBehaviour
 
   private void OnBackClicked()
   {
-    if (HasUnsavedChanges)
+    if (!HasUnsavedChanges) ClosePanel();
+    else
     {
-      // Calling your newly separated Confirm Overlay
       ConfirmOverlayUIController.Instance.Show(
           "Unsaved Changes",
           "You have unsaved changes. Would you like to save before exiting?",
           onConfirm: () =>
           {
             SaveSettings();
-            TriggerClose();
+            ClosePanel();
           },
           onCancel: () =>
           {
             GameSettingsManager.Instance.RevertSettings(GameSettingsManager.Instance.Graphics);
-            TriggerClose();
+            ClosePanel();
           }
       );
     }
-    else
-    {
-      TriggerClose();
-    }
-  }
-
-
-  private void TriggerClose()
-  {
-    OnCloseRequested?.Invoke();
   }
 }

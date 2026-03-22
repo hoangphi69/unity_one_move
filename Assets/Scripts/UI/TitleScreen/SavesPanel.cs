@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SavesPanel : MonoBehaviour
+public class SavesPanel : NavigationPanel
 {
   private SaveSlot[] saveSlots;
   private SaveSlot activeSlot;
@@ -116,13 +116,9 @@ public class SavesPanel : MonoBehaviour
 
     SetActiveSlot(selectedSlot);
     await GameDataManager.Instance.SwitchProfile(activeSlot.GetProfileID());
-    TitleScreenUIController.Instance.CloseCurrentPanel();
-    TitleScreenUIController.Instance.Hide();
+    CloseAllPanels();
     GameEventsManager.Instance.flowEvents.NewGame();
   }
 
-  void backClicked()
-  {
-    TitleScreenUIController.Instance.CloseCurrentPanel();
-  }
+  void backClicked() => ClosePanel();
 }

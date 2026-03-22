@@ -1263,7 +1263,7 @@ GameObject:
   - component: {fileID: 6417514079937198577}
   - component: {fileID: 8196287953110878344}
   - component: {fileID: 1472279354450904008}
-  - component: {fileID: 3856630017822471713}
+  - component: {fileID: 393358114304177520}
   m_Layer: 5
   m_Name: Title Screen
   m_TagString: Untagged
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3856630017822471713
+--- !u!114 &393358114304177520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1365,11 +1365,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 518eadb7cf1a0374b9ca6bf646971246, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TitleScreenManager
+  m_EditorClassIdentifier: Assembly-CSharp::TitleScreenUIController
   uiContainer: {fileID: 168560182316803414}
-  titlePanel: {fileID: 2636482176977454403}
+  titlePanel: {fileID: 2477976307546381737}
   optionsPanel: {fileID: 8268005109507023073}
-  savesPanel: {fileID: 7175763721533569067}
+  savesPanel: {fileID: 1675374040346595976}
 --- !u!1 &2555675127884183152
 GameObject:
   m_ObjectHideFlags: 0

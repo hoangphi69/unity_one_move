@@ -1,54 +1,38 @@
 using UnityEngine;
-using System.Collections.Generic;
 
-public class TitleScreenUIController : MonoBehaviour
+public static class TitleScreenRoutes
+{
+  public const string TITLE = "title";
+  public const string OPTIONS = "options";
+  public const string SAVES = "saves";
+}
+
+public class TitleScreenUIController : NavigationUIController
 {
   public static TitleScreenUIController Instance { get; private set; }
 
-  [Header("All Canvas Panels")]
-  [SerializeField] private GameObject uiContainer;
-  [SerializeField] private GameObject titlePanel;
-  [SerializeField] private OptionsPanel optionsPanel;
-  [SerializeField] private GameObject savesPanel;
+  [Header("Panels")]
+  [SerializeField] private NavigationPanel titlePanel;
+  [SerializeField] private NavigationPanel optionsPanel;
+  [SerializeField] private NavigationPanel savesPanel;
 
-  // The stack keeps track of our menu history
-  private Stack<GameObject> menuStack = new Stack<GameObject>();
-
-  private void Awake()
+  void Awake()
   {
-    if (Instance == null) Instance = this;
-    else Destroy(gameObject);
+    Instance = this;
+
+    RegisterPanel(TitleScreenRoutes.TITLE, titlePanel);
+    RegisterPanel(TitleScreenRoutes.OPTIONS, optionsPanel);
+    RegisterPanel(TitleScreenRoutes.SAVES, savesPanel);
   }
 
-  private void Start()
+  void Start() => Show();
+
+  void OnDestroy() => UnregisterAllPanels();
+
+  public override void Show()
   {
-    optionsPanel.gameObject.SetActive(false);
-    optionsPanel.OnCloseRequested += CloseCurrentPanel;
-
-    savesPanel.SetActive(false);
-
-    if (titlePanel != null) OpenTitle();
-  }
-
-  public void Show() => uiContainer.SetActive(true);
-  public void Hide() => uiContainer.SetActive(false);
-
-  public void OpenTitle() => OpenPanel(titlePanel);
-  public void OpenOptions() => OpenPanel(optionsPanel.gameObject);
-  public void OpenSaves() => OpenPanel(savesPanel);
-
-  private void OpenPanel(GameObject newPanel)
-  {
-    if (menuStack.Count > 0) menuStack.Peek().SetActive(false);
-
-    menuStack.Push(newPanel);
-    newPanel.SetActive(true);
-  }
-
-  public void CloseCurrentPanel()
-  {
-    if (menuStack.Count <= 1) return;
-    menuStack.Pop().SetActive(false);
-    menuStack.Peek().SetActive(true);
+    base.Show();
+    ClearStack();
+    NavigateToPanel(TitleScreenRoutes.TITLE);
   }
 }

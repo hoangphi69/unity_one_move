@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitlePanel : MonoBehaviour
+public class TitlePanel : NavigationPanel
 {
   [Header("Buttons")]
   [SerializeField] private Button continueButton;
@@ -34,17 +34,26 @@ public class TitlePanel : MonoBehaviour
 
   void continueClicked()
   {
-    TitleScreenUIController.Instance.Hide();
+    CloseAllPanels();
     GameEventsManager.Instance.flowEvents.ContinueGame();
   }
 
   void newGameClicked()
   {
-    TitleScreenUIController.Instance.Hide();
+    CloseAllPanels();
     GameEventsManager.Instance.flowEvents.NewGame();
   }
 
-  void optionsClicked() => TitleScreenUIController.Instance.OpenOptions();
-  void savesClicked() => TitleScreenUIController.Instance.OpenSaves();
-  void quitClicked() => Application.Quit();
+  void optionsClicked() => Navigate(TitleScreenRoutes.OPTIONS);
+
+  void savesClicked() => Navigate(TitleScreenRoutes.SAVES);
+
+  void quitClicked()
+  {
+    ConfirmOverlayUIController.Instance.Show(
+      "Exit game?",
+      "Are you sure you want to exit the game?",
+      onConfirm: Application.Quit
+    );
+  }
 }
