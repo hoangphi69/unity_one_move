@@ -65,6 +65,7 @@ public class GameDataManager : MonoBehaviour
     return await dataFileHandler.LoadAllProfiles();
   }
 
+
   public async Task LoadGame()
   {
     data = await dataFileHandler.LoadFile(selectedProfileID);
@@ -79,11 +80,13 @@ public class GameDataManager : MonoBehaviour
     }
   }
 
-  public async Task SaveGame()
+  public async Task SaveGame() => await SaveGame(selectedProfileID);
+
+  public async Task SaveGame(string profileID)
   {
     if (data == null) return;
     data.lastUpdated = DateTime.Now.ToBinary();
-    await dataFileHandler.SaveFile(data, selectedProfileID);
+    await dataFileHandler.SaveFile(data, profileID);
     print("Game Saved.");
   }
 

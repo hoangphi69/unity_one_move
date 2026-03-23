@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SavesPanel : NavigationPanel
+public class TitleSavesPanel : NavigationPanel, ISavesPanel
 {
   private SaveSlot[] saveSlots;
   private SaveSlot activeSlot;

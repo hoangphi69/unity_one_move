@@ -17,6 +17,7 @@ public class PausePanel : NavigationPanel
     resumeButton.onClick.AddListener(OnResumeClicked);
     backButton.onClick.AddListener(OnResumeClicked);
     optionsButton.onClick.AddListener(OnOptionsClicked);
+    saveButton.onClick.AddListener(OnSaveClicked);
     returnTitleButton.onClick.AddListener(OnReturnTitleClicked);
 
     restartButton.gameObject.SetActive(GameplayManager.Instance.isPuzzleStage());
@@ -28,6 +29,7 @@ public class PausePanel : NavigationPanel
     resumeButton.onClick.RemoveListener(OnResumeClicked);
     backButton.onClick.RemoveListener(OnResumeClicked);
     optionsButton.onClick.RemoveListener(OnOptionsClicked);
+    saveButton.onClick.RemoveListener(OnSaveClicked);
     returnTitleButton.onClick.RemoveListener(OnReturnTitleClicked);
   }
 
@@ -46,6 +48,11 @@ public class PausePanel : NavigationPanel
   void OnOptionsClicked()
   {
     Navigate(PauseScreenRoutes.OPTIONS);
+  }
+
+  void OnSaveClicked()
+  {
+    Navigate(PauseScreenRoutes.SAVE);
   }
 
   void OnReturnTitleClicked()

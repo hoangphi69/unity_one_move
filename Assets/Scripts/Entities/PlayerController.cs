@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         // Interact with objects
         if (isMoving) return;
-        (bool canMove, Task pushTask) = await CanMove(direction);
+        (bool canMove, Task pushTask) = CanMove(direction);
         if (!canMove) return;
 
         // Move
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    async Task<(bool canMove, Task pushTask)> CanMove(Vector3 direction)
+    (bool canMove, Task pushTask) CanMove(Vector3 direction)
     {
         Vector3 position = transform.position;
 

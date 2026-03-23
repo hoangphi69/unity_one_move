@@ -11,6 +11,11 @@ public interface IPanel
   void Hide();
 }
 
+public interface ISavesPanel
+{
+  void SelectSlot(SaveSlot slot);
+}
+
 public abstract class NavigationPanel : MonoBehaviour, IPanel
 {
   public event Action OnCloseRequested;

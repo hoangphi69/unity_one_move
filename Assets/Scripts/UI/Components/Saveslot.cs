@@ -30,7 +30,7 @@ public class SaveSlot : MonoBehaviour
 
   void OnSlotClicked()
   {
-    GetComponentInParent<SavesPanel>().SelectSlot(this);
+    GetComponentInParent<ISavesPanel>()?.SelectSlot(this);
   }
 
   public bool HasData() => _data != null;

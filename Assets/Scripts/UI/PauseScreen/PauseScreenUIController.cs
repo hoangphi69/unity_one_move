@@ -5,6 +5,7 @@ public static class PauseScreenRoutes
 {
   public const string PAUSE = "pause";
   public const string OPTIONS = "options";
+  public const string SAVE = "save";
 }
 
 public class PauseScreenUIController : NavigationUIController
@@ -12,11 +13,13 @@ public class PauseScreenUIController : NavigationUIController
   [Header("Panels")]
   [SerializeField] private NavigationPanel pausePanel;
   [SerializeField] private NavigationPanel optionsPanel;
+  [SerializeField] private NavigationPanel savePanel;
 
   void Awake()
   {
     RegisterPanel(PauseScreenRoutes.PAUSE, pausePanel);
     RegisterPanel(PauseScreenRoutes.OPTIONS, optionsPanel);
+    RegisterPanel(PauseScreenRoutes.SAVE, savePanel);
   }
 
   void OnDestroy() => UnregisterAllPanels();
