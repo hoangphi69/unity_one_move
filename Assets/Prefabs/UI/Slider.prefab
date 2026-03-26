@@ -98,8 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c243a4736ebb842b451f1b3267c4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomSlider
-  value: {fileID: 7520560680130101590}
+  valueText: {fileID: 7520560680130101590}
   slider: {fileID: 5499924710097379903}
+  OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1756322319808500342
 GameObject:
   m_ObjectHideFlags: 0

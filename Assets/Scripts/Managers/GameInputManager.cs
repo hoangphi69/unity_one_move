@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
-public enum InputState { Gameplay, UI }
+public enum InputState { None, Gameplay, UI }
 
 public class GameInputManager : MonoBehaviour
 {
@@ -28,8 +28,9 @@ public class GameInputManager : MonoBehaviour
   public void SetState(InputState newState)
   {
     state = newState;
-    foreach (var map in _maps.Values) map.Disable();
-    _maps[newState].Enable();
     print($"Input: {state}");
+    foreach (var map in _maps.Values) map.Disable();
+    if (newState == InputState.None) return;
+    _maps[newState].Enable();
   }
 }

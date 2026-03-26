@@ -43,7 +43,6 @@ public class GameplayManager : MonoBehaviour
   {
     GameEventsManager.Instance.turnEvents.onPlayerTurnEnd += EnemyTurnStart;
     GameEventsManager.Instance.turnEvents.onEnemyTurnEnd += PlayerTurnStart;
-    GameEventsManager.Instance.turnEvents.onStageRestart += () => _ = RestartStageAsync();
     GameInputManager.Instance.Actions.Player.Escape.performed += PauseGame;
   }
 
@@ -81,6 +80,7 @@ public class GameplayManager : MonoBehaviour
 
     GameEventsManager.Instance.dialogueEvents.onLeaveDialogue += cutSceneEnd;
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutsceneKnot, DialogueMode.Cutscene);
+    GameAudioManagger.Instance.StopMusic();
 
     try
     {
@@ -96,6 +96,19 @@ public class GameplayManager : MonoBehaviour
 
       _currentStage = scene;
       SpawnPlayer();
+
+      // Audio
+      if (!stageManager.radioTrack.IsNull)
+      {
+        await activePlayer.PlayMusic();
+        GameAudioManagger.Instance.PlayMusic(stageManager.radioTrack);
+      }
+      else
+      {
+        GameAudioManagger.Instance.StopMusic();
+      }
+
+      GameInputManager.Instance.SetState(InputState.Gameplay);
     }
     catch (Exception e)
     {
@@ -105,7 +118,7 @@ public class GameplayManager : MonoBehaviour
     finally { _isCutscene = false; }
   }
 
-  async Task RestartStageAsync()
+  public async Task RestartStageAsync()
   {
     if (!isPuzzleStage()) return;
 

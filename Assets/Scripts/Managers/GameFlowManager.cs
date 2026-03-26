@@ -21,7 +21,7 @@ public class GameFlowManager : MonoBehaviour
     GameEventsManager.Instance.flowEvents.onGameLoad += () => _ = LoadGame();
     GameEventsManager.Instance.flowEvents.onGamePaused += PauseGame;
     GameEventsManager.Instance.flowEvents.onGameContinue += ContinueGame;
-    GameEventsManager.Instance.turnEvents.onStageRestart += ContinueGame;
+    GameEventsManager.Instance.turnEvents.onStageRestart += RestartStage;
     GameEventsManager.Instance.flowEvents.onGameNew += NewGame;
     GameEventsManager.Instance.flowEvents.onBootTitle += BootTitle;
   }
@@ -30,17 +30,17 @@ public class GameFlowManager : MonoBehaviour
   {
     GameEventsManager.Instance.flowEvents.onGamePaused -= PauseGame;
     GameEventsManager.Instance.flowEvents.onGameContinue -= ContinueGame;
-    GameEventsManager.Instance.turnEvents.onStageRestart += ContinueGame;
+    GameEventsManager.Instance.turnEvents.onStageRestart -= RestartStage;
     GameEventsManager.Instance.flowEvents.onGameNew -= NewGame;
     GameEventsManager.Instance.flowEvents.onBootTitle -= BootTitle;
   }
 
   public async void BootTitle()
   {
+    GameAudioManagger.Instance.PlayMusic(FMODEvents.Instance.TitleMusic);
     LoadingScreenUIController.Instance.Show();
     SetState(GameState.Booting);
     GameInputManager.Instance.SetState(InputState.UI);
-
 
     TitleScreenUIController.Instance.Show();
     SetState(GameState.TitleScreen);
@@ -66,14 +66,58 @@ public class GameFlowManager : MonoBehaviour
     }
   }
 
-  void PauseGame()
+  async void PauseGame()
   {
-    SetState(GameState.Paused);
+    SetState(GameState.Booting);
+
+    // Execute player audio animation 
+    if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
+    {
+      await GameplayManager.Instance.activePlayer.LowerMusic();
+      GameAudioManagger.Instance.LowerMusic();
+    }
+
     GameInputManager.Instance.SetState(InputState.UI);
+    SetState(GameState.Paused);
+
+    PauseScreenUIController.Instance.Show();
   }
 
-  void ContinueGame()
+  async void ContinueGame()
   {
+    SetState(GameState.Booting);
+
+    // Execute player audio animation
+    if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
+    {
+      await GameplayManager.Instance.activePlayer.PlayMusic();
+      GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.stageManager.radioTrack);
+    }
+    else
+    {
+      GameAudioManagger.Instance.StopMusic();
+    }
+
+    SetState(GameState.Gameplay);
+    GameInputManager.Instance.SetState(InputState.Gameplay);
+  }
+
+  async void RestartStage()
+  {
+    SetState(GameState.Booting);
+
+    await GameplayManager.Instance.RestartStageAsync();
+
+    if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
+    {
+      await GameplayManager.Instance.activePlayer.PlayMusic();
+      GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.stageManager.radioTrack);
+    }
+    else
+    {
+      GameAudioManagger.Instance.StopMusic();
+    }
+
     SetState(GameState.Gameplay);
     GameInputManager.Instance.SetState(InputState.Gameplay);
   }

@@ -666,6 +666,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
   defaultPlayerPosition: {x: -8.5, y: 0, z: 24.5}
   isPuzzle: 0
+  ambienceTrack:
+    Guid:
+      Data1: -2037203290
+      Data2: 1297220617
+      Data3: -541217651
+      Data4: 11895021
+    Path: event:/LibraryAmbience
+  radioTrack:
+    Guid:
+      Data1: 2051157825
+      Data2: 1194670887
+      Data3: 1406439349
+      Data4: -1461210383
+    Path: event:/Ch1RadioMusic
 --- !u!1001 &910660675
 PrefabInstance:
   m_ObjectHideFlags: 0

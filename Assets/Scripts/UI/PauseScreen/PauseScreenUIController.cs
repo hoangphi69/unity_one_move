@@ -10,6 +10,8 @@ public static class PauseScreenRoutes
 
 public class PauseScreenUIController : NavigationUIController
 {
+  public static PauseScreenUIController Instance { get; private set; }
+
   [Header("Panels")]
   [SerializeField] private NavigationPanel pausePanel;
   [SerializeField] private NavigationPanel optionsPanel;
@@ -17,22 +19,15 @@ public class PauseScreenUIController : NavigationUIController
 
   void Awake()
   {
+    if (Instance == null) Instance = this;
+    else Destroy(gameObject);
+
     RegisterPanel(PauseScreenRoutes.PAUSE, pausePanel);
     RegisterPanel(PauseScreenRoutes.OPTIONS, optionsPanel);
     RegisterPanel(PauseScreenRoutes.SAVE, savePanel);
   }
 
   void OnDestroy() => UnregisterAllPanels();
-
-  void OnEnable()
-  {
-    GameEventsManager.Instance.flowEvents.onGamePaused += Show;
-  }
-
-  void OnDisable()
-  {
-    GameEventsManager.Instance.flowEvents.onGamePaused -= Show;
-  }
 
   void Start() => Hide(); // Ensure it starts hidden
 

@@ -18,14 +18,13 @@ public class TitleScreenUIController : NavigationUIController
 
   void Awake()
   {
-    Instance = this;
+    if (Instance == null) Instance = this;
+    else Destroy(gameObject);
 
     RegisterPanel(TitleScreenRoutes.TITLE, titlePanel);
     RegisterPanel(TitleScreenRoutes.OPTIONS, optionsPanel);
     RegisterPanel(TitleScreenRoutes.SAVES, savesPanel);
   }
-
-  void Start() => Show();
 
   void OnDestroy() => UnregisterAllPanels();
 

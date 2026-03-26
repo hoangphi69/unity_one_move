@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     private bool isMoving = false;
     private IInteractable nearbyInteractable;
-    private OutlineHighlight currentHighlight;
 
     void OnEnable()
     {
@@ -61,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
         // Move
         Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
+        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.Footstep, transform.position);
         await Task.WhenAll(
             SmoothMoveAsync(location, destroyCancellationToken),
             pushTask ?? Task.CompletedTask
@@ -132,7 +132,6 @@ public class PlayerController : MonoBehaviour
     void ScanSurroundings()
     {
         IInteractable found = null;
-        // OutlineHighlight foundHighlight = null;
 
         // Look for interactibles in 4 directions
         Vector3[] directions = { Vector3.forward, Vector3.left, Vector3.right, Vector3.back };
@@ -140,11 +139,6 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
             {
-                // if (hit.transform.TryGetComponent(out OutlineHighlight highlight))
-                // {
-                //     foundHighlight = highlight;
-                // }
-
                 if (hit.transform.TryGetComponent(out IInteractable interactable))
                 {
                     found = interactable;
@@ -159,13 +153,6 @@ public class PlayerController : MonoBehaviour
             nearbyInteractable = found;
             nearbyInteractable?.OnDetected();
         }
-
-        // if (foundHighlight != currentHighlight)
-        // {
-        //     currentHighlight?.Hide(); 
-        //     currentHighlight = foundHighlight;
-        //     currentHighlight?.Show();
-        // }
     }
 
     void Interact(InputAction.CallbackContext context)
@@ -182,8 +169,35 @@ public class PlayerController : MonoBehaviour
 
     public async Task Die()
     {
-        print("Failed");
+        GameInputManager.Instance.SetState(InputState.None);
         await Task.Delay(300);
         GameEventsManager.Instance.turnEvents.RestartStage();
+    }
+
+    public async Task PlayMusic()
+    {
+        GameInputManager.Instance.SetState(InputState.None);
+        // Simulate animation delay
+        await Task.Delay(1000);
+
+        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
+    }
+
+    public async Task LowerMusic()
+    {
+        GameInputManager.Instance.SetState(InputState.None);
+        // play animation here
+        await Task.Delay(1000);
+
+        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
+    }
+
+    public async Task StopMusic()
+    {
+        GameInputManager.Instance.SetState(InputState.None);
+        // play animation here
+        await Task.Delay(1000);
+
+        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }
 }

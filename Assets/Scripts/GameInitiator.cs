@@ -15,6 +15,7 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private GameInputManager _gameInputManager;
   [SerializeField] private GameDataManager _gameDataManager;
   [SerializeField] private GameSettingsManager _gameSettingsManager;
+  [SerializeField] private GameAudioManagger _gameAudioManager;
 
   [Header("Managers")]
   [SerializeField] private GameplayManager _gameplayManager;
@@ -26,7 +27,6 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private TitleScreenUIController _titleScreen;
   [SerializeField] private PauseScreenUIController _pauseScreen;
   [SerializeField] private ConfirmOverlayUIController _confirmOverlay;
-
 
   async void Start()
   {
@@ -53,6 +53,7 @@ public class GameInitiator : MonoBehaviour
     _gameInputManager = Instantiate(_gameInputManager);
     _gameDataManager = Instantiate(_gameDataManager);
     _gameSettingsManager = Instantiate(_gameSettingsManager);
+    _gameAudioManager = Instantiate(_gameAudioManager);
 
     _gameInputManager.SetState(InputState.UI);
     _gameSettingsManager.Initialize();

@@ -6,7 +6,7 @@ public class GameSettingsManager : MonoBehaviour
   public static GameSettingsManager Instance { get; private set; }
 
   public GraphicsSettings Graphics { get; private set; }
-  // public AudioSettings Audio { get; private set; } // Ready for the future!
+  public AudioSettings Audio { get; private set; }
 
   private List<IGameSettings> categories = new List<IGameSettings>();
 
@@ -23,10 +23,10 @@ public class GameSettingsManager : MonoBehaviour
   public void Initialize()
   {
     Graphics = new GraphicsSettings();
-    // Audio = new AudioSettings();
+    Audio = new AudioSettings();
 
     categories.Add(Graphics);
-    // categories.Add(Audio);
+    categories.Add(Audio);
 
     foreach (var settings in categories)
     {

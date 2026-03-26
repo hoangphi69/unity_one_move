@@ -155,6 +155,7 @@ MonoBehaviour:
   _gameInputManager: {fileID: 1260438475120492109, guid: 3a6da647ea7c6174d910cfadda9307c8, type: 3}
   _gameDataManager: {fileID: 2265597028612923474, guid: 46d538d5bfb14df43b63801e7407bbda, type: 3}
   _gameSettingsManager: {fileID: 6031419844101810751, guid: 41c6d8b79c14be64794eeee5cb8bf906, type: 3}
+  _gameAudioManager: {fileID: 4863580224722678577, guid: a6fb445ea1ad8ca4482bde57848c4741, type: 3}
   _gameplayManager: {fileID: 3042829178732120442, guid: b14c2dfeab839044b97acd15ab9d6c61, type: 3}
   _gameDialogueManager: {fileID: 3912481516373756540, guid: 4bd8c5d99828fd249908f2836717d3ca, type: 3}
   _gameFlowManager: {fileID: 2944949520488624248, guid: aba3e7a70100eb443b41e910e945e306, type: 3}

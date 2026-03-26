@@ -3,7 +3,6 @@ using UnityEngine;
 public class NPC : MonoBehaviour, IInteractable
 {
   private Canvas bubble;
-  private OutlineHighlight outlineHighlight;
   private Outline outline;
   [SerializeField] private string knotName;
   private bool hasInteracted = false;
@@ -30,7 +29,7 @@ public class NPC : MonoBehaviour, IInteractable
   {
     HideOutline();
     if (hasInteracted) HideBubble();
-  } 
+  }
   public void OnInteract()
   {
     hasInteracted = true;

@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4284332930693702856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5768066246508043680}
+  - component: {fileID: 4863580224722678577}
+  - component: {fileID: 2145471189797148139}
+  m_Layer: 0
+  m_Name: GameAudioManagger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5768066246508043680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4284332930693702856}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1095.122, y: 683.0629, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4863580224722678577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4284332930693702856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b032b397690311642b1c597f21c7d1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudioManagger
+  masterVolume: 1
+  musicVolume: 1
+  ambienceVolume: 1
+  SFXVolume: 1
+--- !u!114 &2145471189797148139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4284332930693702856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a502f9d45e4c3e42abc78066eae8e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
+  <TitleMusic>k__BackingField:
+    Guid:
+      Data1: 1589959790
+      Data2: 1274673448
+      Data3: -696161386
+      Data4: 701162366
+    Path: event:/TitleMusic
+  <Ch1RadioMusic>k__BackingField:
+    Guid:
+      Data1: 2051157825
+      Data2: 1194670887
+      Data3: 1406439349
+      Data4: -1461210383
+    Path: event:/Ch1RadioMusic
+  <DormAfternoon>k__BackingField:
+    Guid:
+      Data1: -1900782760
+      Data2: 1328335181
+      Data3: 1340263323
+      Data4: -669251955
+    Path: event:/DormAfternoon
+  <LibraryAmbience>k__BackingField:
+    Guid:
+      Data1: -2037203290
+      Data2: 1297220617
+      Data3: -541217651
+      Data4: 11895021
+    Path: event:/LibraryAmbience
+  <Footstep>k__BackingField:
+    Guid:
+      Data1: 108213640
+      Data2: 1122077464
+      Data3: 783873973
+      Data4: -2041492224
+    Path: event:/Footstep
+  <DoorOpen>k__BackingField:
+    Guid:
+      Data1: 707026385
+      Data2: 1088964936
+      Data3: 302699145
+      Data4: -927471499
+    Path: event:/DoorOpen
+  <RadioToggle>k__BackingField:
+    Guid:
+      Data1: -845270358
+      Data2: 1117015997
+      Data3: -2010244164
+      Data4: 1246218312
+    Path: event:/RadioToggle
