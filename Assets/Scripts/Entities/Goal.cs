@@ -37,9 +37,9 @@ public class Goal : MonoBehaviour, IInteractable, IObstacle
   {
 
     animator.CrossFade("Open", .3f);
-    // await GameDataManager.Instance.SaveProgress(this.nextStage);
-    // string nextStage = GameDataManager.Instance.GetProgress();
-    // await GameplayManager.Instance.LoadStageAsync(nextStage, cutscene);
+    await GameDataManager.Instance.SaveProgress(this.nextStage);
+    string nextStage = GameDataManager.Instance.GetProgress();
+    await GameplayManager.Instance.LoadStageAsync(nextStage, cutscene);
     print("door opened");
   }
 

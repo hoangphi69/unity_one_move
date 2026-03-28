@@ -61,10 +61,10 @@ PrefabInstance:
       addedObject: {fileID: 152387455027586468}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fbcf8387ef1c62841b7461d0b45fe27f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7604094903127748726}
+      addedObject: {fileID: 6530619962413640372}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fbcf8387ef1c62841b7461d0b45fe27f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6530619962413640372}
+      addedObject: {fileID: 4970133916590431769}
   m_SourcePrefab: {fileID: 100100000, guid: fbcf8387ef1c62841b7461d0b45fe27f, type: 3}
 --- !u!1 &1354441816882244767 stripped
 GameObject:
@@ -98,7 +98,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7604094903127748726
+--- !u!114 &6530619962413640372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354441816882244767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb79e8c9a1ba249cd9d5ffec3e485a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  moveDuration: 0.2
+--- !u!65 &4970133916590431769
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,18 +130,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Size: {x: 0.56999993, y: 1.4998568, z: 0.57000005}
   m_Center: {x: 0.000000044703484, y: 0.7499284, z: -0.000000014901161}
---- !u!114 &6530619962413640372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354441816882244767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb79e8c9a1ba249cd9d5ffec3e485a24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveDuration: 0.2
