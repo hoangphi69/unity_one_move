@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class Pushable : MonoBehaviour, IObstacle, IPushable, IInteractable
 {
-    [Header("Player")] 
+    [Header("Player")]
     [SerializeField] bool blockPlayer = true;
     [SerializeField] bool isPushable = false;
 
@@ -16,7 +16,7 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable, IInteractable
 
     [Header("Movement")]
     [SerializeField] float moveDuration = 0.2f;
-    
+
     //IObstacle
     public bool IsPlayerBlocking() => blockPlayer;
     public bool IsEnemyBlocking() => blockEnemy;
@@ -40,8 +40,8 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable, IInteractable
 
     public bool CanPush(Vector3 direction)
     {
-        if(!isPushable) return false;
-        if(isMoving) return false;
+        if (!isPushable) return false;
+        if (isMoving) return false;
         Vector3 target = transform.position + direction * GameplayManager.Instance.cellSize;
         return CanPushTo(direction, target);
     }
@@ -93,6 +93,6 @@ public class Pushable : MonoBehaviour, IObstacle, IPushable, IInteractable
     {
         if (outline != null) outline.enabled = false;
     }
-    public void OnInteract() {}
+    public void OnInteract() { }
     public Vector3 GetPosition() => transform.position;
 }

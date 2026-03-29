@@ -2670,6 +2670,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1981471698}
     m_Modifications:
+    - target: {fileID: -364549135957968240, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110170548490554506, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
+      propertyPath: eventID
+      value: bruh
+      objectReference: {fileID: 0}
     - target: {fileID: 2110170548490554506, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
       propertyPath: knotName
       value: ch1_Hallway2
@@ -2677,6 +2685,10 @@ PrefabInstance:
     - target: {fileID: 3476921466603231912, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
       propertyPath: m_Name
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 5470890364792445872, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5940373076477317316, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
       propertyPath: m_LocalScale.x
@@ -2726,7 +2738,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -364549135957968240, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5940373076477317316, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}

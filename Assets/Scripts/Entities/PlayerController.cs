@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveDuration = .2f;
 
     private bool isMoving = false;
-    private IInteractable nearbyInteractable;
+    private Interactable nearbyInteractable;
 
     void OnEnable()
     {
@@ -131,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     void ScanSurroundings()
     {
-        IInteractable found = null;
+        Interactable found = null;
 
         // Look for interactibles in 4 directions
         Vector3[] directions = { Vector3.forward, Vector3.left, Vector3.right, Vector3.back };
@@ -139,7 +138,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
             {
-                if (hit.transform.TryGetComponent(out IInteractable interactable))
+                if (hit.transform.TryGetComponent(out Interactable interactable))
                 {
                     found = interactable;
                     break;

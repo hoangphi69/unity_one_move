@@ -299,3 +299,8 @@ Sau đó mới tới map với cốt truyện. #speaker:Nam #sprite:nam_talk
 === ch1_GetItem ===
 Bạn vừa nhặt được 1 vật phẩm.
 -> END 
+
+// ----------- Cửa khoá ----------
+=== door_locked ===
+Mình nên kiểm tra điện thoại trước.
+-> END 

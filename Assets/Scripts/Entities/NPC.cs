@@ -1,61 +1,25 @@
 using UnityEngine;
 
-public class NPC : MonoBehaviour, IInteractable
+[RequireComponent(typeof(Interactable))]
+public class NPC : MonoBehaviour
 {
-  private Canvas bubble;
-  private Outline outline;
   [SerializeField] private string knotName;
-  private bool hasInteracted = false;
 
-  void Awake()
+  private Interactable interactable;
+
+  private void Awake()
   {
-    bubble = GetComponentInChildren<Canvas>();
-    bubble.enabled = true;
-
-    outline = GetComponent<Outline>();
-    outline.enabled = false;
+    interactable = GetComponent<Interactable>();
   }
 
-  void Start()
+  private void OnEnable()
   {
-    // bubble.transform.LookAt(bubble.transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
+    interactable.OnInteracted += EnterDialogue;
   }
 
-  public void OnDetected()
+  private void OnDisable()
   {
-    ShowOutline();
-  }
-  public void OnLost()
-  {
-    HideOutline();
-    if (hasInteracted) HideBubble();
-  }
-  public void OnInteract()
-  {
-    hasInteracted = true;
-    HideBubble();
-    EnterDialogue();
-  }
-  public Vector3 GetPosition() => transform.position;
-
-  public void ShowBubble()
-  {
-    bubble.enabled = true;
-  }
-
-  public void HideBubble()
-  {
-    bubble.enabled = false;
-  }
-
-  public void ShowOutline()
-  {
-    outline.enabled = true;
-  }
-
-  public void HideOutline()
-  {
-    outline.enabled = false;
+    interactable.OnInteracted -= EnterDialogue;
   }
 
   public void EnterDialogue()
@@ -63,7 +27,3 @@ public class NPC : MonoBehaviour, IInteractable
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(knotName, DialogueMode.InGame);
   }
 }
-
-//box
-//glass
-//check raycast half size cube

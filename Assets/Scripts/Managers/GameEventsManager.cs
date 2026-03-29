@@ -7,14 +7,17 @@ public class GameEventsManager : MonoBehaviour
   public DialogueEvents dialogueEvents;
   public TurnEvents turnEvents;
   public FlowEvents flowEvents;
+  public QuestEvents questEvents;
+  public InteractEvents interactEvents;
 
   void Awake()
   {
-    Instance = this;
+    if (Instance == null) Instance = this;
 
-    // initialize the events
     dialogueEvents = new();
     turnEvents = new();
     flowEvents = new();
+    questEvents = new();
+    interactEvents = new();
   }
 }
