@@ -59,9 +59,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c1ee15f27b849a94cb048c51bbfd5a2b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2355111496175383438}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c1ee15f27b849a94cb048c51bbfd5a2b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1775228986525544082}
   m_SourcePrefab: {fileID: 100100000, guid: c1ee15f27b849a94cb048c51bbfd5a2b, type: 3}
 --- !u!1 &4911474829854616261 stripped
 GameObject:
@@ -89,20 +86,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 3, z: 0.15}
   m_Center: {x: -0.0017986298, y: 1.5, z: 0.0016546734}
---- !u!114 &1775228986525544082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4911474829854616261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5c7d57a9ae0914f96bf15ea58ece86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  blockPlayer: 0
-  isPushable: 0
-  blockEnemy: 1
-  blockEnemySight: 1
-  moveDuration: 0.2
