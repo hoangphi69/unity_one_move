@@ -21,6 +21,7 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private GameplayManager _gameplayManager;
   [SerializeField] private GameDialogueManager _gameDialogueManager;
   [SerializeField] private GameFlowManager _gameFlowManager;
+  [SerializeField] private GameQuestManager _gameQuestManager;
 
   [Header("UI")]
   [SerializeField] private LoadingScreenUIController _loadingScreen;
@@ -65,7 +66,7 @@ public class GameInitiator : MonoBehaviour
     _gameplayManager = Instantiate(_gameplayManager);
     _gameDialogueManager = Instantiate(_gameDialogueManager);
     _gameFlowManager = Instantiate(_gameFlowManager);
-
+    _gameQuestManager = Instantiate(_gameQuestManager);
   }
 
   void InitializeUI()

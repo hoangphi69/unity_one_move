@@ -1,60 +1,39 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Goal : MonoBehaviour, IInteractable, IObstacle
+[RequireComponent(typeof(Interactable))]
+public class Goal : MonoBehaviour
 {
-  private Outline outline;
-  private Animator animator;
 
   [SerializeField] private string cutscene;
   [SerializeField] private SceneField nextStage;
 
-  [SerializeField] private bool BlockPlayer;
+  private Interactable interactable;
+  private Animator animator;
 
   void Awake()
   {
-    outline = GetComponentInChildren<Outline>();
-    outline.enabled = false;
+    interactable = GetComponent<Interactable>();
     animator = GetComponent<Animator>();
   }
 
-  public void OnDetected() => ShowOutline();
-  public void OnLost() => HideOutline();
-  public void OnInteract() => _ = CompleteGoal();
-  public Vector3 GetPosition() => transform.position;
-
-  public void ShowOutline()
+  private void OnEnable()
   {
-    outline.enabled = true;
+    interactable.OnInteracted += CompleteGoal;
   }
 
-  public void HideOutline()
+  private void OnDisable()
   {
-    outline.enabled = false;
+    interactable.OnInteracted -= CompleteGoal;
   }
 
-  private async Task CompleteGoal()
+  private async void CompleteGoal()
   {
-
     animator.CrossFade("Open", .3f);
+    await Task.Delay(500);
+
     await GameDataManager.Instance.SaveProgress(this.nextStage);
     string nextStage = GameDataManager.Instance.GetProgress();
     await GameplayManager.Instance.LoadStageAsync(nextStage, cutscene);
-    print("door opened");
-  }
-
-  public bool IsPlayerBlocking()
-  {
-    throw new System.NotImplementedException();
-  }
-
-  public bool IsEnemyBlocking()
-  {
-    throw new System.NotImplementedException();
-  }
-
-  public bool IsEnemySightBlocking()
-  {
-    throw new System.NotImplementedException();
   }
 }

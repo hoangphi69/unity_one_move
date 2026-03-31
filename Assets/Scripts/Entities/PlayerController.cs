@@ -2,8 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +9,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveDuration = .2f;
 
     private bool isMoving = false;
-    private IInteractable nearbyInteractable;
+    private Interactable nearbyInteractable;
+    private Animator animator;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void OnEnable()
     {
@@ -53,18 +57,15 @@ public class PlayerController : MonoBehaviour
 
     async Task TryMove(Vector3 direction)
     {
-        // Interact with objects
         if (isMoving) return;
-        (bool canMove, Task pushTask) = CanMove(direction);
+
+        bool canMove = CanMove(direction);
         if (!canMove) return;
 
         // Move
         Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.Footstep, transform.position);
-        await Task.WhenAll(
-            SmoothMoveAsync(location, destroyCancellationToken),
-            pushTask ?? Task.CompletedTask
-        );
+        await SmoothMoveAsync(location, destroyCancellationToken);
     }
 
     async Task SmoothMoveAsync(Vector3 location, CancellationToken token)
@@ -85,53 +86,33 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    (bool canMove, Task pushTask) CanMove(Vector3 direction)
+    bool CanMove(Vector3 direction)
     {
         Vector3 position = transform.position;
 
-        if (!IsGround(position + direction)) return (false, null);
+        if (!GameplayManager.Instance.stageManager.IsGround(position + direction)) return false;
 
         if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
         {
-            if (hit.collider.TryGetComponent(out IPushable pushable))
+            if (hit.collider.TryGetComponent(out Collide collide))
             {
-                if (!pushable.CanPush(direction)) return (false, null);
-                Task pushTask = pushable.Push(direction);
-                return (true, pushTask);
+                collide.OnCollide(direction);
+                if (collide.isLocked) return false;
+                else return true;
             }
 
-            if (hit.collider.TryGetComponent(out IObstacle obstacle))
+            if (hit.collider.TryGetComponent(out Obstacle obstacle))
             {
-                return (!obstacle.IsPlayerBlocking(), null);
-            }
-
-            if (hit.collider.TryGetComponent(out ICollectible collectible))
-            {
-                collectible.Collect();
-                return (true, null);
-            }
-
-            if (hit.collider.TryGetComponent(out IGateway gateway))
-            {
-                gateway.Transition();
-                return (true, null);
+                return !obstacle.BlockPlayer;
             }
         }
 
-        return (true, null);
-    }
-
-    bool IsGround(Vector3 position)
-    {
-        Tilemap ground = GameplayManager.Instance.stageManager.environment;
-        if (ground == null) return true;
-        Vector3Int cell = ground.WorldToCell(position);
-        return ground.HasTile(cell);
+        return true;
     }
 
     void ScanSurroundings()
     {
-        IInteractable found = null;
+        Interactable found = null;
 
         // Look for interactibles in 4 directions
         Vector3[] directions = { Vector3.forward, Vector3.left, Vector3.right, Vector3.back };
@@ -139,7 +120,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
             {
-                if (hit.transform.TryGetComponent(out IInteractable interactable))
+                if (hit.transform.TryGetComponent(out Interactable interactable))
                 {
                     found = interactable;
                     break;
@@ -177,8 +158,9 @@ public class PlayerController : MonoBehaviour
     public async Task PlayMusic()
     {
         GameInputManager.Instance.SetState(InputState.None);
-        // Simulate animation delay
-        await Task.Delay(1000);
+
+        animator.CrossFade("Wear_Headphone", .5f);
+        await Task.Delay(500);
 
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }
@@ -186,8 +168,9 @@ public class PlayerController : MonoBehaviour
     public async Task LowerMusic()
     {
         GameInputManager.Instance.SetState(InputState.None);
-        // play animation here
-        await Task.Delay(1000);
+
+        animator.CrossFade("Remove_Headphone", .3f);
+        await Task.Delay(500);
 
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }
@@ -195,8 +178,9 @@ public class PlayerController : MonoBehaviour
     public async Task StopMusic()
     {
         GameInputManager.Instance.SetState(InputState.None);
-        // play animation here
-        await Task.Delay(1000);
+
+        animator.CrossFade("Remove_Headphone", .3f);
+        await Task.Delay(500);
 
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }

@@ -159,6 +159,7 @@ MonoBehaviour:
   _gameplayManager: {fileID: 3042829178732120442, guid: b14c2dfeab839044b97acd15ab9d6c61, type: 3}
   _gameDialogueManager: {fileID: 3912481516373756540, guid: 4bd8c5d99828fd249908f2836717d3ca, type: 3}
   _gameFlowManager: {fileID: 2944949520488624248, guid: aba3e7a70100eb443b41e910e945e306, type: 3}
+  _gameQuestManager: {fileID: 8772039748907629665, guid: 3df82bd8f8d1512419337d11213d730c, type: 3}
   _loadingScreen: {fileID: -6942197916002871455, guid: 393189e42df69a246bdc9a99dd6c3c47, type: 3}
   _titleScreen: {fileID: 393358114304177520, guid: 6d0285e242081224e9d39a87660d3939, type: 3}
   _pauseScreen: {fileID: 4113078293066160034, guid: 09a28427d84b8f54ca9308f7e1ff2876, type: 3}

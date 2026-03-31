@@ -22,4 +22,11 @@ public class StageManager : MonoBehaviour
     GameplayManager.Instance.RegisterStage(this);
     if (!ambienceTrack.IsNull) GameAudioManagger.Instance.PlayAmbience(ambienceTrack);
   }
+
+  public bool IsGround(Vector3 position)
+  {
+    if (environment == null) return true;
+    Vector3Int cell = environment.WorldToCell(position);
+    return environment.HasTile(cell);
+  }
 }

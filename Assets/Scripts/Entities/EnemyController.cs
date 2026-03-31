@@ -46,9 +46,9 @@ public class EnemyController : MonoBehaviour
       foreach (RaycastHit hit in hits)
       {
         if (hit.collider.TryGetComponent(out EnemyController _)) break;
-        if (hit.collider.TryGetComponent(out IObstacle obstacle))
+        if (hit.collider.TryGetComponent(out Obstacle obstacle))
         {
-          if (obstacle.IsEnemySightBlocking()) break;
+          if (obstacle.BlockEnemySight) break;
           else continue;
         }
 
@@ -59,17 +59,6 @@ public class EnemyController : MonoBehaviour
       }
     }
     return null;
-    // foreach (Vector3 direction in sightDirections)
-    // {
-    //   if (Physics.Raycast(transform.position, direction, out RaycastHit hit, sightDistance, GameplayManager.Instance.entityMask))
-    //   {
-
-    //     if (hit.collider.TryGetComponent(out PlayerController _))
-    //     {
-    //       return direction;
-    //     }
-    //   }
-    // }
   }
 
   void Rotate(Vector3 direction)
@@ -108,13 +97,13 @@ public class EnemyController : MonoBehaviour
   {
     Vector3 position = transform.position;
 
-    if (!IsGround(position + direction)) return false;
+    if (!GameplayManager.Instance.stageManager.IsGround(position + direction)) return false;
 
     if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
     {
-      if (hit.collider.TryGetComponent(out IObstacle obstacle))
+      if (hit.collider.TryGetComponent(out Obstacle obstacle))
       {
-        return !obstacle.IsPlayerBlocking();
+        return !obstacle.BlockEnemy;
       }
 
       if (hit.collider.TryGetComponent(out PlayerController player))
@@ -124,13 +113,5 @@ public class EnemyController : MonoBehaviour
     }
 
     return true;
-  }
-
-  bool IsGround(Vector3 position)
-  {
-    Tilemap ground = GameplayManager.Instance.stageManager.environment;
-    if (ground == null) return true;
-    Vector3Int cell = ground.WorldToCell(position);
-    return ground.HasTile(cell);
   }
 }

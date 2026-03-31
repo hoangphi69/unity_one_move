@@ -1,98 +1,79 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using System.Threading.Tasks;
 
-public class Pushable : MonoBehaviour, IObstacle, IPushable, IInteractable
+[RequireComponent(typeof(Collide))]
+public class Pushable : MonoBehaviour
 {
-    [Header("Player")] 
-    [SerializeField] bool blockPlayer = true;
-    [SerializeField] bool isPushable = false;
-
-    [Header("Enemy")]
-    [SerializeField] bool blockEnemy = true;
-    [SerializeField] bool blockEnemySight = true;
-
-    [Header("Movement")]
-    [SerializeField] float moveDuration = 0.2f;
-    
-    //IObstacle
-    public bool IsPlayerBlocking() => blockPlayer;
-    public bool IsEnemyBlocking() => blockEnemy;
-    public bool IsEnemySightBlocking() => blockEnemySight;
-
-
-    private bool isMoving = false;
-    private Outline outline;
+    [SerializeField] private float moveDuration = .2f;
+    private Collide collide;
+    private bool isSliding = false;
 
     void Awake()
     {
-        outline = GetComponent<Outline>();
-        if (outline != null) outline.enabled = false;
+        collide = GetComponent<Collide>();
     }
 
-    public async Task Push(Vector3 direction)
+    void OnEnable()
     {
-        Vector3 target = transform.position + direction * GameplayManager.Instance.cellSize;
-        await SmoothMoveAsync(target, destroyCancellationToken);
+        collide.OnCollided += TryMove;
     }
 
-    public bool CanPush(Vector3 direction)
+    void OnDisable()
     {
-        if(!isPushable) return false;
-        if(isMoving) return false;
-        Vector3 target = transform.position + direction * GameplayManager.Instance.cellSize;
-        return CanPushTo(direction, target);
+        collide.OnCollided -= TryMove;
     }
 
-    bool CanPushTo(Vector3 direction, Vector3 target)
+    async void TryMove(Vector3 direction)
     {
-        Tilemap ground = GameplayManager.Instance.stageManager.environment;
-        if (ground != null)
+        if (isSliding)
         {
-            Vector3Int cell = ground.WorldToCell(target);
-            if (!ground.HasTile(cell)) return false;
+            await BlockPlayer();
+            return;
         }
 
-        if (Physics.Raycast(transform.position, direction,
-            GameplayManager.Instance.cellSize,
-            GameplayManager.Instance.entityMask))
+        Vector3 location = transform.position + direction;
+
+        if (!GameplayManager.Instance.stageManager.IsGround(location))
         {
-            return false;
+            await BlockPlayer();
+            return;
         }
 
-        return true;
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
+        {
+            if (hit.collider.TryGetComponent(out Obstacle obstacle))
+            {
+                if (obstacle.BlockPlayer)
+                {
+                    await BlockPlayer();
+                    return;
+                }
+            }
+        }
+
+        await Move(location);
     }
 
-    async Task SmoothMoveAsync(Vector3 target, CancellationToken token)
+    async Task BlockPlayer()
     {
-        isMoving = true;
-        float elapsed = 0f;
-        Vector3 start = transform.position;
+        collide.isLocked = true;
+        await Task.Yield();
+        collide.isLocked = false;
+    }
 
-        while (elapsed < moveDuration)
+    async Task Move(Vector3 location)
+    {
+        isSliding = true;
+
+        float elapsedTime = 0;
+        while (elapsedTime < moveDuration)
         {
-            if (token.IsCancellationRequested) return;
-            transform.position = Vector3.Lerp(start, target, elapsed / moveDuration);
-            elapsed += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, location, elapsedTime / moveDuration);
+            elapsedTime += Time.deltaTime;
             await Task.Yield();
         }
 
-        if (token.IsCancellationRequested) return;
-        transform.position = target;
-        isMoving = false;
+        transform.position = location;
+        isSliding = false;
     }
-
-    // IInteractable
-    public void OnDetected()
-    {
-        if (outline != null) outline.enabled = true;
-    }
-    public void OnLost()
-    {
-        if (outline != null) outline.enabled = false;
-    }
-    public void OnInteract() {}
-    public Vector3 GetPosition() => transform.position;
 }
