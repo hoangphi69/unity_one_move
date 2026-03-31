@@ -30,11 +30,10 @@ public class Goal : MonoBehaviour
   private async void CompleteGoal()
   {
     animator.CrossFade("Open", .3f);
-    await Task.Delay(300);
+    await Task.Delay(500);
 
     await GameDataManager.Instance.SaveProgress(this.nextStage);
     string nextStage = GameDataManager.Instance.GetProgress();
     await GameplayManager.Instance.LoadStageAsync(nextStage, cutscene);
-    print("door opened");
   }
 }

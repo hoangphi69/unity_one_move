@@ -11,6 +11,12 @@ public class PlayerController : MonoBehaviour
 
     private bool isMoving = false;
     private Interactable nearbyInteractable;
+    private Animator animator;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void OnEnable()
     {
@@ -52,18 +58,15 @@ public class PlayerController : MonoBehaviour
 
     async Task TryMove(Vector3 direction)
     {
-        // Interact with objects
         if (isMoving) return;
-        (bool canMove, Task pushTask) = CanMove(direction);
+
+        bool canMove = CanMove(direction);
         if (!canMove) return;
 
         // Move
         Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.Footstep, transform.position);
-        await Task.WhenAll(
-            SmoothMoveAsync(location, destroyCancellationToken),
-            pushTask ?? Task.CompletedTask
-        );
+        await SmoothMoveAsync(location, destroyCancellationToken);
     }
 
     async Task SmoothMoveAsync(Vector3 location, CancellationToken token)
@@ -84,40 +87,28 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    (bool canMove, Task pushTask) CanMove(Vector3 direction)
+    bool CanMove(Vector3 direction)
     {
         Vector3 position = transform.position;
 
-        if (!IsGround(position + direction)) return (false, null);
+        if (!IsGround(position + direction)) return false;
 
         if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
         {
-            if (hit.collider.TryGetComponent(out IPushable pushable))
-            {
-                if (!pushable.CanPush(direction)) return (false, null);
-                Task pushTask = pushable.Push(direction);
-                return (true, pushTask);
-            }
-
             if (hit.collider.TryGetComponent(out IObstacle obstacle))
             {
-                return (!obstacle.IsPlayerBlocking(), null);
+                return !obstacle.IsPlayerBlocking();
             }
 
-            if (hit.collider.TryGetComponent(out ICollectible collectible))
+            if (hit.collider.TryGetComponent(out Collide collide))
             {
-                collectible.Collect();
-                return (true, null);
-            }
-
-            if (hit.collider.TryGetComponent(out IGateway gateway))
-            {
-                gateway.Transition();
-                return (true, null);
+                collide.OnCollide(direction);
+                if (collide.isLocked) return false;
+                else return true;
             }
         }
 
-        return (true, null);
+        return true;
     }
 
     bool IsGround(Vector3 position)
@@ -176,8 +167,9 @@ public class PlayerController : MonoBehaviour
     public async Task PlayMusic()
     {
         GameInputManager.Instance.SetState(InputState.None);
-        // Simulate animation delay
-        await Task.Delay(1000);
+
+        animator.CrossFade("Wear_Headphone", .5f);
+        await Task.Delay(500);
 
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }
@@ -185,8 +177,9 @@ public class PlayerController : MonoBehaviour
     public async Task LowerMusic()
     {
         GameInputManager.Instance.SetState(InputState.None);
-        // play animation here
-        await Task.Delay(1000);
+
+        animator.CrossFade("Remove_Headphone", .3f);
+        await Task.Delay(500);
 
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }
@@ -194,8 +187,9 @@ public class PlayerController : MonoBehaviour
     public async Task StopMusic()
     {
         GameInputManager.Instance.SetState(InputState.None);
-        // play animation here
-        await Task.Delay(1000);
+
+        animator.CrossFade("Remove_Headphone", .3f);
+        await Task.Delay(500);
 
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }

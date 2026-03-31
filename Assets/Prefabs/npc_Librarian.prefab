@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4918065817243086199}
   - component: {fileID: 1399715929015670561}
   - component: {fileID: 7547687811328714278}
-  - component: {fileID: 5470890364792445872}
   - component: {fileID: 2110170548490554506}
+  - component: {fileID: 5470890364792445872}
   - component: {fileID: -364549135957968240}
   m_Layer: 0
   m_Name: npc_Librarian
@@ -146,20 +146,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &2110170548490554506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3476921466603231912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7793d26e65c34ef39193b6d06721239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPC
-  eventID: 
-  knotName: 
 --- !u!114 &-364549135957968240
 MonoBehaviour:
   m_ObjectHideFlags: 0

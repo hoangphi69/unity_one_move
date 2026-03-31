@@ -53,7 +53,7 @@ public class InteractPoint : MonoBehaviour
   {
     if (show && currentBubbleInstance == null && bubblePrefab != null)
     {
-      currentBubbleInstance = Instantiate(bubblePrefab, bubbleSpawnPoint.position, Quaternion.identity, transform);
+      currentBubbleInstance = Instantiate(bubblePrefab, bubbleSpawnPoint.position, bubbleSpawnPoint.rotation, transform);
     }
     else if (!show && currentBubbleInstance != null)
     {

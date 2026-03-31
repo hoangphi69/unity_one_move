@@ -85,14 +85,14 @@ public class CutsceneUIController : MonoBehaviour
   void EnableAutoMode()
   {
     isAutoMode = true;
-    autoIcon.sprite = Resources.Load<Sprite>("Sprites/auto_on");
+    autoIcon.sprite = Resources.Load<Sprite>("Sprites/Icon/auto_on");
     _ = StartAutoAdvanceTimer();
   }
 
   void DisableAutoMode()
   {
     isAutoMode = false;
-    autoIcon.sprite = Resources.Load<Sprite>("Sprites/auto_off");
+    autoIcon.sprite = Resources.Load<Sprite>("Sprites/Icon/auto_off");
     CancelAutoAdvanceTask();
   }
 
