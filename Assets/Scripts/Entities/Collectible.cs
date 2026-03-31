@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-  [SerializeField] private string cutsceneName;
-  [SerializeField] private SceneField scene;
-
   void OnTriggerEnter(Collider collider)
   {
     if (collider.gameObject.tag == "Player")

@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -91,32 +90,24 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 position = transform.position;
 
-        if (!IsGround(position + direction)) return false;
+        if (!GameplayManager.Instance.stageManager.IsGround(position + direction)) return false;
 
         if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
         {
-            if (hit.collider.TryGetComponent(out IObstacle obstacle))
-            {
-                return !obstacle.IsPlayerBlocking();
-            }
-
             if (hit.collider.TryGetComponent(out Collide collide))
             {
                 collide.OnCollide(direction);
                 if (collide.isLocked) return false;
                 else return true;
             }
+
+            if (hit.collider.TryGetComponent(out Obstacle obstacle))
+            {
+                return !obstacle.BlockPlayer;
+            }
         }
 
         return true;
-    }
-
-    bool IsGround(Vector3 position)
-    {
-        Tilemap ground = GameplayManager.Instance.stageManager.environment;
-        if (ground == null) return true;
-        Vector3Int cell = ground.WorldToCell(position);
-        return ground.HasTile(cell);
     }
 
     void ScanSurroundings()

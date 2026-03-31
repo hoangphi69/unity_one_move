@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(Collide))]
 public class Gateway : MonoBehaviour
 {
