@@ -20,7 +20,7 @@ public class InteractPoint : MonoBehaviour
 
   private void OnEnable()
   {
-    interactable.OnInteracted += NotifyInteraction;
+    interactable.OnDefaultInteracted += NotifyInteraction;
 
     // Future: Subscribe to Quest Manager state changes here
     // GameEventsManager.Instance.questEvents.OnQuestStateChange += UpdateBubbleState;
@@ -28,7 +28,7 @@ public class InteractPoint : MonoBehaviour
 
   private void OnDisable()
   {
-    interactable.OnInteracted -= NotifyInteraction;
+    interactable.OnDefaultInteracted -= NotifyInteraction;
     // GameEventsManager.Instance.questEvents.OnQuestStateChange -= UpdateBubbleState;
   }
 

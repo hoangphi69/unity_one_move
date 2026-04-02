@@ -1,51 +1,64 @@
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public enum QuestState
 {
-  UNAVAILABLE,
-  AVAILABLE,
-  IN_PROGRESS,
-  DONE,
-  COMPLETED,
+  UNKNOWN,    // 0: Not yet discovered
+  AVAILABLE,  // 1: Prerequisites met, ready to pick up
+  ACTIVE,     // 2: In the player's quest log
+  ACHIEVED,   // 3: Objectives done, needs to be turned in
+  COMPLETED,  // 4: Finished and rewarded (Terminal)
+  FAILED      // 5: Failed or locked out (Terminal)
 }
 
-public class Quest
+[CreateAssetMenu(fileName = "NewQuest", menuName = "Quest System/Quest")]
+public class Quest : ScriptableObject
 {
-  public QuestInfoSO info;
-  public QuestState state;
+  [field: SerializeField] public string id { get; private set; }
 
-  private int currentStep;
+  [Header("General")]
+  [SerializeField] public string title;
+  [SerializeField] public string description;
 
-  public Quest(QuestInfoSO questInfo)
+  [SerializeField] private QuestState state = QuestState.UNKNOWN;
+
+  [Header("Requirements (Optional)")]
+  public Quest[] requiredQuests;
+
+  [Header("Objectives (Sequential)")]
+  [SerializeField] private int currentObjective = 0;
+  public List<QuestObjective> objectives = new();
+
+  [Header("Rewards (Optional)")]
+  public bool requiresTurnIn = false;
+
+  public QuestState GetState() => state;
+
+  // Only accept forward state progression
+  public void SetState(QuestState newState)
   {
-    info = questInfo;
-    state = QuestState.UNAVAILABLE;
-    currentStep = 0;
+    if (state == QuestState.COMPLETED || state == QuestState.FAILED) return;
+    if (newState < state) return;
+    state = newState;
   }
 
-  public void MoveToNextStep()
+  public void AdvanceObjective() => currentObjective++;
+
+  public bool StartObjective()
   {
-    currentStep++;
+    if (currentObjective >= objectives.Count) return false;
+    objectives[currentObjective].details.Initialize(id);
+    return true;
   }
 
-  public bool CurrentStepExists()
-  {
-    return currentStep < info.questSteps.Length;
-  }
+  public int GetCurrentObjectiveIndex() => currentObjective;
 
-  public void InitializeCurrentStep(Transform parent)
+#if UNITY_EDITOR
+  void OnValidate()
   {
-    GameObject prefab = GetCurrentQuestStepPrefab();
-    if (prefab != null)
-      Object
-      .Instantiate(prefab, parent)
-      .GetComponent<QuestStep>()
-      .Initialize(info.id);
+    id = name;
+    EditorUtility.SetDirty(this);
   }
-
-  private GameObject GetCurrentQuestStepPrefab()
-  {
-    if (!CurrentStepExists()) return null;
-    else return info.questSteps[currentStep];
-  }
+#endif
 }

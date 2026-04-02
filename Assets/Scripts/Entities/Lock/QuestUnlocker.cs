@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(ILocker))]
 public class QuestUnlocker : MonoBehaviour
 {
-  [SerializeField] private string questID;
+  [SerializeField] private Quest quest;
 
   private ILocker locker;
 
@@ -25,14 +25,14 @@ public class QuestUnlocker : MonoBehaviour
   void Start()
   {
     // Check if the player already finished the quest before this scene loaded
-    QuestState currentState = GameQuestManager.Instance.GetQuestState(questID);
+    QuestState currentState = GameQuestManager.Instance.GetQuestState(quest.id);
     if (currentState == QuestState.COMPLETED) Unlock();
   }
 
   void CheckQuest(Quest quest)
   {
-    if (quest.info.id != questID) return;
-    if (quest.state == QuestState.COMPLETED) Unlock();
+    if (quest.id != this.quest.id) return;
+    if (quest.GetState() == QuestState.COMPLETED) Unlock();
   }
 
   void Unlock()

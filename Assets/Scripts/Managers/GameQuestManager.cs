@@ -29,38 +29,40 @@ public class GameQuestManager : MonoBehaviour
   void StartQuest(string id)
   {
     Quest quest = GetQuestByID(id);
-    quest.InitializeCurrentStep(transform);
-    ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
+    quest.SetState(QuestState.ACTIVE);
+    quest.StartObjective();
+
+    GameEventsManager.Instance.questEvents.QuestStateChanged(quest);
   }
 
   void AdvanceQuest(string id)
   {
     Quest quest = GetQuestByID(id);
-    quest.MoveToNextStep();
-    if (quest.CurrentStepExists()) quest.InitializeCurrentStep(transform);
-    else ChangeQuestState(quest.info.id, QuestState.COMPLETED); // IMPORTANT - change this to DONE later
+    quest.AdvanceObjective();
+    bool achieved = !quest.StartObjective();
+
+    if (achieved && !quest.requiresTurnIn) quest.SetState(QuestState.COMPLETED);
+    else quest.SetState(QuestState.ACHIEVED);
+
+    GameEventsManager.Instance.questEvents.QuestStateChanged(quest);
   }
 
   void CompleteQuest(string id)
   {
     Quest quest = GetQuestByID(id);
-    ChangeQuestState(quest.info.id, QuestState.COMPLETED);
-  }
+    quest.SetState(QuestState.COMPLETED);
 
-  void ChangeQuestState(string id, QuestState state)
-  {
-    Quest quest = GetQuestByID(id);
-    quest.state = state;
     GameEventsManager.Instance.questEvents.QuestStateChanged(quest);
   }
 
   Dictionary<string, Quest> GetQuests()
   {
-    QuestInfoSO[] allQuestInfoSO = Resources.LoadAll<QuestInfoSO>("Quests");
+    Quest[] allQuests = Resources.LoadAll<Quest>("Quests");
     quests = new();
-    foreach (QuestInfoSO questInfo in allQuestInfoSO)
+    foreach (Quest asset in allQuests)
     {
-      quests.Add(questInfo.id, new Quest(questInfo));
+      Quest quest = Instantiate(asset);
+      quests.Add(quest.id, quest);
     }
     return quests;
   }
@@ -71,21 +73,11 @@ public class GameQuestManager : MonoBehaviour
     return null;
   }
 
+  public Dictionary<string, Quest> GetQuestDictionary() => quests;
+
   public QuestState GetQuestState(string id)
   {
-    if (quests.TryGetValue(id, out Quest quest)) return quest.state;
-    return QuestState.UNAVAILABLE;
-  }
-
-  public bool MeetRequirements(Quest quest)
-  {
-    bool result = true;
-
-    foreach (QuestInfoSO requiredQuest in quest.info.questPrerequisites)
-    {
-      if (GetQuestByID(requiredQuest.id).state != QuestState.COMPLETED) result = false;
-    }
-
-    return result;
+    if (quests.TryGetValue(id, out Quest quest)) return quest.GetState();
+    return QuestState.UNKNOWN;
   }
 }
