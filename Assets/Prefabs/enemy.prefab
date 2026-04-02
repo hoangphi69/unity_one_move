@@ -65,6 +65,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 54c5a39471ab17d48a4d4d1bc93136ff, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2447498020041374450}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 54c5a39471ab17d48a4d4d1bc93136ff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 643106730066962182}
   m_SourcePrefab: {fileID: 100100000, guid: 54c5a39471ab17d48a4d4d1bc93136ff, type: 3}
 --- !u!1 &4928118880943991853 stripped
 GameObject:
@@ -133,3 +136,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   moveDuration: 0.2
   sightDistance: 10
+--- !u!114 &643106730066962182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4928118880943991853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7265f02382f5df4cb28a8665571190c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  <BlockPlayer>k__BackingField: 1
+  <BlockEnemy>k__BackingField: 1
+  <BlockEnemySight>k__BackingField: 0

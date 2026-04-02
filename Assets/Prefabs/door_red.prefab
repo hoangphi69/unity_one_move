@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: -5298628696292975658}
   - component: {fileID: -1545370729683313506}
   - component: {fileID: -5295946146952421241}
+  - component: {fileID: 357217837163949716}
+  - component: {fileID: 6814551662716824408}
   m_Layer: 0
   m_Name: door_red
   m_TagString: Untagged
@@ -127,7 +129,6 @@ MonoBehaviour:
   nextStage:
     m_SceneAsset: {fileID: 0}
     m_SceneName: 
-  BlockPlayer: 0
 --- !u!114 &-5295946146952421241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +147,33 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &357217837163949716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482385087650729581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9666300cb4c2dcd45b081ac21712ebbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+--- !u!114 &6814551662716824408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482385087650729581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7265f02382f5df4cb28a8665571190c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  <BlockPlayer>k__BackingField: 1
+  <BlockEnemy>k__BackingField: 1
+  <BlockEnemySight>k__BackingField: 1
 --- !u!1 &752779641010638985
 GameObject:
   m_ObjectHideFlags: 0

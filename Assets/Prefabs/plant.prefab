@@ -61,7 +61,7 @@ PrefabInstance:
       addedObject: {fileID: 2277284544860100833}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f3c7926c3820ea04fb44d590e4a2a24d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3454904748667440547}
+      addedObject: {fileID: -1594742333785243141}
   m_SourcePrefab: {fileID: 100100000, guid: f3c7926c3820ea04fb44d590e4a2a24d, type: 3}
 --- !u!1 &2478098781843169427 stripped
 GameObject:
@@ -89,7 +89,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.5000001, z: 0.99999994}
   m_Center: {x: -0.02895403, y: 0.75000006, z: 0.026349217}
---- !u!114 &3454904748667440547
+--- !u!114 &-1594742333785243141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,11 +98,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2478098781843169427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5c7d57a9ae0914f96bf15ea58ece86, type: 3}
+  m_Script: {fileID: 11500000, guid: a7265f02382f5df4cb28a8665571190c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  blockPlayer: 1
-  isPushable: 0
-  blockEnemy: 1
-  blockEnemySight: 1
-  moveDuration: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  <BlockPlayer>k__BackingField: 1
+  <BlockEnemy>k__BackingField: 1
+  <BlockEnemySight>k__BackingField: 1
