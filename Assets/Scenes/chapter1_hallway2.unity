@@ -3632,10 +3632,10 @@ PrefabInstance:
       addedObject: {fileID: 2062041118}
     - targetCorrespondingSourceObject: {fileID: 4911474829854616261, guid: 4765822ab25b079489d01f341b170ec1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2062041120}
+      addedObject: {fileID: 2062041119}
     - targetCorrespondingSourceObject: {fileID: 4911474829854616261, guid: 4765822ab25b079489d01f341b170ec1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2062041119}
+      addedObject: {fileID: 2062041120}
   m_SourcePrefab: {fileID: 100100000, guid: 4765822ab25b079489d01f341b170ec1, type: 3}
 --- !u!4 &2062041116 stripped
 Transform:
@@ -3687,14 +3687,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2062041117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5c7d57a9ae0914f96bf15ea58ece86, type: 3}
+  m_Script: {fileID: 11500000, guid: 9666300cb4c2dcd45b081ac21712ebbc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  blockPlayer: 1
-  isPushable: 0
-  blockEnemy: 1
-  blockEnemySight: 1
-  moveDuration: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

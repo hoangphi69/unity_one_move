@@ -66,20 +66,99 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 672ca96eb48144e4796307d5c9511a59, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7372266766469858645}
+      addedObject: {fileID: -5514093195380517172}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 672ca96eb48144e4796307d5c9511a59, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4078043375742136543}
+      addedObject: {fileID: -5233740645903216232}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 672ca96eb48144e4796307d5c9511a59, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1410528750219528610}
+      addedObject: {fileID: -4887294594715959387}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 672ca96eb48144e4796307d5c9511a59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6973728398088998511}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 672ca96eb48144e4796307d5c9511a59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3134628365594256923}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 672ca96eb48144e4796307d5c9511a59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8563535246604885018}
   m_SourcePrefab: {fileID: 100100000, guid: 672ca96eb48144e4796307d5c9511a59, type: 3}
 --- !u!1 &1425098069376134460 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 672ca96eb48144e4796307d5c9511a59, type: 3}
   m_PrefabInstance: {fileID: 2235930515776426093}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7372266766469858645
+--- !u!114 &-5514093195380517172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425098069376134460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7265f02382f5df4cb28a8665571190c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  <BlockPlayer>k__BackingField: 1
+  <BlockEnemy>k__BackingField: 1
+  <BlockEnemySight>k__BackingField: 1
+--- !u!114 &-5233740645903216232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425098069376134460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e9459587ea9a244bb2b205e74a478b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collide
+--- !u!114 &-4887294594715959387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425098069376134460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5c7d57a9ae0914f96bf15ea58ece86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pushable
+  moveDuration: 0.2
+--- !u!114 &6973728398088998511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425098069376134460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &-3134628365594256923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425098069376134460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9666300cb4c2dcd45b081ac21712ebbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+--- !u!65 &8563535246604885018
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,38 +179,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5999999, y: 1, z: 0.6}
   m_Center: {x: 0, y: 0.49999684, z: -0.018516138}
---- !u!114 &4078043375742136543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425098069376134460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5c7d57a9ae0914f96bf15ea58ece86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  blockPlayer: 1
-  isPushable: 1
-  blockEnemy: 1
-  blockEnemySight: 1
-  moveDuration: 0.2
---- !u!114 &1410528750219528610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425098069376134460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []

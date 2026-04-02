@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e265a366d495c8b409ada17c2ebfa0da, type: 3}
       propertyPath: m_Name
-      value: smallPlant
+      value: plant_small
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61,7 +61,7 @@ PrefabInstance:
       addedObject: {fileID: 8680902755356882287}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e265a366d495c8b409ada17c2ebfa0da, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7032967678200985663}
+      addedObject: {fileID: -3164927216013337197}
   m_SourcePrefab: {fileID: 100100000, guid: e265a366d495c8b409ada17c2ebfa0da, type: 3}
 --- !u!1 &9036045228427675220 stripped
 GameObject:
@@ -89,7 +89,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5999999, y: 0.8000001, z: 0.8}
   m_Center: {x: 0.039079905, y: 0.40000004, z: 0.021608472}
---- !u!114 &7032967678200985663
+--- !u!114 &-3164927216013337197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,11 +98,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9036045228427675220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5c7d57a9ae0914f96bf15ea58ece86, type: 3}
+  m_Script: {fileID: 11500000, guid: a7265f02382f5df4cb28a8665571190c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  blockPlayer: 1
-  isPushable: 0
-  blockEnemy: 1
-  blockEnemySight: 1
-  moveDuration: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  <BlockPlayer>k__BackingField: 1
+  <BlockEnemy>k__BackingField: 1
+  <BlockEnemySight>k__BackingField: 1
