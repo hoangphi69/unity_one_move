@@ -19,21 +19,14 @@ MonoBehaviour:
   requiredQuests: []
   currentObjective: 0
   objectives:
-  - description: Check the door
+  - description: Check phone notification
     details:
-      rid: 3769236948575322302
-  - description: Check the phone
-    details:
-      rid: 3769236948575322303
+      rid: 3769236948575322304
   requiresTurnIn: 0
   references:
     version: 2
     RefIds:
-    - rid: 3769236948575322302
+    - rid: 3769236948575322304
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: ch1_lobby_door
-    - rid: 3769236948575322303
-      type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
-      data:
-        targetID: ch1_lobby_phone
+        targetID: phone_ch1
