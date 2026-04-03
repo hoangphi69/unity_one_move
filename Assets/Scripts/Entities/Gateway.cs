@@ -20,15 +20,15 @@ public class Gateway : MonoBehaviour
 
   void OnEnable()
   {
-    collide.OnCollided += OpenDoor;
+    collide.OnMainAction += OpenDoor;
   }
 
   void OnDisable()
   {
-    collide.OnCollided -= OpenDoor;
+    collide.OnMainAction -= OpenDoor;
   }
 
-  async void OpenDoor(Vector3 _)
+  async void OpenDoor()
   {
     if (isOpen) return;
     isOpen = true;

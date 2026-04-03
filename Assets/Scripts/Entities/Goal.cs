@@ -19,12 +19,12 @@ public class Goal : MonoBehaviour
 
   private void OnEnable()
   {
-    interactable.OnInteracted += CompleteGoal;
+    interactable.OnMainAction += CompleteGoal;
   }
 
   private void OnDisable()
   {
-    interactable.OnInteracted -= CompleteGoal;
+    interactable.OnMainAction -= CompleteGoal;
   }
 
   private async void CompleteGoal()

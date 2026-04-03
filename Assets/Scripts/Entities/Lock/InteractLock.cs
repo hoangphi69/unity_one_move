@@ -23,12 +23,12 @@ public class InteractLock : MonoBehaviour, ILocker
 
   void OnEnable()
   {
-    interactable.OnLockInteract += OnInteract;
+    interactable.OnLockAction += OnInteract;
   }
 
   void OnDisable()
   {
-    interactable.OnLockInteract -= OnInteract;
+    interactable.OnLockAction -= OnInteract;
   }
 
   void Start()
