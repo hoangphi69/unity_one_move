@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -28,14 +29,18 @@ public class HUDOverlayUIController : MonoBehaviour
   {
     GameEventsManager.Instance.flowEvents.onGamePaused += Hide;
     GameEventsManager.Instance.flowEvents.onGameContinue += Show;
+    GameEventsManager.Instance.flowEvents.onGameNew += Show;
     GameEventsManager.Instance.turnEvents.onStageRestart += Show;
+    GameEventsManager.Instance.questEvents.OnQuestStateChanged += OnQuestUpdated;
   }
 
   void OnDisable()
   {
     GameEventsManager.Instance.flowEvents.onGamePaused -= Hide;
     GameEventsManager.Instance.flowEvents.onGameContinue -= Show;
+    GameEventsManager.Instance.flowEvents.onGameNew -= Show;
     GameEventsManager.Instance.turnEvents.onStageRestart -= Show;
+    GameEventsManager.Instance.questEvents.OnQuestStateChanged -= OnQuestUpdated;
   }
 
   public void Show() => uiContainer.SetActive(true);
@@ -51,12 +56,16 @@ public class HUDOverlayUIController : MonoBehaviour
 
   public void SetStepLeft(int step) => stepLeft.text = $"{step:D3}";
 
-  public void SetQuests(Quest[] quests)
+  void OnQuestUpdated(Quest quest) => UpdateQuestObjectives();
+
+  void UpdateQuestObjectives()
   {
     foreach (Transform child in questsContainer.transform) Destroy(child.gameObject);
-    foreach (Quest quest in quests)
+
+    List<Quest> activeQuests = GameQuestManager.Instance.GetActiveQuests();
+    foreach (Quest quest in activeQuests)
     {
-      string description = quest.title;
+      string description = quest.objectives[quest.GetCurrentObjectiveIndex()].description;
 
       GameObject obj = Instantiate(questPrefab, questsContainer.transform);
       TextMeshProUGUI text = obj.GetComponentInChildren<TextMeshProUGUI>();

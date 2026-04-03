@@ -9,7 +9,7 @@ public class GameQuestManager : MonoBehaviour
   void Awake()
   {
     if (Instance == null) Instance = this;
-    quests = GetQuests();
+    quests = LoadQuestResources();
   }
 
   void OnEnable()
@@ -55,7 +55,7 @@ public class GameQuestManager : MonoBehaviour
     GameEventsManager.Instance.questEvents.QuestStateChanged(quest);
   }
 
-  Dictionary<string, Quest> GetQuests()
+  Dictionary<string, Quest> LoadQuestResources()
   {
     Quest[] allQuests = Resources.LoadAll<Quest>("Quests");
     quests = new();
@@ -73,7 +73,22 @@ public class GameQuestManager : MonoBehaviour
     return null;
   }
 
-  public Dictionary<string, Quest> GetQuestDictionary() => quests;
+  public Dictionary<string, Quest> GetQuests() => quests;
+
+  // Only grab quests the player is currently doing or ready to turn in
+  public List<Quest> GetActiveQuests()
+  {
+    List<Quest> activeQuests = new List<Quest>();
+    foreach (var kvp in quests)
+    {
+      QuestState state = kvp.Value.GetState();
+      if (state == QuestState.ACTIVE || state == QuestState.ACHIEVED)
+      {
+        activeQuests.Add(kvp.Value);
+      }
+    }
+    return activeQuests;
+  }
 
   public QuestState GetQuestState(string id)
   {
