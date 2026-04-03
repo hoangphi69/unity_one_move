@@ -33,10 +33,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 362.49, y: -0}
-  m_SizeDelta: {x: 362.49, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &4255114846569646708
 CanvasRenderer:
@@ -66,10 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- Ra kh\u1ECFi ph\xF2ng"
+  m_text: "Ra kh\u1ECFi ph\xF2ng"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7f82f07f0bf30ba49b30fce456f9b0dd, type: 2}
-  m_sharedMaterial: {fileID: 8567985587439676174, guid: 7f82f07f0bf30ba49b30fce456f9b0dd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7371bc70797005a45901de35daad38cb, type: 2}
+  m_sharedMaterial: {fileID: -5976125706480938256, guid: 7371bc70797005a45901de35daad38cb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 16
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 1024
   m_textAlignment: 65535

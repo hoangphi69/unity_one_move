@@ -4,7 +4,7 @@ using UnityEngine;
 public class InteractPoint : MonoBehaviour
 {
   [Header("Quest Configuration")]
-  [SerializeField] private string eventID;
+  [SerializeField] private string targetID;
 
   [Header("Visual Indicators")]
   [SerializeField] private GameObject bubblePrefab; // The "!" or "?" prefab
@@ -41,8 +41,8 @@ public class InteractPoint : MonoBehaviour
 
   private void NotifyInteraction()
   {
-    if (string.IsNullOrEmpty(eventID)) return;
-    GameEventsManager.Instance.interactEvents.Interact(eventID);
+    if (string.IsNullOrEmpty(targetID)) return;
+    GameEventsManager.Instance.interactEvents.Interact(targetID);
 
     // Hide the bubble once interacted with
     ShowBubble(false);

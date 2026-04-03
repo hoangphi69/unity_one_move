@@ -17,7 +17,7 @@ public class GameQuestManagerEditor : Editor
     }
 
     GameQuestManager manager = (GameQuestManager)target;
-    var liveQuests = manager.GetQuestDictionary();
+    var liveQuests = manager.GetQuests();
 
     if (liveQuests == null || liveQuests.Count == 0) return;
 
