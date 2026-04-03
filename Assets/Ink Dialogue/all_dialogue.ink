@@ -45,6 +45,11 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 -> DONE
     
 // ----------- Tại lobby tương tác với điện thoại ----------
+
+=== ch1_before_start_quest ===
+Ngày 30 tháng 2.
+-> DONE
+
 === ch1_Lobby1 ===
 { interact_phone == false:
     ~ interact_phone = true
@@ -376,3 +381,22 @@ Cơ mà làm mấy cái dấy thì phải sửa lại luồng chạy game nữa,
 Haiz...
 Haiz...
 -> DONE
+
+VAR quest_check_phone = false
+
+=== phone ===
+{quest_check_phone == false:
+    Ngày 30 tháng 2.
+    -> DONE
+- else: 
+    -> ch1_Lobby1
+}
+
+=== door ===
+{quest_check_phone == false:
+    Có người đang gọi cho bạn.
+    ~ quest_check_phone = true
+    -> DONE
+- else: 
+    -> ch1_Lobby1_LockDoor
+}

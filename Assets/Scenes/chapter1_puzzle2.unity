@@ -362,8 +362,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cecf46dcefc414e4193019af7557345e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
+  stageName: "Th\u01B0 vi\u1EC7n"
   defaultPlayerPosition: {x: -11.5, y: 0, z: 21.5}
   isPuzzle: 1
+  maxStep: 36
   ambienceTrack:
     Guid:
       Data1: -2037203290

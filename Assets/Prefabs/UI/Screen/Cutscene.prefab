@@ -2113,7 +2113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4953143078043562455}
   - component: {fileID: 4397026480037602028}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
