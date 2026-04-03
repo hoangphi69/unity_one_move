@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36046544de2518d4c9191504982bb9d9, type: 3}
   m_Name: hallway2_CheckBookshelf
   m_EditorClassIdentifier: Assembly-CSharp::Quest
-  <id>k__BackingField: CH1_Check_Bookshelf
+  <id>k__BackingField: hallway2_CheckBookshelf
   title: Check book at bookshelf
   description: 
   state: 0

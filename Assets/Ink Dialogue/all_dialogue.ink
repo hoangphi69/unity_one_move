@@ -13,6 +13,7 @@ VAR chose_book1 = false
 VAR chose_book2 = false
 VAR chose_book3 = false
 
+VAR quest_check_phone = false
 
 // ----------- Cutscene đầu ch1 ----------
 === ch1_Cutscene1 ===
@@ -46,41 +47,42 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
     
 // ----------- Tại lobby tương tác với điện thoại ----------
 
-=== ch1_before_start_quest ===
-Ngày 30 tháng 2.
--> DONE
-
-=== ch1_Lobby1 ===
-{ interact_phone == false:
+=== ch1_lobby1_phone ===
+{quest_check_phone == false:
+    Ngày 30 tháng 2. 16:32pm.
+    -> DONE
+- else: 
+    { interact_phone == false:
     ~ interact_phone = true
 
-    _"Ting!!!!!"_
-    "Bạn có một thông báo mới từ Discord."
+        _"Ting!!!!!"_
+        "Bạn có một thông báo mới từ Discord."
 
-    "Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
-    "Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
-    "Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
+        "Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
+        "Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
+        "Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
 
-    Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
-    Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
-    Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
-    Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
+        Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
+        Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
+        Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
+        Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
 
-    "Tao quen mày lâu tao mới dám rủ" #speaker:Phong
-    "Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
-    "Thế chú có tính làm ko?" #speaker:Phong 
+        "Tao quen mày lâu tao mới dám rủ" #speaker:Phong
+        "Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
+        "Thế chú có tính làm ko?" #speaker:Phong 
 
-    + [Đồng ý]
-        -> decision
+        + [Đồng ý]
+            -> decision
 
-    + [Lưỡng lự]
-        ... #speaker:Nam #sprite:nam_confused
-        Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
-        -> decision
+        + [Lưỡng lự]
+            ... #speaker:Nam #sprite:nam_confused
+            Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
+            -> decision
 
-- else:
-    Hiện tại bạn có 0 thông báo.
-    -> DONE
+    - else:
+        Hiện tại bạn có 0 thông báo.
+        -> DONE
+    }
 }
 
 = decision
@@ -91,25 +93,30 @@ Ngày 30 tháng 2.
 ~ accept_invitation = true
 -> DONE
 
-=== ch1_Lobby1_LockDoor ===
-{ locked_door:
-- 0:
-    ~ locked_door = 1
-    Khoan nào... #speaker:Nam #sprite:nam_thinking
-    Hình như mình quên gì đó thì phải... #speaker:Nam #sprite:nam_thinking
-    Điện thoại mình đâu rồi nhỉ?! #speaker:Nam #sprite:nam_talk
+=== ch1_lobby1_door ===
+{quest_check_phone == false:
+    Có người đang gọi cho bạn.
+    ~ quest_check_phone = true
     -> DONE
+- else: 
+    { locked_door:
+    - 0:
+        ~ locked_door = 1
+        Khoan nào... #speaker:Nam #sprite:nam_thinking
+        Hình như mình quên gì đó thì phải... #speaker:Nam #sprite:nam_thinking
+        Điện thoại mình đâu rồi nhỉ?! #speaker:Nam #sprite:nam_talk
+        -> DONE
 
-- 1:
-    ~ locked_door = 2
-    Mình cần mang theo điện thoại ra đường. #speaker:Nam #sprite:nam_talk
-    Không thể ra đường mà thiếu điện thoại được. #speaker:Nam #sprite:nam_talk
-    -> DONE
+    - 1:
+        ~ locked_door = 2
+        Mình cần mang theo điện thoại ra đường. #speaker:Nam #sprite:nam_talk
+        Không thể ra đường mà thiếu điện thoại được. #speaker:Nam #sprite:nam_talk
+        -> DONE
 
-- else:
-    ĐIỆN THOẠIII......... #speaker:Nam #sprite:nam_angry
-    -> DONE
-
+    - else:
+        ĐIỆN THOẠIII......... #speaker:Nam #sprite:nam_angry
+        -> DONE
+    }
 }
 
 // ----------- Cutscene sau lobby1 ----------
@@ -382,21 +389,3 @@ Haiz...
 Haiz...
 -> DONE
 
-VAR quest_check_phone = false
-
-=== phone ===
-{quest_check_phone == false:
-    Ngày 30 tháng 2.
-    -> DONE
-- else: 
-    -> ch1_Lobby1
-}
-
-=== door ===
-{quest_check_phone == false:
-    Có người đang gọi cho bạn.
-    ~ quest_check_phone = true
-    -> DONE
-- else: 
-    -> ch1_Lobby1_LockDoor
-}
