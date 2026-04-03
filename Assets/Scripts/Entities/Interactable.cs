@@ -2,11 +2,12 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Outline))]
-public class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour, ITrigger
 {
-  public event Action OnDefaultInteracted;
-  public event Action OnInteracted;
-  public event Action OnLockInteract;
+  public event Action OnDefaultAction;
+  public event Action OnMainAction;
+  public event Action OnLockAction;
+
   public bool isLocked { get; set; }
   private Outline outline;
 
@@ -28,9 +29,9 @@ public class Interactable : MonoBehaviour
 
   public virtual void OnInteract()
   {
-    if (isLocked) OnLockInteract?.Invoke();
-    else OnInteracted?.Invoke();
-    OnDefaultInteracted?.Invoke();
+    if (isLocked) OnLockAction?.Invoke();
+    else OnMainAction?.Invoke();
+    OnDefaultAction?.Invoke();
   }
 
   public Vector3 GetPosition() => transform.position;

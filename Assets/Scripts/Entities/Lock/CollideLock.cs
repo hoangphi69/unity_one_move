@@ -16,12 +16,12 @@ public class CollideLock : MonoBehaviour, ILocker
 
   void OnEnable()
   {
-    collide.OnLockedCollided += OnCollided;
+    collide.OnLockAction += OnCollided;
   }
 
   void OnDisable()
   {
-    collide.OnLockedCollided -= OnCollided;
+    collide.OnLockAction -= OnCollided;
   }
 
   void OnCollided()

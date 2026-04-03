@@ -14,12 +14,12 @@ public class NPC : MonoBehaviour
 
   private void OnEnable()
   {
-    interactable.OnInteracted += EnterDialogue;
+    interactable.OnMainAction += EnterDialogue;
   }
 
   private void OnDisable()
   {
-    interactable.OnInteracted -= EnterDialogue;
+    interactable.OnMainAction -= EnterDialogue;
   }
 
   public void EnterDialogue()
