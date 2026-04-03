@@ -27,6 +27,7 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private LoadingScreenUIController _loadingScreen;
   [SerializeField] private TitleScreenUIController _titleScreen;
   [SerializeField] private PauseScreenUIController _pauseScreen;
+  [SerializeField] private HUDOverlayUIController _hudOverlay;
   [SerializeField] private ConfirmOverlayUIController _confirmOverlay;
 
   async void Start()
@@ -73,6 +74,7 @@ public class GameInitiator : MonoBehaviour
   {
     _titleScreen = Instantiate(_titleScreen);
     _pauseScreen = Instantiate(_pauseScreen);
+    _hudOverlay = Instantiate(_hudOverlay);
     _confirmOverlay = Instantiate(_confirmOverlay);
   }
 

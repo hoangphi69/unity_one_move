@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum GameState
 {
-  Booting,
+  Busy,
   TitleScreen,
   Gameplay,
   Cutscene,
@@ -12,7 +12,7 @@ public enum GameState
 
 public class GameFlowManager : MonoBehaviour
 {
-  public GameState CurrentState { get; private set; } = GameState.Booting;
+  public GameState CurrentState { get; private set; } = GameState.Busy;
 
   public void SetState(GameState newState) => CurrentState = newState;
 
@@ -39,7 +39,7 @@ public class GameFlowManager : MonoBehaviour
   {
     GameAudioManagger.Instance.PlayMusic(FMODEvents.Instance.TitleMusic);
     LoadingScreenUIController.Instance.Show();
-    SetState(GameState.Booting);
+    SetState(GameState.Busy);
     GameInputManager.Instance.SetState(InputState.UI);
 
     TitleScreenUIController.Instance.Show();
@@ -68,7 +68,7 @@ public class GameFlowManager : MonoBehaviour
 
   async void PauseGame()
   {
-    SetState(GameState.Booting);
+    SetState(GameState.Busy);
 
     // Execute player audio animation 
     if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
@@ -85,7 +85,8 @@ public class GameFlowManager : MonoBehaviour
 
   async void ContinueGame()
   {
-    SetState(GameState.Booting);
+    if (CurrentState == GameState.Busy) return;
+    SetState(GameState.Busy);
 
     // Execute player audio animation
     if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
@@ -104,7 +105,8 @@ public class GameFlowManager : MonoBehaviour
 
   async void RestartStage()
   {
-    SetState(GameState.Booting);
+    if (CurrentState == GameState.Busy) return;
+    SetState(GameState.Busy);
 
     await GameplayManager.Instance.RestartStageAsync();
 
@@ -125,7 +127,7 @@ public class GameFlowManager : MonoBehaviour
   async void NewGame()
   {
     LoadingScreenUIController.Instance.Show();
-    SetState(GameState.Booting);
+    SetState(GameState.Busy);
 
     GameInputManager.Instance.SetState(InputState.UI);
 

@@ -163,6 +163,7 @@ MonoBehaviour:
   _loadingScreen: {fileID: -6942197916002871455, guid: 393189e42df69a246bdc9a99dd6c3c47, type: 3}
   _titleScreen: {fileID: 393358114304177520, guid: 6d0285e242081224e9d39a87660d3939, type: 3}
   _pauseScreen: {fileID: 4113078293066160034, guid: 09a28427d84b8f54ca9308f7e1ff2876, type: 3}
+  _hudOverlay: {fileID: 6964989621357493731, guid: f95c4d14255e89347ae9adbd68c7729e, type: 3}
   _confirmOverlay: {fileID: 6640372612581336664, guid: 917228dda0fe3c340ba588afc0bc6d2c, type: 3}
 --- !u!4 &1859662552
 Transform:

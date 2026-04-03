@@ -5,8 +5,10 @@ using UnityEngine.Tilemaps;
 public class StageManager : MonoBehaviour
 {
   // Configs
+  public string stageName;
   public Vector3 defaultPlayerPosition;
   public bool isPuzzle = false;
+  public int maxStep;
   public EventReference ambienceTrack;
   public EventReference radioTrack;
 
@@ -20,6 +22,9 @@ public class StageManager : MonoBehaviour
   void OnEnable()
   {
     GameplayManager.Instance.RegisterStage(this);
+    HUDOverlayUIController.Instance.SetStageName(stageName);
+    HUDOverlayUIController.Instance.ToggleBottom(isPuzzle);
+    HUDOverlayUIController.Instance.SetStepLeft(maxStep);
     if (!ambienceTrack.IsNull) GameAudioManagger.Instance.PlayAmbience(ambienceTrack);
   }
 
