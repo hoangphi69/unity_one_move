@@ -787,7 +787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6731665939129648108, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       propertyPath: _saveProgress
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6731665939129648108, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       propertyPath: _nextStage.m_SceneName

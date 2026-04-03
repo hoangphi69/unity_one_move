@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36046544de2518d4c9191504982bb9d9, type: 3}
-  m_Name: ch1_go_outside
+  m_Name: hallway3_StoppedByLibrarian
   m_EditorClassIdentifier: Assembly-CSharp::Quest
-  <id>k__BackingField: ch1_go_outside
-  title: "Ra kh\u1ECFi c\u0103n ph\xF2ng"
+  <id>k__BackingField: hallway3_StoppedByLibrarian
+  title: Talked to librarian
   description: 
   state: 0
   requiredQuests: []
   currentObjective: 0
   objectives:
-  - description: "ch\u1EA1m c\u1EEDa"
+  - description: 'Check borrowed book at Librarian '
     details:
-      rid: 3769236948575322308
+      rid: 7374410264679022592
   requiresTurnIn: 0
   references:
     version: 2
     RefIds:
-    - rid: 3769236948575322308
+    - rid: 7374410264679022592
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: door_ch1
+        targetID: librarian
