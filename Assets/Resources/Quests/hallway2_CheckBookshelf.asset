@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36046544de2518d4c9191504982bb9d9, type: 3}
-  m_Name: touch_grass_at_ch1
-  m_EditorClassIdentifier: Assembly-CSharp::Questt
-  <id>k__BackingField: touch_grass_at_ch1
-  title: Go touch grass
+  m_Name: hallway2_CheckBookshelf
+  m_EditorClassIdentifier: Assembly-CSharp::Quest
+  <id>k__BackingField: CH1_Check_Bookshelf
+  title: Check book at bookshelf
   description: 
   state: 0
   requiredQuests: []
   currentObjective: 0
   objectives:
-  - description: Check phone notification
+  - description: Check book at bookshelf
     details:
-      rid: 3769236948575322304
+      rid: 7374410245323358312
   requiresTurnIn: 0
   references:
     version: 2
     RefIds:
-    - rid: 3769236948575322304
+    - rid: 7374410245323358312
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: phone_ch1
+        targetID: check_bookshelf

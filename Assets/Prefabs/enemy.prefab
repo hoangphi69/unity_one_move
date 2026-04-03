@@ -150,4 +150,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   <BlockPlayer>k__BackingField: 1
   <BlockEnemy>k__BackingField: 1
-  <BlockEnemySight>k__BackingField: 0
+  <BlockEnemySight>k__BackingField: 1

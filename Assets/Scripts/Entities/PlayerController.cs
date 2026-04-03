@@ -150,9 +150,9 @@ public class PlayerController : MonoBehaviour
 
     public async Task Die()
     {
-        GameInputManager.Instance.SetState(InputState.None);
-        await Task.Delay(300);
-        GameEventsManager.Instance.turnEvents.RestartStage();
+        // GameInputManager.Instance.SetState(InputState.None);
+        // await Task.Delay(300);
+        // GameEventsManager.Instance.turnEvents.RestartStage();
     }
 
     public async Task PlayMusic()

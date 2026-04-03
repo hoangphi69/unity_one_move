@@ -104,6 +104,7 @@ public class GameFlowManager : MonoBehaviour
 
   async void RestartStage()
   {
+    if(CurrentState == GameState.Booting) return;
     SetState(GameState.Booting);
 
     await GameplayManager.Instance.RestartStageAsync();

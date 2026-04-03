@@ -4,6 +4,7 @@
 VAR interact_phone = false
 VAR accept_invitation = false
 VAR talked_discuss = false
+VAR locked_door = 0
 VAR talked_hallway2 = false
 VAR talked_hallway3 = false
 VAR talked_libarian = false
@@ -86,11 +87,25 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 -> DONE
 
 === ch1_Lobby1_LockDoor ===
-Khoan nào... #speaker:Nam #sprite:nam_thinking
-Hình như mình quên gì đó thì phải... #speaker:Nam #sprite:nam_thinking
-Điện thoại mình đâu rồi nhỉ?! #speaker:Nam #sprite:nam_thinking
--> DONE
+{ locked_door:
+- 0:
+    ~ locked_door = 1
+    Khoan nào... #speaker:Nam #sprite:nam_thinking
+    Hình như mình quên gì đó thì phải... #speaker:Nam #sprite:nam_thinking
+    Điện thoại mình đâu rồi nhỉ?! #speaker:Nam #sprite:nam_talk
+    -> DONE
 
+- 1:
+    ~ locked_door = 2
+    Mình cần mang theo điện thoại ra đường. #speaker:Nam #sprite:nam_talk
+    Không thể ra đường mà thiếu điện thoại được. #speaker:Nam #sprite:nam_talk
+    -> DONE
+
+- else:
+    ĐIỆN THOẠIII......... #speaker:Nam #sprite:nam_angry
+    -> DONE
+
+}
 
 // ----------- Cutscene sau lobby1 ----------
 === ch1_Cutscene2 ===
