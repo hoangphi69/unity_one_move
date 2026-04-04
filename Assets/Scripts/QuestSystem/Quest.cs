@@ -54,6 +54,33 @@ public class Quest : ScriptableObject
 
   public int GetCurrentObjectiveIndex() => currentObjective;
 
+  public QuestData Save()
+  {
+    QuestData data = new()
+    {
+      id = id,
+      state = state,
+      currentObjective = currentObjective
+    };
+
+    foreach (var obj in objectives) data.objectiveDataJsons.Add(obj.details.Save());
+
+    return data;
+  }
+
+  public void Load(QuestData data)
+  {
+    state = data.state;
+    currentObjective = data.currentObjective;
+
+    for (int i = 0; i < objectives.Count; i++)
+    {
+      if (i < data.objectiveDataJsons.Count) objectives[i].details.Load(data.objectiveDataJsons[i]);
+    }
+
+    if (state == QuestState.ACTIVE) StartObjective();
+  }
+
 #if UNITY_EDITOR
   void OnValidate()
   {

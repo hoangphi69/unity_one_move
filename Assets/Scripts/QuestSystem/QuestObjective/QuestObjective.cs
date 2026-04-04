@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 [Serializable]
 public abstract class QuestObjectiveInfo
 {
@@ -19,8 +18,18 @@ public abstract class QuestObjectiveInfo
     completed = true;
     GameEventsManager.Instance.questEvents.AdvanceQuest(questID);
   }
-}
 
+  public virtual string Save()
+  {
+    return JsonUtility.ToJson(this);
+  }
+
+  public virtual void Load(string json)
+  {
+    if (string.IsNullOrEmpty(json)) return;
+    JsonUtility.FromJsonOverwrite(json, this);
+  }
+}
 
 [Serializable]
 public class QuestObjective

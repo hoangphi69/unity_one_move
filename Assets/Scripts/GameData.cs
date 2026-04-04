@@ -10,6 +10,8 @@ public class GameData
   public string progress;
   public string[] collectibles;
 
+  public List<QuestData> quests = new();
+
   public GameData()
   {
     progress = "chapter1_lobby";
@@ -72,4 +74,14 @@ public class GameData
 
     return "Chapter " + chapterNumber;
   }
+}
+
+[Serializable]
+public class QuestData
+{
+  public string id;
+  public QuestState state;
+  public int currentObjective;
+
+  public List<string> objectiveDataJsons = new();
 }

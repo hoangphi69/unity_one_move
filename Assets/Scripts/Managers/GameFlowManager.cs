@@ -37,11 +37,12 @@ public class GameFlowManager : MonoBehaviour
 
   public async void BootTitle()
   {
-    GameAudioManagger.Instance.PlayMusic(FMODEvents.Instance.TitleMusic);
-    LoadingScreenUIController.Instance.Show();
     SetState(GameState.Busy);
+    LoadingScreenUIController.Instance.Show();
     GameInputManager.Instance.SetState(InputState.UI);
+    await GameDataManager.Instance.SaveGame();
 
+    GameAudioManagger.Instance.PlayMusic(FMODEvents.Instance.TitleMusic);
     TitleScreenUIController.Instance.Show();
     SetState(GameState.TitleScreen);
 
@@ -138,6 +139,7 @@ public class GameFlowManager : MonoBehaviour
     string cutscene = "ch1_Cutscene1";
     string stageName = GameplayManager.Instance.newGameStage;
     await GameplayManager.Instance.LoadStageAsync(stageName, cutscene);
+    GameEventsManager.Instance.questEvents.StartQuest("ch1_lobby");
 
     SetState(GameState.Gameplay);
   }

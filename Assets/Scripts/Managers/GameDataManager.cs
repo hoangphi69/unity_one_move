@@ -7,6 +7,10 @@ public class GameDataManager : MonoBehaviour
 {
   public static GameDataManager Instance { get; private set; }
 
+  public event Action<GameData> OnSave;
+  public event Action<GameData> OnLoad;
+  public event Action OnDelete;
+
   // Configs
   [SerializeField] private string fileName = "data.game";
 
@@ -28,7 +32,6 @@ public class GameDataManager : MonoBehaviour
   public async Task Initialize()
   {
     string profileID = await dataFileHandler.GetRecentlyUpdatedProfileID();
-    print($"active profileID: {profileID}");
     if (string.IsNullOrEmpty(profileID)) profileID = "1";
     await SwitchProfile(profileID);
   }
@@ -50,6 +53,7 @@ public class GameDataManager : MonoBehaviour
   public async Task SwitchProfile(string profileID)
   {
     selectedProfileID = profileID;
+    OnDelete?.Invoke();
     await LoadGame();
   }
 
@@ -57,7 +61,11 @@ public class GameDataManager : MonoBehaviour
   {
     dataFileHandler.DeleteFile(profileID);
 
-    if (selectedProfileID == profileID) data = null;
+    if (selectedProfileID == profileID)
+    {
+      OnDelete?.Invoke();
+      data = null;
+    }
   }
 
   public async Task<Dictionary<string, GameData>> GetAllProfiles()
@@ -65,19 +73,13 @@ public class GameDataManager : MonoBehaviour
     return await dataFileHandler.LoadAllProfiles();
   }
 
-
   public async Task LoadGame()
   {
     data = await dataFileHandler.LoadFile(selectedProfileID);
 
-    if (data == null)
-    {
-      print("No save file found.");
-    }
-    else
-    {
-      print($"Loaded Save. Progress: {data.progress}");
-    }
+    if (data == null) print("No save file found.");
+
+    OnLoad?.Invoke(data);
   }
 
   public async Task SaveGame() => await SaveGame(selectedProfileID);
@@ -85,13 +87,16 @@ public class GameDataManager : MonoBehaviour
   public async Task SaveGame(string profileID)
   {
     if (data == null) return;
+
+    OnSave?.Invoke(data);
+
     data.lastUpdated = DateTime.Now.ToBinary();
     await dataFileHandler.SaveFile(data, profileID);
-    print("Game Saved.");
   }
 
   public void NewGame()
   {
+    OnDelete?.Invoke();
     data = new();
     _ = SaveGame();
   }

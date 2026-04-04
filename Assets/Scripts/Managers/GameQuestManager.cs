@@ -9,7 +9,8 @@ public class GameQuestManager : MonoBehaviour
   void Awake()
   {
     if (Instance == null) Instance = this;
-    quests = LoadQuestResources();
+    LoadQuestResources();
+    LoadQuests(GameDataManager.Instance.data);
   }
 
   void OnEnable()
@@ -17,6 +18,10 @@ public class GameQuestManager : MonoBehaviour
     GameEventsManager.Instance.questEvents.OnStartQuest += StartQuest;
     GameEventsManager.Instance.questEvents.OnAdvanceQuest += AdvanceQuest;
     GameEventsManager.Instance.questEvents.OnCompleteQuest += CompleteQuest;
+
+    GameDataManager.Instance.OnLoad += LoadQuests;
+    GameDataManager.Instance.OnSave += SaveQuests;
+    GameDataManager.Instance.OnDelete += LoadQuestResources;
   }
 
   void OnDisable()
@@ -24,6 +29,10 @@ public class GameQuestManager : MonoBehaviour
     GameEventsManager.Instance.questEvents.OnStartQuest -= StartQuest;
     GameEventsManager.Instance.questEvents.OnAdvanceQuest -= AdvanceQuest;
     GameEventsManager.Instance.questEvents.OnCompleteQuest -= CompleteQuest;
+
+    GameDataManager.Instance.OnLoad -= LoadQuests;
+    GameDataManager.Instance.OnSave -= SaveQuests;
+    GameDataManager.Instance.OnDelete -= LoadQuestResources;
   }
 
   void StartQuest(string id)
@@ -42,7 +51,7 @@ public class GameQuestManager : MonoBehaviour
     bool achieved = !quest.StartObjective();
 
     if (achieved && !quest.requiresTurnIn) quest.SetState(QuestState.COMPLETED);
-    else quest.SetState(QuestState.ACHIEVED);
+    else if (achieved) quest.SetState(QuestState.ACHIEVED);
 
     GameEventsManager.Instance.questEvents.QuestStateChanged(quest);
   }
@@ -55,7 +64,7 @@ public class GameQuestManager : MonoBehaviour
     GameEventsManager.Instance.questEvents.QuestStateChanged(quest);
   }
 
-  Dictionary<string, Quest> LoadQuestResources()
+  void LoadQuestResources()
   {
     Quest[] allQuests = Resources.LoadAll<Quest>("Quests");
     quests = new();
@@ -64,7 +73,28 @@ public class GameQuestManager : MonoBehaviour
       Quest quest = Instantiate(asset);
       quests.Add(quest.id, quest);
     }
-    return quests;
+  }
+
+  public void LoadQuests(GameData data)
+  {
+    if (data.quests == null) return;
+
+    foreach (var questData in data.quests)
+    {
+      Quest quest = GetQuestByID(questData.id);
+      quest.Load(questData);
+      GameEventsManager.Instance.questEvents.QuestStateChanged(quest);
+    }
+  }
+
+  void SaveQuests(GameData data)
+  {
+    data.quests.Clear();
+    foreach (var kvp in quests)
+    {
+      if (kvp.Value.GetState() == QuestState.UNKNOWN) continue;
+      data.quests.Add(kvp.Value.Save());
+    }
   }
 
   Quest GetQuestByID(string id)
