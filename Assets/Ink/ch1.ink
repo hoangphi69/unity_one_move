@@ -1,19 +1,32 @@
-﻿// =============================================
+// =============================================
 // CHAPTER 1: KHI CÒN CHƯA BIẾT ĐI VỀ ĐÂU
 // =============================================
-VAR interact_phone = false
-VAR accept_invitation = false
-VAR talked_discuss = false
-VAR locked_door = 0
-VAR talked_hallway2 = false
-VAR talked_hallway3 = false
-VAR talked_libarian = false
-VAR pick_any_book = false
-VAR chose_book1 = false
-VAR chose_book2 = false
-VAR chose_book3 = false
 
-VAR quest_check_phone = false
+// GLOBAL
+VAR ch1_lobby_phone_StartedQuest = false
+VAR ch1_lobby_phone_AcceptedInvite = false
+VAR ch1_cutscene1_Discussed = false
+
+// INTERACTIONS
+VAR ch1_lobby_monitor_Interacted = false
+VAR ch1_hallway2_bookshelf_PickedBooks= false
+VAR ch1_hallway2_monitor_hasInteracted = false
+VAR ch1_hallway2_paper_hasRead = false
+
+// BOOKs CHOICE
+VAR ch1_hallway2_bookshelf_book1 = false
+VAR ch1_hallway2_bookshelf_book2 = false
+VAR ch1_hallway2_bookshelf_book3 = false
+
+// NPCs
+VAR ch1_hallway1_librarian = false
+VAR ch1_hallway2_bookshelf = false
+VAR ch1_hallway3_librarian = false
+
+// LOCK DOORs
+VAR ch1_lobby_door = 0
+VAR ch1_hallway2_door = 0
+VAR ch1_hallway3_door = 0
 
 // ----------- Cutscene đầu ch1 ----------
 === ch1_Cutscene1 ===
@@ -28,7 +41,7 @@ Vậy mà sao mình lại thấy trống rỗng thế này... #speaker:Nam #spri
 * [Tiếp tục chơi game]
     #bg:black
     Cứ chơi thêm một ván nữa. Rồi lại một ván nữa. 
-    Haizzz... Chán thật. #speaker:Nam #sprite:nam_bored #bg:dom
+    Haizzz... Chán thật... #speaker:Nam #sprite:nam_bored #bg:dom
     Cái cảm giác vô định này... #speaker:Nam #sprite:nam_bored
     Mình không thích nó!! #speaker:Nam #sprite:nam_angry
     -> touchgrass
@@ -36,7 +49,7 @@ Vậy mà sao mình lại thấy trống rỗng thế này... #speaker:Nam #spri
 * [Nhìn ra ngoài cửa sổ]
     #bg:dom_pull_curtain
     Sau khi kéo rèm cửa, ánh sáng trải lên khắp phòng một màu vàng nhạt. #bg:dom_pull_curtain
-    Mình đang làm gì với đời vậy nhờ?? #speaker:Nam #sprite:nam_thinking
+    Mình đang làm gì với đời vậy nhờ? #speaker:Nam #sprite:nam_thinking
     -> touchgrass
 
 = touchgrass
@@ -46,78 +59,72 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 -> DONE
     
 // ----------- Tại lobby tương tác với điện thoại ----------
-
-=== ch1_lobby1_phone ===
-{quest_check_phone == false:
-    Ngày 30 tháng 2. 16:32pm.
+=== ch1_Lobby1_phone ===
+{ ch1_lobby_phone_StartedQuest == false:
+    Ngày 30 tháng 2 - 16:32.
     -> DONE
-- else: 
-    { interact_phone == false:
-    ~ interact_phone = true
+}
 
-        _"Ting!!!!!"_
-        "Bạn có một thông báo mới từ Discord."
-
-        "Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
-        "Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
-        "Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
-
-        Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
-        Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
-        Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
-        Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
-
-        "Tao quen mày lâu tao mới dám rủ" #speaker:Phong
-        "Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
-        "Thế chú có tính làm ko?" #speaker:Phong 
-
-        + [Đồng ý]
-            -> decision
-
-        + [Lưỡng lự]
-            ... #speaker:Nam #sprite:nam_confused
-            Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
-            -> decision
-
-    - else:
-        Hiện tại bạn có 0 thông báo.
-        -> DONE
-    }
+{ ch1_lobby_monitor_Interacted == true:
+    ~ ch1_lobby_monitor_Interacted = false
+    _"Ting!!!!!"_
+    "Bạn có một thông báo mới từ Discord."
+    "Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
+    "Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
+    "Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
+    Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
+    Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
+    Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
+    Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
+    "Tao quen mày lâu tao mới dám rủ" #speaker:Phong
+    "Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
+    "Thế chú có tính làm ko?" #speaker:Phong 
+    + [Đồng ý]
+        -> decision
+    + [Lưỡng lự]
+        ... #speaker:Nam #sprite:nam_confused
+        Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
+        -> decision
+    
+- else:
+    Hiện tại bạn có 0 thông báo.
+    -> DONE
 }
 
 = decision
 "Kay" #speaker:Nam #sprite:nam_talk
 "Thế thì để tao giúp" #speaker:Nam #sprite:nam_talk
 "Tao cũng đang rảnh chán" #speaker:Nam #sprite:nam_talk
-"Công việc thế nào hả, cộng sự" #speaker:Nam #sprite:nam_smile
-~ accept_invitation = true
+"Công việc thế nào, cộng sự" #speaker:Nam #sprite:nam_smile
+~ ch1_lobby_phone_AcceptedInvite = true
 -> DONE
 
-=== ch1_lobby1_door ===
-{quest_check_phone == false:
+=== ch1_Lobby1_door ===
+{ch1_lobby_phone_StartedQuest == false:
+    ~ ch1_lobby_phone_StartedQuest = true
+
     Có người đang gọi cho bạn.
-    ~ quest_check_phone = true
     -> DONE
-- else: 
-    { locked_door:
-    - 0:
-        ~ locked_door = 1
-        Khoan nào... #speaker:Nam #sprite:nam_thinking
-        Hình như mình quên gì đó thì phải... #speaker:Nam #sprite:nam_thinking
-        Điện thoại mình đâu rồi nhỉ?! #speaker:Nam #sprite:nam_talk
-        -> DONE
-
-    - 1:
-        ~ locked_door = 2
-        Mình cần mang theo điện thoại ra đường. #speaker:Nam #sprite:nam_talk
-        Không thể ra đường mà thiếu điện thoại được. #speaker:Nam #sprite:nam_talk
-        -> DONE
-
-    - else:
-        ĐIỆN THOẠIII......... #speaker:Nam #sprite:nam_angry
-        -> DONE
-    }
 }
+
+~ ch1_lobby_monitor_Interacted = true
+
+{ ch1_lobby_door:
+- 0:
+    ~ ch1_lobby_door = 1
+    Điện thoại của bạn đang reo!!!
+    Mình để nó ở đâu rồi nhỉ?! #speaker:Nam #sprite:nam_talk
+    -> DONE  
+- 1:
+    ~ ch1_lobby_door = 2
+    Giờ nay ai gọi đấy? #speaker:Nam #sprite:nam_talk
+    Mà cái điện thoại mình giấu ở đâu rồi ?? #speaker:Nam #sprite:nam_talk
+    -> DONE
+- else:
+    CÁI ĐIỆN THOẠIII.........!!! #speaker:Nam #sprite:nam_angry
+    -> DONE
+}
+
 
 // ----------- Cutscene sau lobby1 ----------
 === ch1_Cutscene2 ===
@@ -160,8 +167,8 @@ Kay. #speaker:Nam #sprite:nam_talk
 
 // ----------- Tại map1 hallway 1 ----------
 === ch1_Hallway1 ===
-{ talked_libarian == false:
-    ~ talked_libarian = true
+{ ch1_hallway1_librarian == false:
+    ~ ch1_hallway1_librarian = true
     Chị thủ thư ơi? #speaker:Nam #sprite:nam_talk
     Thư viện có tủ sách nào liên quan đến công nghệ thông tin không ạ? #speaker:Nam #sprite:nam_talk
     Hmm... #speaker:Thủ thư #sprite:libarian_talk
@@ -175,9 +182,27 @@ Kay. #speaker:Nam #sprite:nam_talk
 }
 
 // ----------- Trong map1 hallway2 ----------
-=== ch1_Hallway2 ===
-{ talked_hallway2 == false:
-    ~ talked_hallway2 = true
+=== ch1_Hallway2_door ===
+{ ch1_hallway2_door:
+- 0:
+    ~ ch1_hallway2_door = 1
+    Phòng này nhiều sách thật đấy chứ! #speaker:Nam #sprite:nam_talk
+    Chắc phải có ý tưởng mình cần kiếm trong này. #speaker:Nam #sprite:nam_talk
+    -> DONE
+- 1:
+    ~ch1_hallway2_door = 2
+    Trong phòng này hẳn có ý tưởng mình có thể sử dụng. #speaker:Nam #sprite:nam_talk
+    Mình không thể về tay không được. #speaker:Nam #sprite:nam_talk
+    -> DONE
+- else:
+    KIẾM CÁI Ý TƯỞNGGGGG.....!!!  #speaker:Nam #sprite:nam_angry
+    -> DONE
+}
+
+
+=== ch1_Hallway2_bookshelf ===
+{ ch1_hallway2_bookshelf == false:
+    ~ ch1_hallway2_bookshelf = true
     Cả tủ sách chỉ có 3 cuốn là xài được. #speaker:Nam #sprite:nam_thinking
     Mình nên lấy cuốn nào đây ta? #speaker:Nam #sprite:nam_talk
     -> choose_book
@@ -188,31 +213,31 @@ Kay. #speaker:Nam #sprite:nam_talk
 }
 
 = choose_book
-{ pick_any_book:
+{ ch1_hallway2_bookshelf_PickedBooks:
     Tiếp theo là cuốn nào đây? #speaker:Nam #sprite:nam_thinking
 }
 
-{ not chose_book1:
+{ not ch1_hallway2_bookshelf_book1:
     + [300 bài code thanh niên.]
-    ~ chose_book1 = true
-    ~ pick_any_book = true
+    ~ ch1_hallway2_bookshelf_book1 = true
+    ~ ch1_hallway2_bookshelf_PickedBooks= true
     Nội dung hơi chung chung, cuốn này không xài được rồi, haizz... #speaker:Nam #sprite:nam_thinking
     -> choose_book
 }
 
-{ not chose_book2:
+{ not ch1_hallway2_bookshelf_book2:
     + [Sáng tạo trong IT, hãy bùng nổ kiến thức.]
-    ~ chose_book2 = true
-    ~ pick_any_book = true
+    ~ ch1_hallway2_bookshelf_book2 = true
+    ~ ch1_hallway2_bookshelf_PickedBooks= true
     "....Để trở nên sáng tạo trong lập trình, hãy lập trình những thứ mà mình thích và tận hưởng những khó khăn của nó."
     Hmm... #speaker:Nam #sprite:nam_thinking
     Vẫn chưa kiếm ra ý tưởng từ sách này. #speaker:Nam #sprite:nam_thinking
     -> choose_book
 }
 
-{ not chose_book3:
+{ not ch1_hallway2_bookshelf_book3:
     + [Pro Gamer thì phải làm Game!??]
-    ~ chose_book3 = true
+    ~ ch1_hallway2_bookshelf_book3 = true
     Ra đây là sách hướng dẫn lập trình game à!? #speaker:Nam #sprite:nam_thinking
     Cũng thú vị, để mang vể đọc thử. #speaker:Nam #sprite:nam_thinking
     -> after_choose_book
@@ -226,18 +251,50 @@ Dark Soup 3 mới ra mắt, chơi luôn không cu. #speaker:Phong #sprite:phong_
 Nghe nói game lần này giải đố nhiều lắm đấy! #speaker:Phong #sprite:phong_talk
 Uầy hay, tao với mày đợi game cũng phải nửa năm rồi đấy!! #speaker:Nam #sprite:nam_talk
 Đợi tao về chơi luôn, tao cấm mày chơi trước!! #speaker:Nam #sprite:nam_talk
-OKê! #speaker:Phong #sprite:phong_smile
+OKe! #speaker:Phong #sprite:phong_smile
 -> DONE
 
-=== ch1_Hallway2_LockDoor ===
-Phòng này nhiều sách thật đấy chứ! #speaker:Nam #sprite:nam_talk
-Chắc phải có ý tưởng mình cần kiếm trong này. #speaker:Nam #sprite:nam_talk
+=== ch1_Hallway2_monitor ===
+{ ch1_hallway2_monitor_hasInteracted == false:
+    ~ ch1_hallway2_monitor_hasInteracted = true
+    Bạn tìm kiếm thông tin trên máy tính.
+    ...
+    ...
+    Bạn vô tình kiếm được video thú vị dễ dàng gây xao nhãng.
+    ...
+    ...
+    Màn hình máy tính xuất hiện dòng chữ.
+    "YOU DELAYED".
+    Mình cần tập trung tìm kiếm thông tin. #speaker:Nam #sprite:nam_thinking
+    Không thể để mất tập trung được. #speaker:Nam #sprite:nam_thinking
+    -> DONE
+- else:
+    "YOU DELAYED"
+    -> DONE
+}
 -> DONE
+
+=== ch1_Hallway2_paper ===
+{ ch1_hallway2_paper_hasRead == false:
+    ~ ch1_hallway2_paper_hasRead = true
+
+    Trên tờ giấy xuất hiện 1 dòng chữ.
+    "GitGud".
+    ..... #speaker:Nam #sprite:nam_smile
+    Bạn cảm thấy tràn đầy sự quyết tâm.
+    Kiếm tiếp thôi. #speaker:Nam #sprite:nam_thinking
+    Không có thông tin nào hữu ích cả. #speaker:Nam #sprite:nam_talk
+    -> DONE
+- else: 
+    Phía cuối tờ giấy có xuất hiện 1 dòng chữ nhỏ dễ dàng bị bỏ qua.
+    "Coder May Cry".
+    -> DONE
+}
 
 // ----------- Trong map1 hallway3 ----------
-=== ch1_Hallway3 ===
-{ talked_hallway3 == false:
-    ~ talked_hallway3 = true
+=== ch1_Hallway3_librarian ===
+{ ch1_hallway3_librarian == false:
+    ~ ch1_hallway3_librarian = true
     Em kiếm được sách của em chưa? #speaker:Thủ thư #sprite:libarian_talk
     Có rồi chị ơi. #speaker:Nam #sprite:nam_talk
     Em thấy cuốn này cũng hay nên định mang về đọc thử. #speaker:Nam #sprite:nam_talk
@@ -269,17 +326,24 @@ Chắc phải có ý tưởng mình cần kiếm trong này. #speaker:Nam #sprit
     -> DONE
 }
 
-=== ch1_Hallway3_LockDoor ===
-Em có mượn sách thư viện không em ơi ?? #speaker:Thủ thư #sprite:libarian_talk
-Nếu có thì lại đây để chị đóng dấu đã nhé!  #speaker:Thủ thư #sprite:libarian_talk
--> DONE
+=== ch1_Hallway3_door ===
+{ch1_hallway3_door:
+- 0:
+    ~ ch1_hallway3_door = 1
+    Em có mượn sách thư viện không em ơi ?? #speaker:Thủ thư #sprite:libarian_talk
+    Nếu có thì lại đây để chị đóng dấu đã nhé!  #speaker:Thủ thư #sprite:libarian_talk
+    -> DONE
+- else: 
+    ~ ch1_hallway3_door = 2
+    Đợi chị đóng dấu sách đã em trai!! #speaker:Thủ thư #sprite:libarian_talk
+    -> DONE
+}
 
-// ----------- Nhặt được vật phẩm ----------
-=== ch1_GetItem ===
-Có một câu hỏi giải đố nằm trên kệ sách. #speaker:Nam #sprite:nam_talk
-Hmm.... #speaker:Nam #sprite:nam_thinking
-Để nghiên cứu sau. #speaker:Nam #sprite:nam_talk
--> END 
+
+// // ----------- Nhặt được vật phẩm ----------
+// === ch1_GetItem ===
+// ->ch2_Lobby
+// -> DONE
 
 // ----------- Tại đích ----------
 === ch1_At_Goal ===
@@ -306,7 +370,7 @@ Hồi chiều tao lên thư viện ấy. #speaker:Nam #sprite:nam_talk
 Kiếm được gì không? #speaker:Phong #sprite:phong_talk
 Ban đầu toàn sách linh tinh thôi. #speaker:Nam #sprite:nam_talk
 
-{chose_book2:
+{ch1_hallway2_bookshelf_book2:
     Cơ mà nãy tao kiếm được 1 câu cũng hay. #speaker:Nam #sprite:nam_talk
     "Nếu muốn sáng tạo, hãy làm thứ mà mình thật sự thích." #speaker:Nam #sprite:nam_talk
     Ban đầu nó không liên quan tới đồ án nên tao cũng không để tâm lắm. #speaker:Nam #sprite:nam_talk
@@ -350,42 +414,3 @@ Sau đó mới tới map với cốt truyện. #speaker:Nam #sprite:nam_talk
 ... #speaker:Phong #sprite:phong_smile
 // TODO: dan sang chapter 2
 -> DONE
-
-
-// =============================================
-// CHAPTER 2: NHỮNG TRỞ NGẠI BẤT NGỜ
-// =============================================
-=== ch2_Lobby1 ===
-Hmm....
-Yên tĩnh thật ấy chứ
-Công nhận
-Chả có gì ngoài...
-20 DÒNG BUG BÁO LỖI mày ơi
-Bên tao cũng đang bị lỗi Collison, chả hiểu kiểu gì mấy cái model không tương tác với nhau được
-Để tao check đoạn code thử, mày có viết logic đúng không đấy
-Thế mày có thiết kế đúng tỉ lệ không, khéo nguyên nhân từ bên mày mà ra ấy
-Còn bao nhiêu model chưa thiết kế nữa
-Khoảng 4 5 cái gì đấy
-Còn bên mày viết xong cái code quản lý mấy cái chức năng menu chưa 
-Còn một đóng lỗi, đợi t sửa xong đã
-Với lại đoạn quản lý phải liên kết với nhiều chức năng con, mấy chức năng đấy lại còn ảnh hưởng nhau
-Tao cần phải đập đi xây cấu trúc lại luôn
-Cứ để kiểu này càng về sau hệ thống càng phức tạp
-Vậy sửa lại cái code quản lý đi, còn tao ngồi làm lại cái model
-Ahgggg.....
-Ahgggg.....
-
-Ahggggg...Tại sao các em làm không xong hả
-Có chừng này chức năng các em có làm được không
-Nếu không làm được thì các em đăng ký đồ án tốt nghiệp để làm gì cho vừa nặng vừa mệt
-Mấy đứa có biết mấy nhóm khác làm xong nhiệm vụ tuần này rồi không, cô không biết giữa làm web với làm game khác nhau chỗ nào nhưng đã chia việc ra rồi thì làm cho xong đi chứ
-Khổ vì mấy đứa quá rồi đấy
-
-Rõ là sửa gần hoạn thiện rồi mà còn vẫn bị ăn chửi được, cay thế nhớ
-Đành chịu thôi, phần mình làm tuần này là hệ thống quản lý, có cái gì để show đâu
-Để tuần sau làm mấy cái chức năng nhỏ để có cái báo cáo thôi
-Cơ mà làm mấy cái dấy thì phải sửa lại luồng chạy game nữa, mệt thật chứ
-Haiz...
-Haiz...
--> DONE
-

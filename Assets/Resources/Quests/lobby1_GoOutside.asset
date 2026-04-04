@@ -19,18 +19,21 @@ MonoBehaviour:
   requiredQuests: []
   currentObjective: 0
   objectives:
-  - description: "ch\u1EA1m c\u1EEDa"
-  - description: "ch\u1EA1m c\u1EEDa"
+  - description: "\u0110i ra ngo\xE0i"
     details:
-      rid: 3769236948575322308
+      rid: 7374410265537282134
+  - description: "Nh\u1EADn cu\u1ED9c g\u1ECDi"
+    details:
       rid: 3769236948575322308
   requiresTurnIn: 0
   references:
     version: 2
     RefIds:
     - rid: 3769236948575322308
-    - rid: 3769236948575322308
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: door_ch1
-        targetID: door_ch1
+        targetID: phone
+    - rid: 7374410265537282134
+      type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
+      data:
+        targetID: door

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: hallway2_CheckBookshelf
   m_EditorClassIdentifier: Assembly-CSharp::Quest
   <id>k__BackingField: hallway2_CheckBookshelf
-  title: Check book at bookshelf
+  title: "T\xECm ki\u1EBFm \xFD t\u01B0\u1EDFng"
   description: 
   state: 0
   requiredQuests: []
   currentObjective: 0
   objectives:
-  - description: Check book at bookshelf
+  - description: "Ki\u1EBFm \xFD t\u01B0\u1EDFng trong ph\xF2ng"
     details:
       rid: 7374410245323358312
   requiresTurnIn: 0
@@ -29,4 +29,4 @@ MonoBehaviour:
     - rid: 7374410245323358312
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: check_bookshelf
+        targetID: bookshelf

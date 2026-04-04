@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e671fc6eb257c4bb5a948a649fb29bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
-  inkJSON: {fileID: 4900000, guid: 8bfcd5796ab2848f8a55879c56f5dd75, type: 3}
+  inkJSON: {fileID: 4900000, guid: 22239009a842da74f99d1537aab31f37, type: 3}
   _cutscenePrefab: {fileID: 4397026480037602028, guid: 7d4eee5b5fc7ccc4cb2360ad0f072c0b, type: 3}
   _dialogueBoxPrefab: {fileID: 7852465873732858609, guid: 7b2678dc6457bc44782de162840c0dc5, type: 3}

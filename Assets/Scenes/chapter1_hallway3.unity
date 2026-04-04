@@ -850,7 +850,7 @@ PrefabInstance:
       addedObject: {fileID: 1211198668}
     - targetCorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1211198667}
+      addedObject: {fileID: 1211198669}
   m_SourcePrefab: {fileID: 100100000, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
 --- !u!4 &1211198665 stripped
 Transform:
@@ -862,19 +862,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
   m_PrefabInstance: {fileID: 1211198664}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1211198667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211198666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeed0c5f20c3a904fa9e00f9c5467fa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QuestUnlocker
-  quest: {fileID: 11400000, guid: 8a6a635ebd46f29419ef7993575fd876, type: 2}
 --- !u!114 &1211198668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,7 +874,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1aa1a79a1e9f149b871e61eb40f728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollideLock
-  lockedDialogue: ch1_Hallway3_LockDoor
+  lockedDialogue: ch1_Hallway3_door
+--- !u!114 &1211198669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211198666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeed0c5f20c3a904fa9e00f9c5467fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestUnlocker
+  quest: {fileID: 11400000, guid: 8a6a635ebd46f29419ef7993575fd876, type: 2}
 --- !u!1001 &1364509649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1474,6 +1474,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1981471698}
     m_Modifications:
+    - target: {fileID: -3775756276677560075, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
+      propertyPath: outlineWidth
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2110170548490554506, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
       propertyPath: knotName
       value: ch1_Hallway3
@@ -1532,7 +1536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7753712059158241067, guid: 8847e3ae44095485f8c5aa09f08ff996, type: 3}
       propertyPath: knotName
-      value: ch1_Hallway3
+      value: ch1_Hallway3_librarian
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1567,8 +1571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9f8454239359c40ab656c416d5e050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractPoint
-  eventID: librarian
-  bubblePrefab: {fileID: 4310547284113562885, guid: 151e2399427ed11438994695eb911d63, type: 3}
+  targetID: librarian
+  bubblePrefab: {fileID: 4310547284113562885, guid: 1479c27cadc3812478e9f2f33d578e99, type: 3}
   bubbleSpawnPoint: {fileID: 2046680108}
 --- !u!1001 &1927545324
 PrefabInstance:

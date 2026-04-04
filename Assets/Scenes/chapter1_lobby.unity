@@ -1963,7 +1963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7793d26e65c34ef39193b6d06721239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  knotName: phone
+  knotName: ch1_Lobby1_phone
 --- !u!114 &1003368353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2021,7 +2021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9f8454239359c40ab656c416d5e050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractPoint
-  eventID: phone_ch1
+  targetID: phone
   bubblePrefab: {fileID: 4310547284113562885, guid: 1479c27cadc3812478e9f2f33d578e99, type: 3}
   bubbleSpawnPoint: {fileID: 95768632}
 --- !u!1001 &1040165202
@@ -2032,6 +2032,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 714233521}
     m_Modifications:
+    - target: {fileID: -4887294594715959387, guid: da132dc131cb4764480565ccc1c75258, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1425098069376134460, guid: da132dc131cb4764480565ccc1c75258, type: 3}
       propertyPath: m_Name
       value: chair
@@ -2079,13 +2083,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1425098069376134460, guid: da132dc131cb4764480565ccc1c75258, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1040165207}
+    - targetCorrespondingSourceObject: {fileID: 1425098069376134460, guid: da132dc131cb4764480565ccc1c75258, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1040165206}
   m_SourcePrefab: {fileID: 100100000, guid: da132dc131cb4764480565ccc1c75258, type: 3}
 --- !u!4 &1040165203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1769113695204554630, guid: da132dc131cb4764480565ccc1c75258, type: 3}
   m_PrefabInstance: {fileID: 1040165202}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1040165204 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1425098069376134460, guid: da132dc131cb4764480565ccc1c75258, type: 3}
+  m_PrefabInstance: {fileID: 1040165202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1040165206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040165204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9666300cb4c2dcd45b081ac21712ebbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+--- !u!114 &1040165207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040165204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1063475426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3586,7 +3631,7 @@ GameObject:
   - component: {fileID: 3924743341009243723}
   - component: {fileID: 3924743341009243722}
   - component: {fileID: 3924743341009243725}
-  - component: {fileID: 3924743341009243728}
+  - component: {fileID: 3924743341009243731}
   - component: {fileID: 3924743341009243730}
   - component: {fileID: 3924743341009243729}
   m_Layer: 0
@@ -3819,21 +3864,6 @@ MonoBehaviour:
   <BlockPlayer>k__BackingField: 1
   <BlockEnemy>k__BackingField: 1
   <BlockEnemySight>k__BackingField: 1
---- !u!114 &3924743341009243728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 482385086167489522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf9f8454239359c40ab656c416d5e050, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractPoint
-  eventID: door_ch1
-  bubblePrefab: {fileID: 4310547284113562885, guid: 1479c27cadc3812478e9f2f33d578e99, type: 3}
-  bubbleSpawnPoint: {fileID: 1275986520}
 --- !u!114 &3924743341009243729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3859,8 +3889,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65ba7f6051a2b54c8ac360d9f58396d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractLock
-  lockedDialogue: door
+  lockedDialogue: ch1_Lobby1_door
   hideFirstTime: 1
+  bubblePrefab: {fileID: 4310547284113562885, guid: 78f390fb863edb94689284adb5d9f5ee, type: 3}
+  bubbleSpawnPoint: {fileID: 1275986520}
+--- !u!114 &3924743341009243731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482385086167489522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9f8454239359c40ab656c416d5e050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractPoint
+  targetID: door
   bubblePrefab: {fileID: 4310547284113562885, guid: 78f390fb863edb94689284adb5d9f5ee, type: 3}
   bubbleSpawnPoint: {fileID: 1275986520}
 --- !u!4 &4062341762618797895
