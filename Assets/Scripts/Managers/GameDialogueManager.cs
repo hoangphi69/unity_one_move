@@ -23,6 +23,7 @@ public class GameDialogueManager : MonoBehaviour
   void Awake()
   {
     story = new Story(inkJSON.text);
+    if (GameDataManager.Instance.HasData()) LoadInkState(GameDataManager.Instance.data);
   }
 
   void OnEnable()
@@ -32,6 +33,10 @@ public class GameDialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged += SetTypingState;
     GameEventsManager.Instance.dialogueEvents.onAdvanceDialogue += ContinueDialogue;
     GameEventsManager.Instance.dialogueEvents.onLeaveDialogue += LeaveDialogue;
+
+    GameDataManager.Instance.OnLoad += LoadInkState;
+    GameDataManager.Instance.OnSave += SaveInkState;
+    GameDataManager.Instance.OnRefresh += RefreshInkState;
   }
 
   void OnDisable()
@@ -41,6 +46,10 @@ public class GameDialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged -= SetTypingState;
     GameEventsManager.Instance.dialogueEvents.onAdvanceDialogue -= ContinueDialogue;
     GameEventsManager.Instance.dialogueEvents.onLeaveDialogue -= LeaveDialogue;
+
+    GameDataManager.Instance.OnLoad -= LoadInkState;
+    GameDataManager.Instance.OnSave -= SaveInkState;
+    GameDataManager.Instance.OnRefresh -= RefreshInkState;
   }
 
   void SetTypingState(bool isTyping) => this.isTyping = isTyping;
@@ -52,7 +61,6 @@ public class GameDialogueManager : MonoBehaviour
     GameObject activeUI = GetOrCreateUI(mode);
     if (activeUI == null) return;
     activeUI.SetActive(true);
-    print("Active UI: " + activeUI.name);
 
     GameInputManager.Instance.SetState(InputState.UI);
     GameEventsManager.Instance.dialogueEvents.StartDialogue(mode);
@@ -127,5 +135,25 @@ public class GameDialogueManager : MonoBehaviour
   {
     story.ChooseChoiceIndex(choiceIndex);
     ContinueDialogue();
+  }
+
+  void SaveInkState(GameData data)
+  {
+    if (story == null) return;
+    data.dialogueState = story.state.ToJson();
+  }
+
+  void LoadInkState(GameData data)
+  {
+    if (data == null) return;
+    if (story == null) return;
+    if (string.IsNullOrEmpty(data.dialogueState)) return;
+    story.state.LoadJson(data.dialogueState);
+  }
+
+  void RefreshInkState()
+  {
+    if (inkJSON == null) return;
+    story = new(inkJSON.text);
   }
 }

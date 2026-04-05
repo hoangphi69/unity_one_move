@@ -10,30 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36046544de2518d4c9191504982bb9d9, type: 3}
-  m_Name: ch1_lobby
-  m_EditorClassIdentifier: Assembly-CSharp::Questt
-  <id>k__BackingField: ch1_lobby
-  title: Go touch grass
+  m_Name: hallway3_StoppedByLibrarian
+  m_EditorClassIdentifier: Assembly-CSharp::Quest
+  <id>k__BackingField: hallway3_StoppedByLibrarian
+  title: "N\xF3i chuy\u1EC7n v\u1EDBi th\u1EE7 th\u01B0"
   description: 
   state: 0
   requiredQuests: []
   currentObjective: 0
   objectives:
-  - description: "Ra kh\u1ECFi c\u0103n ph\xF2ng"
+  - description: "\u0110\xF3ng d\u1EA5u s\xE1ch t\u1EA1i th\u1EE7 th\u01B0"
     details:
-      rid: 3769236948575322307
-  - description: "L\u1EA5y \u0111i\u1EC7n tho\u1EA1i"
-    details:
-      rid: 3769236948575322310
+      rid: 7374410265537282146
   requiresTurnIn: 0
   references:
     version: 2
     RefIds:
-    - rid: 3769236948575322307
+    - rid: 7374410265537282146
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: ch1_door
-    - rid: 3769236948575322310
-      type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
-      data:
-        targetID: ch1_phone
+        targetID: librarian

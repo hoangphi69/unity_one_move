@@ -12,10 +12,13 @@ public class GameData
 
   public List<QuestData> quests = new();
 
+  public string dialogueState;
+
   public GameData()
   {
     progress = "chapter1_lobby";
     collectibles = new string[0];
+    dialogueState = "";
   }
 
   public float GetProgressPercentage()

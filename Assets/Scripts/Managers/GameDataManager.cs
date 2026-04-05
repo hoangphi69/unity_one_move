@@ -9,7 +9,7 @@ public class GameDataManager : MonoBehaviour
 
   public event Action<GameData> OnSave;
   public event Action<GameData> OnLoad;
-  public event Action OnDelete;
+  public event Action OnRefresh;
 
   // Configs
   [SerializeField] private string fileName = "data.game";
@@ -53,7 +53,7 @@ public class GameDataManager : MonoBehaviour
   public async Task SwitchProfile(string profileID)
   {
     selectedProfileID = profileID;
-    OnDelete?.Invoke();
+    OnRefresh?.Invoke();
     await LoadGame();
   }
 
@@ -63,7 +63,7 @@ public class GameDataManager : MonoBehaviour
 
     if (selectedProfileID == profileID)
     {
-      OnDelete?.Invoke();
+      OnRefresh?.Invoke();
       data = null;
     }
   }
@@ -77,7 +77,11 @@ public class GameDataManager : MonoBehaviour
   {
     data = await dataFileHandler.LoadFile(selectedProfileID);
 
-    if (data == null) print("No save file found.");
+    if (data == null)
+    {
+      print("No save file found.");
+      return;
+    }
 
     OnLoad?.Invoke(data);
   }
@@ -96,7 +100,7 @@ public class GameDataManager : MonoBehaviour
 
   public void NewGame()
   {
-    OnDelete?.Invoke();
+    OnRefresh?.Invoke();
     data = new();
     _ = SaveGame();
   }

@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36046544de2518d4c9191504982bb9d9, type: 3}
-  m_Name: ch1_go_outside
+  m_Name: lobby1_GoOutside
   m_EditorClassIdentifier: Assembly-CSharp::Quest
-  <id>k__BackingField: ch1_go_outside
+  <id>k__BackingField: lobby1_GoOutside
   title: "Ra kh\u1ECFi c\u0103n ph\xF2ng"
   description: 
   state: 0
   requiredQuests: []
   currentObjective: 0
   objectives:
-  - description: "ch\u1EA1m c\u1EEDa"
+  - description: "\u0110i ra ngo\xE0i"
+    details:
+      rid: 7374410265537282134
+  - description: "Nh\u1EADn cu\u1ED9c g\u1ECDi"
     details:
       rid: 3769236948575322308
   requiresTurnIn: 0
@@ -29,4 +32,8 @@ MonoBehaviour:
     - rid: 3769236948575322308
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: door_ch1
+        targetID: phone
+    - rid: 7374410265537282134
+      type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
+      data:
+        targetID: door

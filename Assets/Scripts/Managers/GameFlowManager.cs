@@ -139,7 +139,7 @@ public class GameFlowManager : MonoBehaviour
     string cutscene = "ch1_Cutscene1";
     string stageName = GameplayManager.Instance.newGameStage;
     await GameplayManager.Instance.LoadStageAsync(stageName, cutscene);
-    GameEventsManager.Instance.questEvents.StartQuest("ch1_lobby");
+    GameEventsManager.Instance.questEvents.StartQuest("lobby1_GoOutside");
 
     SetState(GameState.Gameplay);
   }

@@ -10,7 +10,7 @@ public class GameQuestManager : MonoBehaviour
   {
     if (Instance == null) Instance = this;
     LoadQuestResources();
-    LoadQuests(GameDataManager.Instance.data);
+    if (GameDataManager.Instance.HasData()) LoadQuests(GameDataManager.Instance.data);
   }
 
   void OnEnable()
@@ -21,7 +21,7 @@ public class GameQuestManager : MonoBehaviour
 
     GameDataManager.Instance.OnLoad += LoadQuests;
     GameDataManager.Instance.OnSave += SaveQuests;
-    GameDataManager.Instance.OnDelete += LoadQuestResources;
+    GameDataManager.Instance.OnRefresh += LoadQuestResources;
   }
 
   void OnDisable()
@@ -32,7 +32,7 @@ public class GameQuestManager : MonoBehaviour
 
     GameDataManager.Instance.OnLoad -= LoadQuests;
     GameDataManager.Instance.OnSave -= SaveQuests;
-    GameDataManager.Instance.OnDelete -= LoadQuestResources;
+    GameDataManager.Instance.OnRefresh -= LoadQuestResources;
   }
 
   void StartQuest(string id)
@@ -77,6 +77,7 @@ public class GameQuestManager : MonoBehaviour
 
   public void LoadQuests(GameData data)
   {
+    if (data == null) return;
     if (data.quests == null) return;
 
     foreach (var questData in data.quests)
