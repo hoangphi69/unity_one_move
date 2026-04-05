@@ -10,10 +10,15 @@ public class GameData
   public string progress;
   public string[] collectibles;
 
+  public List<QuestData> quests = new();
+
+  public string dialogueState;
+
   public GameData()
   {
     progress = "chapter1_lobby";
     collectibles = new string[0];
+    dialogueState = "";
   }
 
   public float GetProgressPercentage()
@@ -72,4 +77,14 @@ public class GameData
 
     return "Chapter " + chapterNumber;
   }
+}
+
+[Serializable]
+public class QuestData
+{
+  public string id;
+  public QuestState state;
+  public int currentObjective;
+
+  public List<string> objectiveDataJsons = new();
 }

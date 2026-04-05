@@ -23,6 +23,7 @@ public class HUDOverlayUIController : MonoBehaviour
   {
     if (Instance == null) Instance = this;
     Hide();
+    UpdateQuestObjectives();
   }
 
   void OnEnable()
@@ -60,6 +61,7 @@ public class HUDOverlayUIController : MonoBehaviour
 
   void UpdateQuestObjectives()
   {
+    print("Update quest log");
     foreach (Transform child in questsContainer.transform) Destroy(child.gameObject);
 
     List<Quest> activeQuests = GameQuestManager.Instance.GetActiveQuests();

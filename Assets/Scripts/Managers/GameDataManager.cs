@@ -7,6 +7,10 @@ public class GameDataManager : MonoBehaviour
 {
   public static GameDataManager Instance { get; private set; }
 
+  public event Action<GameData> OnSave;
+  public event Action<GameData> OnLoad;
+  public event Action OnRefresh;
+
   // Configs
   [SerializeField] private string fileName = "data.game";
 
@@ -28,7 +32,6 @@ public class GameDataManager : MonoBehaviour
   public async Task Initialize()
   {
     string profileID = await dataFileHandler.GetRecentlyUpdatedProfileID();
-    print($"active profileID: {profileID}");
     if (string.IsNullOrEmpty(profileID)) profileID = "1";
     await SwitchProfile(profileID);
   }
@@ -50,6 +53,7 @@ public class GameDataManager : MonoBehaviour
   public async Task SwitchProfile(string profileID)
   {
     selectedProfileID = profileID;
+    OnRefresh?.Invoke();
     await LoadGame();
   }
 
@@ -57,14 +61,17 @@ public class GameDataManager : MonoBehaviour
   {
     dataFileHandler.DeleteFile(profileID);
 
-    if (selectedProfileID == profileID) data = null;
+    if (selectedProfileID == profileID)
+    {
+      OnRefresh?.Invoke();
+      data = null;
+    }
   }
 
   public async Task<Dictionary<string, GameData>> GetAllProfiles()
   {
     return await dataFileHandler.LoadAllProfiles();
   }
-
 
   public async Task LoadGame()
   {
@@ -73,11 +80,10 @@ public class GameDataManager : MonoBehaviour
     if (data == null)
     {
       print("No save file found.");
+      return;
     }
-    else
-    {
-      print($"Loaded Save. Progress: {data.progress}");
-    }
+
+    OnLoad?.Invoke(data);
   }
 
   public async Task SaveGame() => await SaveGame(selectedProfileID);
@@ -85,13 +91,16 @@ public class GameDataManager : MonoBehaviour
   public async Task SaveGame(string profileID)
   {
     if (data == null) return;
+
+    OnSave?.Invoke(data);
+
     data.lastUpdated = DateTime.Now.ToBinary();
     await dataFileHandler.SaveFile(data, profileID);
-    print("Game Saved.");
   }
 
   public void NewGame()
   {
+    OnRefresh?.Invoke();
     data = new();
     _ = SaveGame();
   }
