@@ -8,7 +8,7 @@ VAR ch1_lobby_phone_AcceptedInvite = false
 VAR ch1_cutscene1_Discussed = false
 
 // INTERACTIONS
-VAR ch1_lobby_monitor_Interacted = false
+VAR ch1_lobby_door_Interacted = false
 VAR ch1_hallway2_bookshelf_PickedBooks= false
 VAR ch1_hallway2_monitor_hasInteracted = false
 VAR ch1_hallway2_paper_hasRead = false
@@ -65,8 +65,8 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
     -> DONE
 }
 
-{ ch1_lobby_monitor_Interacted == true:
-    ~ ch1_lobby_monitor_Interacted = false
+{ ch1_lobby_door_Interacted == true:
+    ~ ch1_lobby_door_Interacted = false
     _"Ting!!!!!"_
     "Bạn có một thông báo mới từ Discord."
     "Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
@@ -100,6 +100,8 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 -> DONE
 
 === ch1_Lobby1_door ===
+~ ch1_lobby_door_Interacted = true
+
 {ch1_lobby_phone_StartedQuest == false:
     ~ ch1_lobby_phone_StartedQuest = true
 
@@ -107,7 +109,6 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
     -> DONE
 }
 
-~ ch1_lobby_monitor_Interacted = true
 
 { ch1_lobby_door:
 - 0:
