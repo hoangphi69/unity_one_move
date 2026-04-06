@@ -3,12 +3,12 @@
 // =============================================
 
 // GLOBAL
-VAR ch1_lobby_phone_StartedQuest = false
+// VAR ch1_lobby_phone_StartedQuest = false
 VAR ch1_lobby_phone_AcceptedInvite = false
 VAR ch1_cutscene1_Discussed = false
 
 // INTERACTIONS
-VAR ch1_lobby_monitor_Interacted = false
+VAR ch1_lobby_door_Interacted = false
 VAR ch1_hallway2_bookshelf_PickedBooks= false
 VAR ch1_hallway2_monitor_hasInteracted = false
 VAR ch1_hallway2_paper_hasRead = false
@@ -24,7 +24,7 @@ VAR ch1_hallway2_bookshelf = false
 VAR ch1_hallway3_librarian = false
 
 // LOCK DOORs
-VAR ch1_lobby_door = 0
+// VAR ch1_lobby_door = 0
 VAR ch1_hallway2_door = 0
 VAR ch1_hallway3_door = 0
 
@@ -60,36 +60,39 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
     
 // ----------- Tại lobby tương tác với điện thoại ----------
 === ch1_Lobby1_phone ===
-{ ch1_lobby_phone_StartedQuest == false:
-    Ngày 30 tháng 2 - 16:32.
-    -> DONE
+{ch1_lobby_door_Interacted == false:
+    -> phone_date
+- else:
+    { phone_call == 0:
+        -> phone_call
+    - else:
+        -> phone_notification_none
+    }
 }
 
-{ ch1_lobby_monitor_Interacted == true:
-    ~ ch1_lobby_monitor_Interacted = false
-    _"Ting!!!!!"_
-    "Bạn có một thông báo mới từ Discord."
-    "Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
-    "Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
-    "Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
-    Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
-    Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
-    Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
-    Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
-    "Tao quen mày lâu tao mới dám rủ" #speaker:Phong
-    "Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
-    "Thế chú có tính làm ko?" #speaker:Phong 
-    + [Đồng ý]
-        -> decision
-    + [Lưỡng lự]
-        ... #speaker:Nam #sprite:nam_confused
-        Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
-        -> decision
-    
-- else:
-    Hiện tại bạn có 0 thông báo.
-    -> DONE
-}
+= phone_date
+Ngày 30 tháng 2 - 16:32.
+-> DONE
+
+= phone_call
+_"Ting!!!!!"_
+"Bạn có một thông báo mới từ Discord."
+"Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
+"Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
+"Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
+Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
+Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
+Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
+Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
+"Tao quen mày lâu tao mới dám rủ" #speaker:Phong
+"Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
+"Thế chú có tính làm ko?" #speaker:Phong 
++ [Đồng ý]
+    -> decision
++ [Lưỡng lự]
+    ... #speaker:Nam #sprite:nam_confused
+    Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
+    -> decision
 
 = decision
 "Kay" #speaker:Nam #sprite:nam_talk
@@ -99,24 +102,22 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 ~ ch1_lobby_phone_AcceptedInvite = true
 -> DONE
 
-=== ch1_Lobby1_door ===
-{ch1_lobby_phone_StartedQuest == false:
-    ~ ch1_lobby_phone_StartedQuest = true
+= phone_notification_none
+Hiện tại bạn có 0 thông báo.
+-> DONE
 
+
+=== ch1_Lobby1_door ===
+{ ch1_Lobby1_door:
+- 1:
+    ~ ch1_lobby_door_Interacted = true
     Có người đang gọi cho bạn.
     -> DONE
-}
-
-~ ch1_lobby_monitor_Interacted = true
-
-{ ch1_lobby_door:
-- 0:
-    ~ ch1_lobby_door = 1
+- 2:
     Điện thoại của bạn đang reo!!!
     Mình để nó ở đâu rồi nhỉ?! #speaker:Nam #sprite:nam_talk
     -> DONE  
-- 1:
-    ~ ch1_lobby_door = 2
+- 3:
     Giờ nay ai gọi đấy? #speaker:Nam #sprite:nam_talk
     Mà cái điện thoại mình giấu ở đâu rồi ?? #speaker:Nam #sprite:nam_talk
     -> DONE
