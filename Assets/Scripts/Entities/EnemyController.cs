@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
 
       if (hit.collider.TryGetComponent(out PlayerController player))
       {
-        _ = player.Die();
+        _ = player.Die(direction);
       }
     }
 

@@ -74,7 +74,7 @@ public class GameFlowManager : MonoBehaviour
     // Execute player audio animation 
     if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
     {
-      await GameplayManager.Instance.activePlayer.LowerMusic();
+      await GameplayManager.Instance.ActivePlayer.LowerMusic();
       GameAudioManagger.Instance.LowerMusic();
     }
 
@@ -92,7 +92,7 @@ public class GameFlowManager : MonoBehaviour
     // Execute player audio animation
     if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
     {
-      await GameplayManager.Instance.activePlayer.PlayMusic();
+      await GameplayManager.Instance.ActivePlayer.PlayMusic();
       GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.stageManager.radioTrack);
     }
     else
@@ -113,7 +113,7 @@ public class GameFlowManager : MonoBehaviour
 
     if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
     {
-      await GameplayManager.Instance.activePlayer.PlayMusic();
+      await GameplayManager.Instance.ActivePlayer.PlayMusic();
       GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.stageManager.radioTrack);
     }
     else

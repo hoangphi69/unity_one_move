@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     // Configs
     [SerializeField] float moveDuration = .2f;
+    [SerializeField] private bool showDebugRay = true;
 
     private bool isMoving = false;
     private Interactable nearbyInteractable;
@@ -47,7 +49,6 @@ public class PlayerController : MonoBehaviour
         Rotate(direction);
         await TryMove(direction);
         ScanSurroundings();
-        GameEventsManager.Instance.turnEvents.PlayerTurnEnd();
     }
 
     void Rotate(Vector3 direction)
@@ -59,13 +60,15 @@ public class PlayerController : MonoBehaviour
     {
         if (isMoving) return;
 
-        bool canMove = CanMove(direction);
-        if (!canMove) return;
+        animator.CrossFade("move", .1f, 0, 0f);
+
+        if (!CanMove(direction)) return;
 
         // Move
         Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.Footstep, transform.position);
         await SmoothMoveAsync(location, destroyCancellationToken);
+        GameEventsManager.Instance.turnEvents.PlayerTurnEnd();
     }
 
     async Task SmoothMoveAsync(Vector3 location, CancellationToken token)
@@ -89,6 +92,16 @@ public class PlayerController : MonoBehaviour
     bool CanMove(Vector3 direction)
     {
         Vector3 position = transform.position;
+
+        float rayLength = GameplayManager.Instance.cellSize;
+
+        // --- Visual Debugging ---
+        if (showDebugRay)
+        {
+            // Check if there's a hit for color coding
+            bool willHit = Physics.Raycast(position, direction, rayLength, GameplayManager.Instance.entityMask);
+            Debug.DrawRay(position, direction * rayLength, willHit ? Color.red : Color.green);
+        }
 
         if (!GameplayManager.Instance.stageManager.IsGround(position + direction)) return false;
 
@@ -148,10 +161,21 @@ public class PlayerController : MonoBehaviour
         nearbyInteractable.OnInteract();
     }
 
-    public async Task Die()
+    public async Task Die(Vector3 direction)
     {
         GameInputManager.Instance.SetState(InputState.None);
-        await Task.Delay(300);
+
+        // Shake camera
+        var bumped = GetComponent<CinemachineImpulseSource>();
+        float bumpedDirection = direction.z != 0 ? direction.z : -direction.x;
+        bumped.DefaultVelocity = new Vector3(bumpedDirection, 1f, 0f);
+        bumped.GenerateImpulse(.1f);
+
+        // Collapse animation
+        Rotate(-direction);
+        animator.CrossFade("fall_back", .1f, 0);
+        await Task.Delay(1000);
+
         GameEventsManager.Instance.turnEvents.RestartStage();
     }
 
@@ -159,9 +183,8 @@ public class PlayerController : MonoBehaviour
     {
         GameInputManager.Instance.SetState(InputState.None);
 
-        animator.CrossFade("Wear_Headphone", .5f);
-        await Task.Delay(500);
-
+        animator.CrossFade("wear_headphone", .1f, 1);
+        await Task.Delay(300);
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }
 
@@ -169,19 +192,17 @@ public class PlayerController : MonoBehaviour
     {
         GameInputManager.Instance.SetState(InputState.None);
 
-        animator.CrossFade("Remove_Headphone", .3f);
-        await Task.Delay(500);
-
+        animator.CrossFade("remove_headphone", .1f, 1);
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
+        await Task.Delay(300);
     }
 
     public async Task StopMusic()
     {
         GameInputManager.Instance.SetState(InputState.None);
 
-        animator.CrossFade("Remove_Headphone", .3f);
-        await Task.Delay(500);
-
+        animator.CrossFade("remove_headphone", .1f, 1);
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
+        await Task.Delay(300);
     }
 }

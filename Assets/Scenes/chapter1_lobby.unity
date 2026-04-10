@@ -1788,6 +1788,67 @@ MonoBehaviour:
   <BlockPlayer>k__BackingField: 1
   <BlockEnemy>k__BackingField: 1
   <BlockEnemySight>k__BackingField: 1
+--- !u!1001 &886343778
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8681629
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.31598538
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3596048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.13088542
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009158833761086120, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782713966799419083, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_Name
+      value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782713966799419083, guid: c090379bde6815b42b463eab2828cd54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c090379bde6815b42b463eab2828cd54, type: 3}
 --- !u!1001 &943086021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3094,6 +3155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cecf46dcefc414e4193019af7557345e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
+  cameraA: {fileID: 0}
+  cameraB: {fileID: 0}
   stageName: "Ph\xF2ng c\u1EE7a Nam"
   defaultPlayerPosition: {x: 2.5, y: 0, z: 3.5}
   isPuzzle: 0
@@ -3781,4 +3844,5 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 886343778}
   - {fileID: 1548825874}
