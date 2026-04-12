@@ -57,13 +57,16 @@ public class HUDOverlayUIController : MonoBehaviour
 
   public void SetCameraMode(CameraMode mode) => cameraMode.text = $"Camera {mode}";
 
-  public void SetStepLeft(int step) => stepLeft.text = $"{step:D3}";
+  public void SetStepLeft(int step)
+  {
+    if (step <= 0) stepLeft.text = "<color=#D22626>XXX</color>";
+    else stepLeft.text = $"{step:D3}";
+  }
 
   void OnQuestUpdated(Quest quest) => UpdateQuestObjectives();
 
   void UpdateQuestObjectives()
   {
-    print("Update quest log");
     foreach (Transform child in questsContainer.transform) Destroy(child.gameObject);
 
     List<Quest> activeQuests = GameQuestManager.Instance.GetActiveQuests();

@@ -1,9 +1,10 @@
 using System;
+using System.Threading.Tasks;
 
 public class TurnEvents
 {
-  public event Action onPlayerTurnEnd;
-  public void PlayerTurnEnd() => onPlayerTurnEnd?.Invoke();
+  public event Action<Task> onPlayerTurnEnd;
+  public void PlayerTurnEnd(Task action) => onPlayerTurnEnd?.Invoke(action);
 
   public event Action onEnemyTurnEnd;
   public void EnemyTurnEnd() => onEnemyTurnEnd?.Invoke();

@@ -18,11 +18,11 @@ public class InteractLock : MonoBehaviour, ILocker
   void Awake()
   {
     interactable = GetComponent<Interactable>();
-    interactable.isLocked = true;
   }
 
   void OnEnable()
   {
+    interactable.isLocked = true;
     interactable.OnLockAction += OnInteract;
   }
 

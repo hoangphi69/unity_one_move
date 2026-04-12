@@ -1,7 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class EnemyController : MonoBehaviour
 {
@@ -12,14 +11,14 @@ public class EnemyController : MonoBehaviour
   private bool isMoving = false;
   private Vector3[] sightDirections = { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
 
-  void OnEnable()
+  void Start()
   {
-    GameplayManager.Instance.RegisterEnemy(this);
+    GameplayManager.Instance.Stage.RegisterEnemy(this);
   }
 
-  void OnDisable()
+  void OnDestroy()
   {
-    GameplayManager.Instance.UnregisterEnemy(this);
+    GameplayManager.Instance.Stage.UnregisterEnemy(this);
   }
 
   public async Task TakeTurnAsync()
@@ -97,7 +96,7 @@ public class EnemyController : MonoBehaviour
   {
     Vector3 position = transform.position;
 
-    if (!GameplayManager.Instance.stageManager.IsGround(position + direction)) return false;
+    if (!GameplayManager.Instance.Stage.IsGround(position + direction)) return false;
 
     if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Unity.Cinemachine;
@@ -8,7 +9,6 @@ public class PlayerController : MonoBehaviour
 {
     // Configs
     [SerializeField] float moveDuration = .2f;
-    [SerializeField] private bool showDebugRay = true;
 
     private bool isMoving = false;
     private Interactable nearbyInteractable;
@@ -33,18 +33,23 @@ public class PlayerController : MonoBehaviour
 
     async void TakeTurn(InputAction.CallbackContext ctx)
     {
+        // Compute input -> direction
         Vector2 input = ctx.ReadValue<Vector2>();
-
-        // Busy check
-        if (GameplayManager.Instance.turn != Turn.Player) return;
         if (input.sqrMagnitude < 0.1f) return;
-
-        // Pre-process input (exclude diagonal movement)
+        // Exclude diagonal movement
         Vector3 direction;
         if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
             direction = new Vector3(Mathf.Sign(input.x), 0, 0);
         else
             direction = new Vector3(0, 0, Mathf.Sign(input.y));
+
+        // Busy check
+        if (GameplayManager.Instance.Stage.turn != Turn.Player) return;
+        if (GameplayManager.Instance.Stage.isPuzzle && GameplayManager.Instance.Stage.stepLeft == 0)
+        {
+            await Die(direction, false);
+            return;
+        }
 
         Rotate(direction);
         await TryMove(direction);
@@ -64,11 +69,14 @@ public class PlayerController : MonoBehaviour
 
         if (!CanMove(direction)) return;
 
-        // Move
-        Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
         GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.Footstep, transform.position);
-        await SmoothMoveAsync(location, destroyCancellationToken);
-        GameEventsManager.Instance.turnEvents.PlayerTurnEnd();
+
+        Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
+        Task move = SmoothMoveAsync(location, destroyCancellationToken);
+
+        GameEventsManager.Instance.turnEvents.PlayerTurnEnd(move);
+
+        await move;
     }
 
     async Task SmoothMoveAsync(Vector3 location, CancellationToken token)
@@ -93,17 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 position = transform.position;
 
-        float rayLength = GameplayManager.Instance.cellSize;
-
-        // --- Visual Debugging ---
-        if (showDebugRay)
-        {
-            // Check if there's a hit for color coding
-            bool willHit = Physics.Raycast(position, direction, rayLength, GameplayManager.Instance.entityMask);
-            Debug.DrawRay(position, direction * rayLength, willHit ? Color.red : Color.green);
-        }
-
-        if (!GameplayManager.Instance.stageManager.IsGround(position + direction)) return false;
+        if (!GameplayManager.Instance.Stage.IsGround(position + direction)) return false;
 
         if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
         {
@@ -161,15 +159,18 @@ public class PlayerController : MonoBehaviour
         nearbyInteractable.OnInteract();
     }
 
-    public async Task Die(Vector3 direction)
+    public async Task Die(Vector3 direction, bool shake = true)
     {
         GameInputManager.Instance.SetState(InputState.None);
 
         // Shake camera
-        var bumped = GetComponent<CinemachineImpulseSource>();
-        float bumpedDirection = direction.z != 0 ? direction.z : -direction.x;
-        bumped.DefaultVelocity = new Vector3(bumpedDirection, 1f, 0f);
-        bumped.GenerateImpulse(.1f);
+        if (shake)
+        {
+            var bumped = GetComponent<CinemachineImpulseSource>();
+            float bumpedDirection = direction.z != 0 ? direction.z : -direction.x;
+            bumped.DefaultVelocity = new Vector3(bumpedDirection, 1f, 0f);
+            bumped.GenerateImpulse(.1f);
+        }
 
         // Collapse animation
         Rotate(-direction);

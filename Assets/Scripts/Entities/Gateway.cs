@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collide))]
 public class Gateway : MonoBehaviour
 {
+
   [SerializeField] private SceneField _nextStage;
+  [SerializeField] private string cutscene;
   [SerializeField] private bool _saveProgress = false;
 
   private Animator animator;
@@ -44,7 +46,9 @@ public class Gateway : MonoBehaviour
 
   async Task Transition()
   {
-    await GameplayManager.Instance.LoadStageAsync(_nextStage);
+    if (string.IsNullOrEmpty(cutscene)) await GameplayManager.Instance.LoadStageAsync(_nextStage);
+    else await GameplayManager.Instance.LoadStageAsync(_nextStage, cutscene);
+
     if (_saveProgress) await GameDataManager.Instance.SaveProgress(_nextStage);
   }
 }

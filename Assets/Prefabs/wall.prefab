@@ -58,38 +58,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 651ad4bd3835a324ba9705bf8a3bbc01, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1378553302072196838}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 651ad4bd3835a324ba9705bf8a3bbc01, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3034869898206816058}
+      addedObject: {fileID: 2846716570891769778}
   m_SourcePrefab: {fileID: 100100000, guid: 651ad4bd3835a324ba9705bf8a3bbc01, type: 3}
 --- !u!1 &6741003783200950328 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 651ad4bd3835a324ba9705bf8a3bbc01, type: 3}
   m_PrefabInstance: {fileID: 5858535401178592617}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1378553302072196838
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6741003783200950328}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 0.5}
-  m_Center: {x: 0.00566113, y: 1.5, z: 0}
---- !u!114 &3034869898206816058
+--- !u!114 &2846716570891769778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,11 +74,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6741003783200950328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5c7d57a9ae0914f96bf15ea58ece86, type: 3}
+  m_Script: {fileID: 11500000, guid: a7265f02382f5df4cb28a8665571190c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  blockPlayer: 1
-  isPushable: 0
-  blockEnemy: 1
-  blockEnemySight: 1
-  moveDuration: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  <BlockPlayer>k__BackingField: 1
+  <BlockEnemy>k__BackingField: 1
+  <BlockEnemySight>k__BackingField: 1

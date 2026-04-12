@@ -11,11 +11,11 @@ public class CollideLock : MonoBehaviour, ILocker
   void Awake()
   {
     collide = GetComponent<Collide>();
-    collide.isLocked = true;
   }
 
   void OnEnable()
   {
+    collide.isLocked = true;
     collide.OnLockAction += OnCollided;
   }
 

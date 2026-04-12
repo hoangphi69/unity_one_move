@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &327633954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327633955}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327633955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327633954}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5, y: -0, z: 16.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &624263121
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +162,7 @@ GameObject:
   - component: {fileID: 624263122}
   - component: {fileID: 624263124}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,12 +208,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cecf46dcefc414e4193019af7557345e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnvironmentManager
+  stageName: "Th\u01B0 vi\u1EC7n"
+  isPuzzle: 1
+  maxStep: 17
+  tileMap: {fileID: 1981471700}
+  <SpawnPoint>k__BackingField: {fileID: 327633955}
   cameraA: {fileID: 981653685}
   cameraB: {fileID: 1505243748}
-  stageName: "Th\u01B0 vi\u1EC7n"
-  defaultPlayerPosition: {x: 1.5, y: 0, z: 16.5}
-  isPuzzle: 1
-  maxStep: 24
   ambienceTrack:
     Guid:
       Data1: -2037203290
@@ -1089,7 +1121,7 @@ GameObject:
   - component: {fileID: 1981471700}
   - component: {fileID: 1981471699}
   m_Layer: 0
-  m_Name: Environment
+  m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1632,3 +1664,4 @@ SceneRoots:
   - {fileID: 981653684}
   - {fileID: 1505243747}
   - {fileID: 624263123}
+  - {fileID: 327633955}

@@ -21,21 +21,16 @@ public class InteractPoint : MonoBehaviour
   private void OnEnable()
   {
     interactable.OnDefaultAction += NotifyInteraction;
-
-    // Future: Subscribe to Quest Manager state changes here
-    // GameEventsManager.Instance.questEvents.OnQuestStateChange += UpdateBubbleState;
   }
 
   private void OnDisable()
   {
     interactable.OnDefaultAction -= NotifyInteraction;
-    // GameEventsManager.Instance.questEvents.OnQuestStateChange -= UpdateBubbleState;
   }
 
   private void Start()
   {
     // For testing: immediately show the bubble. 
-    // Later, this will be driven by the current Quest State.
     ShowBubble(true);
   }
 
@@ -48,7 +43,6 @@ public class InteractPoint : MonoBehaviour
     ShowBubble(false);
   }
 
-  // Modular function to handle the UI indicator
   public void ShowBubble(bool show)
   {
     if (show && currentBubbleInstance == null && bubblePrefab != null)
