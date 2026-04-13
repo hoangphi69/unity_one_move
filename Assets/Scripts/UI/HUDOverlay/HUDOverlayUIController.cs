@@ -33,6 +33,7 @@ public class HUDOverlayUIController : MonoBehaviour
     GameEventsManager.Instance.flowEvents.onGameNew += Show;
     GameEventsManager.Instance.turnEvents.onStageRestart += Show;
     GameEventsManager.Instance.questEvents.OnQuestStateChanged += OnQuestUpdated;
+    GameplayManager.Instance.OnCameraSwitch += SetCameraMode;
   }
 
   void OnDisable()
@@ -42,6 +43,7 @@ public class HUDOverlayUIController : MonoBehaviour
     GameEventsManager.Instance.flowEvents.onGameNew -= Show;
     GameEventsManager.Instance.turnEvents.onStageRestart -= Show;
     GameEventsManager.Instance.questEvents.OnQuestStateChanged -= OnQuestUpdated;
+    GameplayManager.Instance.OnCameraSwitch += SetCameraMode;
   }
 
   public void Show() => uiContainer.SetActive(true);
@@ -53,15 +55,18 @@ public class HUDOverlayUIController : MonoBehaviour
 
   public void SetStageName(string name) => stageName.text = name;
 
-  public void SetCameraMode(string mode) => cameraMode.text = mode;
+  public void SetCameraMode(CameraMode mode) => cameraMode.text = $"Camera {mode}";
 
-  public void SetStepLeft(int step) => stepLeft.text = $"{step:D3}";
+  public void SetStepLeft(int step)
+  {
+    if (step <= 0) stepLeft.text = "<color=#D22626>XXX</color>";
+    else stepLeft.text = $"{step:D3}";
+  }
 
   void OnQuestUpdated(Quest quest) => UpdateQuestObjectives();
 
   void UpdateQuestObjectives()
   {
-    print("Update quest log");
     foreach (Transform child in questsContainer.transform) Destroy(child.gameObject);
 
     List<Quest> activeQuests = GameQuestManager.Instance.GetActiveQuests();

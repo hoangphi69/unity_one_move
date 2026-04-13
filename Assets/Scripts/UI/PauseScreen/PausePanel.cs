@@ -20,7 +20,7 @@ public class PausePanel : NavigationPanel
     saveButton.onClick.AddListener(OnSaveClicked);
     returnTitleButton.onClick.AddListener(OnReturnTitleClicked);
 
-    restartButton.gameObject.SetActive(GameplayManager.Instance.isPuzzleStage());
+    restartButton.gameObject.SetActive(GameplayManager.Instance.Stage.isPuzzle);
   }
 
   void OnDisable()

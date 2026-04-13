@@ -1,37 +1,127 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using FMODUnity;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public enum CameraMode { A, B }
+
+public enum Turn { Player, Enemy };
+
 public class StageManager : MonoBehaviour
 {
-  // Configs
+  [Header("Generals")]
   public string stageName;
-  public Vector3 defaultPlayerPosition;
   public bool isPuzzle = false;
   public int maxStep;
+
+  [Header("Map")]
+  [SerializeField] private Tilemap tileMap;
+  [field: SerializeField] public Transform SpawnPoint { get; private set; }
+
+  [Header("Camera")]
+  [SerializeField] private CinemachineCamera cameraA;
+  [SerializeField] private CinemachineCamera cameraB;
+
+  [Header("Audio")]
   public EventReference ambienceTrack;
   public EventReference radioTrack;
 
-  public Tilemap environment { get; private set; }
+  public Turn turn { get; private set; }
+  private List<EnemyController> activeEnemies = new();
+  public int stepLeft { get; private set; }
+
 
   void Awake()
   {
-    environment = transform.Find("Environment").GetComponent<Tilemap>();
+    stepLeft = maxStep;
+    turn = Turn.Player;
+    GameplayManager.Instance.RegisterStage(this);
   }
 
   void OnEnable()
   {
-    GameplayManager.Instance.RegisterStage(this);
+    SwitchCamera(GameplayManager.Instance.cameraMode);
+    GameplayManager.Instance.OnCameraSwitch += SwitchCamera;
+
     HUDOverlayUIController.Instance.SetStageName(stageName);
     HUDOverlayUIController.Instance.ToggleBottom(isPuzzle);
     HUDOverlayUIController.Instance.SetStepLeft(maxStep);
+
     if (!ambienceTrack.IsNull) GameAudioManagger.Instance.PlayAmbience(ambienceTrack);
+
+    GameEventsManager.Instance.turnEvents.onPlayerTurnEnd += PlayerTurnEnd;
+    GameEventsManager.Instance.turnEvents.onEnemyTurnEnd += EnemyTurnEnd;
+  }
+
+  void OnDisable()
+  {
+    GameplayManager.Instance.OnCameraSwitch -= SwitchCamera;
+
+    GameEventsManager.Instance.turnEvents.onPlayerTurnEnd -= PlayerTurnEnd;
+    GameEventsManager.Instance.turnEvents.onEnemyTurnEnd -= EnemyTurnEnd;
+  }
+
+  public void RegisterEnemy(EnemyController enemy)
+  {
+    if (activeEnemies.Contains(enemy)) return;
+    activeEnemies.Add(enemy);
+  }
+
+  public void UnregisterEnemy(EnemyController enemy)
+  {
+    if (!activeEnemies.Contains(enemy)) return;
+    activeEnemies.Remove(enemy);
   }
 
   public bool IsGround(Vector3 position)
   {
-    if (environment == null) return true;
-    Vector3Int cell = environment.WorldToCell(position);
-    return environment.HasTile(cell);
+    if (tileMap == null) return true;
+    Vector3Int cell = tileMap.WorldToCell(position);
+    return tileMap.HasTile(cell);
+  }
+
+  void EnemyTurnEnd()
+  {
+    turn = Turn.Player;
+  }
+
+  async void PlayerTurnEnd(Task playerAction)
+  {
+    turn = Turn.Enemy;
+
+    stepLeft--;
+    HUDOverlayUIController.Instance.SetStepLeft(stepLeft);
+
+    await playerAction;
+
+    List<Task> enemyTasks = new();
+
+    foreach (EnemyController enemy in activeEnemies)
+    {
+      if (enemy == null) continue;
+      enemyTasks.Add(enemy.TakeTurnAsync());
+    }
+
+    GameEventsManager.Instance.turnEvents.EnemyTurnEnd();
+    await Task.WhenAll(enemyTasks);
+  }
+
+  void SwitchCamera(CameraMode mode)
+  {
+    if (cameraA == null || cameraB == null) return;
+    switch (mode)
+    {
+      case CameraMode.A:
+        cameraA.Priority = 2;
+        cameraB.Priority = 1;
+        break;
+      case CameraMode.B:
+        cameraA.Priority = 1;
+        cameraB.Priority = 2;
+        break;
+    }
   }
 }

@@ -33,7 +33,7 @@ public class Pushable : MonoBehaviour
 
         Vector3 location = transform.position + direction;
 
-        if (!GameplayManager.Instance.stageManager.IsGround(location))
+        if (!GameplayManager.Instance.Stage.IsGround(location))
         {
             await BlockPlayer();
             return;

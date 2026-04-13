@@ -72,9 +72,9 @@ public class GameFlowManager : MonoBehaviour
     SetState(GameState.Busy);
 
     // Execute player audio animation 
-    if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
+    if (!GameplayManager.Instance.Stage.radioTrack.IsNull)
     {
-      await GameplayManager.Instance.activePlayer.LowerMusic();
+      await GameplayManager.Instance.ActivePlayer.LowerMusic();
       GameAudioManagger.Instance.LowerMusic();
     }
 
@@ -90,10 +90,10 @@ public class GameFlowManager : MonoBehaviour
     SetState(GameState.Busy);
 
     // Execute player audio animation
-    if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
+    if (!GameplayManager.Instance.Stage.radioTrack.IsNull)
     {
-      await GameplayManager.Instance.activePlayer.PlayMusic();
-      GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.stageManager.radioTrack);
+      await GameplayManager.Instance.ActivePlayer.PlayMusic();
+      GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.Stage.radioTrack);
     }
     else
     {
@@ -111,10 +111,10 @@ public class GameFlowManager : MonoBehaviour
 
     await GameplayManager.Instance.RestartStageAsync();
 
-    if (!GameplayManager.Instance.stageManager.radioTrack.IsNull)
+    if (!GameplayManager.Instance.Stage.radioTrack.IsNull)
     {
-      await GameplayManager.Instance.activePlayer.PlayMusic();
-      GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.stageManager.radioTrack);
+      await GameplayManager.Instance.ActivePlayer.PlayMusic();
+      GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.Stage.radioTrack);
     }
     else
     {

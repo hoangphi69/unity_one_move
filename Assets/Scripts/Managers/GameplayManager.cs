@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
-public enum Turn { Player, Enemy };
 
 public class GameplayManager : MonoBehaviour
 {
@@ -17,46 +14,44 @@ public class GameplayManager : MonoBehaviour
   public SceneField newGameStage;
   public float cellSize { get; private set; } = 1f;
 
-  // Turn Manager
-  public Turn turn { get; private set; }
-  private List<EnemyController> activeEnemies = new();
-
   // Stage
-  public StageManager stageManager { get; private set; } = null;
+  public StageManager Stage { get; private set; } = null;
   private string _currentStage = null;
   private bool _isCutscene = false;
 
   // Player
   [SerializeField] private GameObject playerPrefab;
-  [SerializeField] private CinemachineCamera cameraPrefab;
+  public PlayerController ActivePlayer { get; private set; }
 
-  public PlayerController activePlayer { get; private set; }
-  public CinemachineCamera playerCam { get; private set; }
+  [SerializeField] private CinemachineCamera playerCameraPrefab;
+  public CinemachineCamera PlayerCam { get; private set; }
+  public CameraMode cameraMode = CameraMode.A;
+  public Action<CameraMode> OnCameraSwitch;
 
-  private void Awake()
+  void Awake()
   {
-    Instance = this;
-    turn = Turn.Player;
+    if (Instance == null) Instance = this;
   }
 
   void OnEnable()
   {
-    GameEventsManager.Instance.turnEvents.onPlayerTurnEnd += EnemyTurnStart;
-    GameEventsManager.Instance.turnEvents.onEnemyTurnEnd += PlayerTurnStart;
     GameInputManager.Instance.Actions.Player.Escape.performed += PauseGame;
+    GameInputManager.Instance.Actions.Player.Restart.performed += RestartGame;
+    GameInputManager.Instance.Actions.Player.SwitchCamera.performed += SwitchCameraMode;
   }
 
   void OnDisable()
   {
-    GameEventsManager.Instance.turnEvents.onPlayerTurnEnd -= EnemyTurnStart;
-    GameEventsManager.Instance.turnEvents.onEnemyTurnEnd -= PlayerTurnStart;
     GameInputManager.Instance.Actions.Player.Escape.performed -= PauseGame;
+    GameInputManager.Instance.Actions.Player.Restart.performed -= RestartGame;
+    GameInputManager.Instance.Actions.Player.SwitchCamera.performed -= SwitchCameraMode;
   }
 
-  void PauseGame(InputAction.CallbackContext context)
-  {
-    GameEventsManager.Instance.flowEvents.PauseGame();
-  }
+  void PauseGame(InputAction.CallbackContext context) => GameEventsManager.Instance.flowEvents.PauseGame();
+
+  void RestartGame(InputAction.CallbackContext context) => GameEventsManager.Instance.turnEvents.RestartStage();
+
+  void SwitchCameraMode(InputAction.CallbackContext context) => SwitchCamera();
 
   public async Task LoadStageAsync(string scene)
   {
@@ -98,10 +93,10 @@ public class GameplayManager : MonoBehaviour
       SpawnPlayer();
 
       // Audio
-      if (!stageManager.radioTrack.IsNull)
+      if (!Stage.radioTrack.IsNull)
       {
-        await activePlayer.PlayMusic();
-        GameAudioManagger.Instance.PlayMusic(stageManager.radioTrack);
+        await ActivePlayer.PlayMusic();
+        GameAudioManagger.Instance.PlayMusic(Stage.radioTrack);
       }
       else
       {
@@ -120,14 +115,14 @@ public class GameplayManager : MonoBehaviour
 
   public async Task RestartStageAsync()
   {
-    if (!isPuzzleStage()) return;
+    if (!Stage.isPuzzle) return;
 
-    if (playerCam != null) playerCam.gameObject.SetActive(false);
+    if (PlayerCam != null) PlayerCam.gameObject.SetActive(false);
 
     await LoadStageAsync(_currentStage);
     SpawnPlayer();
 
-    if (playerCam != null) playerCam.gameObject.SetActive(true);
+    if (PlayerCam != null) PlayerCam.gameObject.SetActive(true);
   }
 
   public bool isCutscene()
@@ -135,87 +130,54 @@ public class GameplayManager : MonoBehaviour
     return _isCutscene;
   }
 
-  public bool isPuzzleStage()
-  {
-    return stageManager.isPuzzle;
-  }
+  public void RegisterStage(StageManager stage) => Stage = stage;
 
-  public void RegisterStage(StageManager stage) => stageManager = stage;
-
-  public void RegisterEnemy(EnemyController enemy)
+  void InitializePlayerCam()
   {
-    if (activeEnemies.Contains(enemy)) return;
-    activeEnemies.Add(enemy);
-  }
-
-  public void UnregisterEnemy(EnemyController enemy)
-  {
-    if (!activeEnemies.Contains(enemy)) return;
-    activeEnemies.Remove(enemy);
-  }
-
-  void InitializeCamera()
-  {
-    if (cameraPrefab != null && playerCam == null)
+    if (playerCameraPrefab != null && PlayerCam == null)
     {
-      playerCam = Instantiate(cameraPrefab, transform);
+      PlayerCam = Instantiate(playerCameraPrefab, transform);
     }
   }
 
-  public void SetCameraTarget(Transform target)
+  public void SetPlayerCameraTarget(Transform target)
   {
-    if (playerCam == null) return;
-    playerCam.Follow = target;
-    playerCam.LookAt = target;
+    if (PlayerCam == null) return;
+    PlayerCam.Follow = target;
+    PlayerCam.LookAt = target;
+  }
+
+  void SwitchCamera()
+  {
+    cameraMode = cameraMode switch
+    {
+      CameraMode.A => CameraMode.B,
+      CameraMode.B => CameraMode.A,
+      _ => CameraMode.A
+    };
+
+    OnCameraSwitch?.Invoke(cameraMode);
   }
 
   public void DespawnPlayer()
   {
-    if (activePlayer == null) return;
-    SetCameraTarget(null);
-    Destroy(activePlayer.gameObject);
-    activePlayer = null;
+    if (ActivePlayer == null) return;
+    SetPlayerCameraTarget(null);
+    Destroy(ActivePlayer.gameObject);
+    ActivePlayer = null;
   }
 
   public void SpawnPlayer()
   {
-    if (playerPrefab == null)
-    {
-      Debug.LogError("Player prefab missing");
-      return;
-    }
+    if (playerPrefab == null) return;
 
-    if (activePlayer != null) DespawnPlayer();
+    if (ActivePlayer != null) DespawnPlayer();
 
-    InitializeCamera();
+    InitializePlayerCam();
 
-    Vector3 position = stageManager.defaultPlayerPosition;
-    Quaternion rotation = Quaternion.identity;
+    GameObject player = Instantiate(playerPrefab, Stage.SpawnPoint.position, Stage.SpawnPoint.rotation);
+    ActivePlayer = player.GetComponent<PlayerController>();
 
-    GameObject playerObj = Instantiate(playerPrefab, position, rotation);
-    activePlayer = playerObj.GetComponent<PlayerController>();
-
-    SetCameraTarget(playerObj.transform);
-  }
-
-  void PlayerTurnStart()
-  {
-    turn = Turn.Player;
-  }
-
-  async void EnemyTurnStart()
-  {
-    turn = Turn.Enemy;
-
-    List<Task> enemyTasks = new();
-
-    foreach (EnemyController enemy in activeEnemies)
-    {
-      if (enemy == null) continue;
-      enemyTasks.Add(enemy.TakeTurnAsync());
-    }
-
-    await Task.WhenAll(enemyTasks);
-    GameEventsManager.Instance.turnEvents.EnemyTurnEnd();
+    SetPlayerCameraTarget(player.transform);
   }
 }

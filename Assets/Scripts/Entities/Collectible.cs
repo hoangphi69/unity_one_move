@@ -1,12 +1,27 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collide))]
 public class Collectible : MonoBehaviour
 {
-  void OnTriggerEnter(Collider collider)
+  private Collide collide;
+
+  void Awake()
   {
-    if (collider.gameObject.tag == "Player")
-    {
-      Destroy(gameObject);
-    }
+    collide = GetComponent<Collide>();
+  }
+
+  void OnEnable()
+  {
+    collide.OnCollided += Collect;
+  }
+
+  void OnDisable()
+  {
+    collide.OnCollided -= Collect;
+  }
+
+  void Collect(Vector3 direction)
+  {
+    Destroy(gameObject);
   }
 }

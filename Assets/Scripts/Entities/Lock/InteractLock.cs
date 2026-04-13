@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 [RequireComponent(typeof(Interactable))]
@@ -6,11 +7,11 @@ public class InteractLock : MonoBehaviour, ILocker
   [Header("Locked Interaction")]
   [SerializeField] private string lockedDialogue;
 
-  [Header("Visual Indicators")]
+  [SerializeField] private bool bubble = true;
   [Tooltip("If true, the lock bubble won't show until the player tries to interact with it at least once.")]
-  [SerializeField] private bool hideFirstTime = true;
-  [SerializeField] private GameObject bubblePrefab;
-  [SerializeField] private Transform bubbleSpawnPoint;
+  [ShowIf("bubble")][SerializeField] private bool hideFirstTime = true;
+  [ShowIf("bubble")][SerializeField] private GameObject bubblePrefab;
+  [ShowIf("bubble")][SerializeField] private Transform bubbleSpawnPoint;
 
   private GameObject currentBubbleInstance;
   private Interactable interactable;
@@ -18,11 +19,11 @@ public class InteractLock : MonoBehaviour, ILocker
   void Awake()
   {
     interactable = GetComponent<Interactable>();
-    interactable.isLocked = true;
   }
 
   void OnEnable()
   {
+    interactable.isLocked = true;
     interactable.OnLockAction += OnInteract;
   }
 
@@ -51,6 +52,7 @@ public class InteractLock : MonoBehaviour, ILocker
 
   private void ShowBubble(bool show)
   {
+    if (!bubble) return;
     if (show && currentBubbleInstance == null && bubblePrefab != null)
     {
       currentBubbleInstance = Instantiate(bubblePrefab, bubbleSpawnPoint.position, Quaternion.identity, transform);
