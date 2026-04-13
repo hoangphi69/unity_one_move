@@ -27,8 +27,8 @@ public class Quest : ScriptableObject
   public Quest[] requiredQuests;
 
   [Header("Objectives (Sequential)")]
-  [SerializeField] private int currentObjective = 0;
-  public List<QuestObjective> objectives = new();
+  private int currentObjective = 0;
+  public List<Objective> objectives = new();
 
   [Header("Rewards (Optional)")]
   public bool requiresTurnIn = false;

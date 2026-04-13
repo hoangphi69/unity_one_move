@@ -17,7 +17,6 @@ MonoBehaviour:
   description: 
   state: 0
   requiredQuests: []
-  currentObjective: 0
   objectives:
   - description: "\u0110i ra ngo\xE0i"
     details:
