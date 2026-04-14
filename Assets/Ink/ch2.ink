@@ -24,7 +24,7 @@ Deadline tuần này còn chưa xong, lo cấu trúc làm gì. #speaker:Phong #s
 Mà bên mày model xong mấy cái rồi? #speaker:Phong #sprite:phong_talk
 Tao xong được hơn nửa một tý.... #speaker:Nam #sprite:nam_smile
 ... #speaker:Phong #sprite:phong_glance
-Từ nào làm animation với làm model 3D cũng mất thời gian lắm đấy chứ. #speaker:Nam #sprite:nam_talk
+Từ nào, làm animation với làm model 3D cũng mất thời gian lắm đấy chứ. #speaker:Nam #sprite:nam_talk
 Haizzz..... #speaker:Phong #sprite:phong_sad
 Cố cho xong phần tuần này thôi. #speaker:Phong #sprite:phong_talk
 -> DONE
@@ -38,10 +38,11 @@ Hmm.... #speaker:Phong #sprite:phong_talk
 Yên tĩnh thật ấy chứ. #speaker:Phong #sprite:phong_talk
 Hmmm.... công nhận. #speaker:Nam #sprite:nam_talk
 Chả có gì ngoài... #speaker:Phong #sprite:phong_talk
-20 DÒNG BUG BÁO LỖI mày ơi!!! #speaker:Phong #sprite:phong_panic
+<i><b>20 DÒNG BUG BÁO LỖI mày ơi!!! #speaker:Phong #sprite:phong_panic
 Bên tao cũng đang bị lỗi Collision!!! #speaker:Nam #sprite:nam_panic
 Mấy cái model không tương tác với nhau được!!! #speaker:Nam #sprite:nam_panic
 Để tao check đoạn code thử, mày có viết logic đúng không đấy!? #speaker:Nam #sprite:nam_angry
+... #speaker:Phong #sprite:phong_thinking
 Thế mày có thiết kế đúng tỉ lệ không?! #speaker:Phong #sprite:phong_angry
 Khéo nguyên nhân từ bên mày mà ra ấy!! #speaker:Phong #sprite:phong_angry
 ...

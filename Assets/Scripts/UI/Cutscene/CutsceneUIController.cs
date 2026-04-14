@@ -273,6 +273,7 @@ public class CutsceneUIController : MonoBehaviour
 
   async Task DisplayTypingText(string text, CancellationToken token)
   {
+    // text = $"<b>{text}";
     skipLine = false;
     GameEventsManager.Instance.dialogueEvents.SetTypingState(true);
 

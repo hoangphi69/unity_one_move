@@ -71,22 +71,22 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 }
 
 = phone_date
-Ngày 30 tháng 2 - 16:32.
+<i>Ngày 30 tháng 2 - 16:32.
 -> DONE
 
 = phone_call
-_"Ting!!!!!"_
-"Bạn có một thông báo mới từ Discord."
-"Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
-"Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
-"Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
+<i>_"Ting!!!!!"_
+<i>"Bạn có một thông báo mới từ Discord."
+<i>"Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
+<i>"Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
+<i>"Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
 Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
 Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
 Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
 Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
-"Tao quen mày lâu tao mới dám rủ" #speaker:Phong
-"Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
-"Thế chú có tính làm ko?" #speaker:Phong 
+<i>"Tao quen mày lâu tao mới dám rủ" #speaker:Phong
+<i>"Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
+<i>"Thế chú có tính làm ko?" #speaker:Phong 
 + [Đồng ý]
     -> decision
 + [Lưỡng lự]
@@ -95,10 +95,10 @@ Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_t
     -> decision
 
 = decision
-"Kay" #speaker:Nam #sprite:nam_talk
-"Thế thì để tao giúp" #speaker:Nam #sprite:nam_talk
-"Tao cũng đang rảnh chán" #speaker:Nam #sprite:nam_talk
-"Công việc thế nào, cộng sự" #speaker:Nam #sprite:nam_smile
+<i>"Kay" #speaker:Nam #sprite:nam_talk
+<i>"Thế thì để tao giúp" #speaker:Nam #sprite:nam_talk
+<i>"Tao cũng đang rảnh chán" #speaker:Nam #sprite:nam_talk
+<i>"Công việc thế nào, cộng sự" #speaker:Nam #sprite:nam_smile
 ~ ch1_lobby_phone_AcceptedInvite = true
 -> DONE
 
@@ -122,7 +122,7 @@ Hiện tại bạn có 0 thông báo.
     Mà cái điện thoại mình giấu ở đâu rồi ?? #speaker:Nam #sprite:nam_talk
     -> DONE
 - else:
-    CÁI ĐIỆN THOẠIII.........!!! #speaker:Nam #sprite:nam_angry
+    <b>CÁI ĐIỆN THOẠIII.........!!</b> #speaker:Nam #sprite:nam_angry
     -> DONE
 }
 
@@ -188,15 +188,15 @@ Kay. #speaker:Nam #sprite:nam_talk
 - 0:
     ~ ch1_hallway2_door = 1
     Phòng này nhiều sách thật đấy chứ! #speaker:Nam #sprite:nam_talk
-    Chắc phải có ý tưởng mình cần kiếm trong này. #speaker:Nam #sprite:nam_talk
+    Chắc phải có <i>ý tưởng</i> mình cần kiếm trong này. #speaker:Nam #sprite:nam_talk
     -> DONE
 - 1:
     ~ch1_hallway2_door = 2
-    Trong phòng này hẳn có ý tưởng mình có thể sử dụng. #speaker:Nam #sprite:nam_talk
+    Trong phòng này hẳn có <i>ý tưởng</i> mình có thể sử dụng. #speaker:Nam #sprite:nam_talk
     Mình không thể về tay không được. #speaker:Nam #sprite:nam_talk
     -> DONE
 - else:
-    KIẾM CÁI Ý TƯỞNGGGGG.....!!!  #speaker:Nam #sprite:nam_angry
+    <b>KIẾM CÁI Ý TƯỞNGGGGG.....!!!</b>  #speaker:Nam #sprite:nam_angry
     -> DONE
 }
 
@@ -265,12 +265,12 @@ OKe! #speaker:Phong #sprite:phong_smile
     ...
     ...
     Màn hình máy tính xuất hiện dòng chữ.
-    "YOU DELAYED".
+    "<color=Red>YOU DELAYED</color>".
     Mình cần tập trung tìm kiếm thông tin. #speaker:Nam #sprite:nam_thinking
     Không thể để mất tập trung được. #speaker:Nam #sprite:nam_thinking
     -> DONE
 - else:
-    "YOU DELAYED"
+     "<color=Red>YOU DELAYED</color>".
     -> DONE
 }
 -> DONE
@@ -279,16 +279,16 @@ OKe! #speaker:Phong #sprite:phong_smile
 { ch1_hallway2_paper_hasRead == false:
     ~ ch1_hallway2_paper_hasRead = true
 
-    Trên tờ giấy xuất hiện 1 dòng chữ.
-    "GitGud".
+    Trên tờ giấy được viết 1 dòng chữ.
+    "<b>GitGud</b>".
     ..... #speaker:Nam #sprite:nam_smile
-    Bạn cảm thấy tràn đầy sự quyết tâm.
+    Bạn cảm thấy tràn đầy <color=Red>sự quyết tâm</color>.
     Kiếm tiếp thôi. #speaker:Nam #sprite:nam_thinking
     Không có thông tin nào hữu ích cả. #speaker:Nam #sprite:nam_talk
     -> DONE
 - else: 
-    Phía cuối tờ giấy có xuất hiện 1 dòng chữ nhỏ dễ dàng bị bỏ qua.
-    "Coder May Cry".
+    Phía cuối tờ giấy có 1 dòng chữ nhỏ dễ dàng bị bỏ qua.
+    "Coder <s>May</s> Cry".
     -> DONE
 }
 
@@ -373,7 +373,7 @@ Ban đầu toàn sách linh tinh thôi. #speaker:Nam #sprite:nam_talk
 
 {ch1_hallway2_bookshelf_book2:
     Cơ mà nãy tao kiếm được 1 câu cũng hay. #speaker:Nam #sprite:nam_talk
-    "Nếu muốn sáng tạo, hãy làm thứ mà mình thật sự thích." #speaker:Nam #sprite:nam_talk
+    <i>"Nếu muốn sáng tạo, hãy làm thứ mà mình thật sự thích."</i> #speaker:Nam #sprite:nam_talk
     Ban đầu nó không liên quan tới đồ án nên tao cũng không để tâm lắm. #speaker:Nam #sprite:nam_talk
     Giờ nghĩ lại thì câu đấy nó lại đúng trong trường hợp này. #speaker:Nam #sprite:nam_talk
     ... #speaker:Phong #sprite:phong_thinking
@@ -398,7 +398,7 @@ Hai đứa mình cũng cày nát bao nhiêu game rồi còn gì. #speaker:Phong 
 Thế nên tao mới nghĩ... #speaker:Nam #sprite:nam_talk
 
 Hay là... #speaker:Nam #sprite:nam_thinking
-ĐỒ ÁN TỐT NGHIỆP, làm con puzzle game như cái cách tao với mày muốn. #speaker:Nam #sprite:nam_talk
+<b>ĐỒ ÁN TỐT NGHIỆP</b>, làm con puzzle game như cái cách tao với mày muốn. #speaker:Nam #sprite:nam_talk
 Tao thấy nó thú vị đấy chứ. #speaker:Nam #sprite:nam_talk
 ... #speaker:Phong #sprite:phong_surprise
 ... #speaker:Phong #sprite:phong_thinking
@@ -413,5 +413,4 @@ Sau đó mới tới map với cốt truyện. #speaker:Nam #sprite:nam_talk
 
 ... #speaker:Nam #sprite:nam_smile
 ... #speaker:Phong #sprite:phong_smile
-// TODO: dan sang chapter 2
 -> DONE
