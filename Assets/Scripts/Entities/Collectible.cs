@@ -3,11 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Collide))]
 public class Collectible : MonoBehaviour
 {
+  [SerializeField] private string dialogue;
   private Collide collide;
 
   void Awake()
   {
     collide = GetComponent<Collide>();
+    print(collide);
   }
 
   void OnEnable()
@@ -22,6 +24,8 @@ public class Collectible : MonoBehaviour
 
   void Collect(Vector3 direction)
   {
+    print("do sth");
+    GameEventsManager.Instance.dialogueEvents.EnterDialogue(dialogue, DialogueMode.InGame);
     Destroy(gameObject);
   }
 }

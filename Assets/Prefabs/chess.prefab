@@ -159,8 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb79e8c9a1ba249cd9d5ffec3e485a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveDuration: 0.2
-  showDebugRay: 1
+  godMode: 0
+  showRaycast: 0
+  showTrail: 1
+  maxTrails: 2
 --- !u!114 &7723911310987579212
 MonoBehaviour:
   m_ObjectHideFlags: 0
