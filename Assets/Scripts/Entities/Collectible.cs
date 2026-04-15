@@ -9,7 +9,6 @@ public class Collectible : MonoBehaviour
   void Awake()
   {
     collide = GetComponent<Collide>();
-    print(collide);
   }
 
   void OnEnable()
@@ -24,7 +23,6 @@ public class Collectible : MonoBehaviour
 
   void Collect(Vector3 direction)
   {
-    print("do sth");
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(dialogue, DialogueMode.InGame);
     Destroy(gameObject);
   }

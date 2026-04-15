@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+    [SerializeField] private bool onSkipTile = false;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -48,67 +50,102 @@ public class PlayerController : MonoBehaviour
         // Compute input -> direction
         Vector2 input = ctx.ReadValue<Vector2>();
         if (input.sqrMagnitude < 0.1f) return;
+
         // Exclude diagonal movement
         Vector3 direction;
-        if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
-            direction = new Vector3(Mathf.Sign(input.x), 0, 0);
-        else
-            direction = new Vector3(0, 0, Mathf.Sign(input.y));
+        bool x = Mathf.Abs(input.x) > Mathf.Abs(input.y);
+        if (x) direction = new Vector3(Mathf.Sign(input.x), 0, 0);
+        else direction = new Vector3(0, 0, Mathf.Sign(input.y));
 
         // Busy check
-        if (GameplayManager.Instance.Stage.turn != Turn.Player) return;
-        if (GameplayManager.Instance.Stage.isPuzzle && GameplayManager.Instance.Stage.stepLeft == 0)
-        {
-            await Die(direction, false);
-            return;
-        }
+        var stage = GameplayManager.Instance.Stage;
+        if (stage.turn != Turn.Player) return;
+        if (isMoving) return;
 
+        // Check steps left
+        if (stage is { isPuzzle: true, stepLeft: 0 })
+        { await Die(direction, shake: false); return; }
+
+        // Actions
         Rotate(direction);
-        await TryMove(direction);
+
+        if (!CanMove(direction))
+        { animator.CrossFade("move", .1f, 0, 0f); return; }
+
+        await ProcessMove(direction);
+
         ScanSurroundings();
     }
 
-    void Rotate(Vector3 direction)
+    async Task ProcessMove(Vector3 direction)
     {
-        transform.rotation = Quaternion.LookRotation(direction);
-    }
-
-    async Task TryMove(Vector3 direction)
-    {
-        if (isMoving) return;
-
         animator.CrossFade("move", .1f, 0, 0f);
 
-        if (!CanMove(direction)) return;
-
-        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.Footstep, transform.position);
-
-        Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
+        Vector3 location;
+        if (OnSkipTile()) location = GetSlideDestination(direction);
+        else location = transform.position + (direction * GameplayManager.Instance.cellSize);
 
         // --- DEBUG TRAIL ---
         PathTrailManager.AddStep(transform.position, location, raycastHeight, showTrail);
 
-        Task move = SmoothMoveAsync(location, destroyCancellationToken);
+        Task move = Move(location, destroyCancellationToken);
         GameEventsManager.Instance.turnEvents.PlayerTurnEnd(move);
         await move;
     }
 
-    async Task SmoothMoveAsync(Vector3 location, CancellationToken token)
+    private bool OnSkipTile()
     {
-        isMoving = true;
+        // Start slightly above the player's base
+        Vector3 origin = transform.position + (Vector3.up * raycastHeight);
 
-        float elapsedTime = 0f;
-        while (elapsedTime < moveDuration)
+        // Raycast straight down. (raycastHeight + 0.5f) ensures it reaches the floor collider
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, raycastHeight + 0.5f))
         {
-            if (token.IsCancellationRequested) return;
-            transform.position = Vector3.Lerp(transform.position, location, elapsedTime / moveDuration);
-            elapsedTime += Time.deltaTime;
-            await Task.Yield();
+            // If the floor we hit has the SkipperTile component, we are on ice!
+            if (hit.collider.TryGetComponent(out Puddle skipper))
+            {
+                Destroy(skipper.gameObject);
+                return true;
+            }
         }
 
-        if (token.IsCancellationRequested) return;
-        transform.position = location;
-        isMoving = false;
+        return false;
+    }
+
+    Vector3 GetSlideDestination(Vector3 direction)
+    {
+        Vector3 currentSimulatedPos = transform.position;
+        float cellSize = GameplayManager.Instance.cellSize;
+
+        // Failsafe to prevent infinite loops in case of level design errors
+        int maxSlideDistance = 20;
+
+        for (int i = 0; i < maxSlideDistance; i++)
+        {
+            Vector3 nextSimulatedPos = currentSimulatedPos + (direction * cellSize);
+
+            // 1. Check if the next tile is actually ground
+            if (!GameplayManager.Instance.Stage.IsGround(nextSimulatedPos))
+            {
+                break; // Stop at the current position
+            }
+
+            // 2. Check for blocking entities ahead
+            Vector3 rayOrigin = currentSimulatedPos + Vector3.up * raycastHeight;
+            if (Physics.Raycast(rayOrigin, direction, out RaycastHit hit, cellSize, GameplayManager.Instance.entityMask))
+            {
+                if (hit.collider.TryGetComponent(out Collide collide))
+                    break; // Blocked by a locked entity
+
+                if (hit.collider.TryGetComponent(out Obstacle obstacle) && obstacle.BlockPlayer)
+                    break; // Blocked by an obstacle
+            }
+
+            // If we didn't break, the next cell is safe. Advance our simulated position.
+            currentSimulatedPos = nextSimulatedPos;
+        }
+
+        return currentSimulatedPos;
     }
 
     bool CanMove(Vector3 direction)
@@ -135,6 +172,31 @@ public class PlayerController : MonoBehaviour
         }
 
         return true;
+    }
+
+    async Task Move(Vector3 location, CancellationToken token)
+    {
+        isMoving = true;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < moveDuration)
+        {
+            if (token.IsCancellationRequested) return;
+            transform.position = Vector3.Lerp(transform.position, location, elapsedTime / moveDuration);
+            elapsedTime += Time.deltaTime;
+            await Task.Yield();
+        }
+
+        if (token.IsCancellationRequested) return;
+        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.Footstep, location);
+        transform.position = location;
+
+        isMoving = false;
+    }
+
+    void Rotate(Vector3 direction)
+    {
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     void ScanSurroundings()
@@ -232,7 +294,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // --- HELPER METHOD TO DRAW TEMPORARY LINES ---
-    private void DrawGameLine(Vector3 start, Vector3 direction, Color color, float duration)
+    void DrawGameLine(Vector3 start, Vector3 direction, Color color, float duration)
     {
         if (!showRaycast) return;
 
@@ -243,6 +305,8 @@ public class PlayerController : MonoBehaviour
 
         LineRenderer lr = myLine.AddComponent<LineRenderer>();
         lr.material = new Material(Shader.Find("Sprites/Default"));
+        lr.sortingLayerName = "Default";
+        lr.sortingOrder = 1;
         lr.startColor = color;
         lr.endColor = color;
         lr.startWidth = 0.05f;
@@ -253,7 +317,7 @@ public class PlayerController : MonoBehaviour
         Destroy(myLine, duration);
     }
 
-    private void ArchiveTrail()
+    void ArchiveTrail()
     {
         PathTrailManager.ArchiveCurrentTrail(maxTrails);
     }
@@ -290,6 +354,9 @@ public static class PathTrailManager
 
             currentTrail = trailObj.AddComponent<LineRenderer>();
             currentTrail.material = new Material(Shader.Find("Sprites/Default"));
+
+            currentTrail.sortingLayerName = "Default";
+            currentTrail.sortingOrder = 1;
 
             Color currentColor = trailColors[colorIndex % trailColors.Length];
             currentTrail.startColor = currentColor;

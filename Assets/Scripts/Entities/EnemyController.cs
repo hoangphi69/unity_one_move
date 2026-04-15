@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
   // Configs
   [SerializeField] float moveDuration = .2f;
   [SerializeField] float sightDistance = 10f;
+  private float raycastHeight = .3f;
 
   private bool isMoving = false;
   private Vector3[] sightDirections = { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
@@ -35,7 +36,7 @@ public class EnemyController : MonoBehaviour
     {
       RaycastHit[] hits = Physics.RaycastAll
       (
-        transform.position,
+        transform.position + Vector3.up * raycastHeight,
         direction,
         sightDistance,
         GameplayManager.Instance.entityMask
@@ -98,7 +99,7 @@ public class EnemyController : MonoBehaviour
 
     if (!GameplayManager.Instance.Stage.IsGround(position + direction)) return false;
 
-    if (Physics.Raycast(position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
+    if (Physics.Raycast(position + Vector3.up * raycastHeight, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
     {
       if (hit.collider.TryGetComponent(out Obstacle obstacle))
       {

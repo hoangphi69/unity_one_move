@@ -59,7 +59,8 @@ public class HUDOverlayUIController : MonoBehaviour
 
   public void SetStepLeft(int step)
   {
-    if (step <= 0) stepLeft.text = "<color=#D22626>XXX</color>";
+    if (step < 0) stepLeft.text = "<color=#D22626>XXX</color>";
+    // if (step == 0) stepLeft.text = "<color=#D22626>XXX</color>";
     else stepLeft.text = $"{step:D3}";
   }
 

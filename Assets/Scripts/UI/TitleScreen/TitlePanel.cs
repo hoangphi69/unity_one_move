@@ -40,7 +40,6 @@ public class TitlePanel : NavigationPanel
 
   void newGameClicked()
   {
-    CloseAllPanels();
     GameEventsManager.Instance.flowEvents.NewGame();
   }
 

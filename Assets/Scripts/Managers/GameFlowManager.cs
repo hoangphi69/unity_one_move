@@ -38,7 +38,9 @@ public class GameFlowManager : MonoBehaviour
   public async void BootTitle()
   {
     SetState(GameState.Busy);
-    LoadingScreenUIController.Instance.Show();
+
+    if (!LoadingScreenUIController.Instance.isActive()) await LoadingScreenUIController.Instance.ShowFadeAsync();
+
     GameInputManager.Instance.SetState(InputState.UI);
     await GameDataManager.Instance.SaveGame();
 
@@ -48,7 +50,7 @@ public class GameFlowManager : MonoBehaviour
 
     await LoadGame();
 
-    LoadingScreenUIController.Instance.Hide();
+    await LoadingScreenUIController.Instance.HideFadeAsync();
   }
 
   async Task LoadGame()
@@ -69,6 +71,7 @@ public class GameFlowManager : MonoBehaviour
 
   async void PauseGame()
   {
+    if (CurrentState == GameState.Busy) return;
     SetState(GameState.Busy);
 
     // Execute player audio animation 
@@ -109,6 +112,8 @@ public class GameFlowManager : MonoBehaviour
     if (CurrentState == GameState.Busy) return;
     SetState(GameState.Busy);
 
+    await LoadingScreenUIController.Instance.ShowStripsAsync();
+
     await GameplayManager.Instance.RestartStageAsync();
 
     if (!GameplayManager.Instance.Stage.radioTrack.IsNull)
@@ -121,20 +126,27 @@ public class GameFlowManager : MonoBehaviour
       GameAudioManagger.Instance.StopMusic();
     }
 
+    await LoadingScreenUIController.Instance.HideStripsAsync();
+
     SetState(GameState.Gameplay);
     GameInputManager.Instance.SetState(InputState.Gameplay);
   }
 
   async void NewGame()
   {
-    LoadingScreenUIController.Instance.Show();
+    if (CurrentState == GameState.Busy) return;
     SetState(GameState.Busy);
+
+    await LoadingScreenUIController.Instance.ShowFadeAsync();
+
+    TitleScreenUIController.Instance.CloseEntireUI();
 
     GameInputManager.Instance.SetState(InputState.UI);
 
     GameDataManager.Instance.NewGame();
 
-    LoadingScreenUIController.Instance.Hide();
+    await Task.Delay(1000);
+    await LoadingScreenUIController.Instance.HideFadeAsync();
 
     string cutscene = "ch1_Cutscene1";
     string stageName = GameplayManager.Instance.newGameStage;

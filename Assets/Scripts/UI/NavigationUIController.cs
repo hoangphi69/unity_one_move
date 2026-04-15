@@ -60,7 +60,7 @@ public abstract class NavigationUIController : MonoBehaviour
     menuStack.Peek().Show();
   }
 
-  protected void CloseEntireUI()
+  public void CloseEntireUI()
   {
     ClearStack();
     Hide();
