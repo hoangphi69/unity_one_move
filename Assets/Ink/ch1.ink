@@ -76,29 +76,29 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 
 = phone_call
 <i>_"Ting!!!!!"_
-<i>"Bạn có một thông báo mới từ Discord."
-<i>"Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
-<i>"Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
-<i>"Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
-Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
-Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
-Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
-Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
-<i>"Tao quen mày lâu tao mới dám rủ" #speaker:Phong
-<i>"Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
-<i>"Thế chú có tính làm ko?" #speaker:Phong 
-+ [Đồng ý]
-    -> decision
-+ [Lưỡng lự]
-    ... #speaker:Nam #sprite:nam_confused
-    Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
-    -> decision
+// <i>"Bạn có một thông báo mới từ Discord."
+// <i>"Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
+// <i>"Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
+// <i>"Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
+// Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
+// Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
+// Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
+// Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
+// <i>"Tao quen mày lâu tao mới dám rủ" #speaker:Phong
+// <i>"Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
+// <i>"Thế chú có tính làm ko?" #speaker:Phong 
+// + [Đồng ý]
+//     -> decision
+// + [Lưỡng lự]
+//     ... #speaker:Nam #sprite:nam_confused
+//     Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
+//     -> decision
 
-= decision
-<i>"Kay" #speaker:Nam #sprite:nam_talk
-<i>"Thế thì để tao giúp" #speaker:Nam #sprite:nam_talk
-<i>"Tao cũng đang rảnh chán" #speaker:Nam #sprite:nam_talk
-<i>"Công việc thế nào, cộng sự" #speaker:Nam #sprite:nam_smile
+// = decision
+// <i>"Kay" #speaker:Nam #sprite:nam_talk
+// <i>"Thế thì để tao giúp" #speaker:Nam #sprite:nam_talk
+// <i>"Tao cũng đang rảnh chán" #speaker:Nam #sprite:nam_talk
+// <i>"Công việc thế nào, cộng sự" #speaker:Nam #sprite:nam_smile
 ~ ch1_lobby_phone_AcceptedInvite = true
 -> DONE
 

@@ -116,7 +116,6 @@ public class TitleSavesPanel : NavigationPanel, ISavesPanel
 
     SetActiveSlot(selectedSlot);
     await GameDataManager.Instance.SwitchProfile(activeSlot.GetProfileID());
-    CloseAllPanels();
     GameEventsManager.Instance.flowEvents.NewGame();
   }
 

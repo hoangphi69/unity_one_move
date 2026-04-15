@@ -33,7 +33,7 @@ public class GameInitiator : MonoBehaviour
   async void Start()
   {
     Bindings();
-    _loadingScreen.Show();
+    _loadingScreen.ShowImmediate();
     await InitializeServices();
     InitializeManagers();
     InitializeUI();

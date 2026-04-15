@@ -5,6 +5,51 @@
 // glitch -> bug
 // chia de tri dialogue
 
+// Lobby
+// Nhan cuoc goi cua Phong:
+// - Lai nhai ve bug model cua Nam
+// - Nhac hen hop voi gv
+// - Chay ra quan cf
+
+// Cutscene
+// - Bong dua 1 ty
+// - Phong phan nan Nam
+// - Nam phan nan Phong
+// - GV phan nan 2 dua
+// - Nam & Phong quyet dinh sua lai 
+
+// Hallway 1 (coffee)
+// - Phong nho Nam sua map 1 (main)
+// - Staff (nam)
+// - Radio
+// - Glitches
+
+// Puzzle 1
+
+// Hallway 2
+// - Nam report voi Phong, Phong nho Nam sua bug tiep
+// - Staff (nu)
+// - Easter egg
+
+// Puzzle 2
+
+// Hallway 3
+// - Nam report voi Phong, sua loi con lai
+// - Chủ quán (phải mặc đồ maid - !IMPORTANT)
+//  + Unlock secret map neu co voucher
+//  + normal interaction (phải thân tình - !IMPORTANT)
+// - Easter egg
+// - 
+
+// Puzzle 3
+// - Phong 
+
+// Cutscene
+// - Phong build xong con game (demo) va chay dc
+// - Phong & Nam han hoan an mung (cung voi chi chu quan mac do maid (important) ban phao dang sau background) (CG)
+// - Nam cắm flag (đcm Nam)
+
+
 === ch2_lobby ===
 //Kohii coffee
 Quán này ổn đấy mày. #speaker:Nam #sprite:nam_smile
@@ -240,6 +285,8 @@ Oke triển luôn. #speaker:Nam #sprite:nam_talk
 Build thử đi. #speaker:Nam #sprite:nam_talk
 ...
 // narrative
+
+
 
 //td
 Uầy
