@@ -161,8 +161,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   godMode: 0
   showRaycast: 0
-  showTrail: 1
+  showTrail: 0
   maxTrails: 2
+  onSkipTile: 0
 --- !u!114 &7723911310987579212
 MonoBehaviour:
   m_ObjectHideFlags: 0

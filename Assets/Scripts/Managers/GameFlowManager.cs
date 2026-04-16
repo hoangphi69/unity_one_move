@@ -44,29 +44,27 @@ public class GameFlowManager : MonoBehaviour
     GameInputManager.Instance.SetState(InputState.UI);
     await GameDataManager.Instance.SaveGame();
 
-    GameAudioManagger.Instance.PlayMusic(FMODEvents.Instance.TitleMusic);
     TitleScreenUIController.Instance.Show();
     SetState(GameState.TitleScreen);
 
     await LoadGame();
 
-    await LoadingScreenUIController.Instance.HideFadeAsync();
+    await Task.Delay(2000);
+
+    GameAudioManagger.Instance.PlayMusic(FMODEvents.Instance.TitleMusic);
+
+    await LoadingScreenUIController.Instance.HideFadeAsync(2f);
   }
 
   async Task LoadGame()
   {
-    if (!GameDataManager.Instance.HasData())
-    {
-      string stageName = GameplayManager.Instance.newGameStage;
-      await GameplayManager.Instance.LoadStageAsync(stageName);
-      GameplayManager.Instance.DespawnPlayer();
-    }
-    else
+    if (GameDataManager.Instance.HasData())
     {
       string stageName = GameDataManager.Instance.GetProgress();
       await GameplayManager.Instance.LoadStageAsync(stageName);
       GameplayManager.Instance.SpawnPlayer();
     }
+    GameplayManager.Instance.ZoomCamera(false);
   }
 
   async void PauseGame()
@@ -84,6 +82,7 @@ public class GameFlowManager : MonoBehaviour
     GameInputManager.Instance.SetState(InputState.UI);
     SetState(GameState.Paused);
 
+    HUDOverlayUIController.Instance.Hide();
     PauseScreenUIController.Instance.Show();
   }
 
@@ -92,16 +91,15 @@ public class GameFlowManager : MonoBehaviour
     if (CurrentState == GameState.Busy) return;
     SetState(GameState.Busy);
 
+    HUDOverlayUIController.Instance.Show();
+
     // Execute player audio animation
     if (!GameplayManager.Instance.Stage.radioTrack.IsNull)
     {
       await GameplayManager.Instance.ActivePlayer.PlayMusic();
       GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.Stage.radioTrack);
     }
-    else
-    {
-      GameAudioManagger.Instance.StopMusic();
-    }
+    else GameAudioManagger.Instance.StopMusic();
 
     SetState(GameState.Gameplay);
     GameInputManager.Instance.SetState(InputState.Gameplay);
@@ -109,8 +107,12 @@ public class GameFlowManager : MonoBehaviour
 
   async void RestartStage()
   {
+    if (!GameplayManager.Instance.Stage.isPuzzle) return;
+
     if (CurrentState == GameState.Busy) return;
     SetState(GameState.Busy);
+
+    HUDOverlayUIController.Instance.Show();
 
     await LoadingScreenUIController.Instance.ShowStripsAsync();
 
@@ -137,20 +139,27 @@ public class GameFlowManager : MonoBehaviour
     if (CurrentState == GameState.Busy) return;
     SetState(GameState.Busy);
 
+    GameInputManager.Instance.SetState(InputState.UI);
+
     await LoadingScreenUIController.Instance.ShowFadeAsync();
 
     TitleScreenUIController.Instance.CloseEntireUI();
 
-    GameInputManager.Instance.SetState(InputState.UI);
-
     GameDataManager.Instance.NewGame();
 
-    await Task.Delay(1000);
-    await LoadingScreenUIController.Instance.HideFadeAsync();
-
     string cutscene = "ch1_Cutscene1";
+    GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutscene, DialogueMode.Cutscene);
+
+    await Task.Delay(1000);
+    LoadingScreenUIController.Instance.HideImmediate();
+
     string stageName = GameplayManager.Instance.newGameStage;
-    await GameplayManager.Instance.LoadStageAsync(stageName, cutscene);
+    await GameplayManager.Instance.LoadStageAsync(stageName);
+    GameplayManager.Instance.SpawnPlayer();
+    GameplayManager.Instance.ZoomCamera(true);
+
+    HUDOverlayUIController.Instance.Show();
+
     GameEventsManager.Instance.questEvents.StartQuest("lobby1_GoOutside");
 
     SetState(GameState.Gameplay);

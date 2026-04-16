@@ -28,11 +28,6 @@ public class LoadingScreenUIController : MonoBehaviour
   void Awake()
   {
     if (Instance == null) Instance = this;
-    else
-    {
-      Destroy(gameObject);
-      return;
-    }
 
     GenerateStrips();
     uiContainer.gameObject.SetActive(false);
@@ -149,6 +144,8 @@ public class LoadingScreenUIController : MonoBehaviour
 
   public async Task ShowStripsAsync()
   {
+    HUDOverlayUIController.Instance.SetCounterOnTop(true);
+
     DOTween.Kill(background);
     DOTween.Kill(loadingText);
 
@@ -163,14 +160,15 @@ public class LoadingScreenUIController : MonoBehaviour
     foreach (var strip in generatedStrips)
     {
       DOTween.Kill(strip);
-      strip.anchoredPosition = new Vector2(0, screenHeight);
+      strip.anchoredPosition = new Vector2(0, -screenHeight);
     }
 
     List<Task> stripTasks = new List<Task>();
 
     for (int i = 0; i < generatedStrips.Length; i++)
     {
-      float delay = i * this.delay;
+      float delay = (generatedStrips.Length - 1 - i) * this.delay;
+
       Task t = generatedStrips[i].DOAnchorPosY(0, duration)
                                  .SetDelay(delay)
                                  .SetEase(stripEase)
@@ -199,8 +197,9 @@ public class LoadingScreenUIController : MonoBehaviour
 
     for (int i = 0; i < generatedStrips.Length; i++)
     {
-      float delay = i * this.delay;
-      Task t = generatedStrips[i].DOAnchorPosY(-screenHeight, duration)
+      float delay = (generatedStrips.Length - 1 - i) * this.delay;
+
+      Task t = generatedStrips[i].DOAnchorPosY(screenHeight, duration)
                                  .SetDelay(delay)
                                  .SetEase(stripEase)
                                  .SetUpdate(true) // Ignore timeScale
@@ -210,5 +209,7 @@ public class LoadingScreenUIController : MonoBehaviour
 
     await Task.WhenAll(stripTasks);
     HideImmediate();
+
+    HUDOverlayUIController.Instance.SetCounterOnTop(false);
   }
 }

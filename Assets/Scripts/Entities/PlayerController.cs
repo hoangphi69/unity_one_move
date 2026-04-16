@@ -246,6 +246,8 @@ public class PlayerController : MonoBehaviour
         if (godMode) return;
         GameInputManager.Instance.SetState(InputState.None);
 
+        HUDOverlayUIController.Instance.SetStepLeft(-1);
+
         // Shake camera
         if (shake)
         {

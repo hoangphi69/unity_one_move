@@ -92,8 +92,11 @@ public class StageManager : MonoBehaviour
   {
     turn = Turn.Enemy;
 
-    stepLeft--;
-    HUDOverlayUIController.Instance.SetStepLeft(stepLeft);
+    if (isPuzzle)
+    {
+      stepLeft--;
+      HUDOverlayUIController.Instance.SetStepLeft(stepLeft);
+    }
 
     await playerAction;
 
