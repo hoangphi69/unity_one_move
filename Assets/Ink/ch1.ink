@@ -28,6 +28,14 @@ VAR ch1_hallway3_librarian = false
 VAR ch1_hallway2_door = 0
 VAR ch1_hallway3_door = 0
 
+=== test ===
+#cg: cailonma, 3
+#cg: black, 1
+You stopped on the vast plain. #bg: dark
+Màn hình máy tính sáng lên trong căn phòng trọ bao bọc trong tĩnh lặng và bóng tối. 
+Chỉ có tiếng nhạc game đơn điệu phát ra từ máy tính cùng âm thanh gõ bàn phím lạch cạch của Nam.
+-> END
+
 // ----------- Cutscene đầu ch1 ----------
 === ch1_Cutscene1 ===
 #bg:dom

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 277666028057418458}
   - component: {fileID: 8376631159581453471}
   - component: {fileID: 6477986378725766950}
+  - component: {fileID: 6068100167810977778}
   m_Layer: 5
   m_Name: Cancel button
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &6068100167810977778
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221470984223042075}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1414644070863267217
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,10 +966,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72feebe75b5034448bfc3394bfcfa251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConfirmOverlayUIController
+  backgroundPanel: {fileID: 1994497359541920591}
   title: {fileID: 633629466634313190}
   message: {fileID: 5086002109123848378}
   confirmButton: {fileID: 6534838156803487458}
   cancelButton: {fileID: 6477986378725766950}
+  duration: 0.15
+  showEase: 3
+  hideEase: 2
 --- !u!1 &8383668504010628283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1062,7 @@ GameObject:
   - component: {fileID: 5536759158191005677}
   - component: {fileID: 482273451516028803}
   - component: {fileID: 6534838156803487458}
+  - component: {fileID: 3840607905292516096}
   m_Layer: 5
   m_Name: Confirm button
   m_TagString: Untagged
@@ -1154,3 +1172,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &3840607905292516096
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397557644559667747}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

@@ -79,10 +79,21 @@ public class TitlePanel : NavigationPanel
     GameEventsManager.Instance.flowEvents.ContinueGame();
   }
 
-  async void newGameClicked()
+  void newGameClicked()
   {
-    await EnterGameplay();
-    GameEventsManager.Instance.flowEvents.NewGame();
+    async void StartNewGame()
+    {
+      await EnterGameplay();
+      GameEventsManager.Instance.flowEvents.NewGame();
+    }
+
+    if (GameDataManager.Instance.HasData())
+      ConfirmOverlayUIController.Instance.Show(
+        "New Game",
+        "Are you sure you want to start a new game on this save file? This will <color=#D57B19>erase</color> all of your previous progress.",
+        onConfirm: StartNewGame
+      );
+    else StartNewGame();
   }
 
   void optionsClicked() => Navigate(TitleScreenRoutes.OPTIONS);

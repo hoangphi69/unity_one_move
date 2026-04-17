@@ -25,10 +25,6 @@ public class DialogueBoxUIController : MonoBehaviour
   [SerializeField] private int typingSpeed = 50;
   private bool skipLine = false;
 
-  private const string SPEAKER_TAG = "speaker";
-  private const string SPRITE_TAG = "sprite";
-  private const string SPRITE_DIR = "Sprites/";
-
   void OnEnable()
   {
     GameEventsManager.Instance.dialogueEvents.onDialogueStarted += DialogueStart;
@@ -134,12 +130,13 @@ public class DialogueBoxUIController : MonoBehaviour
 
       switch (key)
       {
-        case SPEAKER_TAG:
+        case DialogueAsset.SPEAKER_TAG:
           speaker.text = value;
           speakerBox.SetActive(true);
           break;
-        case SPRITE_TAG:
-          Sprite charSprite = Resources.Load<Sprite>(SPRITE_DIR + value);
+
+        case DialogueAsset.SPRITE_TAG:
+          Sprite charSprite = Resources.Load<Sprite>(DialogueAsset.SPRITE_DIR + value);
           if (charSprite == null) Debug.LogWarning("Character sprite not found: " + value);
           sprite.sprite = charSprite;
           sprite.gameObject.SetActive(true);

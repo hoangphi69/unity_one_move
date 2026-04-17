@@ -51,13 +51,6 @@ public class CutsceneUIController : MonoBehaviour
   private bool isOverlay = false;
   private CancellationTokenSource skipDialogueCTS;
 
-  private const string SPEAKER_TAG = "speaker";
-  private const string SPRITE_TAG = "sprite";
-  private const string BG_TAG = "bg";
-  private const string SPRITE_DIR = "Sprites/";
-  private const string BG_SPRITE_FALLBACK = "Sprites/CutsceneDialogue/bg_fallback";
-
-
   void OnEnable()
   {
     GameEventsManager.Instance.dialogueEvents.onDialogueStarted += DialogueStart;
@@ -255,16 +248,16 @@ public class CutsceneUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.AdvanceDialogue();
   }
 
-  async void DialogueDisplay(string text, List<string> tags, List<Choice> inkChoices, CancellationToken token)
+  async void DialogueDisplay(string text, List<string> tags, List<Choice> choices, CancellationToken token)
   {
     ClearDialogue();
-    DisplayTags(tags);
-    LogEntry(text, tags);
 
     try
     {
+      await HandleTags(tags, token);
+      LogEntry(text, tags);
       await DisplayTypingText(text, token);
-      DisplayChoices(inkChoices);
+      DisplayChoices(choices);
       advanceIndicator.gameObject.SetActive(true);
       if (isAutoMode) _ = StartAutoAdvanceTimer();
     }
@@ -307,7 +300,7 @@ public class CutsceneUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.SetTypingState(false);
   }
 
-  void DisplayTags(List<string> tags)
+  async Task HandleTags(List<string> tags, CancellationToken token)
   {
     foreach (string tag in tags)
     {
@@ -319,27 +312,70 @@ public class CutsceneUIController : MonoBehaviour
 
       switch (key)
       {
-        case SPEAKER_TAG:
+        case DialogueAsset.SPEAKER_TAG:
           speaker.text = value;
           speakerBox.SetActive(true);
           break;
-        case SPRITE_TAG:
-          Sprite charSprite = Resources.Load<Sprite>(SPRITE_DIR + value);
+
+        case DialogueAsset.SPRITE_TAG:
+          Sprite charSprite = Resources.Load<Sprite>(DialogueAsset.SPRITE_DIR + value);
           if (charSprite == null) Debug.LogWarning("Character sprite not found: " + value);
           sprite.sprite = charSprite;
           sprite.gameObject.SetActive(true);
           break;
-        case BG_TAG:
-          Sprite bgSprite = Resources.Load<Sprite>(SPRITE_DIR + value);
-          if (bgSprite != null) background.sprite = bgSprite;
-          else
-          {
-            Debug.LogWarning("Background sprite not found: " + value);
-            background.sprite = Resources.Load<Sprite>(BG_SPRITE_FALLBACK);
-          }
+
+        case DialogueAsset.BG_TAG:
+          Sprite bgSprite = Resources.Load<Sprite>(DialogueAsset.BG_DIR + value);
+          if (bgSprite == null) Debug.LogWarning("Background sprite not found: " + value);
+          background.sprite = bgSprite;
+          break;
+
+        case DialogueAsset.CG_TAG:
+          await HandleCGTag(value, token);
           break;
       }
     }
+  }
+
+  async Task HandleCGTag(string tagValue, CancellationToken token)
+  {
+    string[] parts = tagValue.Split(',');
+    string fileName = parts[0].Trim();
+
+    float duration = 0f;
+    bool isFull = false;
+
+    if (parts.Length > 1)
+    {
+      float.TryParse(parts[1].Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out duration);
+    }
+
+    if (parts.Length > 2)
+    {
+      if (parts[2].Trim().ToLower() == "full") isFull = true;
+    }
+
+    await DisplayCG(fileName, duration, isFull, token);
+  }
+
+  async Task DisplayCG(string fileName, float duration, bool isFull, CancellationToken token)
+  {
+    Sprite cg = Resources.Load<Sprite>(DialogueAsset.CG_DIR + fileName);
+    if (cg == null)
+    {
+      Debug.LogWarning("CG not found: " + fileName);
+      return;
+    }
+
+    background.sprite = cg;
+
+    if (duration <= 0f) return;
+
+    if (isFull) mainUIPanel.SetActive(false);
+
+    try { await Task.Delay((int)(duration * 1000), token); }
+    catch (OperationCanceledException) { }
+    finally { if (isFull) mainUIPanel.SetActive(true); }
   }
 
   void DisplayChoices(List<Choice> inkChoices)
@@ -378,7 +414,7 @@ public class CutsceneUIController : MonoBehaviour
       foreach (string tag in tags)
       {
         string[] splitTag = tag.Split(':');
-        if (splitTag.Length >= 2 && splitTag[0].Trim() == SPEAKER_TAG)
+        if (splitTag.Length >= 2 && splitTag[0].Trim() == DialogueAsset.SPEAKER_TAG)
         {
           speakerName = splitTag[1].Trim();
           break;

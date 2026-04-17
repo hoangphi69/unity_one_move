@@ -49,7 +49,7 @@ public class GameFlowManager : MonoBehaviour
 
     await LoadGame();
 
-    await Task.Delay(2000);
+    // await Task.Delay(2000);
 
     GameAudioManagger.Instance.PlayMusic(FMODEvents.Instance.TitleMusic);
 
@@ -147,7 +147,7 @@ public class GameFlowManager : MonoBehaviour
 
     GameDataManager.Instance.NewGame();
 
-    string cutscene = "ch1_Cutscene1";
+    string cutscene = "test";
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutscene, DialogueMode.Cutscene);
 
     await Task.Delay(1000);

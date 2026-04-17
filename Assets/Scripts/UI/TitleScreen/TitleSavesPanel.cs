@@ -110,13 +110,20 @@ public class TitleSavesPanel : NavigationPanel, ISavesPanel
     );
   }
 
-  async void newGameClicked()
+  void newGameClicked()
   {
     if (selectedSlot == null) return;
 
-    SetActiveSlot(selectedSlot);
-    await GameDataManager.Instance.SwitchProfile(activeSlot.GetProfileID());
-    GameEventsManager.Instance.flowEvents.NewGame();
+    ConfirmOverlayUIController.Instance.Show(
+      "New Game",
+      $"Start a new game on <color=#D57B19>save no. {selectedSlot.GetProfileID()}</color>?",
+      onConfirm: async () =>
+      {
+        SetActiveSlot(selectedSlot);
+        await GameDataManager.Instance.SwitchProfile(activeSlot.GetProfileID());
+        GameEventsManager.Instance.flowEvents.NewGame();
+      }
+    );
   }
 
   void backClicked() => ClosePanel();

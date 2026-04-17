@@ -54,11 +54,9 @@ public class PauseScreenUIController : NavigationUIController
 
   private void HandleEscape(InputAction.CallbackContext context)
   {
+    if (ConfirmOverlayUIController.Instance.gameObject.activeInHierarchy) return;
     // If we are deep in a menu (like Options), just go back one screen
-    if (menuStack.Count > 1)
-    {
-      CloseCurrentPanel();
-    }
+    if (menuStack.Count > 1) CloseCurrentPanel();
     else
     {
       // If we are at the root (the main Pause panel), unpause the game
