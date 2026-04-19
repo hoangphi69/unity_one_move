@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class CutsceneUIController : MonoBehaviour
 
   [Header("Bottom UI")]
   [SerializeField] private Button bottomUI;
+  [SerializeField] private CanvasGroup bottomElements;
   [SerializeField] private TextMeshProUGUI dialogueLine;
   [SerializeField] private GameObject speakerBox;
   [SerializeField] private TextMeshProUGUI speaker;
@@ -32,6 +34,8 @@ public class CutsceneUIController : MonoBehaviour
   [SerializeField] private GameObject choicePrefab;
 
   [Header("Top UI")]
+  [SerializeField] private GameObject topUI;
+  [SerializeField] private CanvasGroup topElements;
   [SerializeField] private Button showLogButton;
   [SerializeField] private Button hideLogButton;
   [SerializeField] private Button autoButton;
@@ -50,6 +54,13 @@ public class CutsceneUIController : MonoBehaviour
   private bool skipLine = false;
   private bool isOverlay = false;
   private CancellationTokenSource skipDialogueCTS;
+
+  [Header("Animation")]
+  [SerializeField] private float duration = 0.3f;
+  [SerializeField] private Ease enterEase = Ease.OutCubic; // Smooth deceleration
+  [SerializeField] private Ease exitEase = Ease.OutCubic;   // Smooth acceleration
+
+  private Sequence sequence;
 
   void OnEnable()
   {
@@ -191,21 +202,48 @@ public class CutsceneUIController : MonoBehaviour
 
   void onSkipClicked()
   {
-    // TODO: implement confirm box;
-    DialogueEnd();
+    ConfirmOverlayUIController.Instance.Show(
+      "Skip cutscene",
+      "Are you sure you want to skip this cutscene?",
+      onConfirm: DialogueEnd
+    );
   }
 
-  void DialogueStart(DialogueMode mode)
+  async void DialogueStart(DialogueMode mode)
   {
     if (mode != DialogueMode.Cutscene) return;
     ClearDialogue();
     logPanel.ClearEntries();
+
+    // 1. Instantly set starting states (invisible / scaled to 0) to prevent 1-frame flickering
+    background.DOFade(0f, 0f);
+    sprite.DOFade(0f, 0f);
+    topElements.alpha = 0f;
+    bottomElements.alpha = 0f;
+
     canvas.SetActive(true);
+
+    // 2. Play Entrance Animation
+    sequence?.Kill();
+    sequence = DOTween.Sequence();
+    sequence.SetUpdate(true); // Optional: Run on unscaled time if timeScale is paused
+
+    // Scale panels and fade background/sprite at the same time
+    await sequence
+      .Join(topUI.GetComponent<RectTransform>().DOScaleY(1f, duration).From(0).SetEase(enterEase))
+      .Join(bottomUI.GetComponent<RectTransform>().DOScaleY(1f, duration).From(0).SetEase(enterEase))
+      .Insert(duration / 2, topElements.DOFade(1f, duration))
+      .Join(bottomElements.DOFade(1f, duration))
+      .Join(background.DOFade(1f, duration))
+      .Join(sprite.DOFade(1f, duration))
+      .AppendInterval(.5f)
+      .AsyncWaitForCompletion();
 
     GameInputManager.Instance.Actions.UI.DialogueAdvance.performed += AdvanceDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.performed += SkipDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.started += StartSkipHold;
     GameInputManager.Instance.Actions.UI.DialogueSkip.canceled += CancelSkipHold;
+
     middleUI.onClick.AddListener(AdvanceDialogue);
     bottomUI.onClick.AddListener(AdvanceDialogue);
     showLogButton.onClick.AddListener(onShowLogClicked);
@@ -218,12 +256,31 @@ public class CutsceneUIController : MonoBehaviour
 
   void DialogueEnd()
   {
+    GameEventsManager.Instance.dialogueEvents.LeaveDialogue();
+
+    sequence?.Kill();
+    sequence = DOTween.Sequence();
+    sequence.SetUpdate(true);
+
+    sequence
+      .Join(topElements.DOFade(0f, duration / 2))
+      .Join(bottomElements.DOFade(0f, duration / 2))
+      .Join(sprite.DOFade(0f, duration / 2))
+      .Insert(duration / 3, background.DOFade(0f, duration))
+      .Join(topUI.GetComponent<RectTransform>().DOScaleY(0f, duration / 2).SetEase(exitEase))
+      .Join(bottomUI.GetComponent<RectTransform>().DOScaleY(0f, duration / 2).SetEase(exitEase))
+      .OnComplete(CleanupDialogue);
+  }
+
+  void CleanupDialogue()
+  {
     canvas.SetActive(false);
 
     GameInputManager.Instance.Actions.UI.DialogueAdvance.performed -= AdvanceDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.performed -= SkipDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.started -= StartSkipHold;
     GameInputManager.Instance.Actions.UI.DialogueSkip.canceled -= CancelSkipHold;
+
     middleUI.onClick.RemoveAllListeners();
     bottomUI.onClick.RemoveAllListeners();
     showLogButton.onClick.RemoveAllListeners();
@@ -232,7 +289,6 @@ public class CutsceneUIController : MonoBehaviour
     showUIPanel.onClick.RemoveAllListeners();
     autoButton.onClick.RemoveAllListeners();
     skipButton.onClick.RemoveAllListeners();
-    GameEventsManager.Instance.dialogueEvents.LeaveDialogue();
   }
 
   void SkipLine() => skipLine = true;
@@ -250,6 +306,7 @@ public class CutsceneUIController : MonoBehaviour
 
   async void DialogueDisplay(string text, List<string> tags, List<Choice> choices, CancellationToken token)
   {
+    if (sequence.active) await sequence.AsyncWaitForCompletion();
     ClearDialogue();
 
     try
@@ -299,6 +356,8 @@ public class CutsceneUIController : MonoBehaviour
 
     GameEventsManager.Instance.dialogueEvents.SetTypingState(false);
   }
+
+
 
   async Task HandleTags(List<string> tags, CancellationToken token)
   {

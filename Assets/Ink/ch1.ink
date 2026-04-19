@@ -29,11 +29,18 @@ VAR ch1_hallway2_door = 0
 VAR ch1_hallway3_door = 0
 
 === test ===
-#cg: cailonma, 3
-#cg: black, 1
+#cg: black, 3
 You stopped on the vast plain. #bg: dark
 Màn hình máy tính sáng lên trong căn phòng trọ bao bọc trong tĩnh lặng và bóng tối. 
 Chỉ có tiếng nhạc game đơn điệu phát ra từ máy tính cùng âm thanh gõ bàn phím lạch cạch của Nam.
+
+... #speaker:Nam #sprite:nam_thinking
+Cái l #speaker:Nam #sprite:nam_angry
+#cg: cailonma, 3, full
+Thực tập xong rồi. Môn cũng hết rồi. #speaker:Nam #sprite:nam_thinking #bg: black
+Mọi thứ đáng lẽ phải nhẹ nhõm hơn chứ? #speaker:Nam #sprite:nam_thinking
+Vậy mà sao mình lại thấy trống rỗng thế này... #speaker:Nam #sprite:nam_bored
+#cg: cailonma, 2
 -> END
 
 // ----------- Cutscene đầu ch1 ----------

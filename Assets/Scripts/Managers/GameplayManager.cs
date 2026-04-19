@@ -86,6 +86,8 @@ public class GameplayManager : MonoBehaviour
 
     try
     {
+      await Task.Delay(1000); // Simulate cutscene opening animation
+
       await Utility.UnloadAsync(_currentStage);
 
       var loadOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
@@ -129,11 +131,6 @@ public class GameplayManager : MonoBehaviour
     SpawnPlayer();
 
     if (PlayerCam != null) PlayerCam.gameObject.SetActive(true);
-  }
-
-  public bool isCutscene()
-  {
-    return _isCutscene;
   }
 
   public void RegisterStage(StageManager stage) => Stage = stage;

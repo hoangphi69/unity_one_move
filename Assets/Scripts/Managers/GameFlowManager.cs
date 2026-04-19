@@ -143,6 +143,8 @@ public class GameFlowManager : MonoBehaviour
 
     await LoadingScreenUIController.Instance.ShowFadeAsync();
 
+    GameAudioManagger.Instance.StopMusic();
+
     TitleScreenUIController.Instance.CloseEntireUI();
 
     GameDataManager.Instance.NewGame();
