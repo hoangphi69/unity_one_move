@@ -12,6 +12,7 @@ VAR ch1_lobby_door_Interacted = false
 VAR ch1_hallway2_bookshelf_PickedBooks= false
 VAR ch1_hallway2_monitor_hasInteracted = false
 VAR ch1_hallway2_paper_hasRead = false
+VAR item_voucher = false
 
 // BOOKs CHOICE
 VAR ch1_hallway2_bookshelf_book1 = false
@@ -27,21 +28,6 @@ VAR ch1_hallway3_librarian = false
 // VAR ch1_lobby_door = 0
 VAR ch1_hallway2_door = 0
 VAR ch1_hallway3_door = 0
-
-=== test ===
-#cg: black, 3
-You stopped on the vast plain. #bg: dark
-Màn hình máy tính sáng lên trong căn phòng trọ bao bọc trong tĩnh lặng và bóng tối. 
-Chỉ có tiếng nhạc game đơn điệu phát ra từ máy tính cùng âm thanh gõ bàn phím lạch cạch của Nam.
-
-... #speaker:Nam #sprite:nam_thinking
-Cái l #speaker:Nam #sprite:nam_angry
-#cg: cailonma, 3, full
-Thực tập xong rồi. Môn cũng hết rồi. #speaker:Nam #sprite:nam_thinking #bg: black
-Mọi thứ đáng lẽ phải nhẹ nhõm hơn chứ? #speaker:Nam #sprite:nam_thinking
-Vậy mà sao mình lại thấy trống rỗng thế này... #speaker:Nam #sprite:nam_bored
-#cg: cailonma, 2
--> END
 
 // ----------- Cutscene đầu ch1 ----------
 === ch1_Cutscene1 ===
@@ -91,29 +77,29 @@ Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinki
 
 = phone_call
 <i>_"Ting!!!!!"_
-// <i>"Bạn có một thông báo mới từ Discord."
-// <i>"Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
-// <i>"Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
-// <i>"Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
-// Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
-// Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
-// Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
-// Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
-// <i>"Tao quen mày lâu tao mới dám rủ" #speaker:Phong
-// <i>"Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
-// <i>"Thế chú có tính làm ko?" #speaker:Phong 
-// + [Đồng ý]
-//     -> decision
-// + [Lưỡng lự]
-//     ... #speaker:Nam #sprite:nam_confused
-//     Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
-//     -> decision
+<i>"Bạn có một thông báo mới từ Discord."
+<i>"Êy cu, làm <b>đồ án tốt nghiệp</b> với tao ko?" #speaker:Phong 
+<i>"Đằng nào tao với mày cũng xong mấy môn sớm," #speaker:Phong 
+<i>"Thì tại sao hai tụi mình ko làm đồ án sớm luôn chứ nhỉ??" #speaker:Phong
+Uầyyy!!! Nó rủ mình làm đồ án chung này. #speaker:Nam #sprite:nam_surprise
+Cơ mà mình lỡ thất bại thì sao? #speaker:Nam #sprite:nam_thinking
+Nếu mình ko đủ giỏi thì sao? #speaker:Nam #sprite:nam_thinking
+Lỡ mà kéo nó xuống chung với mình thì sao? #speaker:Nam #sprite:nam_thinking
+<i>"Tao quen mày lâu tao mới dám rủ" #speaker:Phong
+<i>"Chứ mấy đứa khác tao không yên tâm. Với lại cũng ngại chết mày ơi!" #speaker:Phong
+<i>"Thế chú có tính làm ko?" #speaker:Phong 
++ [Đồng ý]
+    -> decision
++ [Lưỡng lự]
+    ... #speaker:Nam #sprite:nam_confused
+    Thôi thì đằng nào cũng chả có việc gì làm. #speaker:Nam #sprite:nam_talk
+    -> decision
 
-// = decision
-// <i>"Kay" #speaker:Nam #sprite:nam_talk
-// <i>"Thế thì để tao giúp" #speaker:Nam #sprite:nam_talk
-// <i>"Tao cũng đang rảnh chán" #speaker:Nam #sprite:nam_talk
-// <i>"Công việc thế nào, cộng sự" #speaker:Nam #sprite:nam_smile
+= decision
+<i>"Kay" #speaker:Nam #sprite:nam_talk
+<i>"Thế thì để tao giúp" #speaker:Nam #sprite:nam_talk
+<i>"Tao cũng đang rảnh chán" #speaker:Nam #sprite:nam_talk
+<i>"Công việc thế nào, cộng sự" #speaker:Nam #sprite:nam_smile
 ~ ch1_lobby_phone_AcceptedInvite = true
 -> DONE
 
@@ -217,16 +203,16 @@ Kay. #speaker:Nam #sprite:nam_talk
 
 
 === ch1_Hallway2_bookshelf ===
-// { ch1_hallway2_bookshelf == false:
-//     ~ ch1_hallway2_bookshelf = true
-//     Cả tủ sách chỉ có 3 cuốn là xài được. #speaker:Nam #sprite:nam_thinking
-//     Mình nên lấy cuốn nào đây ta? #speaker:Nam #sprite:nam_talk
-//     -> choose_book
+{ ch1_hallway2_bookshelf == false:
+    ~ ch1_hallway2_bookshelf = true
+    Cả tủ sách chỉ có 3 cuốn là xài được. #speaker:Nam #sprite:nam_thinking
+    Mình nên lấy cuốn nào đây ta? #speaker:Nam #sprite:nam_talk
+    -> choose_book
 
-// - else:
+- else:
     Có một cuốn sách bị thiếu trên kệ có lẽ đang nằm trong tay bạn.
     -> DONE
-// }
+}
 
 = choose_book
 { ch1_hallway2_bookshelf_PickedBooks:
@@ -309,38 +295,38 @@ OKe! #speaker:Phong #sprite:phong_smile
 
 // ----------- Trong map1 hallway3 ----------
 === ch1_Hallway3_librarian ===
-// { ch1_hallway3_librarian == false:
-//     ~ ch1_hallway3_librarian = true
-//     Em kiếm được sách của em chưa? #speaker:Thủ thư #sprite:libarian_talk
-//     Có rồi chị ơi. #speaker:Nam #sprite:nam_talk
-//     Em thấy cuốn này cũng hay nên định mang về đọc thử. #speaker:Nam #sprite:nam_talk
+{ ch1_hallway3_librarian == false:
+    ~ ch1_hallway3_librarian = true
+    Em kiếm được sách của em chưa? #speaker:Thủ thư #sprite:libarian_talk
+    Có rồi chị ơi. #speaker:Nam #sprite:nam_talk
+    Em thấy cuốn này cũng hay nên định mang về đọc thử. #speaker:Nam #sprite:nam_talk
 
-//     ... #speaker:Thủ thư #sprite:libarian_talk
-//     Hướng dẫn làm game à, làm chị nhớ đến khoá trước cũng có người làm đồ án game. #speaker: Thủ thư #sprite:libarian_smile
+    ... #speaker:Thủ thư #sprite:libarian_talk
+    Hướng dẫn làm game à, làm chị nhớ đến khoá trước cũng có người làm đồ án game. #speaker: Thủ thư #sprite:libarian_smile
     
-//     Thật vậy hả chị? #speaker:Nam #sprite:nam_surprise
+    Thật vậy hả chị? #speaker:Nam #sprite:nam_surprise
     
-//     Ừ. #speaker:Thủ thư #sprite:libarian_talk
-//     Mấy bạn đó cũng từng quanh quẩn ở khu cuối thư viện để tìm tài liệu thêm. #speaker:Thủ thư #sprite:libarian_talk
+    Ừ. #speaker:Thủ thư #sprite:libarian_talk
+    Mấy bạn đó cũng từng quanh quẩn ở khu cuối thư viện để tìm tài liệu thêm. #speaker:Thủ thư #sprite:libarian_talk
      
-//     ... #speaker:Nam #sprite:nam_thinking
-//     Vậy từ từ để em xem thêm một vòng thử nha chị. #speaker:Nam #sprite:nam_talk
+    ... #speaker:Nam #sprite:nam_thinking
+    Vậy từ từ để em xem thêm một vòng thử nha chị. #speaker:Nam #sprite:nam_talk
 
-//     Vậy thì chị đánh dấu cuốn này lại cho em trước. #speaker:Thủ thư #sprite:libarian_talk
-//     Có mà lấy thêm sách nhớ quay lại chỗ chị nhá. #speaker:Thủ thư #sprite:libarian_talk
-//     À vâng. #speaker:Nam #sprite:nam_talk
-//     À mà đằng sau có tủ sách tự do ấy! #speaker:Thủ thư #sprite:libarian_talk
-//     Em có thích cuốn sách gì mang về đọc thì cứ lấy. #speaker: Thủ thư #sprite:libarian_smile
-//     Mỗi người được mang 1 cuốn về. #speaker:Thủ thư #sprite:libarian_talk
-//     Còn nếu có sách nào hay thì mang lên chia sẻ cùng mọi người nha. #speaker: Thủ thư #sprite:libarian_smile
-//     Vâng ạ!#speaker:Nam #sprite:nam_talk
+    Vậy thì chị đánh dấu cuốn này lại cho em trước. #speaker:Thủ thư #sprite:libarian_talk
+    Có mà lấy thêm sách nhớ quay lại chỗ chị nhá. #speaker:Thủ thư #sprite:libarian_talk
+    À vâng. #speaker:Nam #sprite:nam_talk
+    À mà đằng sau có tủ sách tự do ấy! #speaker:Thủ thư #sprite:libarian_talk
+    Em có thích cuốn sách gì mang về đọc thì cứ lấy. #speaker: Thủ thư #sprite:libarian_smile
+    Mỗi người được mang 1 cuốn về. #speaker:Thủ thư #sprite:libarian_talk
+    Còn nếu có sách nào hay thì mang lên chia sẻ cùng mọi người nha. #speaker: Thủ thư #sprite:libarian_smile
+    Vâng ạ!#speaker:Nam #sprite:nam_talk
     Em cảm ơn chị! #speaker:Nam #sprite:nam_talk
     -> DONE
 
-// - else:
-//     Nhớ trả sách vào tuần sau nhé. #speaker:Thủ thư #sprite:libarian_talk
-//     -> DONE
-// }
+- else:
+    Nhớ trả sách vào tuần sau nhé. #speaker:Thủ thư #sprite:libarian_talk
+    -> DONE
+}
 
 === ch1_Hallway3_door ===
 {ch1_hallway3_door:
@@ -356,10 +342,11 @@ OKe! #speaker:Phong #sprite:phong_smile
 }
 
 
-// // ----------- Nhặt được vật phẩm ----------
-// === ch1_GetItem ===
-// ->ch2_Lobby
-// -> DONE
+// ----------- Nhặt được vật phẩm ----------
+=== ch1_GetItem ===
+~ item_voucher = true
+Bạn đã nhặt được 1 vật phẩm.
+-> DONE
 
 // ----------- Tại đích ----------
 === ch1_At_Goal ===

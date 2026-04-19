@@ -149,7 +149,7 @@ public class GameFlowManager : MonoBehaviour
 
     GameDataManager.Instance.NewGame();
 
-    string cutscene = "test";
+    string cutscene = "ch1_Cutscene1";
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutscene, DialogueMode.Cutscene);
 
     await Task.Delay(1000);
