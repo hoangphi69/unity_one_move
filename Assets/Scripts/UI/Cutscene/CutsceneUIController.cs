@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using DG.Tweening;
@@ -49,9 +50,10 @@ public class CutsceneUIController : MonoBehaviour
   [SerializeField] private int typingSpeed = 50;
   [SerializeField] private float autoAdvanceDelay = 1.0f; // Seconds
   // State
+  private bool skipLine = false;
+  private bool isCG = false;
   private bool isAutoMode = false;
   private CancellationTokenSource autoAdvanceCTS;
-  private bool skipLine = false;
   private bool isOverlay = false;
   private CancellationTokenSource skipDialogueCTS;
 
@@ -300,6 +302,7 @@ public class CutsceneUIController : MonoBehaviour
   void AdvanceDialogue()
   {
     if (isOverlay) return;
+    if (isCG) return;
     if (isAutoMode) DisableAutoMode();
     GameEventsManager.Instance.dialogueEvents.AdvanceDialogue();
   }
@@ -357,8 +360,6 @@ public class CutsceneUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.SetTypingState(false);
   }
 
-
-
   async Task HandleTags(List<string> tags, CancellationToken token)
   {
     foreach (string tag in tags)
@@ -398,23 +399,14 @@ public class CutsceneUIController : MonoBehaviour
 
   async Task HandleCGTag(string tagValue, CancellationToken token)
   {
-    string[] parts = tagValue.Split(',');
-    string fileName = parts[0].Trim();
+    var parts = tagValue.Split(',');
 
-    float duration = 0f;
-    bool isFull = false;
+    float.TryParse(parts.ElementAtOrDefault(1), out var duration);
+    bool isFull = parts.ElementAtOrDefault(2)?.Trim().Equals("full", StringComparison.OrdinalIgnoreCase) ?? false;
 
-    if (parts.Length > 1)
-    {
-      float.TryParse(parts[1].Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out duration);
-    }
-
-    if (parts.Length > 2)
-    {
-      if (parts[2].Trim().ToLower() == "full") isFull = true;
-    }
-
-    await DisplayCG(fileName, duration, isFull, token);
+    isCG = true;
+    await DisplayCG(parts[0].Trim(), duration, isFull, token);
+    isCG = false;
   }
 
   async Task DisplayCG(string fileName, float duration, bool isFull, CancellationToken token)
