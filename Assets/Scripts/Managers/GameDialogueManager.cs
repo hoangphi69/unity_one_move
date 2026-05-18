@@ -96,7 +96,6 @@ public class GameDialogueManager : MonoBehaviour
     return newInstance?.gameObject;
   }
 
-  // void ContinueDialogue(InputAction.CallbackContext context) => ContinueDialogue();
   void ContinueDialogue()
   {
     if (!dialogueActive) return;
@@ -114,8 +113,13 @@ public class GameDialogueManager : MonoBehaviour
       CancelDisplaying();
       _displaying = new();
 
-      GameEventsManager.Instance.dialogueEvents.DisplayDialogue(
-        story.Continue(),
+      string storyLine = story.Continue();
+
+      while (IsLineBlank(storyLine) && story.canContinue) storyLine = story.Continue();
+
+      if (IsLineBlank(storyLine) && !story.canContinue) GameEventsManager.Instance.dialogueEvents.EndDialogue();
+      else GameEventsManager.Instance.dialogueEvents.DisplayDialogue(
+        storyLine,
         story.currentTags,
         story.currentChoices,
         _displaying.Token
@@ -123,6 +127,8 @@ public class GameDialogueManager : MonoBehaviour
     }
     else GameEventsManager.Instance.dialogueEvents.EndDialogue();
   }
+
+  bool IsLineBlank(string line) => line.Trim().Equals("") || line.Trim().Equals("\n");
 
   void CancelDisplaying()
   {

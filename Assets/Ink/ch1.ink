@@ -31,7 +31,8 @@ VAR ch1_hallway3_door = 0
 
 // ----------- Cutscene đầu ch1 ----------
 === ch1_Cutscene1 ===
-#bg:dom
+#cg:chapter1_title, 3, full
+#cg:black, 3, full
 Màn hình máy tính sáng lên trong căn phòng trọ bao bọc trong tĩnh lặng và bóng tối. 
 Chỉ có tiếng nhạc game đơn điệu phát ra từ máy tính cùng âm thanh gõ bàn phím lạch cạch của Nam.
 
@@ -56,7 +57,6 @@ Vậy mà sao mình lại thấy trống rỗng thế này... #speaker:Nam #spri
 = touchgrass
 Không thể cứ lầm lì mãi một chỗ được. #speaker:Nam #sprite:nam_thinking
 Ra ngoài đường thư giãn đầu óc thôi. #speaker:Nam #sprite:nam_thinking
-#bg:nam_touchgrass
 -> DONE
     
 // ----------- Tại lobby tương tác với điện thoại ----------
