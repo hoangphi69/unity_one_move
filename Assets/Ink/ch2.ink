@@ -79,10 +79,10 @@ Hiện tại bạn có 1 tin nhắn.
 
 = phone_call
 Alo đội kiến trúc sư 3D một thành viên. #speaker:Phong #sprite:phong_talk
-Có việc gấp đây, cần mày xử lý. #speaker:Phong #sprite:phong_talk
-Nhớ cái quán cà phê mày giới thiệu không, ra đó gặp tao. #speaker:Phong #sprite:phong_talk
+Có việc gấp đây, cần ông xử lý. #speaker:Phong #sprite:phong_talk
+Nhớ cái quán cà phê ông giới thiệu không, ra đó gặp tui. #speaker:Phong #sprite:phong_talk
 Ơ... chuyện gì mà gấp thế? #speaker:Nam #sprite:nam_talk
-Model 3D của mày đang có vấn đề, tiện bàn luôn đồ án. #speaker:Phong #sprite:phong_talk
+Model 3D của ông đang có vấn đề, tiện bàn luôn đồ án. #speaker:Phong #sprite:phong_talk45
 À mà lát còn họp với GV, đừng quên. #speaker:Phong #sprite:phong_talk
 Ừ, ra liền. #speaker:Nam #sprite:nam_talk
 -> DONE
@@ -111,60 +111,60 @@ Hiện tại bạn có 0 thông báo.
 === ch2_cutscene1 ===
 //Kohii coffee
 #bg:coffe_shop_morning
-Mày có vẻ mê quán này nhờ. #speaker:Nam #sprite:nam_talk
-Quán này xịn lắm mày ơi. #speaker:Phong #sprite:phong_smile
-Từ lúc mày giới thiệu tao đến giờ tao ra đây suốt. #speaker:Phong #sprite:phong_smile
-Tao đặt sẵn chỗ rồi, ngay gần ổ điện luôn nhá. #speaker:Phong #sprite:phong_talk
+Ông có vẻ mê quán này nhờ. #speaker:Nam #sprite:nam_talk
+Quán này xịn lắm ông ơi. #speaker:Phong #sprite:phong_smile
+Từ lúc ông giới thiệu tui đến giờ tui ra đây suốt. #speaker:Phong #sprite:phong_smile
+Tui đặt sẵn chỗ rồi, ngay gần ổ điện luôn nhá. #speaker:Phong #sprite:phong_talk
 Được, rất là tinh tế đấy nhá. #speaker:Nam #sprite:nam_talk
 
 Ngoài này yên tĩnh thật ấy chứ. #speaker:Phong #sprite:phong_talk
 Hmmm... công nhận. #speaker:Nam #sprite:nam_talk
 Chả có gì ngoài... #speaker:Phong #sprite:phong_talk
-<i><b>20 DÒNG BUG BÁO LỖI mày ơi!!! #speaker:Phong #sprite:phong_panic
+<i><b>20 DÒNG BUG BÁO LỖI ông ơi!!! #speaker:Phong #sprite:phong_panic
 
-Mày xem thử cái demo tao build hôm qua bị vấn đề gì nào. #speaker:Phong #sprite:phong_talk
+Ông xem thử cái demo tui build hôm qua bị vấn đề gì nào. #speaker:Phong #sprite:phong_talk
 ... #speaker:Nam #sprite:nam_thinking
 Ờ... chạy cũng được mà, sao bị lỗi được. #speaker:Nam #sprite:nam_panic
 Từ từ nào, sao cái tường kia mất màu rồi, thêm mấy cái vật này bay lung tung thế? #speaker:Nam #sprite:nam_panic
 
-Ừ... vấn đề đấy, hiện tại một vài model mày làm đang bị lỗi, tao đang cần mày sửa lại cho tao. #speaker:Phong #sprite:phong_talk
-Có đúng lỗi từ model của tao không đấy, đưa tao xem code của mày nào. #speaker:Nam #sprite:nam_talk
-Sao mày viết rối rắm thế, mày viết kiểu này sao tao hiểu được. #speaker:Nam #sprite:nam_angry
-Ừ thì tao viết demo trước, nhưng model của mày vốn đã bị lỗi rồi. #speaker:Phong #sprite:phong_talk
+Ừ... vấn đề đấy, hiện tại một vài model ông làm đang bị lỗi, tui đang cần ông sửa lại cho tui. #speaker:Phong #sprite:phong_talk
+Có đúng lỗi từ model của tui không đấy, đưa tui xem code của ông nào. #speaker:Nam #sprite:nam_talk
+Sao ông viết rối rắm thế, ông viết kiểu này sao tui hiểu được. #speaker:Nam #sprite:nam_angry
+Ừ thì tui viết demo trước, nhưng model của ông vốn đã bị lỗi rồi. #speaker:Phong #sprite:phong_talk
 
 Hmm... #speaker:Nam #sprite:nam_thinking
-Model của mày đang bị lỗi mất texture với vị trí bị bay lung tung đấy, biết không? #speaker:Phong #sprite:phong_talk
-Hmm... thế thì lạ đấy, rõ ràng tao làm bài bản rồi mà. #speaker:Nam #sprite:nam_talk
-Với lại code của mày đang bùi nhùi vậy thì dùng model của tao kiểu gì? #speaker:Nam #sprite:nam_angry
+Model của ông đang bị lỗi mất texture với vị trí bị bay lung tung đấy, biết không? #speaker:Phong #sprite:phong_talk
+Hmm... thế thì lạ đấy, rõ ràng tui làm bài bản rồi mà. #speaker:Nam #sprite:nam_talk
+Với lại code của ông đang bùi nhùi vậy thì dùng model của tui kiểu gì? #speaker:Nam #sprite:nam_angry
 
-Model của mày vốn bị lỗi rồi, tao chỉ đặt vào game là nó lỗi, không phải do code đâu. #speaker:Phong #sprite:phong_angry
-Đống model đấy tao thức mấy đêm làm liên tục mà vẫn bị lỗi được à. #speaker:Nam #sprite:nam_angry
-Ừ thì code của tao cũng thế, ai biết được nó lỗi chỗ nào đâu. #speaker:Phong #sprite:phong_angry
+Model của ông vốn bị lỗi rồi, tui chỉ đặt vào game là nó lỗi, không phải do code đâu. #speaker:Phong #sprite:phong_angry
+Đống model đấy tui thức mấy đêm làm liên tục mà vẫn bị lỗi được à. #speaker:Nam #sprite:nam_angry
+Ừ thì code của tui cũng thế, ai biết được nó lỗi chỗ nào đâu. #speaker:Phong #sprite:phong_angry
 
-Hmmm... để tao check lại model thử, mày có viết logic đúng không đấy!? #speaker:Nam #sprite:nam_angry
+Hmmm... để tui check lại model thử, ông có viết logic đúng không đấy!? #speaker:Nam #sprite:nam_angry
 ... #speaker:Phong #sprite:phong_thinking
-Thế mày có thiết kế đúng tỉ lệ không?! #speaker:Phong #sprite:phong_angry
-Khéo nguyên nhân từ bên mày mà ra ấy!! #speaker:Phong #sprite:phong_angry
+Thế ông có thiết kế đúng tỉ lệ không?! #speaker:Phong #sprite:phong_angry
+Khéo nguyên nhân từ bên ông mà ra ấy!! #speaker:Phong #sprite:phong_angry
 ... #speaker:Nam #sprite:nam_thinking
 
 + [Đề xuất ý tưởng]
     ~ ch2_missed_report = true
     Giờ cả 2 cùng tìm cách giải quyết vấn đề luôn. #speaker:Nam #sprite:nam_talk
-    Cứ thế này thì đồ án năm sau mới báo cáo được mày ơi. #speaker:Nam #sprite:nam_talk
-    Vậy tao sửa phần code, mày sửa phần model đi, giải quyết cả hai vấn đề cùng lúc luôn. #speaker:Phong #sprite:phong_talk
+    Cứ thế này thì đồ án năm sau mới báo cáo được ông ơi. #speaker:Nam #sprite:nam_talk
+    Vậy tui sửa phần code, ông sửa phần model đi, giải quyết cả hai vấn đề cùng lúc luôn. #speaker:Phong #sprite:phong_talk
     Ừ. #speaker:Nam #sprite:nam_talk
     -> DONE
 
 + [...]
     Từ từ nào. #speaker:Phong #sprite:phong_talk
-    Tao với mày có quên gì không? #speaker:Phong #sprite:phong_talk
+    Tui với ông có quên gì không? #speaker:Phong #sprite:phong_talk
     Quên gì? #speaker:Nam #sprite:nam_talk
     ... #speaker:Phong #sprite:phong_thinking
     -> report_with_gv
 
 = report_with_gv
 Đến giờ họp rồi. #speaker:Phong #sprite:phong_talk
-... Ừ, nãy giờ bàn tao quên luôn. #speaker:Nam #sprite:nam_panic
+... Ừ, nãy giờ bàn tui quên luôn. #speaker:Nam #sprite:nam_panic
 Còn đống này chưa sửa xong chứ. #speaker:Nam #sprite:nam_panic
 Agggghhh..... #speaker:Phong #sprite:phong_panic
 Agggghhh..... #speaker:Nam #sprite:nam_panic
@@ -190,7 +190,7 @@ Khổ vì mấy đứa quá rồi đấy! #speaker:GV
 ... #speaker:Nam #sprite:nam_angry
 ... #speaker:Phong #sprite:phong_angry
 "lười" à. #speaker:Nam #sprite:nam_angry
-Tao với mày thức đến 2 giờ sáng mấy đêm liên tục. #speaker:Nam #sprite:nam_angry
+Tui với ông thức đến 2 giờ sáng mấy đêm liên tục. #speaker:Nam #sprite:nam_angry
 MÀ BỊ GỌI LÀ "LƯỜI".  #speaker:Nam #sprite:nam_angry
 Haizz... #speaker:Phong #sprite:phong_sigh
 Thôi đừng quan tâm đến nữa. #speaker:Phong #sprite:phong_sigh
@@ -203,31 +203,31 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
 { ch2_hallway1 :
 -0: 
     Vào việc nào anh bạn. #speaker:Phong #sprite:phong_talk
-    Như mày thấy rồi đấy! #speaker:Phong #sprite:phong_talk
-    Tao dựng map này lấy bối cảnh quán cà phê. #speaker:Phong #sprite:phong_talk
-    Nhưng nó đang bị lỗi gì đó tao chưa rõ. #speaker:Phong #sprite:phong_talk
-    Tao giao lại cho mày nhé? #speaker:Phong #sprite:phong_talk
-    Mày... dựng lại cái quán này trong game? #speaker:Nam #sprite:nam_surprise
-    Ừ, tao thấy quen thuộc thì dễ dựng map hơn. #speaker:Phong #sprite:phong_smile
+    Như ông thấy rồi đấy! #speaker:Phong #sprite:phong_talk
+    Tui dựng map này lấy bối cảnh quán cà phê. #speaker:Phong #sprite:phong_talk
+    Nhưng nó đang bị lỗi gì đó tui chưa rõ. #speaker:Phong #sprite:phong_talk
+    Tui giao lại cho ông nhé? #speaker:Phong #sprite:phong_talk
+    Ông... dựng lại cái quán này trong game? #speaker:Nam #sprite:nam_surprise
+    Ừ, tui thấy quen thuộc thì dễ dựng map hơn. #speaker:Phong #sprite:phong_smile
 
-    Giờ mày mà đi tới cái map tầng trên đấy, trên đấy có lỗi mà tao không biết. #speaker:Phong #sprite:phong_talk
+    Giờ ông mà đi tới cái map tầng trên đấy, trên đấy có lỗi mà tui không biết. #speaker:Phong #sprite:phong_talk
     Sao nhiều model mất hết texture đấy? #speaker:Nam #sprite:nam_confused
-    À thôi tao biết lỗi này rồi. #speaker:Nam #sprite:nam_talk
-    Cái này để tao sửa. #speaker:Nam #sprite:nam_talk
-    Thế thì nhờ mày đấy anh bạn. #speaker:Phong #sprite:phong_talk
+    À thôi tui biết lỗi này rồi. #speaker:Nam #sprite:nam_talk
+    Cái này để tui sửa. #speaker:Nam #sprite:nam_talk
+    Thế thì nhờ ông đấy anh bạn. #speaker:Phong #sprite:phong_talk
     -> DONE
 
 -1: 
-    À này tao quên nói. #speaker:Phong #sprite:phong_talk
-    Tao có thêm chức năng mới là có cái vũng nước đấy, đáng lẽ nó sẽ trượt lên 2 ô nhưng bằng cách nào đấy nó đang bị lỗi trượt hết cả đường đi về phía trước. #speaker:Phong #sprite:phong_talk
-    Tao cũng có lỡ đặt ở trong mấy cái map giải đố. #speaker:Phong #sprite:phong_talk
+    À này tui quên nói. #speaker:Phong #sprite:phong_talk
+    Tui có thêm chức năng mới là có cái vũng nước đấy, đáng lẽ nó sẽ trượt lên 2 ô nhưng bằng cách nào đấy nó đang bị lỗi trượt hết cả đường đi về phía trước. #speaker:Phong #sprite:phong_talk
+    Tui cũng có lỡ đặt ở trong mấy cái map giải đố. #speaker:Phong #sprite:phong_talk
     Nhớ lưu ý nhá. #speaker:Phong #sprite:phong_talk
-    Mà với mày thì chắc tìm được hướng đi mới nhờ vào nó mà nhỉ. #speaker:Phong #sprite:phong_smile
-    Tao tin ở mày.  #speaker:Phong #sprite:phong_smile
+    Mà với ông thì chắc tìm được hướng đi mới nhờ vào nó mà nhỉ. #speaker:Phong #sprite:phong_smile
+    Tui tin ở ông.  #speaker:Phong #sprite:phong_smile
     -> DONE
 
 -else:
-    Sửa hộ tao đóng bùi nhùi đấy nhá. #speaker:Phong #sprite:phong_smile
+    Sửa hộ tui đóng bùi nhùi đấy nhá. #speaker:Phong #sprite:phong_smile
     -> DONE
 }
 
@@ -260,16 +260,16 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
 // Kohii coffee (Unity)
 { ch2_hallway2:
 -0:
-    Tao sửa xong lỗi texture rồi đấy. #speaker:Nam #sprite:nam_talk 
+    Tui sửa xong lỗi texture rồi đấy. #speaker:Nam #sprite:nam_talk 
     Kiểm tra lại trong game thử. #speaker:Nam #sprite:nam_talk 
-    Hmm....Ừm, lỗi texture mày giải quyết xong rồi đấy. #speaker:Phong #sprite:phong_talk
+    Hmm....Ừm, lỗi texture ông giải quyết xong rồi đấy. #speaker:Phong #sprite:phong_talk
     Thế là giải quyết xong rồi nhể, còn lại của m.... #speaker:Nam #sprite:nam_talk
     Chưa thư giãn được đâu anh bạn. #speaker:Phong #sprite:phong_talk
     Phòng kế bên đang bị lỗi mấy cái object đang bay lung tung đấy. #speaker:Phong #sprite:phong_talk
-    Tao cứ đặt model ra là nó cứ bay lung tung. #speaker:Phong #sprite:phong_talk
-    Sửa lại hộ tao nhá. #speaker:Phong #sprite:phong_talk
+    Tui cứ đặt model ra là nó cứ bay lung tung. #speaker:Phong #sprite:phong_talk
+    Sửa lại hộ tui nhá. #speaker:Phong #sprite:phong_talk
     Haizz.. #speaker:Nam #sprite:nam_exhaust
-    Rồi để tao xem thử như nào. #speaker:Nam #sprite:nam_talk
+    Rồi để tui xem thử như nào. #speaker:Nam #sprite:nam_talk
     Ừm, cố lên nhá. #speaker:Phong #sprite:phong_talk
     -> DONE
 -1:
@@ -304,16 +304,16 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
 
 === ch2_hallway3 ===
 // Kohii coffee (Unity)
-Lỗi position tao sửa xong rồi. #speaker:Nam #sprite:nam_talk
+Lỗi position tui sửa xong rồi. #speaker:Nam #sprite:nam_talk
 Object đặt đúng chỗ hết rồi đấy. #speaker:Nam #sprite:nam_talk
 
 Tốt. #speaker:Phong #sprite:phong_talk
-Giờ còn cái map cuối, cái này liên quan đến kỹ thuật hơn nên để tao xử lý luôn. #speaker:Phong #sprite:phong_talk
-Mày nghỉ tay một chút đi. #speaker:Phong #sprite:phong_smile
+Giờ còn cái map cuối, cái này liên quan đến kỹ thuật hơn nên để tui xử lý luôn. #speaker:Phong #sprite:phong_talk
+Ông nghỉ tay một chút đi. #speaker:Phong #sprite:phong_smile
 
-Tao mà nghỉ thì mày làm xong không? #speaker:Nam #sprite:nam_talk
+Tui mà nghỉ thì ông làm xong không? #speaker:Nam #sprite:nam_talk
 Có chứ. #speaker:Phong #sprite:phong_smile
-Tao giỏi mà. #speaker:Phong #sprite:phong_smile
+Tui giỏi mà. #speaker:Phong #sprite:phong_smile
 
 Ủa, Phong! Hôm nay cũng ra đây làm việc à? #speaker:Owner #sprite:owner_smile
 Đúng rồi ạ, hôm nay tụi em ra đây ngồi làm đồ án. #speaker:Phong #sprite:phong_smile
@@ -403,6 +403,6 @@ Mai hai đứa tới ủng hộ chị tiếp nha. #speaker:Owner #sprite:owner_t
 Càng đông càng vui mà. #speaker:Owner #sprite:owner_smile
 
 
-Chị chủ quán nhiệt tình quá mày ơi. #speaker:Nam #sprite:nam_smile
-Mày hiểu tại sao tao thích quán này rồi đấy, dù mày là ngưởi giới thiệu cho tao. #speaker:Phong #sprite:phong_smile
+Chị chủ quán nhiệt tình quá ông ơi. #speaker:Nam #sprite:nam_smile
+Ông hiểu tại sao tui thích quán này rồi đấy, dù ông là ngưởi giới thiệu cho tui. #speaker:Phong #sprite:phong_smile
 -> DONE
