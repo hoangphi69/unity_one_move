@@ -322,7 +322,7 @@ Ngày nào cũng thấy Phong ở đây nha. #speaker:Owner #sprite:owner_talk
 Chị nhớ order của em luôn à. #speaker:Phong #sprite:phong_suprise
 Khách ruột của chị mà. #speaker:Owner #sprite:owner_smile
 
-{ item_voucher == true:
+// { item_voucher == true:
     À chị ơi. #speaker:Phong #sprite:phong_smile
     Bữa nay em mang theo voucher nha chị. #speaker:Phong #sprite:phong_smile
     Voucher mình nhặt được ở thư viện à. #speaker:Nam #sprite:nam_thinking
@@ -337,7 +337,7 @@ Khách ruột của chị mà. #speaker:Owner #sprite:owner_smile
     Hiện tại chị đang hết nguyên liệu, chị còn phải trông quán. #speaker:Owner #sprite:owner_talk 
     Em lấy nguyên liệu giúp chị nha, ở trong nhà kho bên cạnh đấy. #speaker:Owner #sprite:owner_talk 
     Oke chị. #speaker:Phong #sprite:phong_smile
-}
+// }
 
 // Chị chủ quán nhìn sang Nam
 Bạn của Phong à? #speaker:Owner #sprite:owner_talk

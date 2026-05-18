@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,6 +25,8 @@ public class GameplayManager : MonoBehaviour
   public PlayerController ActivePlayer { get; private set; }
 
   [SerializeField] private CinemachineCamera playerCameraPrefab;
+  [SerializeField] private float titleFOV = 6.5f;
+  [SerializeField] private float gameplayFOV = 4.5f;
   public CinemachineCamera PlayerCam { get; private set; }
   public CameraMode cameraMode = CameraMode.A;
   public Action<CameraMode> OnCameraSwitch;
@@ -74,11 +77,17 @@ public class GameplayManager : MonoBehaviour
     };
 
     GameEventsManager.Instance.dialogueEvents.onLeaveDialogue += cutSceneEnd;
+
+    HUDOverlayUIController.Instance.Hide();
+
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutsceneKnot, DialogueMode.Cutscene);
+
     GameAudioManagger.Instance.StopMusic();
 
     try
     {
+      await Task.Delay(1000); // Simulate cutscene opening animation
+
       await Utility.UnloadAsync(_currentStage);
 
       var loadOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
@@ -98,10 +107,9 @@ public class GameplayManager : MonoBehaviour
         await ActivePlayer.PlayMusic();
         GameAudioManagger.Instance.PlayMusic(Stage.radioTrack);
       }
-      else
-      {
-        GameAudioManagger.Instance.StopMusic();
-      }
+      else GameAudioManagger.Instance.StopMusic();
+
+      HUDOverlayUIController.Instance.Show();
 
       GameInputManager.Instance.SetState(InputState.Gameplay);
     }
@@ -125,11 +133,6 @@ public class GameplayManager : MonoBehaviour
     if (PlayerCam != null) PlayerCam.gameObject.SetActive(true);
   }
 
-  public bool isCutscene()
-  {
-    return _isCutscene;
-  }
-
   public void RegisterStage(StageManager stage) => Stage = stage;
 
   void InitializePlayerCam()
@@ -145,6 +148,17 @@ public class GameplayManager : MonoBehaviour
     if (PlayerCam == null) return;
     PlayerCam.Follow = target;
     PlayerCam.LookAt = target;
+  }
+
+  public void ZoomCamera(bool isZoomed)
+  {
+    if (PlayerCam == null) return;
+    float targetFOV = isZoomed ? gameplayFOV : titleFOV;
+    DOTween.To(() => PlayerCam.Lens.OrthographicSize,
+               x => PlayerCam.Lens.OrthographicSize = x,
+               targetFOV,
+               .5f)
+            .SetEase(Ease.InOutSine);
   }
 
   void SwitchCamera()

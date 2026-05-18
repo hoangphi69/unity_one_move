@@ -5,6 +5,17 @@ using UnityEngine;
 
 public enum DialogueMode { Cutscene, InGame }
 
+public class DialogueAsset
+{
+  public const string SPEAKER_TAG = "speaker";
+  public const string SPRITE_TAG = "sprite";
+  public const string SPRITE_DIR = "Sprites/";
+  public const string BG_TAG = "bg";
+  public const string BG_DIR = "Sprites/Backgrounds/";
+  public const string CG_TAG = "cg";
+  public const string CG_DIR = "Sprites/Backgrounds/";
+}
+
 public class GameDialogueManager : MonoBehaviour
 {
   [Header("Ink Story")]

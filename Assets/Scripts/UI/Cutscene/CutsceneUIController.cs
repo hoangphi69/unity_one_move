@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class CutsceneUIController : MonoBehaviour
 
   [Header("Bottom UI")]
   [SerializeField] private Button bottomUI;
+  [SerializeField] private CanvasGroup bottomElements;
   [SerializeField] private TextMeshProUGUI dialogueLine;
   [SerializeField] private GameObject speakerBox;
   [SerializeField] private TextMeshProUGUI speaker;
@@ -32,6 +34,8 @@ public class CutsceneUIController : MonoBehaviour
   [SerializeField] private GameObject choicePrefab;
 
   [Header("Top UI")]
+  [SerializeField] private GameObject topUI;
+  [SerializeField] private CanvasGroup topElements;
   [SerializeField] private Button showLogButton;
   [SerializeField] private Button hideLogButton;
   [SerializeField] private Button autoButton;
@@ -51,12 +55,12 @@ public class CutsceneUIController : MonoBehaviour
   private bool isOverlay = false;
   private CancellationTokenSource skipDialogueCTS;
 
-  private const string SPEAKER_TAG = "speaker";
-  private const string SPRITE_TAG = "sprite";
-  private const string BG_TAG = "bg";
-  private const string SPRITE_DIR = "Sprites/";
-  private const string BG_SPRITE_FALLBACK = "Sprites/CutsceneDialogue/bg_fallback";
+  [Header("Animation")]
+  [SerializeField] private float duration = 0.3f;
+  [SerializeField] private Ease enterEase = Ease.OutCubic; // Smooth deceleration
+  [SerializeField] private Ease exitEase = Ease.OutCubic;   // Smooth acceleration
 
+  private Sequence sequence;
 
   void OnEnable()
   {
@@ -198,21 +202,48 @@ public class CutsceneUIController : MonoBehaviour
 
   void onSkipClicked()
   {
-    // TODO: implement confirm box;
-    DialogueEnd();
+    ConfirmOverlayUIController.Instance.Show(
+      "Skip cutscene",
+      "Are you sure you want to skip this cutscene?",
+      onConfirm: DialogueEnd
+    );
   }
 
-  void DialogueStart(DialogueMode mode)
+  async void DialogueStart(DialogueMode mode)
   {
     if (mode != DialogueMode.Cutscene) return;
     ClearDialogue();
     logPanel.ClearEntries();
+
+    // 1. Instantly set starting states (invisible / scaled to 0) to prevent 1-frame flickering
+    background.DOFade(0f, 0f);
+    sprite.DOFade(0f, 0f);
+    topElements.alpha = 0f;
+    bottomElements.alpha = 0f;
+
     canvas.SetActive(true);
+
+    // 2. Play Entrance Animation
+    sequence?.Kill();
+    sequence = DOTween.Sequence();
+    sequence.SetUpdate(true); // Optional: Run on unscaled time if timeScale is paused
+
+    // Scale panels and fade background/sprite at the same time
+    await sequence
+      .Join(topUI.GetComponent<RectTransform>().DOScaleY(1f, duration).From(0).SetEase(enterEase))
+      .Join(bottomUI.GetComponent<RectTransform>().DOScaleY(1f, duration).From(0).SetEase(enterEase))
+      .Insert(duration / 2, topElements.DOFade(1f, duration))
+      .Join(bottomElements.DOFade(1f, duration))
+      .Join(background.DOFade(1f, duration))
+      .Join(sprite.DOFade(1f, duration))
+      .AppendInterval(.5f)
+      .AsyncWaitForCompletion();
 
     GameInputManager.Instance.Actions.UI.DialogueAdvance.performed += AdvanceDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.performed += SkipDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.started += StartSkipHold;
     GameInputManager.Instance.Actions.UI.DialogueSkip.canceled += CancelSkipHold;
+
     middleUI.onClick.AddListener(AdvanceDialogue);
     bottomUI.onClick.AddListener(AdvanceDialogue);
     showLogButton.onClick.AddListener(onShowLogClicked);
@@ -225,12 +256,31 @@ public class CutsceneUIController : MonoBehaviour
 
   void DialogueEnd()
   {
+    GameEventsManager.Instance.dialogueEvents.LeaveDialogue();
+
+    sequence?.Kill();
+    sequence = DOTween.Sequence();
+    sequence.SetUpdate(true);
+
+    sequence
+      .Join(topElements.DOFade(0f, duration / 2))
+      .Join(bottomElements.DOFade(0f, duration / 2))
+      .Join(sprite.DOFade(0f, duration / 2))
+      .Insert(duration / 3, background.DOFade(0f, duration))
+      .Join(topUI.GetComponent<RectTransform>().DOScaleY(0f, duration / 2).SetEase(exitEase))
+      .Join(bottomUI.GetComponent<RectTransform>().DOScaleY(0f, duration / 2).SetEase(exitEase))
+      .OnComplete(CleanupDialogue);
+  }
+
+  void CleanupDialogue()
+  {
     canvas.SetActive(false);
 
     GameInputManager.Instance.Actions.UI.DialogueAdvance.performed -= AdvanceDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.performed -= SkipDialogue;
     GameInputManager.Instance.Actions.UI.DialogueSkip.started -= StartSkipHold;
     GameInputManager.Instance.Actions.UI.DialogueSkip.canceled -= CancelSkipHold;
+
     middleUI.onClick.RemoveAllListeners();
     bottomUI.onClick.RemoveAllListeners();
     showLogButton.onClick.RemoveAllListeners();
@@ -239,7 +289,6 @@ public class CutsceneUIController : MonoBehaviour
     showUIPanel.onClick.RemoveAllListeners();
     autoButton.onClick.RemoveAllListeners();
     skipButton.onClick.RemoveAllListeners();
-    GameEventsManager.Instance.dialogueEvents.LeaveDialogue();
   }
 
   void SkipLine() => skipLine = true;
@@ -255,16 +304,17 @@ public class CutsceneUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.AdvanceDialogue();
   }
 
-  async void DialogueDisplay(string text, List<string> tags, List<Choice> inkChoices, CancellationToken token)
+  async void DialogueDisplay(string text, List<string> tags, List<Choice> choices, CancellationToken token)
   {
+    if (sequence.active) await sequence.AsyncWaitForCompletion();
     ClearDialogue();
-    DisplayTags(tags);
-    LogEntry(text, tags);
 
     try
     {
+      await HandleTags(tags, token);
+      LogEntry(text, tags);
       await DisplayTypingText(text, token);
-      DisplayChoices(inkChoices);
+      DisplayChoices(choices);
       advanceIndicator.gameObject.SetActive(true);
       if (isAutoMode) _ = StartAutoAdvanceTimer();
     }
@@ -307,7 +357,9 @@ public class CutsceneUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.SetTypingState(false);
   }
 
-  void DisplayTags(List<string> tags)
+
+
+  async Task HandleTags(List<string> tags, CancellationToken token)
   {
     foreach (string tag in tags)
     {
@@ -319,27 +371,70 @@ public class CutsceneUIController : MonoBehaviour
 
       switch (key)
       {
-        case SPEAKER_TAG:
+        case DialogueAsset.SPEAKER_TAG:
           speaker.text = value;
           speakerBox.SetActive(true);
           break;
-        case SPRITE_TAG:
-          Sprite charSprite = Resources.Load<Sprite>(SPRITE_DIR + value);
+
+        case DialogueAsset.SPRITE_TAG:
+          Sprite charSprite = Resources.Load<Sprite>(DialogueAsset.SPRITE_DIR + value);
           if (charSprite == null) Debug.LogWarning("Character sprite not found: " + value);
           sprite.sprite = charSprite;
           sprite.gameObject.SetActive(true);
           break;
-        case BG_TAG:
-          Sprite bgSprite = Resources.Load<Sprite>(SPRITE_DIR + value);
-          if (bgSprite != null) background.sprite = bgSprite;
-          else
-          {
-            Debug.LogWarning("Background sprite not found: " + value);
-            background.sprite = Resources.Load<Sprite>(BG_SPRITE_FALLBACK);
-          }
+
+        case DialogueAsset.BG_TAG:
+          Sprite bgSprite = Resources.Load<Sprite>(DialogueAsset.BG_DIR + value);
+          if (bgSprite == null) Debug.LogWarning("Background sprite not found: " + value);
+          background.sprite = bgSprite;
+          break;
+
+        case DialogueAsset.CG_TAG:
+          await HandleCGTag(value, token);
           break;
       }
     }
+  }
+
+  async Task HandleCGTag(string tagValue, CancellationToken token)
+  {
+    string[] parts = tagValue.Split(',');
+    string fileName = parts[0].Trim();
+
+    float duration = 0f;
+    bool isFull = false;
+
+    if (parts.Length > 1)
+    {
+      float.TryParse(parts[1].Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out duration);
+    }
+
+    if (parts.Length > 2)
+    {
+      if (parts[2].Trim().ToLower() == "full") isFull = true;
+    }
+
+    await DisplayCG(fileName, duration, isFull, token);
+  }
+
+  async Task DisplayCG(string fileName, float duration, bool isFull, CancellationToken token)
+  {
+    Sprite cg = Resources.Load<Sprite>(DialogueAsset.CG_DIR + fileName);
+    if (cg == null)
+    {
+      Debug.LogWarning("CG not found: " + fileName);
+      return;
+    }
+
+    background.sprite = cg;
+
+    if (duration <= 0f) return;
+
+    if (isFull) mainUIPanel.SetActive(false);
+
+    try { await Task.Delay((int)(duration * 1000), token); }
+    catch (OperationCanceledException) { }
+    finally { if (isFull) mainUIPanel.SetActive(true); }
   }
 
   void DisplayChoices(List<Choice> inkChoices)
@@ -378,7 +473,7 @@ public class CutsceneUIController : MonoBehaviour
       foreach (string tag in tags)
       {
         string[] splitTag = tag.Split(':');
-        if (splitTag.Length >= 2 && splitTag[0].Trim() == SPEAKER_TAG)
+        if (splitTag.Length >= 2 && splitTag[0].Trim() == DialogueAsset.SPEAKER_TAG)
         {
           speakerName = splitTag[1].Trim();
           break;
