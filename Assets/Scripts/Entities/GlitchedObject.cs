@@ -39,7 +39,7 @@ public class GlitchedObject : MonoBehaviour
     isTransforming = true;
 
     // 1. Play the glitch fixing animation
-    animator.Play("Fix");
+    animator.CrossFade("Fix", .1f);
 
     // 2. Wait for the animation to finish. Task.Delay takes milliseconds.
     await Task.Delay(Mathf.RoundToInt(animationDuration * 1000));
