@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bce45a85f1ae7ba47b7ef026bfcc65d7
+guid: 85b992b05f692b04a8ce43078d6127cd
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,13 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: SmallPlant
-    second: {fileID: 2100000, guid: a9cfc5e92f397cd4b93bb3282c0054df, type: 2}
+      name: Canvas
+    second: {fileID: 2100000, guid: 67d64a444425d464c8a418a026593545, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Canvas_Face
+    second: {fileID: 2100000, guid: f77b130bc55e83d4286383442f6af004, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: smallPlant
-    second: {fileID: 2800000, guid: 29152c939e69e234ab9b48a69f0cafde, type: 3}
+      name: canvas
+    second: {fileID: 2800000, guid: 2c321feb9e06b2b469462d84bff4a9f2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: elring_cavas
+    second: {fileID: 2800000, guid: a75eed5648097934f8a0616e986fe05f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +50,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

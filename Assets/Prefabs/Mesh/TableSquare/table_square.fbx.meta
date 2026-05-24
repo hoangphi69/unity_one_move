@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bce45a85f1ae7ba47b7ef026bfcc65d7
+guid: 02942ba9f59df5941acd0b1dc182c93d
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,13 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: SmallPlant
-    second: {fileID: 2100000, guid: a9cfc5e92f397cd4b93bb3282c0054df, type: 2}
+      name: TableSquare
+    second: {fileID: 2100000, guid: e486c2bc86963f945b88f532d5d38b4f, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: smallPlant
-    second: {fileID: 2800000, guid: 29152c939e69e234ab9b48a69f0cafde, type: 3}
+      name: table_square
+    second: {fileID: 2800000, guid: 5f9f327776460664db8fb3075cf7b78f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +40,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
