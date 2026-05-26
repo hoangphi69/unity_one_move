@@ -3,22 +3,7 @@ guid: 3fb071f4f41c61043bcafea70ea989d6
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: brick
-    second: {fileID: 2100000, guid: 4bdefcdaf2afdd64f9388bd942655141, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: chair_long
-    second: {fileID: 2800000, guid: 502dbb34c7303ce4f8026e33dd556bb2, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: white_brick
-    second: {fileID: 2800000, guid: df3f599a6ded31f47a677ae5f7c027e6, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

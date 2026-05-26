@@ -5,15 +5,10 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
-      type: UnityEngine:Material
+      type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Canvas.001
-    second: {fileID: 2100000, guid: 67d64a444425d464c8a418a026593545, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Canvas_Face.001
-    second: {fileID: 2100000, guid: acf92e52ae3218c48872b8a6dbc6a389, type: 2}
+      name: bocchi_canvas
+    second: {fileID: 2800000, guid: 237074c5605058647b820f77bd20a573, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
