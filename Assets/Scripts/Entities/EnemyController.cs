@@ -9,8 +9,18 @@ public class EnemyController : MonoBehaviour
   [SerializeField] float sightDistance = 10f;
   private float raycastHeight = .3f;
 
+  [Header("Grid")]
+  private string tileAsset = "Sprites/Icon/tile_enemy";
+  [SerializeField] private float heightOffset = 0.03f;
+  private GameObject indicatorTile;
+
   private bool isMoving = false;
   private Vector3[] sightDirections = { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
+
+  void Awake()
+  {
+    CreateIndicatorTile();
+  }
 
   void Start()
   {
@@ -61,9 +71,25 @@ public class EnemyController : MonoBehaviour
     return null;
   }
 
+  void CreateIndicatorTile()
+  {
+    GameObject indicator = new("indicator");
+
+    indicator.transform.SetParent(transform);
+    indicator.transform.localPosition = new Vector3(0, heightOffset, 0);
+    indicator.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+    indicator.transform.localScale = new Vector3(.9f, .9f, 1f);
+
+    indicatorTile = indicator;
+
+    SpriteRenderer sr = indicator.AddComponent<SpriteRenderer>();
+    sr.sprite = Resources.Load<Sprite>(tileAsset);
+  }
+
   void Rotate(Vector3 direction)
   {
     transform.rotation = Quaternion.LookRotation(direction);
+    indicatorTile.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
   }
 
   async Task TryMove(Vector3 direction)

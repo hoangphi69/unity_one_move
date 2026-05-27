@@ -159,6 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb79e8c9a1ba249cd9d5ffec3e485a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  playerTile: {fileID: 21300000, guid: ea10c1f018c4ed6458fae414dd4abfdf, type: 3}
+  heightOffset: 0.02
   godMode: 0
   showRaycast: 0
   showTrail: 0

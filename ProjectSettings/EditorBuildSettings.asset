@@ -30,23 +30,26 @@ EditorBuildSettings:
     path: Assets/Scenes/chapter1_puzzle3.unity
     guid: be3f1332206a3714eac718117e871586
   - enabled: 1
+    path: Assets/Scenes/chapter2_hallway1.unity
+    guid: 957984a567eb4464fa6302c19d70cf73
+  - enabled: 1
+    path: Assets/Scenes/chapter2_hallway2.unity
+    guid: c5219dde93bdc3140b50118660f589b2
+  - enabled: 1
+    path: Assets/Scenes/chapter2_hallway3.unity
+    guid: 3413123598a08044582bd338fbc16d63
+  - enabled: 1
+    path: Assets/Scenes/chapter2_puzzle1.unity
+    guid: 5e1b48c8ffa48f0489a9533c8c269c72
+  - enabled: 1
+    path: Assets/Scenes/chapter2_puzzle2.unity
+    guid: 98bd9e914b56e7b4c90e78cc85e6e4f2
+  - enabled: 1
+    path: Assets/Scenes/chapter2_puzzle3.unity
+    guid: 9e9030a6f3506ff41b9dd6704dcff63b
+  - enabled: 1
     path: Assets/Scenes/gameplay_test.unity
     guid: b68b7e6d3523b497392ed6be411c1b67
-  - enabled: 0
-    path: Assets/Scenes/Gameplay_3.unity
-    guid: 4435dc28d65a949419a260efcaa6e2ca
-  - enabled: 0
-    path: Assets/Scenes/Gameplay_4.unity
-    guid: 821b8053321204f6889e6631d4f8931a
-  - enabled: 0
-    path: Assets/Scenes/Lobby_2.unity
-    guid: 3fb53c59d05534f9696d9241508856ee
-  - enabled: 0
-    path: Assets/Scenes/Lobby_3.unity
-    guid: e15a3909c85fe422dadf5f2f10eeb06d
-  - enabled: 0
-    path: Assets/Scenes/Lobby_4.unity
-    guid: 6fa1ca7d275ae482b979ba2001490db7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
