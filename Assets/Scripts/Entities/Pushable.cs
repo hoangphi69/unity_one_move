@@ -58,13 +58,10 @@ public class Pushable : MonoBehaviour
 
         if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
         {
-            if (hit.collider.TryGetComponent(out Obstacle obstacle))
+            if (hit.collider)
             {
-                if (obstacle.BlockPlayer)
-                {
-                    await BlockPlayer();
-                    return;
-                }
+                await BlockPlayer();
+                return;
             }
         }
 

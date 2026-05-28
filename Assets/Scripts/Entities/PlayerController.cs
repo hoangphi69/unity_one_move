@@ -30,8 +30,6 @@ public class PlayerController : MonoBehaviour
 
     private GameObject indicatorTile;
 
-    [SerializeField] private bool onSkipTile = false;
-
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -276,13 +274,7 @@ public class PlayerController : MonoBehaviour
         HUDOverlayUIController.Instance.SetStepLeft(-1);
 
         // Shake camera
-        if (shake)
-        {
-            var bumped = GetComponent<CinemachineImpulseSource>();
-            float bumpedDirection = direction.z != 0 ? direction.z : -direction.x;
-            bumped.DefaultVelocity = new Vector3(bumpedDirection, 1f, 0f);
-            bumped.GenerateImpulse(.1f);
-        }
+        if (shake) CameraBump(direction);
 
         // --- SAVE TRAIL BEFORE RESTART ---
         PathTrailManager.ArchiveCurrentTrail(maxTrails);
@@ -293,6 +285,14 @@ public class PlayerController : MonoBehaviour
         await Task.Delay(1000);
 
         GameEventsManager.Instance.turnEvents.RestartStage();
+    }
+
+    void CameraBump(Vector3 direction)
+    {
+        var bumped = GetComponent<CinemachineImpulseSource>();
+        float bumpedDirection = direction.z != 0 ? direction.z : -direction.x;
+        bumped.DefaultVelocity = new Vector3(bumpedDirection, 1f, 0f);
+        bumped.GenerateImpulse(.1f);
     }
 
     public async Task PlayMusic()
