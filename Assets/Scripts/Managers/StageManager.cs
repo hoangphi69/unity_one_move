@@ -33,7 +33,6 @@ public class StageManager : MonoBehaviour
   private List<EnemyController> activeEnemies = new();
   public int stepLeft { get; private set; }
 
-
   void Awake()
   {
     stepLeft = maxStep;
@@ -54,6 +53,7 @@ public class StageManager : MonoBehaviour
 
     GameEventsManager.Instance.turnEvents.onPlayerTurnEnd += PlayerTurnEnd;
     GameEventsManager.Instance.turnEvents.onEnemyTurnEnd += EnemyTurnEnd;
+    GameEventsManager.Instance.turnEvents.onStageFinished += StageFinished;
   }
 
   void OnDisable()
@@ -62,6 +62,7 @@ public class StageManager : MonoBehaviour
 
     GameEventsManager.Instance.turnEvents.onPlayerTurnEnd -= PlayerTurnEnd;
     GameEventsManager.Instance.turnEvents.onEnemyTurnEnd -= EnemyTurnEnd;
+    GameEventsManager.Instance.turnEvents.onStageFinished -= StageFinished;
   }
 
   public void RegisterEnemy(EnemyController enemy)
@@ -126,5 +127,12 @@ public class StageManager : MonoBehaviour
         cameraB.Priority = 2;
         break;
     }
+  }
+
+  void StageFinished()
+  {
+    if (cameraA == null || cameraB == null) return;
+    cameraA.Priority = -1;
+    cameraB.Priority = -1;
   }
 }

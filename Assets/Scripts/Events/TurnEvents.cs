@@ -11,4 +11,7 @@ public class TurnEvents
 
   public event Action onStageRestart;
   public void RestartStage() => onStageRestart?.Invoke();
+
+  public event Action onStageFinished;
+  public void StageFinished() => onStageFinished?.Invoke();
 }

@@ -34,6 +34,7 @@ public class Gateway : MonoBehaviour
   {
     if (isOpen) return;
     isOpen = true;
+    GameEventsManager.Instance.turnEvents.StageFinished();
     await PlayAnimation();
     await Transition();
   }

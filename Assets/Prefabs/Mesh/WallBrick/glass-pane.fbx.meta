@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: ef1b83ae4c49d01439b149a7f7c1e334
+guid: dde2b4181ee82d2489e0a451eda060b6
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FloorYellow
-    second: {fileID: 2100000, guid: 789cb9feea115744e9f426611029bd93, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: floor_yellow
-    second: {fileID: 2800000, guid: 84625ccabc9c8364699330c6776459ae, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

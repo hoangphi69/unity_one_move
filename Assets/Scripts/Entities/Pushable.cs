@@ -8,9 +8,13 @@ public class Pushable : MonoBehaviour
     private Collide collide;
     private bool isSliding = false;
 
+    private string tileAsset = "Sprites/Icon/tile_pushable";
+    private float heightOffset = 0.02f;
+
     void Awake()
     {
         collide = GetComponent<Collide>();
+        CreateIndicatorTile();
     }
 
     void OnEnable()
@@ -21,6 +25,19 @@ public class Pushable : MonoBehaviour
     void OnDisable()
     {
         collide.OnCollided -= TryMove;
+    }
+
+    void CreateIndicatorTile()
+    {
+        GameObject indicator = new("indicator");
+
+        indicator.transform.SetParent(transform);
+        indicator.transform.localPosition = new Vector3(0, heightOffset, 0);
+        indicator.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        indicator.transform.localScale = new Vector3(.9f, .9f, 1f);
+
+        SpriteRenderer sr = indicator.AddComponent<SpriteRenderer>();
+        sr.sprite = Resources.Load<Sprite>(tileAsset);
     }
 
     async void TryMove(Vector3 direction)
@@ -41,13 +58,10 @@ public class Pushable : MonoBehaviour
 
         if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
         {
-            if (hit.collider.TryGetComponent(out Obstacle obstacle))
+            if (hit.collider)
             {
-                if (obstacle.BlockPlayer)
-                {
-                    await BlockPlayer();
-                    return;
-                }
+                await BlockPlayer();
+                return;
             }
         }
 

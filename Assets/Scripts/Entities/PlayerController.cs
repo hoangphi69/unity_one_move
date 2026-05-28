@@ -8,6 +8,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Grid")]
+    [SerializeField] private Sprite playerTile;
+    [SerializeField] private float heightOffset = 0.02f;
+
     // Configs
     [Header("Debug")]
     [SerializeField] private bool godMode = false;
@@ -24,11 +28,12 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
-    [SerializeField] private bool onSkipTile = false;
+    private GameObject indicatorTile;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        CreateIndicatorTile();
     }
 
     void OnEnable()
@@ -43,6 +48,22 @@ public class PlayerController : MonoBehaviour
         GameInputManager.Instance.Actions.Player.Move.performed -= TakeTurn;
         GameInputManager.Instance.Actions.Player.Interact.started -= Interact;
         GameEventsManager.Instance.turnEvents.onStageRestart -= ArchiveTrail;
+    }
+
+    void CreateIndicatorTile()
+    {
+        GameObject indicator = new("indicator");
+
+        indicator.transform.SetParent(transform);
+        indicator.transform.localPosition = new Vector3(0, heightOffset, 0);
+        indicator.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        indicator.transform.localScale = new Vector3(.9f, .9f, 1f);
+
+        indicatorTile = indicator;
+
+        if (playerTile == null) return;
+        SpriteRenderer sr = indicator.AddComponent<SpriteRenderer>();
+        sr.sprite = playerTile;
     }
 
     async void TakeTurn(InputAction.CallbackContext ctx)
@@ -81,30 +102,33 @@ public class PlayerController : MonoBehaviour
     {
         animator.CrossFade("move", .1f, 0, 0f);
 
+        // Calculate distance
         Vector3 location;
-        if (OnSkipTile()) location = GetSlideDestination(direction);
+        if (OnPuddle(out Puddle puddle)) location = GetSlideDestination(direction);
         else location = transform.position + (direction * GameplayManager.Instance.cellSize);
 
-        // --- DEBUG TRAIL ---
-        PathTrailManager.AddStep(transform.position, location, raycastHeight, showTrail);
+        PathTrailManager.AddStep(transform.position, location, raycastHeight, showTrail); // DEBUG TRAIL
 
         Task move = Move(location, destroyCancellationToken);
         GameEventsManager.Instance.turnEvents.PlayerTurnEnd(move);
         await move;
+
+        if (puddle != null) puddle.DetachAndFade(destroyCancellationToken);
     }
 
-    private bool OnSkipTile()
+    private bool OnPuddle(out Puddle activePuddle)
     {
-        // Start slightly above the player's base
+        activePuddle = null;
+
         Vector3 origin = transform.position + (Vector3.up * raycastHeight);
 
-        // Raycast straight down. (raycastHeight + 0.5f) ensures it reaches the floor collider
+        // Raycast straight down
         if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, raycastHeight + 0.5f))
         {
-            // If the floor we hit has the SkipperTile component, we are on ice!
-            if (hit.collider.TryGetComponent(out Puddle skipper))
+            if (hit.collider.TryGetComponent(out Puddle puddle))
             {
-                Destroy(skipper.gameObject);
+                puddle.AttachTrailTo(transform);
+                activePuddle = puddle;
                 return true;
             }
         }
@@ -197,6 +221,7 @@ public class PlayerController : MonoBehaviour
     void Rotate(Vector3 direction)
     {
         transform.rotation = Quaternion.LookRotation(direction);
+        indicatorTile.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
     }
 
     void ScanSurroundings()
@@ -249,13 +274,7 @@ public class PlayerController : MonoBehaviour
         HUDOverlayUIController.Instance.SetStepLeft(-1);
 
         // Shake camera
-        if (shake)
-        {
-            var bumped = GetComponent<CinemachineImpulseSource>();
-            float bumpedDirection = direction.z != 0 ? direction.z : -direction.x;
-            bumped.DefaultVelocity = new Vector3(bumpedDirection, 1f, 0f);
-            bumped.GenerateImpulse(.1f);
-        }
+        if (shake) CameraBump(direction);
 
         // --- SAVE TRAIL BEFORE RESTART ---
         PathTrailManager.ArchiveCurrentTrail(maxTrails);
@@ -266,6 +285,14 @@ public class PlayerController : MonoBehaviour
         await Task.Delay(1000);
 
         GameEventsManager.Instance.turnEvents.RestartStage();
+    }
+
+    void CameraBump(Vector3 direction)
+    {
+        var bumped = GetComponent<CinemachineImpulseSource>();
+        float bumpedDirection = direction.z != 0 ? direction.z : -direction.x;
+        bumped.DefaultVelocity = new Vector3(bumpedDirection, 1f, 0f);
+        bumped.GenerateImpulse(.1f);
     }
 
     public async Task PlayMusic()
