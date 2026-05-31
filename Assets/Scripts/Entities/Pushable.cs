@@ -31,10 +31,10 @@ public class Pushable : MonoBehaviour
     {
         GameObject indicator = new("indicator");
 
+        indicator.transform.localScale = new Vector3(.9f, .9f, 1f);
         indicator.transform.SetParent(transform);
         indicator.transform.localPosition = new Vector3(0, heightOffset, 0);
         indicator.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-        indicator.transform.localScale = new Vector3(.9f, .9f, 1f);
 
         SpriteRenderer sr = indicator.AddComponent<SpriteRenderer>();
         sr.sprite = Resources.Load<Sprite>(tileAsset);
@@ -56,7 +56,7 @@ public class Pushable : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
+        if (Physics.Raycast(transform.position + (Vector3.up * .3f), direction, out RaycastHit hit, GameplayManager.Instance.cellSize, GameplayManager.Instance.entityMask))
         {
             if (hit.collider)
             {

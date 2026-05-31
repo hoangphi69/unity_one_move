@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
         GameEventsManager.Instance.turnEvents.PlayerTurnEnd(move);
         await move;
 
-        if (puddle != null) puddle.DetachAndFade(destroyCancellationToken);
+        if (puddle != null) puddle.Evaporate();
     }
 
     private bool OnPuddle(out Puddle activePuddle)

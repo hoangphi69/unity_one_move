@@ -22,26 +22,29 @@ public class Gateway : MonoBehaviour
 
   void OnEnable()
   {
-    collide.OnMainAction += OpenDoor;
+    collide.OnCollided += OpenDoor;
   }
 
   void OnDisable()
   {
-    collide.OnMainAction -= OpenDoor;
+    collide.OnCollided -= OpenDoor;
   }
 
-  async void OpenDoor()
+  async void OpenDoor(Vector3 direction)
   {
     if (isOpen) return;
     isOpen = true;
     GameEventsManager.Instance.turnEvents.StageFinished();
-    await PlayAnimation();
+
+    float dotProduct = Vector3.Dot(transform.forward, direction);
+    string anim = dotProduct > 0 ? "Pull" : "Push";
+    await PlayAnimation(anim);
     await Transition();
   }
 
-  async Task PlayAnimation()
+  async Task PlayAnimation(string anim)
   {
-    animator.CrossFade("Open", .1f);
+    animator.CrossFade(anim, .1f);
     await Task.Delay(150);
   }
 

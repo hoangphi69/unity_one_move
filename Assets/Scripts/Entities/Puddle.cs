@@ -34,25 +34,13 @@ public class Puddle : MonoBehaviour
     trail.emitting = true;
   }
 
-  public void DetachAndFade(CancellationToken token)
+  public void Evaporate()
   {
     transform.SetParent(null);
     trail.emitting = false;
 
-    FadeAndDestroyAsync(token); // Fire and forget
-  }
-
-  void FadeAndDestroyAsync(CancellationToken token)
-  {
-    Tween fadeTween = trail.material.DOFade(0f, fadeDuration)
-        // Safety: automatically kills the tween if the gameObject is destroyed early
-        .SetLink(gameObject)
-        .OnComplete(() => { if (gameObject != null) Destroy(gameObject); });
-
-    token.Register(() =>
-    {
-      if (fadeTween != null && fadeTween.IsActive()) fadeTween.Kill();
-      if (gameObject != null) Destroy(gameObject);
-    });
+    Tween fadeTween = trail.material
+      .DOFade(0f, fadeDuration)
+      .OnComplete(() => { if (gameObject != null) Destroy(gameObject); });
   }
 }
