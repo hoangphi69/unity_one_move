@@ -39,7 +39,7 @@ public class GameAudioManagger : MonoBehaviour
     }
   }
 
-  // --- START Ambience channel ---
+  // --- START SFX channel ---
 
   public void PlaySFX(EventReference audio, Vector3 position)
   {
@@ -60,7 +60,7 @@ public class GameAudioManagger : MonoBehaviour
     await Task.Delay(length);
   }
 
-  // --- END Ambience channel ---
+  // --- END SFX channel ---
 
   // --- START Ambience channel ---
 
