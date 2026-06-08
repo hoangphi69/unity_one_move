@@ -15,7 +15,7 @@ public class GameInitiator : MonoBehaviour
   [SerializeField] private GameInputManager _gameInputManager;
   [SerializeField] private GameDataManager _gameDataManager;
   [SerializeField] private GameSettingsManager _gameSettingsManager;
-  [SerializeField] private GameAudioManagger _gameAudioManager;
+  [SerializeField] private GameAudioManager _gameAudioManager;
 
   [Header("Managers")]
   [SerializeField] private GameplayManager _gameplayManager;

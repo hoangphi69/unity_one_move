@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5768066246508043680}
-  - component: {fileID: 4863580224722678577}
-  - component: {fileID: 2145471189797148139}
+  - component: {fileID: 7889757942414443857}
   m_Layer: 0
   m_Name: GameAudioManagger
   m_TagString: Untagged
@@ -33,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4863580224722678577
+--- !u!114 &7889757942414443857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,69 +43,110 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b032b397690311642b1c597f21c7d1da, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameAudioManagger
-  masterVolume: 1
-  musicVolume: 1
-  ambienceVolume: 1
-  SFXVolume: 1
---- !u!114 &2145471189797148139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4284332930693702856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a502f9d45e4c3e42abc78066eae8e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
-  <TitleMusic>k__BackingField:
-    Guid:
-      Data1: 1589959790
-      Data2: 1274673448
-      Data3: -696161386
-      Data4: 701162366
-    Path: event:/TitleMusic
-  <Ch1RadioMusic>k__BackingField:
-    Guid:
-      Data1: 2051157825
-      Data2: 1194670887
-      Data3: 1406439349
-      Data4: -1461210383
-    Path: event:/Ch1RadioMusic
-  <DormAfternoon>k__BackingField:
-    Guid:
-      Data1: -1900782760
-      Data2: 1328335181
-      Data3: 1340263323
-      Data4: -669251955
-    Path: event:/DormAfternoon
-  <LibraryAmbience>k__BackingField:
-    Guid:
-      Data1: -2037203290
-      Data2: 1297220617
-      Data3: -541217651
-      Data4: 11895021
-    Path: event:/LibraryAmbience
-  <Footstep>k__BackingField:
-    Guid:
-      Data1: 108213640
-      Data2: 1122077464
-      Data3: 783873973
-      Data4: -2041492224
-    Path: event:/Footstep
-  <DoorOpen>k__BackingField:
-    Guid:
-      Data1: 707026385
-      Data2: 1088964936
-      Data3: 302699145
-      Data4: -927471499
-    Path: event:/DoorOpen
-  <RadioToggle>k__BackingField:
-    Guid:
-      Data1: -845270358
-      Data2: 1117015997
-      Data3: -2010244164
-      Data4: 1246218312
-    Path: event:/RadioToggle
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
+  tracks:
+  - tag: 1
+    audio:
+      Guid:
+        Data1: -1682724088
+        Data2: 1123019367
+        Data3: -1917021528
+        Data4: -674931532
+      Path: event:/music/title_menu
+  - tag: 2
+    audio:
+      Guid:
+        Data1: 1693437244
+        Data2: 1320825761
+        Data3: 986880926
+        Data4: -975584426
+      Path: event:/gameplay/bump
+  - tag: 3
+    audio:
+      Guid:
+        Data1: 389657450
+        Data2: 1247935435
+        Data3: 1454212251
+        Data4: -105785520
+      Path: event:/gameplay/failed
+  - tag: 4
+    audio:
+      Guid:
+        Data1: 1030607118
+        Data2: 1170224097
+        Data3: -1670365780
+        Data4: 809670888
+      Path: event:/gameplay/door
+  - tag: 5
+    audio:
+      Guid:
+        Data1: -161188887
+        Data2: 1143966147
+        Data3: -639283327
+        Data4: -1579158529
+      Path: event:/gameplay/push
+  - tag: 6
+    audio:
+      Guid:
+        Data1: -2055329017
+        Data2: 1336963808
+        Data3: -164074102
+        Data4: -1914414564
+      Path: event:/gameplay/slide
+  - tag: 7
+    audio:
+      Guid:
+        Data1: -92958327
+        Data2: 1143565852
+        Data3: 448965789
+        Data4: 1546518714
+      Path: event:/gameplay/step
+  - tag: 8
+    audio:
+      Guid:
+        Data1: 1701777174
+        Data2: 1202571570
+        Data3: -81792592
+        Data4: 1716212645
+      Path: event:/gameplay/glitch_fix
+  - tag: 9
+    audio:
+      Guid:
+        Data1: -374842620
+        Data2: 1263598826
+        Data3: 841952918
+        Data4: 1877735051
+      Path: event:/gameplay/switch_glitch
+  - tag: 10
+    audio:
+      Guid:
+        Data1: 1483724903
+        Data2: 1245456639
+        Data3: -1846840691
+        Data4: -57058085
+      Path: event:/ui/restart
+  - tag: 11
+    audio:
+      Guid:
+        Data1: 1811109640
+        Data2: 1241488216
+        Data3: -1815236962
+        Data4: 118315463
+      Path: event:/ui/pause
+  - tag: 12
+    audio:
+      Guid:
+        Data1: 392778598
+        Data2: 1308131291
+        Data3: -2000768334
+        Data4: 1875503285
+      Path: event:/ui/dialogue_on
+  - tag: 13
+    audio:
+      Guid:
+        Data1: 1126908353
+        Data2: 1116923067
+        Data3: 2140208771
+        Data4: 1035593218
+      Path: event:/ui/dialogue_off
+  hasDuplicateTags: 0

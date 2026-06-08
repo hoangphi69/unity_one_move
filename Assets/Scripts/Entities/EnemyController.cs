@@ -98,6 +98,7 @@ public class EnemyController : MonoBehaviour
     if (!CanMove(direction)) return;
 
     Vector3 location = transform.position + (direction * GameplayManager.Instance.cellSize);
+    GameAudioManager.Instance.PlaySFX(AudioTag.Step);
     await SmoothMoveAsync(location, destroyCancellationToken);
   }
 

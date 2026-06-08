@@ -28,7 +28,6 @@ public class GameInputManager : MonoBehaviour
   public void SetState(InputState newState)
   {
     state = newState;
-    print($"Input: {state}");
     foreach (var map in _maps.Values) map.Disable();
     if (newState == InputState.None) return;
     _maps[newState].Enable();

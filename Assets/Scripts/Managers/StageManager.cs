@@ -27,7 +27,8 @@ public class StageManager : MonoBehaviour
 
   [Header("Audio")]
   public EventReference ambienceTrack;
-  public EventReference radioTrack;
+  public EventReference musicTrack;
+  public float musicTrackParameter;
 
   public Turn turn { get; private set; }
   private List<EnemyController> activeEnemies = new();
@@ -49,7 +50,7 @@ public class StageManager : MonoBehaviour
     HUDOverlayUIController.Instance.ToggleBottom(isPuzzle);
     HUDOverlayUIController.Instance.SetStepLeft(maxStep);
 
-    if (!ambienceTrack.IsNull) GameAudioManagger.Instance.PlayAmbience(ambienceTrack);
+    if (!ambienceTrack.IsNull) GameAudioManager.Instance.PlayAmbience(ambienceTrack);
 
     GameEventsManager.Instance.turnEvents.onPlayerTurnEnd += PlayerTurnEnd;
     GameEventsManager.Instance.turnEvents.onEnemyTurnEnd += EnemyTurnEnd;

@@ -51,7 +51,7 @@ public class GameFlowManager : MonoBehaviour
 
     // await Task.Delay(2000);
 
-    GameAudioManagger.Instance.PlayMusic(FMODEvents.Instance.TitleMusic);
+    GameAudioManager.Instance.PlayMusic(AudioTag.Title_Menu);
 
     await LoadingScreenUIController.Instance.HideFadeAsync(2f);
   }
@@ -64,7 +64,7 @@ public class GameFlowManager : MonoBehaviour
       await GameplayManager.Instance.LoadStageAsync(stageName);
       GameplayManager.Instance.SpawnPlayer();
     }
-    GameplayManager.Instance.ZoomCamera(false);
+    GameplayManager.Instance.ZoomCamera(6.5f);
   }
 
   async void PauseGame()
@@ -73,10 +73,11 @@ public class GameFlowManager : MonoBehaviour
     SetState(GameState.Busy);
 
     // Execute player audio animation 
-    if (!GameplayManager.Instance.Stage.radioTrack.IsNull)
+    GameAudioManager.Instance.PlayPauseStaticAudio();
+    if (!GameplayManager.Instance.Stage.musicTrack.IsNull)
     {
       await GameplayManager.Instance.ActivePlayer.LowerMusic();
-      GameAudioManagger.Instance.LowerMusic();
+      GameAudioManager.Instance.SetMusicVolume(.2f);
     }
 
     GameInputManager.Instance.SetState(InputState.UI);
@@ -94,12 +95,13 @@ public class GameFlowManager : MonoBehaviour
     HUDOverlayUIController.Instance.Show();
 
     // Execute player audio animation
-    if (!GameplayManager.Instance.Stage.radioTrack.IsNull)
+    if (!GameplayManager.Instance.Stage.musicTrack.IsNull)
     {
       await GameplayManager.Instance.ActivePlayer.PlayMusic();
-      GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.Stage.radioTrack);
+      GameAudioManager.Instance.PlayMusic(GameplayManager.Instance.Stage.musicTrack);
+      GameAudioManager.Instance.SetMusicParameter("progress", GameplayManager.Instance.Stage.musicTrackParameter);
     }
-    else GameAudioManagger.Instance.StopMusic();
+    else GameAudioManager.Instance.StopMusic();
 
     SetState(GameState.Gameplay);
     GameInputManager.Instance.SetState(InputState.Gameplay);
@@ -114,18 +116,19 @@ public class GameFlowManager : MonoBehaviour
 
     HUDOverlayUIController.Instance.Show();
 
+    GameAudioManager.Instance.PlaySFX(AudioTag.Restart);
     await LoadingScreenUIController.Instance.ShowStripsAsync();
 
     await GameplayManager.Instance.RestartStageAsync();
 
-    if (!GameplayManager.Instance.Stage.radioTrack.IsNull)
+    if (!GameplayManager.Instance.Stage.musicTrack.IsNull)
     {
       await GameplayManager.Instance.ActivePlayer.PlayMusic();
-      GameAudioManagger.Instance.PlayMusic(GameplayManager.Instance.Stage.radioTrack);
+      GameAudioManager.Instance.PlayMusic(GameplayManager.Instance.Stage.musicTrack);
     }
     else
     {
-      GameAudioManagger.Instance.StopMusic();
+      GameAudioManager.Instance.StopMusic();
     }
 
     await LoadingScreenUIController.Instance.HideStripsAsync();
@@ -143,13 +146,13 @@ public class GameFlowManager : MonoBehaviour
 
     await LoadingScreenUIController.Instance.ShowFadeAsync();
 
-    GameAudioManagger.Instance.StopMusic();
+    GameAudioManager.Instance.StopMusic();
 
     TitleScreenUIController.Instance.CloseEntireUI();
 
     GameDataManager.Instance.NewGame();
 
-    string cutscene = "ch1_Cutscene1";
+    string cutscene = "ch1_cutscene1";
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutscene, DialogueMode.Cutscene);
 
     await Task.Delay(1000);
@@ -158,7 +161,7 @@ public class GameFlowManager : MonoBehaviour
     string stageName = GameplayManager.Instance.newGameStage;
     await GameplayManager.Instance.LoadStageAsync(stageName);
     GameplayManager.Instance.SpawnPlayer();
-    GameplayManager.Instance.ZoomCamera(true);
+    GameplayManager.Instance.ZoomCamera(4.5f);
 
     HUDOverlayUIController.Instance.Show();
 

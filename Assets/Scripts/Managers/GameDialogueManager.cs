@@ -5,15 +5,21 @@ using UnityEngine;
 
 public enum DialogueMode { Cutscene, InGame }
 
-public class DialogueAsset
+public enum InkTag
 {
-  public const string SPEAKER_TAG = "speaker";
-  public const string SPRITE_TAG = "sprite";
-  public const string SPRITE_DIR = "Sprites/";
-  public const string BG_TAG = "bg";
-  public const string BG_DIR = "Sprites/Backgrounds/";
-  public const string CG_TAG = "cg";
-  public const string CG_DIR = "Sprites/Backgrounds/";
+  Speaker,
+  Sprite,
+  Bg,
+  Cg,
+  Bgm,
+  Sfx
+}
+
+public class ResourcePath
+{
+  public const string Sprites = "Sprites/";
+  public const string Backgrounds = "Sprites/Backgrounds/";
+  public const string CGs = "Sprites/Backgrounds/";
 }
 
 public class GameDialogueManager : MonoBehaviour

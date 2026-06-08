@@ -25,8 +25,6 @@ public class GameplayManager : MonoBehaviour
   public PlayerController ActivePlayer { get; private set; }
 
   [SerializeField] private CinemachineCamera playerCameraPrefab;
-  [SerializeField] private float titleFOV = 6.5f;
-  [SerializeField] private float gameplayFOV = 4.5f;
   public CinemachineCamera PlayerCam { get; private set; }
   public CameraMode cameraMode = CameraMode.A;
   public Action<CameraMode> OnCameraSwitch;
@@ -60,6 +58,14 @@ public class GameplayManager : MonoBehaviour
   {
     await Utility.UnloadAsync(_currentStage);
     await Utility.LoadAdditiveAsync(scene);
+
+    if (!Stage.musicTrack.IsNull)
+    {
+      GameAudioManager.Instance.PlayMusic(Stage.musicTrack);
+      GameAudioManager.Instance.SetMusicParameter("progress", Stage.musicTrackParameter);
+    }
+    else GameAudioManager.Instance.StopMusic();
+
     _currentStage = scene;
   }
 
@@ -82,7 +88,7 @@ public class GameplayManager : MonoBehaviour
 
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutsceneKnot, DialogueMode.Cutscene);
 
-    GameAudioManagger.Instance.StopMusic();
+    GameAudioManager.Instance.StopMusic();
 
     try
     {
@@ -102,12 +108,13 @@ public class GameplayManager : MonoBehaviour
       SpawnPlayer();
 
       // Audio
-      if (!Stage.radioTrack.IsNull)
+      if (!Stage.musicTrack.IsNull)
       {
         await ActivePlayer.PlayMusic();
-        GameAudioManagger.Instance.PlayMusic(Stage.radioTrack);
+        GameAudioManager.Instance.PlayMusic(Stage.musicTrack);
+        GameAudioManager.Instance.SetMusicParameter("progress", Stage.musicTrackParameter);
       }
-      else GameAudioManagger.Instance.StopMusic();
+      else GameAudioManager.Instance.StopMusic();
 
       HUDOverlayUIController.Instance.Show();
 
@@ -150,14 +157,13 @@ public class GameplayManager : MonoBehaviour
     PlayerCam.LookAt = target;
   }
 
-  public void ZoomCamera(bool isZoomed)
+  public void ZoomCamera(float FOV, float duration = 0.5f)
   {
     if (PlayerCam == null) return;
-    float targetFOV = isZoomed ? gameplayFOV : titleFOV;
     DOTween.To(() => PlayerCam.Lens.OrthographicSize,
                x => PlayerCam.Lens.OrthographicSize = x,
-               targetFOV,
-               .5f)
+               FOV,
+               duration)
             .SetEase(Ease.InOutSine);
   }
 

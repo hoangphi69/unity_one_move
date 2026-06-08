@@ -64,7 +64,7 @@ public class TitlePanel : NavigationPanel
     title.DOFade(0f, .2f);
     buttons.DOFade(0f, .2f);
 
-    GameplayManager.Instance.ZoomCamera(true);
+    GameplayManager.Instance.ZoomCamera(4.5f);
 
     await background.DOScale(Vector3.one * zoomScale, duration)
                     .SetEase(Ease.InOutQuad)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class DialogueBoxUIController : MonoBehaviour
   [Header("UI")]
   [SerializeField] private GameObject uiContainer;
   [SerializeField] private Button background;
+  [SerializeField] private GameObject dialogueBox;
+  [SerializeField] private CanvasGroup elements;
   [SerializeField] private Image sprite;
   [SerializeField] private TextMeshProUGUI speaker;
   [SerializeField] private GameObject speakerBox;
@@ -23,7 +26,9 @@ public class DialogueBoxUIController : MonoBehaviour
 
   [Header("Config")]
   [SerializeField] private int typingSpeed = 50;
+  [SerializeField] private float animationDuration = .15f;
   private bool skipLine = false;
+  private Sequence animSequence;
 
   void OnEnable()
   {
@@ -47,16 +52,33 @@ public class DialogueBoxUIController : MonoBehaviour
     ClearDialogue();
     uiContainer.SetActive(true);
 
+    animSequence?.Kill();
+    animSequence = DOTween.Sequence();
+    elements.DOFade(0f, 0f);
+    animSequence
+      .Join(dialogueBox.transform.DOScaleY(1f, animationDuration).From(0).SetEase(Ease.OutSine))
+      .Append(elements.DOFade(1f, animationDuration).From(0));
+
+    GameplayManager.Instance.ZoomCamera(4f, animationDuration * 2);
+    GameAudioManager.Instance.PlaySFX(AudioTag.DialogueOn);
     GameInputManager.Instance.Actions.UI.DialogueAdvance.performed += AdvanceDialogue;
     background.onClick.AddListener(AdvanceDialogue);
   }
 
-  void DialogueEnd()
+  async void DialogueEnd()
   {
-    uiContainer.SetActive(false);
+    animSequence?.Kill();
+    animSequence = DOTween.Sequence();
+    GameplayManager.Instance.ZoomCamera(4.5f, animationDuration * 2);
+    await animSequence
+      .Join(elements.DOFade(0f, animationDuration / 2))
+      .Append(dialogueBox.transform.DOScaleY(0f, animationDuration / 2).SetEase(Ease.InSine))
+      .AsyncWaitForCompletion();
 
-    GameInputManager.Instance.Actions.UI.DialogueAdvance.performed -= AdvanceDialogue;
+    uiContainer.SetActive(false);
     background.onClick.RemoveAllListeners();
+    GameAudioManager.Instance.PlaySFX(AudioTag.DialogueOff);
+    GameInputManager.Instance.Actions.UI.DialogueAdvance.performed -= AdvanceDialogue;
     GameEventsManager.Instance.dialogueEvents.LeaveDialogue();
   }
 
@@ -71,7 +93,7 @@ public class DialogueBoxUIController : MonoBehaviour
   async void DialogueDisplay(string text, List<string> tags, List<Choice> inkChoices, CancellationToken token)
   {
     ClearDialogue();
-    DisplayTags(tags);
+    HandleTags(tags);
 
     try
     {
@@ -118,7 +140,7 @@ public class DialogueBoxUIController : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.SetTypingState(false);
   }
 
-  void DisplayTags(List<string> tags)
+  void HandleTags(List<string> tags)
   {
     foreach (string tag in tags)
     {
@@ -128,21 +150,36 @@ public class DialogueBoxUIController : MonoBehaviour
       string key = splitTag[0].Trim();
       string value = splitTag[1].Trim();
 
-      switch (key)
+      if (Enum.TryParse(key, true, out InkTag parsedTag))
       {
-        case DialogueAsset.SPEAKER_TAG:
-          speaker.text = value;
-          speakerBox.SetActive(true);
-          break;
-
-        case DialogueAsset.SPRITE_TAG:
-          Sprite charSprite = Resources.Load<Sprite>(DialogueAsset.SPRITE_DIR + value);
-          if (charSprite == null) Debug.LogWarning("Character sprite not found: " + value);
-          sprite.sprite = charSprite;
-          sprite.gameObject.SetActive(true);
-          break;
+        switch (parsedTag)
+        {
+          case InkTag.Speaker: DisplaySpeaker(value); break;
+          case InkTag.Sprite: DisplaySprite(value); break;
+          case InkTag.Sfx: PlaySFX(value); break;
+        }
       }
     }
+  }
+
+  void DisplaySpeaker(string name)
+  {
+    speaker.text = name;
+    speakerBox.SetActive(true);
+  }
+
+  void DisplaySprite(string fileName)
+  {
+    Sprite charSprite = Resources.Load<Sprite>(ResourcePath.Sprites + fileName);
+    if (charSprite == null) Debug.LogWarning("Character sprite not found: " + fileName);
+    sprite.sprite = charSprite;
+    sprite.gameObject.SetActive(true);
+  }
+
+  void PlaySFX(string tag)
+  {
+    Enum.TryParse(tag, true, out AudioTag audio);
+    GameAudioManager.Instance.PlaySFX(audio);
   }
 
   void DisplayChoices(List<Choice> inkChoices)
