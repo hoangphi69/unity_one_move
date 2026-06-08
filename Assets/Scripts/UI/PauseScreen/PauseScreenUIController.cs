@@ -47,7 +47,7 @@ public class PauseScreenUIController : NavigationUIController
     base.Hide();
     ClearStack();
 
-    // Resume time and stop listening for UI escape presses
+    GameAudioManager.Instance.EndPauseStaticAudio();
     Time.timeScale = 1f;
     GameInputManager.Instance.Actions.UI.Escape.performed -= HandleEscape;
   }

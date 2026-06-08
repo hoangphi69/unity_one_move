@@ -258,6 +258,7 @@ public class CutsceneUIController : MonoBehaviour
 
   void DialogueEnd()
   {
+    GameAudioManager.Instance.StopMusic();
     GameEventsManager.Instance.dialogueEvents.LeaveDialogue();
 
     sequence?.Kill();
@@ -370,48 +371,50 @@ public class CutsceneUIController : MonoBehaviour
       string key = splitTag[0].Trim();
       string value = splitTag[1].Trim();
 
-      switch (key)
+      if (Enum.TryParse(key, true, out InkTag parsedTag))
       {
-        case DialogueAsset.SPEAKER_TAG:
-          speaker.text = value;
-          speakerBox.SetActive(true);
-          break;
-
-        case DialogueAsset.SPRITE_TAG:
-          Sprite charSprite = Resources.Load<Sprite>(DialogueAsset.SPRITE_DIR + value);
-          if (charSprite == null) Debug.LogWarning("Character sprite not found: " + value);
-          sprite.sprite = charSprite;
-          sprite.gameObject.SetActive(true);
-          break;
-
-        case DialogueAsset.BG_TAG:
-          Sprite bgSprite = Resources.Load<Sprite>(DialogueAsset.BG_DIR + value);
-          if (bgSprite == null) Debug.LogWarning("Background sprite not found: " + value);
-          background.sprite = bgSprite;
-          break;
-
-        case DialogueAsset.CG_TAG:
-          await HandleCGTag(value, token);
-          break;
+        switch (parsedTag)
+        {
+          case InkTag.Speaker: DisplaySpeaker(value); break;
+          case InkTag.Sprite: DisplaySprite(value); break;
+          case InkTag.Bg: DisplayBackground(value); break;
+          case InkTag.Cg: await DisplayCG(value, token); break;
+          case InkTag.Sfx: PlaySFX(value); break;
+          case InkTag.Bgm: PlayBackgroundMusic(value); break;
+        }
       }
     }
   }
 
-  async Task HandleCGTag(string tagValue, CancellationToken token)
+  void DisplaySpeaker(string name)
   {
-    var parts = tagValue.Split(',');
-
-    float.TryParse(parts.ElementAtOrDefault(1), out var duration);
-    bool isFull = parts.ElementAtOrDefault(2)?.Trim().Equals("full", StringComparison.OrdinalIgnoreCase) ?? false;
-
-    isCG = true;
-    await DisplayCG(parts[0].Trim(), duration, isFull, token);
-    isCG = false;
+    speaker.text = name;
+    speakerBox.SetActive(true);
   }
 
-  async Task DisplayCG(string fileName, float duration, bool isFull, CancellationToken token)
+  void DisplaySprite(string fileName)
   {
-    Sprite cg = Resources.Load<Sprite>(DialogueAsset.CG_DIR + fileName);
+    Sprite charSprite = Resources.Load<Sprite>(ResourcePath.Sprites + fileName);
+    if (charSprite == null) Debug.LogWarning("Character sprite not found: " + fileName);
+    sprite.sprite = charSprite;
+    sprite.gameObject.SetActive(true);
+  }
+
+  void DisplayBackground(string fileNam)
+  {
+    Sprite bgSprite = Resources.Load<Sprite>(ResourcePath.Backgrounds + fileNam);
+    if (bgSprite == null) Debug.LogWarning("Background sprite not found: " + fileNam);
+    background.sprite = bgSprite;
+  }
+
+  async Task DisplayCG(string tagValue, CancellationToken token)
+  {
+    var parts = tagValue.Split(',');
+    string fileName = parts[0].Trim();
+    float duration = parts.Length > 1 && float.TryParse(parts[1], out var d) ? d : 0f;
+    bool isFull = parts.Length > 2 && string.Equals(parts[2].Trim(), "full", StringComparison.OrdinalIgnoreCase);
+
+    Sprite cg = Resources.Load<Sprite>(ResourcePath.CGs + fileName);
     if (cg == null)
     {
       Debug.LogWarning("CG not found: " + fileName);
@@ -420,13 +423,35 @@ public class CutsceneUIController : MonoBehaviour
 
     background.sprite = cg;
 
+    // If there's no duration, we just set the background and immediately exit
     if (duration <= 0f) return;
 
+    isCG = true;
     if (isFull) mainUIPanel.SetActive(false);
 
-    try { await Task.Delay((int)(duration * 1000), token); }
-    catch (OperationCanceledException) { }
-    finally { if (isFull) mainUIPanel.SetActive(true); }
+    try
+    {
+      await Task.Delay(TimeSpan.FromSeconds(duration), token);
+    }
+    catch (OperationCanceledException) { /* Handled silently */ }
+    finally
+    {
+      // Finally ensures these reset even if the delay is cancelled!
+      isCG = false;
+      if (isFull) mainUIPanel.SetActive(true);
+    }
+  }
+
+  void PlaySFX(string tag)
+  {
+    if (Enum.TryParse(tag, true, out AudioTag audio)) GameAudioManager.Instance.PlaySFX(audio);
+    else Debug.LogWarning($"'{tag}' value is not a valid AudioTag.");
+  }
+
+  void PlayBackgroundMusic(string tag)
+  {
+    if (Enum.TryParse(tag, true, out AudioTag audio)) GameAudioManager.Instance.PlayMusic(audio);
+    else Debug.LogWarning($"'{tag}' value is not a valid AudioTag.");
   }
 
   void DisplayChoices(List<Choice> inkChoices)
@@ -465,7 +490,7 @@ public class CutsceneUIController : MonoBehaviour
       foreach (string tag in tags)
       {
         string[] splitTag = tag.Split(':');
-        if (splitTag.Length >= 2 && splitTag[0].Trim() == DialogueAsset.SPEAKER_TAG)
+        if (splitTag.Length >= 2 && splitTag[0].Trim() == InkTag.Speaker.ToString())
         {
           speakerName = splitTag[1].Trim();
           break;

@@ -4,9 +4,40 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 
-public class GameAudioManagger : MonoBehaviour
+public enum AudioTag
 {
-  public static GameAudioManagger Instance { get; private set; }
+  None, // default/empty state
+
+  // BGM
+  Title_Menu,
+
+  // SFX (Gameplay)
+  Bump,
+  Die,
+  Door,
+  Push,
+  Slide,
+  Step,
+  GlitchFix,
+  SwitchGlitch,
+
+  // SFX (UI)
+  Restart,
+  Pause,
+  DialogueOn,
+  DialogueOff
+}
+
+[System.Serializable]
+public struct AudioMap
+{
+  public AudioTag tag;
+  public EventReference audio;
+}
+
+public class GameAudioManager : MonoBehaviour
+{
+  public static GameAudioManager Instance { get; private set; }
 
   private EventInstance ambienceChannel;
   private EventReference ambienceTrack;
@@ -16,15 +47,14 @@ public class GameAudioManagger : MonoBehaviour
 
   private List<EventInstance> eventInstances = new();
 
-  [Header("Volume")]
-  [Range(0, 1)] public float masterVolume = 1;
-  [Range(0, 1)] public float musicVolume = 1;
-  [Range(0, 1)] public float ambienceVolume = 1;
-  [Range(0, 1)] public float SFXVolume = 1;
+  [SerializeField] private List<AudioMap> tracks = new();
+  private readonly Dictionary<AudioTag, EventReference> lookup = new();
+  [HideInInspector] public bool hasDuplicateTags = false;
 
   void Awake()
   {
     if (Instance == null) Instance = this;
+    InitializeTrackDictionary();
   }
 
   void OnDestroy()
@@ -39,17 +69,77 @@ public class GameAudioManagger : MonoBehaviour
     }
   }
 
-  // --- START SFX channel ---
-
-  public void PlaySFX(EventReference audio, Vector3 position)
+  void OnValidate()
   {
-    RuntimeManager.PlayOneShot(audio, position);
+    hasDuplicateTags = false;
+    HashSet<AudioTag> seenTags = new HashSet<AudioTag>();
+
+    foreach (var mapping in tracks)
+    {
+      if (mapping.tag == AudioTag.None) continue;
+
+      // HashSet.Add returns false if the item is already in the set
+      if (!seenTags.Add(mapping.tag))
+      {
+        hasDuplicateTags = true;
+        break; // Stop checking, we already know there's at least one duplicate
+      }
+    }
   }
 
-  public async Task PlaySFXAsync(EventReference audio, Vector3 position)
+  private void InitializeTrackDictionary()
   {
-    if (audio.IsNull) return;
+    lookup.Clear();
+    foreach (var map in tracks)
+    {
+      if (map.tag == AudioTag.None) continue;
+      if (!lookup.ContainsKey(map.tag)) lookup.Add(map.tag, map.audio);
+    }
+  }
 
+  private EventReference GetAudio(AudioTag tag)
+  {
+    if (tag == AudioTag.None) return new();
+
+    if (lookup.TryGetValue(tag, out EventReference audio)) return audio;
+
+    Debug.LogWarning($"[GameAudioManager] No EventReference mapped for tag: {tag}");
+    return new();
+  }
+
+
+  // SFX METHODS
+  public void PlaySFX(AudioTag tag) => PlaySFX(GetAudio(tag));
+  public void PlaySFX(AudioTag tag, string key, float value) => PlaySFX(GetAudio(tag), key, value);
+  public void PlaySFX(AudioTag tag, string key, string value) => PlaySFX(GetAudio(tag), key, value);
+
+  public void PlaySFX(EventReference audio)
+  {
+    RuntimeManager.PlayOneShot(audio);
+  }
+
+  public void PlaySFX(EventReference audio, string key, float value)
+  {
+    var instance = RuntimeManager.CreateInstance(audio);
+    instance.setParameterByName(key, value);
+    instance.start();
+    instance.release();
+  }
+
+  public void PlaySFX(EventReference audio, string key, string value)
+  {
+    var instance = RuntimeManager.CreateInstance(audio);
+    instance.setParameterByNameWithLabel(key, value);
+    instance.start();
+    instance.release();
+  }
+
+  public Task PlaySFXAsync(AudioTag tag) => PlaySFXAsync(GetAudio(tag));
+  public Task PlaySFXAsync(AudioTag tag, string key, float value) => PlaySFXAsync(GetAudio(tag), key, value);
+  public Task PlaySFXAsync(AudioTag tag, string key, string value) => PlaySFXAsync(GetAudio(tag), key, value);
+
+  public async Task PlaySFXAsync(EventReference audio)
+  {
     var instance = RuntimeManager.CreateInstance(audio);
     instance.getDescription(out EventDescription description);
     description.getLength(out int length);
@@ -60,9 +150,44 @@ public class GameAudioManagger : MonoBehaviour
     await Task.Delay(length);
   }
 
-  // --- END SFX channel ---
+  public async Task PlaySFXAsync(EventReference audio, string key, float value)
+  {
+    var instance = RuntimeManager.CreateInstance(audio);
 
-  // --- START Ambience channel ---
+    // Set the continuous or discrete parameter
+    instance.setParameterByName(key, value);
+
+    // Get the length of the event's timeline
+    instance.getDescription(out EventDescription description);
+    description.getLength(out int length);
+
+    instance.start();
+    instance.release();
+
+    await Task.Delay(length);
+  }
+
+  public async Task PlaySFXAsync(EventReference audio, string key, string value)
+  {
+    var instance = RuntimeManager.CreateInstance(audio);
+
+    // Set the labeled parameter
+    instance.setParameterByNameWithLabel(key, value);
+
+    // Get the length of the event's timeline
+    instance.getDescription(out EventDescription description);
+    description.getLength(out int length);
+
+    instance.start();
+    instance.release();
+
+    // Wait for the duration of the timeline
+    await Task.Delay(length);
+  }
+
+
+  // AMBIENCE METHODS
+  public void PlayAmbience(AudioTag tag) => PlayAmbience(GetAudio(tag));
 
   public void PlayAmbience(EventReference audio)
   {
@@ -95,9 +220,10 @@ public class GameAudioManagger : MonoBehaviour
     ambienceTrack = new();
   }
 
-  // --- END Ambience channel ---
 
-  // --- START Music channel ---
+  // MUSIC METHODS
+
+  public void PlayMusic(AudioTag tag) => PlayMusic(GetAudio(tag));
 
   public void PlayMusic(EventReference audio)
   {
@@ -120,23 +246,52 @@ public class GameAudioManagger : MonoBehaviour
       musicChannel.setVolume(1);
       musicChannel.start();
     }
+    print($"play {audio.Path}");
   }
 
-  public void LowerMusic()
+  public void SetMusicParameter(string paramName, float paramValue)
   {
     if (!musicChannel.isValid()) return;
-    musicChannel.setVolume(0.2f);
+    musicChannel.setParameterByName(paramName, paramValue);
+  }
+
+  public void SetMusicVolume(float volume)
+  {
+    if (!musicChannel.isValid()) return;
+    musicChannel.setVolume(volume);
   }
 
   public void StopMusic()
   {
     if (!musicChannel.isValid()) return;
-    musicChannel.stop(0);
+    musicChannel.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     musicChannel.release();
     musicTrack = new();
+    print($"stop music");
   }
 
-  // --- END Music channel ---
+
+  // PAUSE METHODS
+
+  private EventInstance pauseStaticSFX;
+
+  public void PlayPauseStaticAudio()
+  {
+    EventReference audio = GetAudio(AudioTag.Pause);
+    if (audio.IsNull) return;
+
+    pauseStaticSFX = CreateEventInstance(audio);
+    pauseStaticSFX.setParameterByName("pause", 0f);
+    pauseStaticSFX.start();
+  }
+
+  public void EndPauseStaticAudio()
+  {
+    if (!pauseStaticSFX.isValid()) return;
+    pauseStaticSFX.setParameterByName("pause", 1f);
+    pauseStaticSFX.release();
+    pauseStaticSFX.clearHandle();
+  }
 
   EventInstance CreateEventInstance(EventReference eventReference)
   {

@@ -29,7 +29,7 @@ public class GlitchRemover : MonoBehaviour
   {
     if (triggered) return;
     triggered = true;
-
+    GameAudioManager.Instance.PlaySFX(AudioTag.SwitchGlitch);
     HandleAnimation();
 
     GameEventsManager.Instance.interactEvents.Switch(id, true);

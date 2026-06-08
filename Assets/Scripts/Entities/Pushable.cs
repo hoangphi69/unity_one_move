@@ -65,6 +65,7 @@ public class Pushable : MonoBehaviour
             }
         }
 
+        GameAudioManager.Instance.PlaySFX(AudioTag.Push);
         await Move(location);
     }
 

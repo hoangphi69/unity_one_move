@@ -113,7 +113,12 @@ public class PlayerController : MonoBehaviour
         GameEventsManager.Instance.turnEvents.PlayerTurnEnd(move);
         await move;
 
-        if (puddle != null) puddle.Evaporate();
+        if (puddle != null)
+        {
+            GameAudioManager.Instance.PlaySFX(AudioTag.Slide);
+            puddle.Evaporate();
+        }
+        else GameAudioManager.Instance.PlaySFX(AudioTag.Step);
     }
 
     private bool OnPuddle(out Puddle activePuddle)
@@ -212,7 +217,6 @@ public class PlayerController : MonoBehaviour
         }
 
         if (token.IsCancellationRequested) return;
-        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.Footstep, location);
         transform.position = location;
 
         isMoving = false;
@@ -274,13 +278,19 @@ public class PlayerController : MonoBehaviour
         HUDOverlayUIController.Instance.SetStepLeft(-1);
 
         // Shake camera
-        if (shake) CameraBump(direction);
+        if (shake)
+        {
+            CameraBump(direction);
+            GameAudioManager.Instance.PlaySFX(AudioTag.Bump);
+        }
+
 
         // --- SAVE TRAIL BEFORE RESTART ---
         PathTrailManager.ArchiveCurrentTrail(maxTrails);
 
         // Collapse animation
         Rotate(-direction);
+        GameAudioManager.Instance.PlaySFX(AudioTag.Die);
         animator.CrossFade("fall_back", .1f, 0);
         await Task.Delay(1000);
 
@@ -301,7 +311,6 @@ public class PlayerController : MonoBehaviour
 
         animator.CrossFade("wear_headphone", .1f, 1);
         await Task.Delay(300);
-        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
     }
 
     public async Task LowerMusic()
@@ -309,7 +318,6 @@ public class PlayerController : MonoBehaviour
         GameInputManager.Instance.SetState(InputState.None);
 
         animator.CrossFade("remove_headphone", .1f, 1);
-        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
         await Task.Delay(300);
     }
 
@@ -318,7 +326,6 @@ public class PlayerController : MonoBehaviour
         GameInputManager.Instance.SetState(InputState.None);
 
         animator.CrossFade("remove_headphone", .1f, 1);
-        GameAudioManagger.Instance.PlaySFX(FMODEvents.Instance.RadioToggle, transform.position);
         await Task.Delay(300);
     }
 

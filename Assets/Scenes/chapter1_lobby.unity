@@ -5831,18 +5831,19 @@ MonoBehaviour:
   cameraB: {fileID: 0}
   ambienceTrack:
     Guid:
-      Data1: -1900782760
-      Data2: 1328335181
-      Data3: 1340263323
-      Data4: -669251955
-    Path: event:/DormAfternoon
-  radioTrack:
+      Data1: -1861139565
+      Data2: 1142116504
+      Data3: -278542166
+      Data4: 977728929
+    Path: event:/ambience/dorm_afternoon
+  musicTrack:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1682724088
+      Data2: 1123019367
+      Data3: -1917021528
+      Data4: -674931532
+    Path: event:/music/title_menu
+  musicTrackParameter: 0
 --- !u!156049354 &1809071644
 Grid:
   m_ObjectHideFlags: 0

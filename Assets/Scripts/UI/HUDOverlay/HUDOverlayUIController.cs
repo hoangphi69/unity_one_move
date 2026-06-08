@@ -27,6 +27,8 @@ public class HUDOverlayUIController : MonoBehaviour
   [Header("Animation Settings")]
   [SerializeField] private float slideDuration = 0.2f;
   [SerializeField] private float staggerDelay = 0.03f; // The delay between each digit moving
+  [SerializeField] private float rumbleStrength = 50f;
+  [SerializeField] private int rumbleVibrato = 30;
 
   private string[] currentValues = new string[3] { "0", "0", "0" };
   private Sequence counterSequence;
@@ -136,7 +138,8 @@ public class HUDOverlayUIController : MonoBehaviour
 
   public void SetStepLeft(int targetStep, bool instant = false)
   {
-    string newText = targetStep < 0 ? "XXX" : targetStep.ToString("D3");
+    bool isOutOfBounds = targetStep < 0;
+    string newText = isOutOfBounds ? "XXX" : targetStep.ToString("D3");
 
     if (instant)
     {
@@ -146,6 +149,16 @@ public class HUDOverlayUIController : MonoBehaviour
 
     counterSequence?.Kill(true);
     counterSequence = DOTween.Sequence();
+
+    if (isOutOfBounds)
+    {
+      counterSequence.Insert(0, counter.transform.DOShakePosition(
+          duration: 0.5f,
+          strength: new Vector3(rumbleStrength, rumbleStrength, 0f),
+          vibrato: rumbleVibrato,
+          randomness: 90f
+      ));
+    }
 
     for (int i = 0; i < 3; i++)
     {

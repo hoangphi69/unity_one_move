@@ -5715,11 +5715,11 @@ MonoBehaviour:
     Path: event:/DormAfternoon
   radioTrack:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 2051157825
+      Data2: 1194670887
+      Data3: 1406439349
+      Data4: -1461210383
+    Path: event:/Ch1RadioMusic
 --- !u!156049354 &1548825873
 Grid:
   m_ObjectHideFlags: 0

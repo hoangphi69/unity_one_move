@@ -31,6 +31,7 @@ public class GlitchMisalignment : MonoBehaviour
     {
       isFixed = true;
       PlayGlitchFixAnimation();
+      GameAudioManager.Instance.PlaySFX(AudioTag.GlitchFix);
     }
   }
 

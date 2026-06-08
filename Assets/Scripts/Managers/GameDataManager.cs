@@ -36,11 +36,7 @@ public class GameDataManager : MonoBehaviour
     await SwitchProfile(profileID);
   }
 
-  public bool HasData()
-  {
-    if (data != null) print("Data progress: " + data.progress);
-    return data != null;
-  }
+  public bool HasData() => data != null;
 
   public async Task SaveProgress(string stageName)
   {

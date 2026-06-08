@@ -3,7 +3,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using System.Threading; // Required for CancellationToken
 
-public class GlitchFreeze : MonoBehaviour
+public class GlitchDoorStuck : MonoBehaviour
 {
   [SerializeField] private string id;
   [SerializeField] private GameObject normalObject;
@@ -83,11 +83,7 @@ public class GlitchFreeze : MonoBehaviour
         }
       }
     }
-    catch (TaskCanceledException)
-    {
-      // This block gracefully catches the exception thrown when cts.Cancel() is called
-      // No action needed; the loop just exits safely.
-    }
+    catch (TaskCanceledException) { }
   }
 
   void HandleSwitchEvent(string incomingId, bool state)
@@ -116,6 +112,7 @@ public class GlitchFreeze : MonoBehaviour
     float remainingAngle = 360f - stuckAngle;
     Vector3 finalRotationAdd = rotationAxis * remainingAngle;
 
+    GameAudioManager.Instance.PlaySFX(AudioTag.Door, "door", 1); // 1 - door squeak
     transform.DORotate(finalRotationAdd, fixDuration, RotateMode.LocalAxisAdd)
         .SetEase(fixEase)
         .OnComplete(SwapToNormal);

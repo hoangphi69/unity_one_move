@@ -12329,11 +12329,11 @@ MonoBehaviour:
     Path: event:/DormAfternoon
   radioTrack:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 2051157825
+      Data2: 1194670887
+      Data3: 1406439349
+      Data4: -1461210383
+    Path: event:/Ch1RadioMusic
 --- !u!156049354 &1548825873
 Grid:
   m_ObjectHideFlags: 0
@@ -12578,6 +12578,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e74ef630121160345834f3354d3cab98, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1598177493}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e74ef630121160345834f3354d3cab98, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1598177497}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e74ef630121160345834f3354d3cab98, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1598177496}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e74ef630121160345834f3354d3cab98, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1598177495}
   m_SourcePrefab: {fileID: 100100000, guid: e74ef630121160345834f3354d3cab98, type: 3}
 --- !u!1 &1598177492 stripped
 GameObject:
@@ -12620,6 +12629,49 @@ MonoBehaviour:
   <BlockPlayer>k__BackingField: 1
   <BlockEnemy>k__BackingField: 1
   <BlockEnemySight>k__BackingField: 0
+--- !u!114 &1598177495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598177492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7793d26e65c34ef39193b6d06721239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPC
+  knotName: t_npc
+--- !u!114 &1598177496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598177492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9666300cb4c2dcd45b081ac21712ebbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+--- !u!114 &1598177497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598177492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1609874053
 PrefabInstance:
   m_ObjectHideFlags: 0

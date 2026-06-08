@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collide))]
 public class Gateway : MonoBehaviour
 {
-
   [SerializeField] private SceneField _nextStage;
   [SerializeField] private string cutscene;
   [SerializeField] private bool _saveProgress = false;
@@ -38,6 +37,7 @@ public class Gateway : MonoBehaviour
 
     float dotProduct = Vector3.Dot(transform.forward, direction);
     string anim = dotProduct > 0 ? "Pull" : "Push";
+    GameAudioManager.Instance.PlaySFX(AudioTag.Door);
     await PlayAnimation(anim);
     await Transition();
   }
