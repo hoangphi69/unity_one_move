@@ -4193,10 +4193,10 @@ MonoBehaviour:
     Path: event:/ambience/libary
   musicTrack:
     Guid:
-      Data1: -1927147573
-      Data2: 1128624306
-      Data3: 147197628
-      Data4: -945300652
+      Data1: -1990048848
+      Data2: 1182324296
+      Data3: 522856858
+      Data4: 1389132291
     Path: event:/music/ch1_library
   musicTrackParameter: 0
 --- !u!156049354 &1111829172
