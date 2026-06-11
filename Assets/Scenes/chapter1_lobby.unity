@@ -5902,13 +5902,7 @@ MonoBehaviour:
       Data3: -278542166
       Data4: 977728929
     Path: event:/ambience/dorm_afternoon
-  musicTrack:
-    Guid:
-      Data1: -1682724088
-      Data2: 1123019367
-      Data3: -1917021528
-      Data4: -674931532
-    Path: event:/music/title_menu
+  musicTrack: 2
   musicTrackParameter: 0
 --- !u!156049354 &1809071644
 Grid:
@@ -7429,7 +7423,8 @@ PrefabInstance:
       propertyPath: targetID
       value: door1_1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 823286384962820039, guid: a2b773fada16d90489756a911d3e4e6d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
