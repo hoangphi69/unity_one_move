@@ -8376,6 +8376,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1870617985084634595, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       propertyPath: m_Name
       value: door
@@ -8435,8 +8439,53 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1964598655}
+    - targetCorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1964598656}
   m_SourcePrefab: {fileID: 100100000, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+--- !u!1 &1964598654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+  m_PrefabInstance: {fileID: 1964598653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1964598655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964598654}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1964598656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964598654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345fcff4b2c85ff40b96f9d6d3a4e08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestStartTrigger
+  quest: {fileID: 11400000, guid: ef84ce1d65d177846a013352b6421cf8, type: 2}
 --- !u!1001 &1977433945
 PrefabInstance:
   m_ObjectHideFlags: 0

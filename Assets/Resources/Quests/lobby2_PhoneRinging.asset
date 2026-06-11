@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36046544de2518d4c9191504982bb9d9, type: 3}
-  m_Name: hallway2_CheckBookshelf
+  m_Name: lobby2_PhoneRinging
   m_EditorClassIdentifier: Assembly-CSharp::Quest
-  <id>k__BackingField: hallway2_CheckBookshelf
-  title: "T\xECm ki\u1EBFm \xFD t\u01B0\u1EDFng"
+  <id>k__BackingField: lobby2_PhoneRinging
+  title: "\u0110i\u1EC7n tho\u1EA1i reo chu\xF4ng"
   description: 
-  state: 1
+  state: 0
   requiredQuests: []
   objectives:
-  - description: "Ki\u1EBFm \xFD t\u01B0\u1EDFng"
+  - description: "Nh\u1EADn cu\u1ED9c g\u1ECDi"
     details:
-      rid: 8315910136783175752
+      rid: 8315910136783175757
   requiresTurnIn: 0
   references:
     version: 2
     RefIds:
-    - rid: 8315910136783175752
+    - rid: 8315910136783175757
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: book
+        targetID: phone_2

@@ -6,7 +6,7 @@ VAR ch2_lobby_door = 0
 VAR ch2_missed_report = false
 VAR ch2_hallway1_talk_to_phong = 0
 
-=== lobby2_Phone ===
+=== lobby2_phone ===
 { ch2_lobby_interacted_door == false:
     -> phone_date
 - else:
@@ -25,8 +25,6 @@ VAR ch2_hallway1_talk_to_phong = 0
 Hiện tại bạn có 1 tin nhắn.
 + [Đọc tin nhắn]
     -> phone_call
-+ [Bỏ qua tin nhắn]
-    -> phone_notification_none
 -> DONE
 
 = phone_call
@@ -49,14 +47,14 @@ Nam ngồi dậy.
 -> DONE
 
 
-=== lobby2_Door ===
+=== lobby2_door ===
 { ch2_lobby_door:
--1:
+-0:
     ~ ch2_lobby_interacted_door = true
     <i>_"Ting!!!!!"_
     Mới sáng sớm mà ai gọi đấy. #speaker:Nam #sprite:nam_talk
     -> DONE
--2: 
+-1: 
     <i>_"Ting Ting!!!!!"_ 
     Cái điện thoại đâu rồi nhờ. #speaker:Nam #sprite:nam_talk
     -> DONE
@@ -190,7 +188,7 @@ Cô thấy mấy đứa hơi bị lười rồi đấy!! #speaker:GV
 Khổ vì mấy đứa quá rồi đấy! #speaker:GV
 
 // Sau cuộc họp
-#cg:black,3,full #sfx:clock_ticking
+#cg:dark,2,full #sfx:clock_ticking
 #bgm:vn_theme
 #bg:coffe_shop_morning
 
@@ -210,9 +208,9 @@ Thôi đừng quan tâm nữa. #speaker:Phong #sprite:phong_sigh
 Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phong_sigh
 -> DONE
 
-=== hallway1_Phong ===
+=== hallway1_phong ===
 // Kohii coffee (Unity)
-{ hallway1_Phong :
+{ hallway1_phong :
 -0: 
     Vào việc nào anh bạn.#speaker:Phong #sprite:phong_talk
 
@@ -260,8 +258,8 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 }
 
-=== hallway1_Table1 ===
-{ hallway1_Table1:
+=== hallway1_table1 ===
+{ hallway1_table1:
 -0: 
     Bàn nhìn có vẻ không đúng lắm. #speaker:Nam #sprite:nam_thinking
     Nhìn nó đang thiếu cái gì đó. #speaker:Nam #sprite:nam_thinking
@@ -274,20 +272,32 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 }
 
-=== hallway1_Table2 ===
-{ hallway1_Table2:
+=== hallway1_table2 ===
+{ hallway1_table2:
 -0: 
-    Cái <voffset=15px><rotate="-10">bàn</voffset></rotate> không ở đúng vị trí của nó. #speaker:Nam #sprite:nam_thinking
+    Cái <voffset=15px><rotate="-10">bàn</voffset></rotate> có vẻ đang không ở đúng vị trí của nó. #speaker:Nam #sprite:nam_thinking
     -> DONE
 -else:
-    Cái ghế đang <voffset=15px><rotate="-10">cao</voffset></rotate> hơn bình thường thì phải. #speaker:Nam #sprite:nam_thinking
+    Cái ghế đang <voffset=25px><rotate="-20">cao</voffset></rotate> hơn bình thường thì phải. #speaker:Nam #sprite:nam_thinking
     -> DONE
 }
 
+=== ch2_hallway1_door ===
+{ ch2_hallway1_door:
+-0:
+    Mình cần thảo luận với Phong, không có thời gian chạy lung tung được. #speaker:Nam #sprite:nam_talk
+    ->DONE
+-1:
+    Từ từ đã nào, lại đây thảo luận tí đã. #speaker:Phong #sprite:phong_talk
+    ->DONE
+-else:
+    <b> Đồ án ở phía này. </b> #speaker:Phong #sprite:phong_talk
+    ->DONE
+}
 
-=== hallway2_Phong ===
+=== hallway2_phong ===
 // Kohii coffee (Unity)
-{ hallway2_Phong:
+{ hallway2_phong:
 -0:
     Tôi sửa xong lỗi texture rồi đấy. #speaker:Nam #sprite:nam_talk
     Kiểm tra lại trong game thử. #speaker:Nam #sprite:nam_talk
@@ -310,8 +320,8 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     ->DONE
 }
 
-=== hallway2_Table1 ===
-{ hallway2_Table1:
+=== hallway2_table1 ===
+{ hallway2_table1:
 -0: 
     Thật ngạc nhiên.
     Một cái bàn hết sức bình thường.
@@ -327,8 +337,8 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 }
 
-=== hallway2_Table2 ===
-{ hallway2_Table2:
+=== hallway2_table2 ===
+{ hallway2_table2:
 -0: 
     Hiện tại vật lý đang trong quá trình cập nhật.
     Nếu bạn thấy <voffset=15px><rotate="20">vật thể</voffset></rotate> đang lơ lửng.
@@ -341,52 +351,101 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 }
 
-=== hallway3_Phong ===
+=== ch2_hallway2_door ===
+{ ch2_hallway2_door:
+-0:
+    Vẫn còn vấn đề đấy nhé, chưa nghỉ ngơi được đâu!!. #speaker:Phong #sprite:phong_talk
+    ->DONE
+-else:
+    Phải quay lại bàn với Phong. #speaker:Nam #sprite:nam_talk
+    ->DONE
+}
+
+=== hallway3_phong ===
 // Kohii coffee (Unity)
-Lỗi position sửa xong rồi. #speaker:Nam #sprite:nam_talk
-Object đặt đúng chỗ hết rồi đấy. #speaker:Nam #sprite:nam_talk
-Tốt." #speaker:Phong #sprite:phong_talk
-Còn cái map cuối, liên quan đến kỹ thuật hơn nên để tôi xử lý luôn. #speaker:Phong #sprite:phong_talk
-Ông nghỉ tay một chút đi. #speaker:Phong #sprite:phong_smile
-Tôi mà nghỉ thì ông làm xong không? #speaker:Nam #sprite:nam_talk
-Có chứ. #speaker:Phong #sprite:phong_smile
-Tôi giỏi mà. #speaker:Phong #sprite:phong_smile
+{ hallway3_phong:
+-0: 
+    Lỗi position sửa xong rồi. #speaker:Nam #sprite:nam_talk
+    Object đặt đúng chỗ hết rồi đấy. #speaker:Nam #sprite:nam_talk
+    Tốt." #speaker:Phong #sprite:phong_talk
+    Còn cái map cuối, liên quan đến kỹ thuật hơn nên để tôi xử lý luôn. #speaker:Phong #sprite:phong_talk
+    Ông nghỉ tay một chút đi. #speaker:Phong #sprite:phong_smile
+    Tôi mà nghỉ thì ông làm xong không? #speaker:Nam #sprite:nam_talk
+    Có chứ. #speaker:Phong #sprite:phong_smile
+    Tôi giỏi mà. #speaker:Phong #sprite:phong_smile
 
-Từ phía quầy, có tiếng ai đó vừa bước ra.
+    Từ phía quầy, có tiếng ai đó vừa bước ra.
 
-Ủa, Phong! #speaker:Owner #sprite:owner_smile
-Hôm nay cũng ra đây làm việc à? #speaker:Owner #sprite:owner_smile
-Đúng rồi ạ, hôm nay tụi em ra đây ngồi làm đồ án. #speaker:Phong #sprite:phong_smile
-Ngày nào cũng thấy Phong ở đây nha. #speaker:Owner #sprite:owner_talk
-Để chị lấy phần của em ra nhé, chị nhớ order của em rồi. #speaker:Owner #sprite:owner_smile
-Chị nhớ order của em luôn à. #speaker:Phong #sprite:phong_surprised
-Khách ruột của chị mà. #speaker:Owner #sprite:owner_smile
+    Ủa, Phong! #speaker:Owner #sprite:owner_smile
+    Hôm nay cũng ra đây làm việc à? #speaker:Owner #sprite:owner_smile
+    Đúng rồi ạ, hôm nay tụi em ra đây ngồi làm đồ án. #speaker:Phong #sprite:phong_smile
+    Ngày nào cũng thấy Phong ở đây nha. #speaker:Owner #sprite:owner_talk
+    Để chị lấy phần của em ra nhé, chị nhớ order của em rồi. #speaker:Owner #sprite:owner_smile
+    Chị nhớ order của em luôn à. #speaker:Phong #sprite:phong_surprised
+    Khách ruột của chị mà. #speaker:Owner #sprite:owner_smile
 
-// { item_voucher == true:
-    À chị ơi, hôm nay em mang theo voucher nha chị." #speaker:Phong #sprite:phong_smile
+    // { item_voucher == true:
+        À chị ơi, hôm nay em mang theo voucher nha chị." #speaker:Phong #sprite:phong_smile
 
-    Nam liếc sang.
-    Cái voucher mà cậu nhặt được ở thư viện — cậu đã nhét vào tay Phong từ hôm đó vì không biết dùng làm gì.
+        Nam liếc sang.
+        Cái voucher mà cậu nhặt được ở thư viện — cậu đã nhét vào tay Phong từ hôm đó vì không biết dùng làm gì.
 
-    Vậy em muốn món gì nè, miễn phí một món trên menu nha. #speaker:Owner #sprite:owner_smile
-    Em lấy bánh đặc biệt nhất nha chị. #speaker:Phong #sprite:phong_smile
-    Okie nha Phong. #speaker:Owner #sprite:owner_smile
-// }
+        Vậy em muốn món gì nè, miễn phí một món trên menu nha. #speaker:Owner #sprite:owner_smile
+        Em lấy bánh đặc biệt nhất nha chị. #speaker:Phong #sprite:phong_smile
+        Okie nha Phong. #speaker:Owner #sprite:owner_smile
+    // }
 
 
-Chị chủ quán nhìn sang.
-Bạn của Phong à? #speaker:Owner #sprite:owner_talk
-Bạn làm đồ án cùng em ạ. #speaker:Phong #sprite:phong_smile
-Ủa, Nam đó hả. #speaker:Owner #sprite:owner_talk
-Lâu rồi mới thấy lại em nha. #speaker:Owner #sprite:owner_talk
-...Dạ." #speaker:Nam #sprite:nam_smile
-Vậy chị lấy đồ uống cho em luôn nha. #speaker:Owner #sprite:owner_talk
-Em cảm ơn chị. #speaker:Nam #sprite:nam_smile
-Mấy đứa đang làm đồ án đúng không, cố gắng lên nha. #speaker:Owner #sprite:owner_smile
--> DONE
+    Chị chủ quán nhìn sang.
+    Bạn của Phong à? #speaker:Owner #sprite:owner_talk
+    Bạn làm đồ án cùng em ạ. #speaker:Phong #sprite:phong_smile
+    Ủa, Nam đó hả. #speaker:Owner #sprite:owner_talk
+    Lâu rồi mới thấy lại em nha. #speaker:Owner #sprite:owner_talk
+    ...Dạ." #speaker:Nam #sprite:nam_smile
+    Vậy chị lấy đồ uống cho em luôn nha. #speaker:Owner #sprite:owner_talk
+    Em cảm ơn chị. #speaker:Nam #sprite:nam_smile
+    Mấy đứa đang làm đồ án đúng không, cố gắng lên nha. #speaker:Owner #sprite:owner_smile
+    -> DONE
+}
+
+=== ch2_hallway3_door ===
+{ ch2_hallway3_door:
+-0:
+    <b><i>Còn bao nhiêu cái bug nữa mới xong đây!!</i></b> #speaker:Phong #sprite:phong_exhaust
+    Phải quay lại thảo luận với Phong thôi. #speaker:Nam #sprite:nam_exhaust
+    ->DONE
+-else:
+    Quay lại với Phong thảo luận tiếp thôi. #speaker:Nam #sprite:nam_exhaust
+    ->DONE
+}
+
+=== hallway3_table1 ===
+{ hallway3_table1 :
+-0:
+    ...
+    ...
+    Sau một thời gian Nam để ý cái bàn.
+    Nam nhận ra cái bàn được lau rất kỹ càng.
+    Chắc được lâu bởi nhân viên cực kỳ chu đáo. #speaker:Nam #sprite:nam_thinking
+    ->DONE
+-else:
+    Một cái bàn sạch sẽ hoàn toàn bình thường. 
+    ->DONE
+}
+
+=== hallway3_table2 ===
+{ hallway3_table2:
+-0:
+    Trong Nam thoáng qua một suy nghĩ...
+    Bàn ghế được sắp xếp rất gọn trái lại với vẻ kỳ lại buổi sáng.
+    ->DONE
+-else:
+    Quán vắng vẻ thật đấy. #speaker:Nam #sprite:nam_thinking
+    ->DONE
+}
 
 === ch2_cutscene2 ===
-#cg:laptop_screen,5,full #sfx:8_bit
+#cg:laptop_screen,2,full #sfx:8_bit
 #bgm:vn_theme
 #bg:coffee_shop_evening
 Nào, chứng kiến thời khắc huy hoàng nào anh bạn. #speaker:Nam #sprite:nam_excited
@@ -396,10 +455,11 @@ Nào, chứng kiến thời khắc huy hoàng nào anh bạn. #speaker:Nam #spri
 Nó đang chạy này. #speaker:Nam #sprite:nam_talk
 Nó chạy được rồi này. #speaker:Nam #sprite:nam_smile
 NÓ CHẠY ĐƯỢC RỒI NÀY. #speaker:Phong #sprite:phong_smile
-TAO VỚI MÀY LÀM ĐƯỢC RỒI. #speaker:Nam & Phong
+TÔI VỚI ÔNG LÀM ĐƯỢC RỒI. #speaker:Nam & Phong
 WOOOOOHOOOOO!!!! #speaker:Nam & Phong
-LÊN NÀO NGƯỜI ANH EM. #speaker:Nam #sprite:nam_excited
-#cg:high_five,5,full #sfx:clap
+LÊN NÀO BRO. #speaker:Nam #sprite:nam_excited
+#cg:high_five,2,full #sfx:clap
+#bg:coffee_shop_evening
 Hai đứa cố gắng thật đấy chứ. #speaker:Owner #sprite:owner_talk
 Trời tối thế này rồi hai đứa vẫn không nhận ra cơ mà. #speaker:Owner #sprite:owner_talk
 Khách chị còn lại mỗi hai em thôi đấy. #speaker:Owner #sprite:owner_talk

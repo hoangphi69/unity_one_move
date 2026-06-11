@@ -5784,13 +5784,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1257699673}
   m_SourcePrefab: {fileID: 100100000, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
 --- !u!1 &1257699672 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
   m_PrefabInstance: {fileID: 1257699671}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1257699673
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257699672}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &1266522508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7357,13 +7381,14 @@ MonoBehaviour:
       Data3: 1340263323
       Data4: -669251955
     Path: event:/DormAfternoon
-  radioTrack:
+  musicTrack:
     Guid:
-      Data1: 1378897821
-      Data2: 1140727365
-      Data3: -1126543709
-      Data4: 401343018
-    Path: event:/Ch2RadioMusic
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  musicTrackParameter: 0
 --- !u!156049354 &1548825873
 Grid:
   m_ObjectHideFlags: 0

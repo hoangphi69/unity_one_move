@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36046544de2518d4c9191504982bb9d9, type: 3}
-  m_Name: hallway2_CheckBookshelf
+  m_Name: hallway1_Phong
   m_EditorClassIdentifier: Assembly-CSharp::Quest
-  <id>k__BackingField: hallway2_CheckBookshelf
-  title: "T\xECm ki\u1EBFm \xFD t\u01B0\u1EDFng"
+  <id>k__BackingField: hallway1_Phong
+  title: "B\xE0n lu\u1EADn v\u1EDBi Phong"
   description: 
-  state: 1
+  state: 0
   requiredQuests: []
   objectives:
-  - description: "Ki\u1EBFm \xFD t\u01B0\u1EDFng"
+  - description: "Th\u1EA3o lu\u1EADn \u0111\u1ED3 \xE1n v\u1EDBi Phong"
     details:
-      rid: 8315910136783175752
+      rid: 8315910136783175756
   requiresTurnIn: 0
   references:
     version: 2
     RefIds:
-    - rid: 8315910136783175752
+    - rid: 8315910136783175756
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: book
+        targetID: phong_1

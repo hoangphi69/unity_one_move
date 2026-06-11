@@ -15,7 +15,7 @@ MonoBehaviour:
   <id>k__BackingField: lobby1_GoOutside
   title: "Ra kh\u1ECFi c\u0103n ph\xF2ng"
   description: 
-  state: 0
+  state: 1
   requiredQuests: []
   objectives:
   - description: "\u0110i ra ngo\xE0i"
@@ -31,8 +31,8 @@ MonoBehaviour:
     - rid: 3769236948575322308
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: phone
+        targetID: phone1
     - rid: 7374410265537282134
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: door
+        targetID: door1_1

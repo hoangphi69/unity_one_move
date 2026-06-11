@@ -15,7 +15,7 @@ MonoBehaviour:
   <id>k__BackingField: hallway3_StoppedByLibrarian
   title: "N\xF3i chuy\u1EC7n v\u1EDBi th\u1EE7 th\u01B0"
   description: 
-  state: 0
+  state: 1
   requiredQuests: []
   objectives:
   - description: "\u0110\xF3ng d\u1EA5u s\xE1ch t\u1EA1i th\u1EE7 th\u01B0"
@@ -28,4 +28,4 @@ MonoBehaviour:
     - rid: 7374410265537282146
       type: {class: InteractObjective, ns: , asm: Assembly-CSharp}
       data:
-        targetID: librarian
+        targetID: lib
