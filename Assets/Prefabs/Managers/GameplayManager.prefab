@@ -50,6 +50,6 @@ MonoBehaviour:
   newGameStage:
     m_SceneAsset: {fileID: 102900000, guid: 9d35536fcc265424ca9c9bb85c0033bf, type: 3}
     m_SceneName: chapter1_lobby
-  playerPrefab: {fileID: 3126881201836064609, guid: 2770e32f08d4bcd459cd96c82478f229, type: 3}
+  playerPrefab: {fileID: 3126881201836064609, guid: dfae483ce882586439040e6bf51ecd31, type: 3}
   playerCameraPrefab: {fileID: 1070790957166581366, guid: dc96575badb6be4478de0bfd74501ff2, type: 3}
   cameraMode: 0

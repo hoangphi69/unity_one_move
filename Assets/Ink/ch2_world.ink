@@ -33,11 +33,23 @@ Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #
 
 // chapter 2 - hallway 1
 // ---------
-
 === ch2_h1_clock ===
 Đồng hồ điểm 9 giờ sáng.
 -> DONE
 
+=== ch2_h1_table1 ===
+{ ch2_h1_table1:
+-1: 
+    Hiện tại vật lý đang trong quá trình cập nhật.
+    Nếu bạn thấy <voffset=15px><rotate="20">vật thể</voffset></rotate> đang lơ lửng.
+    Có thể hiểu rằng vật lý hiện tại đang không tồn tại.
+    Xin vui lòng chờ.
+    -> DONE
+-else:
+    Đang đợi bản cập nhật <voffset=-15px>vật lý</voffset>.
+    Xin vui lòng tiếp tục chờ.
+    -> DONE
+}
 
 === ch2_h1_npc_maid ===
 {!Nhân viên hiện tại là một cô gái trạc tuổi Nam, trong bộ trang phục hầu gái "moe" thường thấy ở Nhật.}
@@ -100,12 +112,26 @@ Phải mua chiếc bàn này ngay mới được. #speaker:Tổng tài
 
 // chapter 2 - hallway 2
 // ---------
-
-
 === ch2_h2_clock ===
 Đồng hồ điểm 1 giờ trưa.
 -> DONE
 
+=== ch2_h2_table1 ===
+{ ch2_h2_table1:
+-1: 
+    Thật ngạc nhiên.
+    Một cái bàn hết sức bình thường.
+    Nam đứng nhìn nó một lúc.
+    ...
+    ...
+    ...
+    Chỉ là một cái bàn. #speaker:Nam #sprite:nam_thinking
+    -> DONE
+-else:
+    Vẫn là một cái bàn bình thường.
+    Không có gì để xem ở đây. #speaker:Nam #sprite:nam_thinking
+    -> DONE
+}
 
 === ch2_h2_npc_ceo ===
 Chiếc bàn này có hoa văn thật thú vị. #speaker:Tổng tài
@@ -150,7 +176,7 @@ Có tiền là tôi mua luôn. #speaker:Tổng tài
     -> DONE
 
 
-// chapter 2 - hallway 2
+// chapter 2 - hallway 
 // ---------
 
 === ch2_h3_clock ===
@@ -160,6 +186,31 @@ Có tiền là tôi mua luôn. #speaker:Tổng tài
   - Đồng hồ điểm 8 giờ tối.
 }
 -> DONE
+
+=== ch2_h3_table1 ===
+{ ch2_h3_table1:
+-1:
+    Trong Nam thoáng qua một suy nghĩ...
+    Bàn ghế được sắp xếp rất gọn trái lại với vẻ kỳ lạ buổi sáng.
+    ->DONE
+-else:
+    Quán vắng vẻ thật đấy. #speaker:Nam #sprite:nam_thinking
+    ->DONE
+}
+
+=== ch2_h3_table2 ===
+{ ch2_h3_table2:
+-1:
+    ...
+    ...
+    Sau một thời gian Nam để ý cái bàn.
+    Nam nhận ra cái bàn được lau rất kỹ càng.
+    Chắc được lâu bởi nhân viên cực kỳ chu đáo. #speaker:Nam #sprite:nam_thinking
+    ->DONE
+-else:
+    Một cái bàn sạch sẽ hoàn toàn bình thường. 
+    ->DONE
+}
 
 VAR voucher = false
 

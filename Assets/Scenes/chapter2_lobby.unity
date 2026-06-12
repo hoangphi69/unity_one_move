@@ -1374,6 +1374,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2513220facbf364db90aec65214d94c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 256366683}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2513220facbf364db90aec65214d94c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 256366684}
   m_SourcePrefab: {fileID: 100100000, guid: a2513220facbf364db90aec65214d94c, type: 3}
 --- !u!1 &256366680 stripped
 GameObject:
@@ -1392,6 +1395,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e9459587ea9a244bb2b205e74a478b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collide
+--- !u!65 &256366684
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256366680}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &272051573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4236,7 +4260,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6867469554636011710, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1696990265}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       insertIndex: -1
@@ -4308,11 +4335,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1aa1a79a1e9f149b871e61eb40f728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollideLock
-  lockedDialogue: lobby2_door
-  bubble: 0
+  lockedDialogue: ch2_l2_door
+  bubble: 1
   hideFirstTime: 1
   bubblePrefab: {fileID: 0}
-  bubbleSpawnPoint: {fileID: 0}
+  bubbleSpawnPoint: {fileID: 1696990265}
 --- !u!114 &1074287571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5712,20 +5739,8 @@ MonoBehaviour:
   <SpawnPoint>k__BackingField: {fileID: 2006461066}
   cameraA: {fileID: 0}
   cameraB: {fileID: 0}
-  ambienceTrack:
-    Guid:
-      Data1: -1900782760
-      Data2: 1328335181
-      Data3: 1340263323
-      Data4: -669251955
-    Path: event:/DormAfternoon
-  musicTrack:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+  ambienceTrack: 0
+  musicTrack: 0
   musicTrackParameter: 0
 --- !u!156049354 &1548825873
 Grid:
@@ -6428,7 +6443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7793d26e65c34ef39193b6d06721239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  knotName: lobby2_phone
+  knotName: ch2_l2_phone
 --- !u!114 &1608997514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6678,6 +6693,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b8857f62d9ff25440b04176fba7c249d, type: 3}
   m_PrefabInstance: {fileID: 1693007257}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1696990264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1696990265}
+  m_Layer: 0
+  m_Name: quest_door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1696990265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696990264}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.19, z: -0.28}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2040303647}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1738841247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8693,6 +8739,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b8857f62d9ff25440b04176fba7c249d, type: 3}
   m_PrefabInstance: {fileID: 2011366647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2040303647 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6867469554636011710, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+  m_PrefabInstance: {fileID: 1074287566}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2048406349
 PrefabInstance:

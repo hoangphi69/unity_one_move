@@ -11490,20 +11490,8 @@ MonoBehaviour:
   <SpawnPoint>k__BackingField: {fileID: 2006461066}
   cameraA: {fileID: 0}
   cameraB: {fileID: 0}
-  ambienceTrack:
-    Guid:
-      Data1: -1900782760
-      Data2: 1328335181
-      Data3: 1340263323
-      Data4: -669251955
-    Path: event:/DormAfternoon
-  musicTrack:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+  ambienceTrack: 0
+  musicTrack: 0
   musicTrackParameter: 0
 --- !u!156049354 &1548825873
 Grid:
@@ -12899,7 +12887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7793d26e65c34ef39193b6d06721239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  knotName: hallway3_phong
+  knotName: ch2_h3_phong
 --- !u!114 &1677553343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15162,7 +15150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1aa1a79a1e9f149b871e61eb40f728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollideLock
-  lockedDialogue: ch2_hallway3_door
+  lockedDialogue: ch2_h3_door
   bubble: 1
   hideFirstTime: 1
   bubblePrefab: {fileID: 4310547284113562885, guid: 78f390fb863edb94689284adb5d9f5ee, type: 3}

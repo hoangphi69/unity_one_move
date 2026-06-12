@@ -7,7 +7,7 @@ VAR ch2_lobby2_door = 0
 VAR ch2_missed_report = false
 VAR ch2_hallway1_talk_to_phong = 0
 
-=== lobby2_phone ===
+=== ch2_l2_phone ===
 { ch2_lobby2_phone == false:
     -> phone_notification
 - else:
@@ -41,7 +41,7 @@ Nam ngồi dậy.
 -> DONE
 
 
-=== lobby2_door ===
+=== ch2_l2_door ===
 { ch2_lobby2_phone == false:
      ~ ch2_lobby2_door++
     { ch2_lobby2_door:
@@ -64,7 +64,7 @@ Nam ngồi dậy.
 //Kohii coffee
 #cg:chapter2,3,full #sfx:collect
 #bgm:vn_theme
-#bg:coffe_shop_morning
+#bg:coffee_shop_morning
 
 Quán Kohii vào buổi sáng sớm.
 Ánh nắng lọc qua khung cửa kính, trải dài trên những hàng bàn gỗ.
@@ -132,6 +132,8 @@ Khéo nguyên nhân từ bên ông mà ra ấy. #speaker:Phong #sprite:phong_ang
 ...
 
 + [Tiếp tục ý kiến]
+    #bg:coffe_shop_morning
+
     ~ ch2_missed_report = true
     Nam thở dài.
     Giờ cả hai cùng giải quyết luôn đi. #speaker:Nam #sprite:nam_talk
@@ -142,6 +144,7 @@ Khéo nguyên nhân từ bên ông mà ra ấy. #speaker:Phong #sprite:phong_ang
     -> DONE
 
 + [...]
+    #bg:coffe_shop_morning
     Phong bỗng ngừng lại.
     Tôi với ông có quên gì không? #speaker:Phong #sprite:phong_thinking
     Nam nhìn Phong.
@@ -160,8 +163,7 @@ Còn đống này chưa sửa xong chứ. #speaker:Nam #sprite:nam_panic
 Agggghhh..... #speaker:Phong #sprite:phong_panic
 Agggghhh..... #speaker:Nam #sprite:nam_panic
 
-// [Tiếng "Agggghhh" overlap với tiếng GV]
-#bg: video_call
+#bg:meeting_online
 Aggggghh... Tại sao các em làm không xong hả?? #speaker:GV
 Có chừng này chức năng mà không làm được à?! #speaker:GV
 Nếu không làm được thì đăng ký đồ án để làm gì cho vừa nặng vừa mệt?! #speaker:GV
@@ -204,9 +206,9 @@ Thôi đừng quan tâm nữa. #speaker:Phong #sprite:phong_sigh
 Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phong_sigh
 -> DONE
 
-=== hallway1_phong ===
+=== ch2_h1_phong ===
 // Kohii coffee (Unity)
-{ hallway1_phong :
+{ ch2_h1_phong :
 -1: 
     Vào việc nào anh bạn.#speaker:Phong #sprite:phong_talk
 
@@ -255,37 +257,8 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 }
 
-// === hallway1_table1 ===
-// { hallway1_table1:
-// -1: 
-//     Bàn nhìn có vẻ không đúng lắm. #speaker:Nam #sprite:nam_thinking
-//     Nhìn nó đang thiếu cái gì đó. #speaker:Nam #sprite:nam_thinking
-//     -> DONE
-// -2:
-//     Hình như bàn đang bị \#@^!*&^%#*&%*&%#*%*&%#. #speaker:Nam #sprite:nam_thinking
-//     Hoa văn bàn này có vẻ khác với các bàn khác thì phải. #speaker:Nam #sprite:nam_thinking
-//     -> DONE
-// -else:
-//     \#@^!*&^%#*&%*&%#*%*&%_@&^_!_*@_*&#_&^, phải sửa lại lỗi này thôi. #speaker:Nam #sprite:nam_thinking
-//     -> DONE
-// }
-
-=== hallway1_table1 ===
-{ hallway1_table1:
--1: 
-    Hiện tại vật lý đang trong quá trình cập nhật.
-    Nếu bạn thấy <voffset=15px><rotate="20">vật thể</voffset></rotate> đang lơ lửng.
-    Có thể hiểu rằng vật lý hiện tại đang không tồn tại.
-    Xin vui lòng chờ.
-    -> DONE
--else:
-    Đang đợi bản cập nhật <voffset=-15px>vật lý</voffset>.
-    Xin vui lòng tiếp tục chờ.
-    -> DONE
-}
-
-=== ch2_hallway1_door ===
-{ ch2_hallway1_door:
+=== ch2_h1_door ===
+{ ch2_h1_door:
 -1:
     Mình cần thảo luận với Phong, không có thời gian chạy lung tung được. #speaker:Nam #sprite:nam_talk
     ->DONE
@@ -298,9 +271,9 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     ->DONE
 }
 
-=== hallway2_phong ===
+=== ch2_h2_phong ===
 // Kohii coffee (Unity)
-{ hallway2_phong:
+{ ch2_h2_phong:
 -1:
     Tôi sửa xong lỗi toạ độ rồi đấy. #speaker:Nam #sprite:nam_talk
     Kiểm tra lại trong game thử. #speaker:Nam #sprite:nam_talk
@@ -324,25 +297,8 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     ->DONE
 }
 
-=== hallway2_table1 ===
-{ hallway2_table1:
--1: 
-    Thật ngạc nhiên.
-    Một cái bàn hết sức bình thường.
-    Nam đứng nhìn nó một lúc.
-    ...
-    ...
-    ...
-    Chỉ là một cái bàn. #speaker:Nam #sprite:nam_thinking
-    -> DONE
--else:
-    Vẫn là một cái bàn bình thường.
-    Không có gì để xem ở đây. #speaker:Nam #sprite:nam_thinking
-    -> DONE
-}
-
-=== ch2_hallway2_door ===
-{ ch2_hallway2_door:
+=== ch2_h2_door ===
+{ ch2_h2_door:
 -1:
     Vẫn còn vấn đề đấy nhé, chưa nghỉ ngơi được đâu!!. #speaker:Phong #sprite:phong_talk
     ->DONE
@@ -352,9 +308,9 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     ->DONE
 }
 
-=== hallway3_phong ===
+=== ch2_h3_phong ===
 // Kohii coffee (Unity)
-{ hallway3_phong:
+{ ch2_h3_phong:
 -1: 
     Lỗi position sửa xong rồi. #speaker:Nam #sprite:nam_talk
     Object đặt đúng chỗ hết rồi đấy. #speaker:Nam #sprite:nam_talk
@@ -393,8 +349,8 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 }
 
-=== ch2_hallway3_door ===
-{ ch2_hallway3_door:
+=== ch2_h3_door ===
+{ ch2_h3_door:
 -1:
     <b><i>Còn bao nhiêu cái bug nữa mới xong đây!!</i></b> #speaker:Phong #sprite:phong_exhaust
     Phải quay lại thảo luận với Phong thôi. #speaker:Nam #sprite:nam_exhaust
@@ -404,30 +360,7 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     ->DONE
 }
 
-=== hallway3_table1 ===
-{ hallway3_table1:
--1:
-    Trong Nam thoáng qua một suy nghĩ...
-    Bàn ghế được sắp xếp rất gọn trái lại với vẻ kỳ lạ buổi sáng.
-    ->DONE
--else:
-    Quán vắng vẻ thật đấy. #speaker:Nam #sprite:nam_thinking
-    ->DONE
-}
 
-=== hallway3_table2 ===
-{ hallway3_table2:
--1:
-    ...
-    ...
-    Sau một thời gian Nam để ý cái bàn.
-    Nam nhận ra cái bàn được lau rất kỹ càng.
-    Chắc được lâu bởi nhân viên cực kỳ chu đáo. #speaker:Nam #sprite:nam_thinking
-    ->DONE
--else:
-    Một cái bàn sạch sẽ hoàn toàn bình thường. 
-    ->DONE
-}
 
 
 === ch2_cutscene2 ===
