@@ -31,17 +31,17 @@ VAR ch1_hallway3_door = 0
 
 // ----------- Cutscene đầu ch1 ----------
 === ch1_cutscene1 ===
-#sfx:begin #cg:chapter1,2,full 
-#bg:black
+#sfx:collect #cg:chapter1,2,full 
+#cg:black,2,full
 
-Ánh sáng xanh nhạt từ màn hình hắt lên căn phòng trọ nhỏ.
+Ánh sáng xanh nhạt từ màn hình hắt lên căn phòng trọ nhỏ. #bg:dom
 Tiếng bàn phím lách cách vang lên. Rồi dừng lại.
 Trên màn hình là dòng chữ: <b>VICTORY</b>
 Nam tháo tai nghe xuống.
 ...
-#sfx:camera_tick
+#sfx:camera_snap
 #bgm:vn_theme
-Góc phải màn hình hiện thông báo:
+Góc phải màn hình hiện thông báo: #bg:dark
 <i>Hoàn thành kỳ thực tập.</i>
 <i>Đã kết thúc học phần cuối cùng.</i>
 ...
@@ -54,12 +54,12 @@ Căn phòng vẫn như mọi ngày.
 ...
 "Giờ thì làm gì tiếp đây..." #speaker:Nam #sprite:nam_bored
 * [Tiếp tục chơi game]
-    #sfx:camera_tick #cg:dark,1,full 
+    #sfx:camera_snap #cg:dark,1,full 
     #bg:dom
     Màn hình sáng lên. Âm thanh chiến thắng vang lên lần thứ ba.
-    #cg:black,1,full 
+    #sfx:camera_snap #cg:dark,1,full 
     Nhưng tâm trạng Nam vẫn chùng xuống.
-    #cg:black,1,full 
+    #sfx:camera_snap #cg:dark,1,full 
     #bg:dom
     ...
     Ngón tay cậu dừng lại trên bàn phím.
@@ -171,7 +171,9 @@ Tôi với ông cùng làm thì có gì khó chứ!! #speaker:Nam #sprite:nam_ta
 
 // ----------- Cutscene sau lobby1 ----------
 === ch1_cutscene2 ===
-#sfx:calendar_flip #cg:calender_flip,2,full
+#cg:black,0.2,full #sfx:calendar_flip
+#cg:calender_flip,0.2,full 
+#cg:dom_friend_morning,0.2,full
 #bgm:vn_theme
 #bg:dom_friend_morning
 Một tuần trôi qua.
@@ -440,9 +442,9 @@ _"Ring Ring!!!"_
 
 // ----------- Cutscene sau khi chơi game xong tại phòng trọ ----------
 === ch1_cutscene3 ===
-#cg: timeskip_evening,5,full #sfx: clock_ticking
+#cg: timeskip_afternoon,5,full #sfx: clock_ticking
 #bgm:vn_theme
-#bg:dom_friend
+#bg:dom_friend_afternoon
 
 Màn hình tắt.
 Tiêu đề trò chơi hiện ra.

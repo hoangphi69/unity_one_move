@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(Outline))]
 public class Interactable : MonoBehaviour, ITrigger
 {

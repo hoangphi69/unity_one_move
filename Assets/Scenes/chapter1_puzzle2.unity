@@ -1320,6 +1320,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5f794758da053a942b2ea9be6b7f7dfc, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2220975849928245953, guid: 5f794758da053a942b2ea9be6b7f7dfc, type: 3}
     - target: {fileID: 919132149155446097, guid: 5f794758da053a942b2ea9be6b7f7dfc, type: 3}
       propertyPath: m_Name
       value: pc
@@ -7235,20 +7239,8 @@ MonoBehaviour:
   <SpawnPoint>k__BackingField: {fileID: 661314353}
   cameraA: {fileID: 560915321}
   cameraB: {fileID: 883090234}
-  ambienceTrack:
-    Guid:
-      Data1: 12349720
-      Data2: 1074429056
-      Data3: 1495270296
-      Data4: 48356264
-    Path: event:/ambience/libary
-  musicTrack:
-    Guid:
-      Data1: -1927147573
-      Data2: 1128624306
-      Data3: 147197628
-      Data4: -945300652
-    Path: event:/music/ch1_library
+  ambienceTrack: 6
+  musicTrack: 3
   musicTrackParameter: 2
 --- !u!156049354 &1980364718
 Grid:

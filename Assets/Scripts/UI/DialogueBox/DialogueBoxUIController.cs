@@ -60,7 +60,7 @@ public class DialogueBoxUIController : MonoBehaviour
       .Append(elements.DOFade(1f, animationDuration).From(0));
 
     GameplayManager.Instance.ZoomCamera(4f, animationDuration * 2);
-    GameAudioManager.Instance.PlaySFX(AudioTag.DialogueOn);
+    GameAudioManager.Instance.PlaySFX(AudioTag.dialogue_on);
     GameInputManager.Instance.Actions.UI.DialogueAdvance.performed += AdvanceDialogue;
     background.onClick.AddListener(AdvanceDialogue);
   }
@@ -77,7 +77,7 @@ public class DialogueBoxUIController : MonoBehaviour
 
     uiContainer.SetActive(false);
     background.onClick.RemoveAllListeners();
-    GameAudioManager.Instance.PlaySFX(AudioTag.DialogueOff);
+    GameAudioManager.Instance.PlaySFX(AudioTag.dialogue_off);
     GameInputManager.Instance.Actions.UI.DialogueAdvance.performed -= AdvanceDialogue;
     GameEventsManager.Instance.dialogueEvents.LeaveDialogue();
   }

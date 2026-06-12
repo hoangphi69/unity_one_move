@@ -62,7 +62,7 @@ Nam ngồi dậy.
 
 === ch2_cutscene1 ===
 //Kohii coffee
-#cg:chapter2,3,full #sfx:begin
+#cg:chapter2,3,full #sfx:collect
 #bgm:vn_theme
 #bg:coffe_shop_morning
 

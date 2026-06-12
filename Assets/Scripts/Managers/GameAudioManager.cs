@@ -8,24 +8,37 @@ public enum AudioTag
 {
   None, // default/empty state
 
-  // BGM
-  Title_Menu,
+  // MUSIC
+  tile_menu,
+  vn_theme,
+  ch1_library,
+  ch2_cafe,
+
+  // AMBIENCE
+  ambient_cafe,
+  ambient_library,
+  ambient_dorm_morning,
+  ambient_dorm_afternoon,
 
   // SFX (Gameplay)
-  Bump,
-  Die,
-  Door,
-  Push,
-  Slide,
-  Step,
-  GlitchFix,
-  SwitchGlitch,
+  bump,
+  failed,
+  door,
+  push,
+  slide,
+  step,
+  glitch_fix,
+  switch_glitch,
+  collect,
 
   // SFX (UI)
-  Restart,
-  Pause,
-  DialogueOn,
-  DialogueOff
+  restart,
+  pause,
+  dialogue_on,
+  dialogue_off,
+  camera_snap,
+  calendar_flip,
+  clock_ticking,
 }
 
 [System.Serializable]
@@ -246,7 +259,6 @@ public class GameAudioManager : MonoBehaviour
       musicChannel.setVolume(1);
       musicChannel.start();
     }
-    print($"play {audio.Path}");
   }
 
   public void SetMusicParameter(string paramName, float paramValue)
@@ -267,7 +279,6 @@ public class GameAudioManager : MonoBehaviour
     musicChannel.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     musicChannel.release();
     musicTrack = new();
-    print($"stop music");
   }
 
 
@@ -277,7 +288,7 @@ public class GameAudioManager : MonoBehaviour
 
   public void PlayPauseStaticAudio()
   {
-    EventReference audio = GetAudio(AudioTag.Pause);
+    EventReference audio = GetAudio(AudioTag.pause);
     if (audio.IsNull) return;
 
     pauseStaticSFX = CreateEventInstance(audio);

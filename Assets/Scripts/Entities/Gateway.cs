@@ -37,7 +37,7 @@ public class Gateway : MonoBehaviour
 
     float dotProduct = Vector3.Dot(transform.forward, direction);
     string anim = dotProduct > 0 ? "Pull" : "Push";
-    GameAudioManager.Instance.PlaySFX(AudioTag.Door);
+    GameAudioManager.Instance.PlaySFX(AudioTag.door);
     await PlayAnimation(anim);
     await Transition();
   }
@@ -50,9 +50,17 @@ public class Gateway : MonoBehaviour
 
   async Task Transition()
   {
+    if (_saveProgress) await SaveProgress();
+
     if (string.IsNullOrEmpty(cutscene)) await GameplayManager.Instance.LoadStageAsync(_nextStage);
     else await GameplayManager.Instance.LoadStageAsync(_nextStage, cutscene);
+  }
 
-    if (_saveProgress) await GameDataManager.Instance.SaveProgress(_nextStage);
+  async Task SaveProgress()
+  {
+    await GameDataManager.Instance.SaveProgress(_nextStage);
+
+    foreach (string item in GameplayManager.Instance.ActivePlayer.collectedItems)
+      GameEventsManager.Instance.dialogueEvents.SetVariable(item, true);
   }
 }

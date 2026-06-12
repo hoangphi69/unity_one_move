@@ -56,12 +56,68 @@ MonoBehaviour:
   - tag: 2
     audio:
       Guid:
+        Data1: 543236486
+        Data2: 1092957461
+        Data3: 783772565
+        Data4: 1414680741
+      Path: event:/music/vn_theme
+  - tag: 3
+    audio:
+      Guid:
+        Data1: -1990048848
+        Data2: 1182324296
+        Data3: 522856858
+        Data4: 1389132291
+      Path: event:/music/ch1_library
+  - tag: 4
+    audio:
+      Guid:
+        Data1: -1927147573
+        Data2: 1128624306
+        Data3: 147197628
+        Data4: -945300652
+      Path: event:/music/ch2_cafe
+  - tag: 5
+    audio:
+      Guid:
+        Data1: -1502454477
+        Data2: 1247658308
+        Data3: -223055723
+        Data4: 323907272
+      Path: event:/ambience/cafe
+  - tag: 6
+    audio:
+      Guid:
+        Data1: 12349720
+        Data2: 1074429056
+        Data3: 1495270296
+        Data4: 48356264
+      Path: event:/ambience/libary
+  - tag: 7
+    audio:
+      Guid:
+        Data1: -1271943229
+        Data2: 1304194765
+        Data3: 1040641418
+        Data4: -1539904559
+      Path: event:/ambience/dorm_morning
+  - tag: 8
+    audio:
+      Guid:
+        Data1: -1861139565
+        Data2: 1142116504
+        Data3: -278542166
+        Data4: 977728929
+      Path: event:/ambience/dorm_afternoon
+  - tag: 9
+    audio:
+      Guid:
         Data1: 1693437244
         Data2: 1320825761
         Data3: 986880926
         Data4: -975584426
       Path: event:/gameplay/bump
-  - tag: 3
+  - tag: 10
     audio:
       Guid:
         Data1: 389657450
@@ -69,7 +125,7 @@ MonoBehaviour:
         Data3: 1454212251
         Data4: -105785520
       Path: event:/gameplay/failed
-  - tag: 4
+  - tag: 11
     audio:
       Guid:
         Data1: 1030607118
@@ -77,7 +133,7 @@ MonoBehaviour:
         Data3: -1670365780
         Data4: 809670888
       Path: event:/gameplay/door
-  - tag: 5
+  - tag: 12
     audio:
       Guid:
         Data1: -161188887
@@ -85,7 +141,7 @@ MonoBehaviour:
         Data3: -639283327
         Data4: -1579158529
       Path: event:/gameplay/push
-  - tag: 6
+  - tag: 13
     audio:
       Guid:
         Data1: -2055329017
@@ -93,7 +149,7 @@ MonoBehaviour:
         Data3: -164074102
         Data4: -1914414564
       Path: event:/gameplay/slide
-  - tag: 7
+  - tag: 14
     audio:
       Guid:
         Data1: -92958327
@@ -101,7 +157,7 @@ MonoBehaviour:
         Data3: 448965789
         Data4: 1546518714
       Path: event:/gameplay/step
-  - tag: 8
+  - tag: 15
     audio:
       Guid:
         Data1: 1701777174
@@ -109,7 +165,7 @@ MonoBehaviour:
         Data3: -81792592
         Data4: 1716212645
       Path: event:/gameplay/glitch_fix
-  - tag: 9
+  - tag: 16
     audio:
       Guid:
         Data1: -374842620
@@ -117,7 +173,15 @@ MonoBehaviour:
         Data3: 841952918
         Data4: 1877735051
       Path: event:/gameplay/switch_glitch
-  - tag: 10
+  - tag: 17
+    audio:
+      Guid:
+        Data1: -6286058
+        Data2: 1240993760
+        Data3: 1065561222
+        Data4: -1759589427
+      Path: event:/gameplay/collect
+  - tag: 18
     audio:
       Guid:
         Data1: 1483724903
@@ -125,7 +189,7 @@ MonoBehaviour:
         Data3: -1846840691
         Data4: -57058085
       Path: event:/ui/restart
-  - tag: 11
+  - tag: 19
     audio:
       Guid:
         Data1: 1811109640
@@ -133,7 +197,7 @@ MonoBehaviour:
         Data3: -1815236962
         Data4: 118315463
       Path: event:/ui/pause
-  - tag: 12
+  - tag: 20
     audio:
       Guid:
         Data1: 392778598
@@ -141,7 +205,7 @@ MonoBehaviour:
         Data3: -2000768334
         Data4: 1875503285
       Path: event:/ui/dialogue_on
-  - tag: 13
+  - tag: 21
     audio:
       Guid:
         Data1: 1126908353
@@ -149,4 +213,28 @@ MonoBehaviour:
         Data3: 2140208771
         Data4: 1035593218
       Path: event:/ui/dialogue_off
+  - tag: 22
+    audio:
+      Guid:
+        Data1: 1191256621
+        Data2: 1239416463
+        Data3: 35447725
+        Data4: -1553903708
+      Path: event:/ui/camera_snap
+  - tag: 23
+    audio:
+      Guid:
+        Data1: -2035944673
+        Data2: 1336094113
+        Data3: 1599139262
+        Data4: 915270450
+      Path: event:/ui/calendar_flip
+  - tag: 24
+    audio:
+      Guid:
+        Data1: 1663681756
+        Data2: 1218931797
+        Data3: -336193388
+        Data4: -2109603280
+      Path: event:/ui/clock_ticking
   hasDuplicateTags: 0

@@ -51,7 +51,7 @@ public class GameFlowManager : MonoBehaviour
 
     // await Task.Delay(2000);
 
-    GameAudioManager.Instance.PlayMusic(AudioTag.Title_Menu);
+    GameAudioManager.Instance.PlayMusic(AudioTag.tile_menu);
 
     await LoadingScreenUIController.Instance.HideFadeAsync(2f);
   }
@@ -74,7 +74,7 @@ public class GameFlowManager : MonoBehaviour
 
     // Execute player audio animation 
     GameAudioManager.Instance.PlayPauseStaticAudio();
-    if (!GameplayManager.Instance.Stage.musicTrack.IsNull)
+    if (GameplayManager.Instance.Stage.musicTrack != AudioTag.None)
     {
       await GameplayManager.Instance.ActivePlayer.LowerMusic();
       GameAudioManager.Instance.SetMusicVolume(.2f);
@@ -95,7 +95,7 @@ public class GameFlowManager : MonoBehaviour
     HUDOverlayUIController.Instance.Show();
 
     // Execute player audio animation
-    if (!GameplayManager.Instance.Stage.musicTrack.IsNull)
+    if (GameplayManager.Instance.Stage.musicTrack != AudioTag.None)
     {
       await GameplayManager.Instance.ActivePlayer.PlayMusic();
       GameAudioManager.Instance.PlayMusic(GameplayManager.Instance.Stage.musicTrack);
@@ -116,12 +116,12 @@ public class GameFlowManager : MonoBehaviour
 
     HUDOverlayUIController.Instance.Show();
 
-    GameAudioManager.Instance.PlaySFX(AudioTag.Restart);
+    GameAudioManager.Instance.PlaySFX(AudioTag.restart);
     await LoadingScreenUIController.Instance.ShowStripsAsync();
 
     await GameplayManager.Instance.RestartStageAsync();
 
-    if (!GameplayManager.Instance.Stage.musicTrack.IsNull)
+    if (GameplayManager.Instance.Stage.musicTrack != AudioTag.None)
     {
       await GameplayManager.Instance.ActivePlayer.PlayMusic();
       GameAudioManager.Instance.PlayMusic(GameplayManager.Instance.Stage.musicTrack);
@@ -153,14 +153,9 @@ public class GameFlowManager : MonoBehaviour
     GameDataManager.Instance.NewGame();
 
     string cutscene = "ch1_cutscene1";
-    GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutscene, DialogueMode.Cutscene);
-
-    await Task.Delay(1000);
-    LoadingScreenUIController.Instance.HideImmediate();
 
     string stageName = GameplayManager.Instance.newGameStage;
-    await GameplayManager.Instance.LoadStageAsync(stageName);
-    GameplayManager.Instance.SpawnPlayer();
+    await GameplayManager.Instance.LoadStageAsync(stageName, cutscene, LoadingScreenUIController.Instance.HideImmediate);
     GameplayManager.Instance.ZoomCamera(4.5f);
 
     HUDOverlayUIController.Instance.Show();

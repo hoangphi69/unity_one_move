@@ -24,11 +24,13 @@ public class PlayerController : MonoBehaviour
 
     private float raycastHeight = .3f;
 
-    private Interactable nearbyInteractable;
-
     private Animator animator;
 
     private GameObject indicatorTile;
+
+    private Interactable nearbyInteractable;
+
+    public List<string> collectedItems = new List<string>();
 
     void Awake()
     {
@@ -115,10 +117,10 @@ public class PlayerController : MonoBehaviour
 
         if (puddle != null)
         {
-            GameAudioManager.Instance.PlaySFX(AudioTag.Slide);
+            GameAudioManager.Instance.PlaySFX(AudioTag.slide);
             puddle.Evaporate();
         }
-        else GameAudioManager.Instance.PlaySFX(AudioTag.Step);
+        else GameAudioManager.Instance.PlaySFX(AudioTag.step);
     }
 
     private bool OnPuddle(out Puddle activePuddle)
@@ -189,6 +191,8 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out Collide collide))
             {
+                if (hit.collider.TryGetComponent(out Collectible item)) Collect(item.id);
+
                 collide.OnCollide(direction);
                 if (collide.isLocked) return false;
                 else return true;
@@ -270,6 +274,11 @@ public class PlayerController : MonoBehaviour
         nearbyInteractable.OnInteract();
     }
 
+    void Collect(string inkVarName)
+    {
+        if (!string.IsNullOrEmpty(inkVarName) && !collectedItems.Contains(inkVarName)) collectedItems.Add(inkVarName);
+    }
+
     public async Task Die(Vector3 direction, bool shake = true)
     {
         if (godMode) return;
@@ -281,7 +290,7 @@ public class PlayerController : MonoBehaviour
         if (shake)
         {
             CameraBump(direction);
-            GameAudioManager.Instance.PlaySFX(AudioTag.Bump);
+            GameAudioManager.Instance.PlaySFX(AudioTag.bump);
         }
 
 
@@ -290,7 +299,7 @@ public class PlayerController : MonoBehaviour
 
         // Collapse animation
         Rotate(-direction);
-        GameAudioManager.Instance.PlaySFX(AudioTag.Die);
+        GameAudioManager.Instance.PlaySFX(AudioTag.failed);
         animator.CrossFade("fall_back", .1f, 0);
         await Task.Delay(1000);
 
