@@ -77,7 +77,7 @@ Chọn một cuốn sách?
 === ch1_h1_locker ===
 { stopping: 
   - Một dãy các tủ cá nhân để bạn cất đồ của mình trước khi vào thư viện.
-    Tuy nhiên do thư viện không đánh số tủ nên rất nhiều người đã gặp khó khắn trong việc tìm đồ của mình, trong đó có Nam.
+    Tuy nhiên do thư viện không đánh số tủ nên rất nhiều người đã gặp khó khăn trong việc tìm đồ của mình, trong đó có Nam.
     Nhận thức được sự hạn chế của trí nhớ ngắn hạn của bản thân, cậu tự nhủ sẽ không bao giờ dùng tủ cá nhân của thư viện.
   - ... #speaker:Nam
     Khoan đã, đồ của mình ở tủ nào nhỉ? #speaker:Nam

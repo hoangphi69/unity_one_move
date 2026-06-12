@@ -254,11 +254,13 @@ public class CutsceneUIController : MonoBehaviour
     showUIPanel.onClick.AddListener(onShowUIClicked);
     autoButton.onClick.AddListener(ToggleAutoMode);
     skipButton.onClick.AddListener(onSkipClicked);
+
+    // GameAudioManager.Instance.SetMusicVolume(.2f);
   }
 
   void DialogueEnd()
   {
-    GameAudioManager.Instance.StopMusic();
+    // GameAudioManager.Instance.SetMusicVolume(1);
     GameEventsManager.Instance.dialogueEvents.LeaveDialogue();
 
     sequence?.Kill();
@@ -450,7 +452,11 @@ public class CutsceneUIController : MonoBehaviour
 
   void PlayBackgroundMusic(string tag)
   {
-    if (Enum.TryParse(tag, true, out AudioTag audio)) GameAudioManager.Instance.PlayMusic(audio);
+    if (Enum.TryParse(tag, true, out AudioTag audio))
+    {
+      GameAudioManager.Instance.PlayMusic(audio);
+      GameAudioManager.Instance.SetMusicVolume(.5f);
+    }
     else Debug.LogWarning($"'{tag}' value is not a valid AudioTag.");
   }
 

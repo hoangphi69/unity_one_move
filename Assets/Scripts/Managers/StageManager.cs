@@ -26,8 +26,9 @@ public class StageManager : MonoBehaviour
   [SerializeField] private CinemachineCamera cameraB;
 
   [Header("Audio")]
-  public EventReference ambienceTrack;
-  public EventReference musicTrack;
+  public AudioTag ambienceTrack;
+  public AudioTag musicTrack = AudioTag.None;
+
   public float musicTrackParameter;
 
   public Turn turn { get; private set; }
@@ -50,7 +51,8 @@ public class StageManager : MonoBehaviour
     HUDOverlayUIController.Instance.ToggleBottom(isPuzzle);
     HUDOverlayUIController.Instance.SetStepLeft(maxStep);
 
-    if (!ambienceTrack.IsNull) GameAudioManager.Instance.PlayAmbience(ambienceTrack);
+    if (ambienceTrack != AudioTag.None) GameAudioManager.Instance.PlayAmbience(ambienceTrack);
+    else GameAudioManager.Instance.StopAmbience();
 
     GameEventsManager.Instance.turnEvents.onPlayerTurnEnd += PlayerTurnEnd;
     GameEventsManager.Instance.turnEvents.onEnemyTurnEnd += EnemyTurnEnd;

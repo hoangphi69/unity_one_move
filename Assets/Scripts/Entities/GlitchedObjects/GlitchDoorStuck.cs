@@ -112,7 +112,7 @@ public class GlitchDoorStuck : MonoBehaviour
     float remainingAngle = 360f - stuckAngle;
     Vector3 finalRotationAdd = rotationAxis * remainingAngle;
 
-    GameAudioManager.Instance.PlaySFX(AudioTag.Door, "door", 1); // 1 - door squeak
+    GameAudioManager.Instance.PlaySFX(AudioTag.door, "door", 1); // 1 - door squeak
     transform.DORotate(finalRotationAdd, fixDuration, RotateMode.LocalAxisAdd)
         .SetEase(fixEase)
         .OnComplete(SwapToNormal);

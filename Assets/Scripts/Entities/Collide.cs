@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class Collide : MonoBehaviour, ITrigger
 {
   public event Action OnDefaultAction;

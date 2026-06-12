@@ -50,6 +50,7 @@ public class GameDialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged += SetTypingState;
     GameEventsManager.Instance.dialogueEvents.onAdvanceDialogue += ContinueDialogue;
     GameEventsManager.Instance.dialogueEvents.onLeaveDialogue += LeaveDialogue;
+    GameEventsManager.Instance.dialogueEvents.onSetVariable += SetVariable;
 
     GameDataManager.Instance.OnLoad += LoadInkState;
     GameDataManager.Instance.OnSave += SaveInkState;
@@ -63,6 +64,7 @@ public class GameDialogueManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onTypingStateChanged -= SetTypingState;
     GameEventsManager.Instance.dialogueEvents.onAdvanceDialogue -= ContinueDialogue;
     GameEventsManager.Instance.dialogueEvents.onLeaveDialogue -= LeaveDialogue;
+    GameEventsManager.Instance.dialogueEvents.onSetVariable -= SetVariable;
 
     GameDataManager.Instance.OnLoad -= LoadInkState;
     GameDataManager.Instance.OnSave -= SaveInkState;
@@ -178,5 +180,11 @@ public class GameDialogueManager : MonoBehaviour
   {
     if (inkJSON == null) return;
     story = new(inkJSON.text);
+  }
+
+  void SetVariable(string varName, bool state)
+  {
+    if (story == null) return;
+    story.variablesState[varName] = state;
   }
 }

@@ -161,6 +161,7 @@ Có tiền là tôi mua luôn. #speaker:Tổng tài
 }
 -> DONE
 
+VAR voucher = false
 
 === ch2_h3_npc_mai ===
 { once:
@@ -168,7 +169,7 @@ Có tiền là tôi mua luôn. #speaker:Tổng tài
     Khác với hai người còn lại, phong thái của chị ấy toát lên vẻ kiêu sa của những người hầu gái thời Victoria.
 }
 - (ask) Chị có thể giúp gì cho em nào? #speaker:Mai
-  * [<color=\#932040>Hỏi về voucher</color>]
+  * {voucher} [<color=\#844600>Hỏi về voucher</color>]
     -> secret_encounter
   + [Hỏi về trang phục]
     { stopping:

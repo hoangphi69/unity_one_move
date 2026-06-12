@@ -4184,20 +4184,8 @@ MonoBehaviour:
   <SpawnPoint>k__BackingField: {fileID: 1476808362}
   cameraA: {fileID: 1475424372}
   cameraB: {fileID: 1369976289}
-  ambienceTrack:
-    Guid:
-      Data1: 12349720
-      Data2: 1074429056
-      Data3: 1495270296
-      Data4: 48356264
-    Path: event:/ambience/libary
-  musicTrack:
-    Guid:
-      Data1: -1990048848
-      Data2: 1182324296
-      Data3: 522856858
-      Data4: 1389132291
-    Path: event:/music/ch1_library
+  ambienceTrack: 6
+  musicTrack: 3
   musicTrackParameter: 0
 --- !u!156049354 &1111829172
 Grid:

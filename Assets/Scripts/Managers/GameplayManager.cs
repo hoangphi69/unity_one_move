@@ -59,7 +59,7 @@ public class GameplayManager : MonoBehaviour
     await Utility.UnloadAsync(_currentStage);
     await Utility.LoadAdditiveAsync(scene);
 
-    if (!Stage.musicTrack.IsNull)
+    if (Stage.musicTrack != AudioTag.None)
     {
       GameAudioManager.Instance.PlayMusic(Stage.musicTrack);
       GameAudioManager.Instance.SetMusicParameter("progress", Stage.musicTrackParameter);
@@ -69,7 +69,7 @@ public class GameplayManager : MonoBehaviour
     _currentStage = scene;
   }
 
-  public async Task LoadStageAsync(string scene, string cutsceneKnot)
+  public async Task LoadStageAsync(string scene, string cutsceneKnot, Action onCutsceneBegin = null)
   {
     if (_isCutscene) return;
     _isCutscene = true;
@@ -85,14 +85,15 @@ public class GameplayManager : MonoBehaviour
     GameEventsManager.Instance.dialogueEvents.onLeaveDialogue += cutSceneEnd;
 
     HUDOverlayUIController.Instance.Hide();
+    GameAudioManager.Instance.StopMusic();
 
     GameEventsManager.Instance.dialogueEvents.EnterDialogue(cutsceneKnot, DialogueMode.Cutscene);
 
-    GameAudioManager.Instance.StopMusic();
 
     try
     {
       await Task.Delay(1000); // Simulate cutscene opening animation
+      onCutsceneBegin?.Invoke();
 
       await Utility.UnloadAsync(_currentStage);
 
@@ -108,7 +109,7 @@ public class GameplayManager : MonoBehaviour
       SpawnPlayer();
 
       // Audio
-      if (!Stage.musicTrack.IsNull)
+      if (Stage.musicTrack != AudioTag.None)
       {
         await ActivePlayer.PlayMusic();
         GameAudioManager.Instance.PlayMusic(Stage.musicTrack);

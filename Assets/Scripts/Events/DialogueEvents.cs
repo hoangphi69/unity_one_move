@@ -31,4 +31,7 @@ public class DialogueEvents
 
     public event Action onRequestSkipLine;
     public void RequestSkipLine() => onRequestSkipLine?.Invoke();
+
+    public event Action<string, bool> onSetVariable;
+    public void SetVariable(string varName, bool state) => onSetVariable?.Invoke(varName, state);
 }
