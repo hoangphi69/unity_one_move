@@ -121,7 +121,7 @@ Trong đầu Nam thoáng qua những bản báo cáo thực tập. Những lần
 <i>"Nếu là ông thì tôi yên tâm."</i> #speaker:Phong
 <i>"Này."</i> #speaker:Phong
 <i>"Ông vẫn còn nghe chứ?"</i> #speaker:Phong
-"Tôi đây." #speaker:Nam #sprite:nam_talk
+"Tôi đây." #speaker:Nam #sprite:nam_talk1
 <i>"Vậy ý ông như nào?"</i> #speaker:Phong
 
 -> selection
@@ -140,8 +140,8 @@ Trong đầu Nam thoáng qua những bản báo cáo thực tập. Những lần
     -> selection
 
 = decision
-Được. #speaker:Nam #sprite:nam_talk
-Tôi với ông cùng làm thì có gì khó chứ!! #speaker:Nam #sprite:nam_talk
+Được. #speaker:Nam #sprite:nam_talk1
+Tôi với ông cùng làm thì có gì khó chứ!! #speaker:Nam #sprite:nam_talk1
 <i>"Tuyệt vời lắm người anh em, có ông làm đồ án chung kiểu gì cũng vui hết." #speaker:Phong
 
 ~ ch1_lobby_phone_AcceptedInvite = true
@@ -157,11 +157,11 @@ Tôi với ông cùng làm thì có gì khó chứ!! #speaker:Nam #sprite:nam_ta
     -> DONE
 - 2:
     Điện thoại của bạn đang reo.
-    Mình để nó ở đâu rồi nhỉ?! #speaker:Nam #sprite:nam_talk
+    Mình để nó ở đâu rồi nhỉ?! #speaker:Nam #sprite:nam_talk2
     -> DONE  
 - 3:
-    Giờ nay ai gọi đấy? #speaker:Nam #sprite:nam_talk
-    Mà cái điện thoại mình giấu ở đâu rồi?? #speaker:Nam #sprite:nam_talk
+    Giờ nay ai gọi đấy? #speaker:Nam #sprite:nam_talk2
+    Mà cái điện thoại mình giấu ở đâu rồi?? #speaker:Nam #sprite:nam_talk1
     -> DONE
 - else:
     <b>CÁI ĐIỆN THOẠIII.........!!</b> #speaker:Nam #sprite:nam_angry
@@ -184,10 +184,10 @@ Nhưng không cái nào có vẻ đúng.
 
 Đồ án làm thử AI không? #speaker:Phong #sprite:phong_talk
 
-Hả? Làm thử? Ông tính làm thử AI á? #speaker:Nam #sprite:nam_talk
+Hả? Làm thử? Ông tính làm thử AI á? #speaker:Nam #sprite:nam_talk2
 Làm AI chắc cũng đơn giản mà nhỉ?  #speaker:Phong #sprite:phong_talk
-Từ lọc cả ngàn ảnh, đánh dấu vật thể, gắn tag cho từng ảnh thì chắc đơn giản với mỗi ông. #speaker:Nam #sprite:nam_talk
-Chưa tính đến code hay ý tưởng đề tài phải thật sáng tạo thì ông nhắm 2 đứa làm nổi không? #speaker:Nam #sprite:nam_talk
+Từ lọc cả ngàn ảnh, đánh dấu vật thể, gắn tag cho từng ảnh thì chắc đơn giản với mỗi ông. #speaker:Nam #sprite:nam_talk2
+Chưa tính đến code hay ý tưởng đề tài phải thật sáng tạo thì ông nhắm 2 đứa làm nổi không? #speaker:Nam #sprite:nam_talk2
 ...
 Ông nói đúng. #speaker:Phong #sprite:phong_talk
 Còn ý tưởng nào khác không? #speaker:Phong #sprite:phong_talk
@@ -202,22 +202,33 @@ Thế Blockchain thì sao? #speaker:Phong #sprite:phong_talk
 Lỡ mà thành công thì hai thằng tung luôn coin ra thị trường luôn. #speaker:Phong #sprite:phong_smile
 Vừa có đồ án tốt nghiệp vừa có dự án khởi nghiệp. #speaker:Phong #sprite:phong_smile
 Hehe #speaker:Phong #sprite:phong_smile
-Nghe vui đấy. #speaker:Nam #sprite:nam_talk
-Vậy để mở đầu dự án Blockchain thì tôi BlockIdea ông đã nhé. #speaker:Nam #sprite:nam_talk
-Hai đứa chả biết gì về Blockchain cả. #speaker:Nam #sprite:nam_talk
-Thì ông tính hai đứa làm đồ án kiểu gì? #speaker:Nam #sprite:nam_talk
+Nghe vui đấy. #speaker:Nam #sprite:nam_talk1
+Vậy để mở đầu dự án Blockchain thì tôi BlockIdea ông đã nhé. #speaker:Nam #sprite:nam_talk2
+Hai đứa chả biết gì về Blockchain cả. #speaker:Nam #sprite:nam_talk2
+Thì ông tính hai đứa làm đồ án kiểu gì? #speaker:Nam #sprite:nam_talk2
 Vừa ngồi học vừa làm à? #speaker:Nam #sprite:nam_bored
+Thế phải như nào mới hài lòng được ông. #speaker:Phong #sprite:phong_angry
+Ai mà biết được, phải như nào phù hợp báo cáo hội đồng mà còn vừa sức với anh em mình nữa chứ. #speaker:Nam #sprite:nam_angry
+...
+...
 
+Sau một thời gian dài tranh cãi, khi cả Nam và Phong biết rằng ngôn từ trở nên bất lực.
+Nam và Phong đều quyết định giảng hoà bằng phương pháp...im lặng.
 ... #speaker:Nam #sprite:nam_thinking
 ... #speaker:Phong #sprite:phong_thinking
 
 Cả hai không nói gì.
 Tờ giấy vẫn như cũ.
 
-Để tôi lên thư viện kiếm ý tưởng. #speaker:Nam #sprite:nam_talk
-Ông ở nhà lên mạng kiếm đê, biết đâu kiếm được ý tưởng hay thì sao? #speaker:Nam #sprite:nam_talk
+...
+...
+Không được rồi, cứ thế này không ổn. #speaker:Phong #sprite:phong_exhaust
+Chả có đề tài nào vừa ý anh em mình. #speaker:Phong #sprite:phong_talk
+Nếu vậy thì đi kiếm đề tài thôi. #speaker:Nam #sprite
+Để tôi lên thư viện kiếm ý tưởng. #speaker:Nam #sprite:nam_talk1
+Ông ở nhà lên mạng kiếm đê, biết đâu kiếm được ý tưởng hay thì sao? #speaker:Nam #sprite:nam_talk1
 Oke! Kiếm được gì hay tôi báo cho ông. #speaker:Phong #sprite:phong_talk
-Kay. #speaker:Nam #sprite:nam_talk
+Kay. #speaker:Nam #sprite:nam_talk1
 -> DONE
 
 
@@ -226,11 +237,11 @@ Kay. #speaker:Nam #sprite:nam_talk
 { ch1_hallway1_librarian == false:
     ~ ch1_hallway1_librarian = true
     Chị có thể giúp gì cho em??... #speaker:Thủ thư #sprite:libarian_talk
-    Cho em hỏi thư viện có tủ sách nào liên quan đến công nghệ thông tin không ạ? #speaker:Nam #sprite:nam_talk
+    Cho em hỏi thư viện có tủ sách nào liên quan đến công nghệ thông tin không ạ? #speaker:Nam #sprite:nam_talk1
     Hmm... #speaker:Thủ thư #sprite:libarian_talk
     Thủ thư suy nghĩ một chút.
     Em kiểm tra thử dãy sách ở phòng <b>Tổng hợp</b> nha. #speaker:Thủ thư #sprite:libarian_talk
-    Vâng, em cảm ơn chị. #speaker:Nam #sprite:nam_talk
+    Vâng, em cảm ơn chị. #speaker:Nam #sprite:nam_talk1
     À, nhớ tránh các bạn đang đọc sách, cẩn thận va trúng mấy bạn đấy nhá. #speaker:Thủ thư #sprite:libarian_talk
     ->DONE
 - else:
@@ -250,8 +261,8 @@ Kay. #speaker:Nam #sprite:nam_talk
 - 1:
     ~ch1_hallway2_door = 2
     Nam đứng nhìn vào phòng lần nữa.
-    Không thể về tay không được. #speaker:Nam #sprite:nam_talk
-    Trong phòng này hẳn có <i>ý tưởng</i> mình có thể sử dụng. #speaker:Nam #sprite:nam_talk
+    Không thể về tay không được. #speaker:Nam #sprite:nam_talk1
+    Trong phòng này hẳn có <i>ý tưởng</i> mình có thể sử dụng. #speaker:Nam #sprite:nam_talk1
     -> DONE
 - else:
     <b>KIẾM CÁI Ý TƯỞNGGGGG.....!!!</b>  #speaker:Nam #sprite:nam_angry
@@ -312,7 +323,7 @@ Kay. #speaker:Nam #sprite:nam_talk
     ...
     ...
     Nam lật bìa sách.
-    Ra đây là sách hướng dẫn lập trình game à!? #speaker:Nam #sprite:nam_talk
+    Ra đây là sách hướng dẫn lập trình game à!? #speaker:Nam #sprite:nam_talk1
     Cũng thú vị, để mang vể đọc thử. #speaker:Nam #sprite:nam_thinking
     -> after_choose_book
 }
@@ -323,15 +334,15 @@ Kay. #speaker:Nam #sprite:nam_talk
 Nam nhìn màn hình.
 <i>Phong.</i>
 
-"Sao rồi?" #speaker:Nam #sprite:nam_talk
+"Sao rồi?" #speaker:Nam #sprite:nam_talk1
 <i>"Tôi kiếm được rồi."</i> #speaker:Phong
 <i>"Tôi kiếm được...."</i> #speaker:Phong #sprite:phong_talk
 <i>"Dark Soup 3 mới ra mắt, chơi luôn không anh bạn."</i> #speaker:Phong #sprite:phong_talk
 Nghe nói game lần này giải đố nhiều lắm đấy! #speaker:Phong #sprite:phong_talk
 ...
 Nam nhìn cuốn sách vừa cầm trên tay.
-"Tôi về liền." #speaker:Nam #sprite:nam_talk
-"Ai thua bao kèo đi ăn." #speaker:Nam #sprite:nam_talk
+"Tôi về liền." #speaker:Nam #sprite:nam_talk1
+"Ai thua bao kèo đi ăn." #speaker:Nam #sprite:nam_talk1
 <i>"Oke!"</i> #speaker:Phong
 -> DONE
 
@@ -377,8 +388,8 @@ Nam nhìn cuốn sách vừa cầm trên tay.
 { ch1_hallway3_librarian == false:
     ~ ch1_hallway3_librarian = true
     Em kiếm được sách của em chưa? #speaker:Thủ thư #sprite:libarian_talk
-    Có rồi chị ơi. #speaker:Nam #sprite:nam_talk
-    Em thấy cuốn này cũng hay nên định mang về đọc thử. #speaker:Nam #sprite:nam_talk
+    Có rồi chị ơi. #speaker:Nam #sprite:nam_talk1
+    Em thấy cuốn này cũng hay nên định mang về đọc thử. #speaker:Nam #sprite:nam_talk1
 
     Người thủ thư nhìn bìa sách. #speaker:Thủ thư #sprite:libarian_thinking
     ...
@@ -391,17 +402,17 @@ Nam nhìn cuốn sách vừa cầm trên tay.
      
     Nam nhìn về phía cuối thư viện.
     ... #speaker:Nam #sprite:nam_thinking
-    Vậy từ từ để em xem thêm một vòng nha chị. #speaker:Nam #sprite:nam_talk
+    Vậy từ từ để em xem thêm một vòng nha chị. #speaker:Nam #sprite:nam_talk1
 
     Vậy thì chị đánh dấu cuốn này lại cho em trước. #speaker:Thủ thư #sprite:libarian_talk
     Có mà lấy thêm sách nhớ quay lại chỗ chị nhá. #speaker:Thủ thư #sprite:libarian_talk
-    À vâng. #speaker:Nam #sprite:nam_talk
+    À vâng. #speaker:Nam #sprite:nam_talk1
     À mà đằng sau có tủ sách tự do ấy! #speaker:Thủ thư #sprite:libarian_talk
     Em có thích cuốn sách gì mang về đọc thì lấy. #speaker: Thủ thư #sprite:libarian_smile
     Mỗi người được mang 1 cuốn về. #speaker:Thủ thư #sprite:libarian_talk
     Còn nếu có sách nào hay thì mang lên chia sẻ cùng mọi người nha. #speaker: Thủ thư #sprite:libarian_smile
-    Vâng ạ!#speaker:Nam #sprite:nam_talk
-    Em cảm ơn chị! #speaker:Nam #sprite:nam_talk
+    Vâng ạ!#speaker:Nam #sprite:nam_talk1
+    Em cảm ơn chị! #speaker:Nam #sprite:nam_talk1
     -> DONE
 
 - else:
@@ -452,7 +463,7 @@ Tiêu đề trò chơi hiện ra.
 
 Cuốn thật. #speaker:Nam #sprite:nam_smile
 Nhìn đơn giản mà căng phết. #speaker:Phong #sprite:phong_talk
-Ừ. #speaker:Nam #sprite:nam_talk
+Ừ. #speaker:Nam #sprite:nam_talk1
 
 Phong đặt tay cầm xuống bàn.
 Tôi lại thích kiểu puzzle nhanh gọn hơn. #speaker:Phong #sprite:phong_smile
@@ -465,24 +476,24 @@ Giống tôi. #speaker:Nam #sprite:nam_smile
 
 À mà. #speaker:Nam #sprite:nam_thinking
 Phong nhìn sang.
-Hôm nay tôi lên thư viện. #speaker:Nam #sprite:nam_talk
+Hôm nay tôi lên thư viện. #speaker:Nam #sprite:nam_talk1
 Kiếm được gì không? #speaker:Phong #sprite:phong_talk
-Ban đầu toàn sách linh tinh. #speaker:Nam #sprite:nam_talk
+Ban đầu toàn sách linh tinh. #speaker:Nam #sprite:nam_talk1
 
 {ch1_hallway2_bookshelf_book2:
-    Cơ mà nãy tui kiếm được 1 câu cũng hay. #speaker:Nam #sprite:nam_talk
-    <i>"Nếu muốn sáng tạo, hãy làm thứ mà mình thật sự thích."</i> #speaker:Nam #sprite:nam_talk
-    Ban đầu nó không liên quan tới đồ án nên tôi cũng không để tâm lắm. #speaker:Nam #sprite:nam_talk
-    Giờ nghĩ lại thì câu đấy nó lại đúng... #speaker:Nam #sprite:nam_talk
+    Cơ mà nãy tui kiếm được 1 câu cũng hay. #speaker:Nam #sprite:nam_talk1
+    <i>"Nếu muốn sáng tạo, hãy làm thứ mà mình thật sự thích."</i> #speaker:Nam #sprite:nam_talk1
+    Ban đầu nó không liên quan tới đồ án nên tôi cũng không để tâm lắm. #speaker:Nam #sprite:nam_talk1
+    Giờ nghĩ lại thì câu đấy nó lại đúng... #speaker:Nam #sprite:nam_talk1
     ... #speaker:Phong #sprite:phong_thinking
 }
 
-Trong đống linh tinh đấy thì tui kiếm được cuốn hướng dẫn lập trình game. #speaker:Nam #sprite:nam_talk
-Thấy thú vị thì tui mang về xem thử. #speaker:Nam #sprite:nam_talk
+Trong đống linh tinh đấy thì tui kiếm được cuốn hướng dẫn lập trình game. #speaker:Nam #sprite:nam_talk1
+Thấy thú vị thì tui mang về xem thử. #speaker:Nam #sprite:nam_talk1
 
 À mà nhắc mới nhớ. #speaker:Nam #sprite:nam_surprise
-Chị thủ thư kể khoá trước cũng có nhóm làm đồ án game. #speaker:Nam #sprite:nam_talk
-Nghe nói làm ổn phết. #speaker:Nam #sprite:nam_talk
+Chị thủ thư kể khoá trước cũng có nhóm làm đồ án game. #speaker:Nam #sprite:nam_talk1
+Nghe nói làm ổn phết. #speaker:Nam #sprite:nam_talk1
 Thật không? #speaker:Phong #sprite:phong_surprise
 
 Nam không trả lời ngay.
@@ -493,16 +504,16 @@ Những đáp án được ghép lại từng chút một.
 
 //chuyển sang bgm_warm_discovery
 #bgm:vn_theme
-Tụi mình thích game lâu rồi nhỉ. #speaker:Nam #sprite:nam_talk
+Tụi mình thích game lâu rồi nhỉ. #speaker:Nam #sprite:nam_talk1
 Ừ thì... #speaker:Phong #sprite:phong_smile
 Cày nát bao nhiêu game rồi còn gì. #speaker:Phong #sprite:phong_talk
-Nếu... Nếu tụi mình thử làm một trò chơi thì sao?" #speaker:Nam #sprite:nam_talk
+Nếu... Nếu tụi mình thử làm một trò chơi thì sao?" #speaker:Nam #sprite:nam_talk1
 
 Game? #speaker:Phong #sprite:phong_surprise
 
-Ừ. #speaker:Nam #sprite:nam_talk
-Puzzle. #speaker:Nam #sprite:nam_talk
-Theo kiểu tụi mình thích. #speaker:Nam #sprite:nam_talk
+Ừ. #speaker:Nam #sprite:nam_talk1
+Puzzle. #speaker:Nam #sprite:nam_talk1
+Theo kiểu tụi mình thích. #speaker:Nam #sprite:nam_talk1
 
 Căn phòng im lặng vài giây.
 
@@ -520,7 +531,7 @@ Mọi thứ bỗng nhiên kết nối lại với nhau.
 Bắt đầu từ đâu? #speaker:Phong #sprite:phong_talk
 
 Gameplay trước. #speaker:Nam #sprite:nam_smile
-Sau đó mới tới map với cốt truyện. #speaker:Nam #sprite:nam_talk
+Sau đó mới tới map với cốt truyện. #speaker:Nam #sprite:nam_talk1
 
 ... #speaker:Nam #sprite:nam_smile
 ... #speaker:Phong #sprite:phong_smile
