@@ -16,10 +16,8 @@ VAR ch2_hallway1_talk_to_phong = 0
 
 = phone_notification
 ~ ch2_lobby2_phone = true
-Hiện tại bạn có 1 tin nhắn.
-+ [Đọc tin nhắn]
-    -> phone_call
--> DONE
+Hiện tại bạn có 1 cuộc gọi.
+-> phone_call
 
 = phone_call
 Màn hình điện thoại sáng lên trong căn phòng còn tối.
@@ -46,15 +44,15 @@ Nam ngồi dậy.
      ~ ch2_lobby2_door++
     { ch2_lobby2_door:
     - 1:
-        <i>_"Ting!!!!!"_
+        <i>"Reng!!!!!"
         Mới sáng sớm mà ai gọi đấy. #speaker:Nam #sprite:nam_talk
         -> DONE
     - 2: 
-        <i>_"Ting Ting!!!!!"_ 
+        <i>"Reng Reng!!!!"
         Cái điện thoại đâu rồi nhờ. #speaker:Nam #sprite:nam_talk
         -> DONE
     - else:
-        <i><b><uppercase>_"Ting Ting Ting Ting Ting Ting <br>Ting Ting Ting Ting Ting Ting <br>Ting Ting Ting Ting Ting Ting !!!!!"_
+        <i><b><uppercase>"Reng Reng Reng Reng Reng Reng <br>Reng Reng Reng Reng Reng Reng <br>Reng Reng Reng Reng Reng Reng !!!!!"
         -> DONE
     }
 }
@@ -62,7 +60,7 @@ Nam ngồi dậy.
 
 === ch2_cutscene1 ===
 //Kohii coffee
-#cg:chapter2,3,full #sfx:collect
+#sfx:collect #cg:chapter2,3,full
 #bgm:vn_theme
 #bg:coffee_shop_morning
 
@@ -315,14 +313,12 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     Lỗi position sửa xong rồi. #speaker:Nam #sprite:nam_talk
     Object đặt đúng chỗ hết rồi đấy. #speaker:Nam #sprite:nam_talk
     Tốt. #speaker:Phong #sprite:phong_talk
-    Còn cái map cuối, liên quan đến kỹ thuật hơn nên để tôi xử lý luôn. #speaker:Phong #sprite:phong_talk
-    Ông nghỉ tay một chút đi. #speaker:Phong #sprite:phong_smile
-    Tôi mà nghỉ thì ông làm xong không? #speaker:Nam #sprite:nam_talk
-    Có chứ. #speaker:Phong #sprite:phong_smile
-    Không gì làm khó được tôi mà. #speaker:Phong #sprite:phong_smile
+    Ông kiểm tra cho tôi map nhà kho đi nhá.
+    Map đấy thiên về kỹ thuật hơn ông sửa được không.
+    ... #speaker:Nam #sprite:nam_thinking
+    Được chứ. #speaker:Nam #sprite:nam_excited
 
-    Từ phía quầy, có tiếng ai đó vừa bước ra.
-
+    Chị nhân viên từ quán nhìn về phía hai đứa.
     Helo Phong nha! #speaker:Owner #sprite:owner_smile
     Hôm nay cũng ra đây làm việc à? #speaker:Owner #sprite:owner_smile
     Đúng rồi ạ, hôm nay tụi em ra đây ngồi làm đồ án. #speaker:Phong #sprite:phong_smile
@@ -330,17 +326,6 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     Vậy thì hôm nay chị đãi em một món nhé. #speaker:Owner #sprite:owner_smile
     Xịn vậy chị ơi. #speaker:Phong #sprite:phong_talk
     Khách ruột của chị mà. #speaker:Owner #sprite:owner_smile
-
-    // { item_voucher == true:
-        À chị ơi, hôm nay em mang theo voucher nha chị. #speaker:Phong #sprite:phong_smile
-
-        Nam liếc sang.
-        Cái voucher mà cậu nhặt được ở thư viện — cậu đã nhét vào tay Phong từ hôm đó vì không biết dùng làm gì.
-
-        Voucher này là nhận bánh limited của quán được làm bởi chính chị này. #speaker:Owner #sprite:owner_smile
-        Mấy đứa ăn xong nhận xét bánh chị làm đấy nhá. #speaker:Owner #sprite:owner_smile
-        Okie chị. #speaker:Phong #sprite:phong_smile
-    // }
     -> DONE
 
 - else:
@@ -359,7 +344,6 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     Quay lại với Phong thảo luận tiếp thôi. #speaker:Nam #sprite:nam_bored
     ->DONE
 }
-
 
 
 
@@ -393,3 +377,5 @@ Chị chủ quán nhiệt tình quá ông ơi. #speaker:Nam #sprite:nam_smile
 Ông hiểu tại sao tôi thích quán này rồi đấy, dù ông là ngưởi giới thiệu cho tôi. #speaker:Phong #sprite:phong_smile
 -> DONE
 
+thêm lời thoại giải thích macintosh.
+thêm lời thoại giải thích các vật thể nhìn xuyên qua được.

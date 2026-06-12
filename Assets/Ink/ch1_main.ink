@@ -54,12 +54,12 @@ Căn phòng vẫn như mọi ngày.
 ...
 "Giờ thì làm gì tiếp đây..." #speaker:Nam #sprite:nam_bored
 * [Tiếp tục chơi game]
-    #sfx:camera_snap #cg:dark,1,full 
+    #sfx:camera_snap #cg:black,1,full 
     #bg:dom
     Màn hình sáng lên. Âm thanh chiến thắng vang lên lần thứ ba.
-    #sfx:camera_snap #cg:dark,1,full 
+    #sfx:camera_snap #cg:black,1,full 
     Nhưng tâm trạng Nam vẫn chùng xuống.
-    #sfx:camera_snap #cg:dark,1,full 
+    #sfx:camera_snap #cg:black,1,full 
     #bg:dom
     ...
     Ngón tay cậu dừng lại trên bàn phím.
@@ -318,7 +318,7 @@ Kay. #speaker:Nam #sprite:nam_talk
 }
 
 = after_choose_book
-_"Ring Ring!!!"_
+"Reng Reng!!!"
 Điện thoại rung trong túi.
 Nam nhìn màn hình.
 <i>Phong.</i>
@@ -434,7 +434,7 @@ Một tờ phiếu nhỏ. Chữ in đã hơi mờ.
 
 // ----------- Tại đích ----------
 === puzzle3_atGoal ===
-_"Ring Ring!!!"_
+"Reng Reng!!!"
 <i>"Về chưa đấy."</i> #speaker:Phong #sprite:phong_talk
 <i>"Không về nhanh cẩn thận tôi chơi trước đấy nhá."</i> #speaker:Phong #sprite:phong_smile
 ->ch1_cutscene3

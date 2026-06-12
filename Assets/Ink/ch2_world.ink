@@ -33,6 +33,7 @@ Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #
 
 // chapter 2 - hallway 1
 // ---------
+
 === ch2_h1_clock ===
 Đồng hồ điểm 9 giờ sáng.
 -> DONE
@@ -112,6 +113,7 @@ Phải mua chiếc bàn này ngay mới được. #speaker:Tổng tài
 
 // chapter 2 - hallway 2
 // ---------
+
 === ch2_h2_clock ===
 Đồng hồ điểm 1 giờ trưa.
 -> DONE
