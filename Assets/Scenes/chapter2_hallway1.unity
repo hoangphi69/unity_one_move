@@ -732,108 +732,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8594296377570691183, guid: 5f280c617e4e2b646aada4c094fc416e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 625406162}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8939297444436857557, guid: 5f280c617e4e2b646aada4c094fc416e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 150635246}
-    - targetCorrespondingSourceObject: {fileID: 8939297444436857557, guid: 5f280c617e4e2b646aada4c094fc416e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 150635245}
-    - targetCorrespondingSourceObject: {fileID: 8939297444436857557, guid: 5f280c617e4e2b646aada4c094fc416e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 150635244}
-    - targetCorrespondingSourceObject: {fileID: 8939297444436857557, guid: 5f280c617e4e2b646aada4c094fc416e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 150635243}
-    - targetCorrespondingSourceObject: {fileID: 8939297444436857557, guid: 5f280c617e4e2b646aada4c094fc416e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 150635247}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f280c617e4e2b646aada4c094fc416e, type: 3}
---- !u!1 &150635242 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8939297444436857557, guid: 5f280c617e4e2b646aada4c094fc416e, type: 3}
-  m_PrefabInstance: {fileID: 150635241}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &150635243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150635242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7793d26e65c34ef39193b6d06721239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPC
-  knotName: hallway1_table1
---- !u!114 &150635244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150635242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9666300cb4c2dcd45b081ac21712ebbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactable
---- !u!114 &150635245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150635242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 3
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!65 &150635246
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150635242}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.9999995, y: 0.9, z: 0.7000002}
-  m_Center: {x: 0.00000071525574, y: 0.45, z: 0}
---- !u!114 &150635247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150635242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf9f8454239359c40ab656c416d5e050, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractPoint
-  targetID: table2_1
-  bubble: 1
-  bubblePrefab: {fileID: 4310547284113562885, guid: 151e2399427ed11438994695eb911d63, type: 3}
-  bubbleSpawnPoint: {fileID: 625406162}
 --- !u!1001 &155762972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3562,6 +3462,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2726597868399715759, guid: 643dc7d952cf9e540a9db07761d3b526, type: 3}
   m_PrefabInstance: {fileID: 423402826}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &459081380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459081381}
+  m_Layer: 0
+  m_Name: quest_door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &459081381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459081380}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.3, z: 0.226}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 701888845}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &474949842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4024,7 +3955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 3
   precomputeOutline: 0
@@ -4042,7 +3973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7793d26e65c34ef39193b6d06721239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  knotName: hallway1_table2
+  knotName: hallway1_table1
 --- !u!114 &510597679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5588,7 +5519,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6867469554636011710, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 459081381}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       insertIndex: -1
@@ -5646,16 +5580,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701888841}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c1aa1a79a1e9f149b871e61eb40f728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollideLock
   lockedDialogue: ch2_hallway1_door
-  bubble: 0
+  bubble: 1
   hideFirstTime: 1
-  bubblePrefab: {fileID: 0}
-  bubbleSpawnPoint: {fileID: 0}
+  bubblePrefab: {fileID: 4310547284113562885, guid: 78f390fb863edb94689284adb5d9f5ee, type: 3}
+  bubbleSpawnPoint: {fileID: 459081381}
+--- !u!4 &701888845 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6867469554636011710, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
+  m_PrefabInstance: {fileID: 701888840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &706496785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11108,7 +11047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 3
   precomputeOutline: 0

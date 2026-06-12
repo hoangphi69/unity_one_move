@@ -32,7 +32,7 @@ VAR ch1_hallway3_door = 0
 // ----------- Cutscene đầu ch1 ----------
 === ch1_cutscene1 ===
 #sfx:begin #cg:chapter1,2,full 
-#cg:dark,2,full
+#bg:black
 
 Ánh sáng xanh nhạt từ màn hình hắt lên căn phòng trọ nhỏ.
 Tiếng bàn phím lách cách vang lên. Rồi dừng lại.
@@ -45,8 +45,9 @@ Góc phải màn hình hiện thông báo:
 <i>Hoàn thành kỳ thực tập.</i>
 <i>Đã kết thúc học phần cuối cùng.</i>
 ...
+#bg:blur
 Đáng lẽ đây phải là cảm giác nhẹ nhõm chứ !!! #speaker:Nam #sprite:nam_thinking
-
+#bg:dom
 Nam tựa lưng vào ghế.
 Trần nhà vẫn như mọi ngày.
 Căn phòng vẫn như mọi ngày.
@@ -56,12 +57,13 @@ Căn phòng vẫn như mọi ngày.
     #sfx:camera_tick #cg:dark,1,full 
     #bg:dom
     Màn hình sáng lên. Âm thanh chiến thắng vang lên lần thứ ba.
-    #sfx:camera_tick #cg:dark,1,full 
+    #cg:black,1,full 
     Nhưng tâm trạng Nam vẫn chùng xuống.
-    #sfx:camera_tick #cg:dark,1,full 
+    #cg:black,1,full 
     #bg:dom
     ...
     Ngón tay cậu dừng lại trên bàn phím.
+    #bg:blur
     Cứ thế này thì không ổn rồi!?? #speaker:Nam #sprite:nam_angry
     -> touchgrass
 
@@ -74,6 +76,7 @@ Căn phòng vẫn như mọi ngày.
     -> touchgrass
 
 = touchgrass
+#bg:dom
 Không thể tiếp tục ngồi trong phòng như vậy được. #speaker:Nam #sprite:nam_bored
 Nam với lấy áo khoác trên móc cửa.
 -> DONE
@@ -170,7 +173,7 @@ Tôi với ông cùng làm thì có gì khó chứ!! #speaker:Nam #sprite:nam_ta
 === ch1_cutscene2 ===
 #sfx:calendar_flip #cg:calender_flip,2,full
 #bgm:vn_theme
-#bg:dom_friend
+#bg:dom_friend_morning
 Một tuần trôi qua.
 Nam và Phong ngồi trước hai cái màn hình.
 Giữa hai người là một tờ giấy, vài ý tưởng được gạch đầu dòng.
@@ -220,11 +223,11 @@ Kay. #speaker:Nam #sprite:nam_talk
 === hallway1_librarian ===
 { ch1_hallway1_librarian == false:
     ~ ch1_hallway1_librarian = true
-    Có gì không em??... #speaker:Thủ thư #sprite:libarian_talk
+    Chị có thể giúp gì cho em??... #speaker:Thủ thư #sprite:libarian_talk
     Cho em hỏi thư viện có tủ sách nào liên quan đến công nghệ thông tin không ạ? #speaker:Nam #sprite:nam_talk
     Hmm... #speaker:Thủ thư #sprite:libarian_talk
-    Người thủ thư suy nghĩ một chút.
-    Em kiểm tra thử dãy sách ở hành lang thứ hai nha. #speaker:Thủ thư #sprite:libarian_talk
+    Thủ thư suy nghĩ một chút.
+    Em kiểm tra thử dãy sách ở phòng <b>Tổng hợp</b> nha. #speaker:Thủ thư #sprite:libarian_talk
     Vâng, em cảm ơn chị. #speaker:Nam #sprite:nam_talk
     À, nhớ tránh các bạn đang đọc sách, cẩn thận va trúng mấy bạn đấy nhá. #speaker:Thủ thư #sprite:libarian_talk
     ->DONE

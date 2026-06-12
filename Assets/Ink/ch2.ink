@@ -2,26 +2,20 @@
 // CHAPTER 2: NHỮNG TRỞ NGẠI BẤT NGỜ
 // =============================================
 VAR ch2_lobby_interacted_door = false
-VAR ch2_lobby_door = 0
+VAR ch2_lobby2_phone = false
+VAR ch2_lobby2_door = 0   
 VAR ch2_missed_report = false
 VAR ch2_hallway1_talk_to_phong = 0
 
 === lobby2_phone ===
-{ ch2_lobby_interacted_door == false:
-    -> phone_date
+{ ch2_lobby2_phone == false:
+    -> phone_notification
 - else:
-    { phone_call == 0:
-        -> phone_notification
-    - else:
-        -> phone_notification_none
-    }
+    -> phone_notification_none
 }
 
-= phone_date
-<i>Ngày 15 tháng 3 - 6:58.
--> DONE
-
 = phone_notification
+~ ch2_lobby2_phone = true
 Hiện tại bạn có 1 tin nhắn.
 + [Đọc tin nhắn]
     -> phone_call
@@ -48,19 +42,21 @@ Nam ngồi dậy.
 
 
 === lobby2_door ===
-{ ch2_lobby_door:
--0:
-    ~ ch2_lobby_interacted_door = true
-    <i>_"Ting!!!!!"_
-    Mới sáng sớm mà ai gọi đấy. #speaker:Nam #sprite:nam_talk
-    -> DONE
--1: 
-    <i>_"Ting Ting!!!!!"_ 
-    Cái điện thoại đâu rồi nhờ. #speaker:Nam #sprite:nam_talk
-    -> DONE
--else:
-    <i><b><uppercase>_"Ting Ting Ting Ting Ting Ting <br>Ting Ting Ting Ting Ting Ting <br>Ting Ting Ting Ting Ting Ting !!!!!"_
-    -> DONE
+{ ch2_lobby2_phone == false:
+     ~ ch2_lobby2_door++
+    { ch2_lobby2_door:
+    - 1:
+        <i>_"Ting!!!!!"_
+        Mới sáng sớm mà ai gọi đấy. #speaker:Nam #sprite:nam_talk
+        -> DONE
+    - 2: 
+        <i>_"Ting Ting!!!!!"_ 
+        Cái điện thoại đâu rồi nhờ. #speaker:Nam #sprite:nam_talk
+        -> DONE
+    - else:
+        <i><b><uppercase>_"Ting Ting Ting Ting Ting Ting <br>Ting Ting Ting Ting Ting Ting <br>Ting Ting Ting Ting Ting Ting !!!!!"_
+        -> DONE
+    }
 }
 
 
@@ -110,13 +106,13 @@ Một vài model ông làm đang bị lỗi, tôi cần ông sửa lại. #speak
 
 Nam không trả lời ngay.
 Cậu kéo cửa sổ code của Phong ra xem.
-Một lúc.
+Một khoảng lặng thời gian trôi qua...
 
 Có đúng lỗi từ model của tôi không đấy. #speaker:Nam #sprite:nam_talk
 Sao ông viết rối rắm thế này, tôi hiểu chỗ nào được. #speaker:Nam #sprite:nam_angry
 Ừ thì tôi viết demo trước. #speaker:Phong #sprite:phong_talk
 Nhưng model của ông vốn đã bị lỗi rồi. #speaker:Phong #sprite:phong_talk
-Hmm. #speaker:Nam #sprite:nam_thinking
+Hmm... #speaker:Nam #sprite:nam_thinking
 Model của ông đang bị mất texture với vị trí bị bay lung tung đấy, ông biết không? #speaker:Phong #sprite:phong_talk
 Thế thì lạ đấy, rõ ràng tôi làm bài bản rồi mà. #speaker:Nam #sprite:nam_talk
 Với lại code của ông đang bùi nhùi vậy thì dùng model của tôi kiểu gì? #speaker:Nam #sprite:nam_angry
@@ -126,18 +122,18 @@ Tôi chỉ đặt vào game là nó lỗi, không phải do code đâu. #speaker
 Ừ thì code của tôi cũng thế, ai biết được nó lỗi chỗ nào đâu. #speaker:Phong #sprite:phong_angry
 Hai người nhìn nhau.
 Rồi cùng nhìn xuống màn hình.
-Những dòng đỏ vẫn ở đó, kiên nhẫn chờ.
+Những dòng đỏ vẫn ở đó, vẫn kiên nhẫn chờ đợi.
 
-Hmmm... để tôi check lại model thử. #speaker:Nam #sprite:nam_thinking
+Nếu vậy thì... để tôi check lại model thử. #speaker:Nam #sprite:nam_thinking
 Ông có viết logic đúng không đấy? #speaker:Nam #sprite:nam_angry
 ... #speaker:Phong #sprite:phong_thinking
 Thế ông có thiết kế đúng tỉ lệ không? #speaker:Phong #sprite:phong_angry
 Khéo nguyên nhân từ bên ông mà ra ấy. #speaker:Phong #sprite:phong_angry
 ...
 
-+ [Đề xuất ý kiến]
++ [Tiếp tục ý kiến]
     ~ ch2_missed_report = true
-    Nam thở ra.
+    Nam thở dài.
     Giờ cả hai cùng giải quyết luôn đi. #speaker:Nam #sprite:nam_talk
     Cứ thế này thì đồ án năm sau mới báo cáo được ông ơi. #speaker:Nam #sprite:nam_talk
     Ông sửa phần code, tôi sửa model. #speaker:Phong #sprite:phong_talk
@@ -211,7 +207,7 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
 === hallway1_phong ===
 // Kohii coffee (Unity)
 { hallway1_phong :
--0: 
+-1: 
     Vào việc nào anh bạn.#speaker:Phong #sprite:phong_talk
 
     Phong mở một cửa sổ trên màn hình.
@@ -221,21 +217,21 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     Lại có vài object bay lung tung nữa chứ!! #speaker:Nam #sprite:nam_confused
 
     Nam nhìn màn hình.
-    Rồi nhìn ra cái quán cà phê thật bên ngoài cửa kính.
+    Rồi nhìn ra cái quán cà phê thật bên ngoài màn hình.
     Rồi nhìn lại màn hình.
 
     Ông dựng lại cái quán này trong game. #speaker:Nam #sprite:nam_surprised
     Ừ, quen thuộc thì dựng dễ hơn. #speaker:Phong #sprite:phong_smile
 
-    Một cái bàn đang xoay chậm chạp cách sàn hai mét.
+    Một cái ghế đang xoay chậm chạp cách sàn hai mét.
 
     Sao nhiều model mất hết texture đấy? #speaker:Nam #sprite:nam_confused
-    À thôi, tôi biết lỗi này rồi. #speaker:Nam #sprite:nam_talk
-    Để tôi sửa. #speaker:Nam #sprite:nam_talk
-    Nhờ ông đấy anh bạn. #speaker:Phong #sprite:phong_talk
+    Giờ ưu tiên sửa lỗi toạ độ trước đã, object cứ lung tung thế này tôi không code tiếp được. #speaker:Phong #sprite:phong_talk
+    Vậy để tôi xử lý. #speaker:Nam #sprite:nam_talk
+    Nhờ ông đấy. #speaker:Phong #sprite:phong_talk
     -> DONE
 
-- 1:
+- 2:
     À này tôi quên nói. #speaker:Phong #sprite:phong_talk
     Tôi có thêm chức năng mới là cái vũng nước. #speaker:Phong #sprite:phong_talk
     Đáng lẽ bước vào thì trượt lên 2 ô, nhưng bằng cách nào đó nó đang lỗi — trượt hết cả đường về phía trước. #speaker:Phong #sprite:phong_talk
@@ -246,11 +242,12 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
 
     Ông.... #speaker:Nam #sprite:nam_talk
     Trượt hết cả đường về phía trước nghĩa là sao? #speaker:Nam #sprite:nam_talk
-    Nghĩa là... trượt hết. #speaker:Phong #sprite:phong_talk
+    Nghĩa là... trượt hết về phía trước. #speaker:Phong #sprite:phong_talk
     ...Tới tường à? #speaker:Nam #sprite:nam_talk
     Tới tường. #speaker:Phong #sprite:phong_smile
 
     Ông biết không, tôi tin ở ông lắm đấy. #speaker:Phong #sprite:phong_smile
+    Sửa hộ tôi nhá. #speaker:Phong #sprite:phong_smile
     -> DONE
 
 - else:
@@ -258,78 +255,85 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 }
 
+// === hallway1_table1 ===
+// { hallway1_table1:
+// -1: 
+//     Bàn nhìn có vẻ không đúng lắm. #speaker:Nam #sprite:nam_thinking
+//     Nhìn nó đang thiếu cái gì đó. #speaker:Nam #sprite:nam_thinking
+//     -> DONE
+// -2:
+//     Hình như bàn đang bị \#@^!*&^%#*&%*&%#*%*&%#. #speaker:Nam #sprite:nam_thinking
+//     Hoa văn bàn này có vẻ khác với các bàn khác thì phải. #speaker:Nam #sprite:nam_thinking
+//     -> DONE
+// -else:
+//     \#@^!*&^%#*&%*&%#*%*&%_@&^_!_*@_*&#_&^, phải sửa lại lỗi này thôi. #speaker:Nam #sprite:nam_thinking
+//     -> DONE
+// }
+
 === hallway1_table1 ===
 { hallway1_table1:
--0: 
-    Bàn nhìn có vẻ không đúng lắm. #speaker:Nam #sprite:nam_thinking
-    Nhìn nó đang thiếu cái gì đó. #speaker:Nam #sprite:nam_thinking
-    -> DONE
--1:
-    Hình như bàn đang bị \#@^!*&^%#*&%*&%#*%*&%#. #speaker:Nam #sprite:nam_thinking
-    -> DONE
--else:
-    \#@^!*&^%#*&%*&%#*%*&%_@&^_!_*@_*&#_&^, phải sửa lại lỗi này thôi. #speaker:Nam #sprite:nam_thinking
-    -> DONE
-}
-
-=== hallway1_table2 ===
-{ hallway1_table2:
--0: 
-    Cái <voffset=15px><rotate="-10">bàn</voffset></rotate> có vẻ đang không ở đúng vị trí của nó. #speaker:Nam #sprite:nam_thinking
+-1: 
+    Hiện tại vật lý đang trong quá trình cập nhật.
+    Nếu bạn thấy <voffset=15px><rotate="20">vật thể</voffset></rotate> đang lơ lửng.
+    Có thể hiểu rằng vật lý hiện tại đang không tồn tại.
+    Xin vui lòng chờ.
     -> DONE
 -else:
-    Cái ghế đang <voffset=25px><rotate="-20">cao</voffset></rotate> hơn bình thường thì phải. #speaker:Nam #sprite:nam_thinking
+    Đang đợi bản cập nhật <voffset=-15px>vật lý</voffset>.
+    Xin vui lòng tiếp tục chờ.
     -> DONE
 }
 
 === ch2_hallway1_door ===
 { ch2_hallway1_door:
--0:
+-1:
     Mình cần thảo luận với Phong, không có thời gian chạy lung tung được. #speaker:Nam #sprite:nam_talk
     ->DONE
--1:
+-2:
     Từ từ đã nào, lại đây thảo luận tí đã. #speaker:Phong #sprite:phong_talk
     ->DONE
 -else:
     <b> Đồ án ở phía này. </b> #speaker:Phong #sprite:phong_talk
+    Phải quay lại thôi. #speaker:Nam #sprite:nam_talk
     ->DONE
 }
 
 === hallway2_phong ===
 // Kohii coffee (Unity)
 { hallway2_phong:
--0:
-    Tôi sửa xong lỗi texture rồi đấy. #speaker:Nam #sprite:nam_talk
+-1:
+    Tôi sửa xong lỗi toạ độ rồi đấy. #speaker:Nam #sprite:nam_talk
     Kiểm tra lại trong game thử. #speaker:Nam #sprite:nam_talk
     Phong click thử vài chỗ.
-    Hmm. Lỗi texture giải quyết xong rồi đấy. #speaker:Phong #sprite:phong_talk
+    Hmm. Lỗi toạ độ giải quyết xong rồi đấy. #speaker:Phong #sprite:phong_talk
 
     Thế là xong rồi nhỉ, còn lại của m— #speaker:Nam #sprite:nam_talk
 
     Chưa thư giãn được đâu anh bạn. #speaker:Phong #sprite:phong_talk
 
     Nam dừng lại.
-    Phòng kế bên đang bị lỗi mấy cái object bay lung tung. #speaker:Phong #sprite:phong_talk
-    Tôi cứ đặt model ra là nó bay. #speaker:Phong #sprite:phong_talk
-    Sửa lại hộ tôi nhá. #speaker:Phong #sprite:phong_talk
+    Phòng kế bên đang bị lỗi một vài object mất texture. #speaker:Phong #sprite:phong_talk
+    Cứ đặt model ra map là màu y như rằng sẽ bị bốc hơi. #speaker:Phong #sprite:phong_talk
+    Tôi cũng chả hiểu lỗi này lắm nên sửa lại hộ tôi nhá. #speaker:Phong #sprite:phong_talk
     ...Haizz. #speaker:Nam #sprite:nam_exhaust
     Để tôi xem thử. #speaker:Nam #sprite:nam_talk
-    Ừm, cố lên nhá. #speaker:Phong #sprite:phong_talk
+    OK bro. #speaker:Phong #sprite:phong_talk
     -> DONE
 -else:
+    Kiểm tra thử mấy cái vật bị lỗi phòng kế bên nhá. #speaker:Phong #sprite:phong_talk
     ->DONE
 }
 
 === hallway2_table1 ===
 { hallway2_table1:
--0: 
+-1: 
     Thật ngạc nhiên.
     Một cái bàn hết sức bình thường.
     Nam đứng nhìn nó một lúc.
     ...
     ...
     ...
-    Thật bình thường, một cái bàn. #speaker:Nam #sprite:nam_thinking
+    Chỉ là một cái bàn. #speaker:Nam #sprite:nam_thinking
     -> DONE
 -else:
     Vẫn là một cái bàn bình thường.
@@ -337,91 +341,83 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 }
 
-=== hallway2_table2 ===
-{ hallway2_table2:
--0: 
-    Hiện tại vật lý đang trong quá trình cập nhật.
-    Nếu bạn thấy <voffset=15px><rotate="20">vật thể</voffset></rotate> đang lơ lửng.
-    Có thể hiểu rằng vật lý hiện tại đang không tồn tại.
-    Xin vui lòng chờ.
-    -> DONE
--else:
-    Đang đợi <voffset=-15px>vật lý</voffset> cập nhật.
-    Xin vui lòng tiếp tục chờ.
-    -> DONE
-}
-
 === ch2_hallway2_door ===
 { ch2_hallway2_door:
--0:
+-1:
     Vẫn còn vấn đề đấy nhé, chưa nghỉ ngơi được đâu!!. #speaker:Phong #sprite:phong_talk
     ->DONE
 -else:
-    Phải quay lại bàn với Phong. #speaker:Nam #sprite:nam_talk
+    Phải quay lại bàn với Phong thôi. #speaker:Nam #sprite:nam_talk
+    Đến khi nào mới giải quyết xong đống này đây. #speaker:Nam #sprite:nam_bored
     ->DONE
 }
 
 === hallway3_phong ===
 // Kohii coffee (Unity)
 { hallway3_phong:
--0: 
+-1: 
     Lỗi position sửa xong rồi. #speaker:Nam #sprite:nam_talk
     Object đặt đúng chỗ hết rồi đấy. #speaker:Nam #sprite:nam_talk
-    Tốt." #speaker:Phong #sprite:phong_talk
+    Tốt. #speaker:Phong #sprite:phong_talk
     Còn cái map cuối, liên quan đến kỹ thuật hơn nên để tôi xử lý luôn. #speaker:Phong #sprite:phong_talk
     Ông nghỉ tay một chút đi. #speaker:Phong #sprite:phong_smile
     Tôi mà nghỉ thì ông làm xong không? #speaker:Nam #sprite:nam_talk
     Có chứ. #speaker:Phong #sprite:phong_smile
-    Tôi giỏi mà. #speaker:Phong #sprite:phong_smile
+    Không gì làm khó được tôi mà. #speaker:Phong #sprite:phong_smile
 
     Từ phía quầy, có tiếng ai đó vừa bước ra.
 
-    Ủa, Phong! #speaker:Owner #sprite:owner_smile
+    Helo Phong nha! #speaker:Owner #sprite:owner_smile
     Hôm nay cũng ra đây làm việc à? #speaker:Owner #sprite:owner_smile
     Đúng rồi ạ, hôm nay tụi em ra đây ngồi làm đồ án. #speaker:Phong #sprite:phong_smile
     Ngày nào cũng thấy Phong ở đây nha. #speaker:Owner #sprite:owner_talk
-    Để chị lấy phần của em ra nhé, chị nhớ order của em rồi. #speaker:Owner #sprite:owner_smile
-    Chị nhớ order của em luôn à. #speaker:Phong #sprite:phong_surprised
+    Vậy thì hôm nay chị đãi em một món nhé. #speaker:Owner #sprite:owner_smile
+    Xịn vậy chị ơi. #speaker:Phong #sprite:phong_talk
     Khách ruột của chị mà. #speaker:Owner #sprite:owner_smile
 
     // { item_voucher == true:
-        À chị ơi, hôm nay em mang theo voucher nha chị." #speaker:Phong #sprite:phong_smile
+        À chị ơi, hôm nay em mang theo voucher nha chị. #speaker:Phong #sprite:phong_smile
 
         Nam liếc sang.
         Cái voucher mà cậu nhặt được ở thư viện — cậu đã nhét vào tay Phong từ hôm đó vì không biết dùng làm gì.
 
-        Vậy em muốn món gì nè, miễn phí một món trên menu nha. #speaker:Owner #sprite:owner_smile
-        Em lấy bánh đặc biệt nhất nha chị. #speaker:Phong #sprite:phong_smile
-        Okie nha Phong. #speaker:Owner #sprite:owner_smile
+        Voucher này là nhận bánh limited của quán được làm bởi chính chị này. #speaker:Owner #sprite:owner_smile
+        Mấy đứa ăn xong nhận xét bánh chị làm đấy nhá. #speaker:Owner #sprite:owner_smile
+        Okie chị. #speaker:Phong #sprite:phong_smile
     // }
+    -> DONE
 
-
-    Chị chủ quán nhìn sang.
-    Bạn của Phong à? #speaker:Owner #sprite:owner_talk
-    Bạn làm đồ án cùng em ạ. #speaker:Phong #sprite:phong_smile
-    Ủa, Nam đó hả. #speaker:Owner #sprite:owner_talk
-    Lâu rồi mới thấy lại em nha. #speaker:Owner #sprite:owner_talk
-    ...Dạ." #speaker:Nam #sprite:nam_smile
-    Vậy chị lấy đồ uống cho em luôn nha. #speaker:Owner #sprite:owner_talk
-    Em cảm ơn chị. #speaker:Nam #sprite:nam_smile
-    Mấy đứa đang làm đồ án đúng không, cố gắng lên nha. #speaker:Owner #sprite:owner_smile
+- else:
+    Đến bây giờ phần lớn vấn đề đang được xử lý rồi. #speaker:Phong #sprite:phong_talk
+    Cố cho xong thôi. #speaker:Phong #sprite:phong_talk
     -> DONE
 }
 
 === ch2_hallway3_door ===
 { ch2_hallway3_door:
--0:
+-1:
     <b><i>Còn bao nhiêu cái bug nữa mới xong đây!!</i></b> #speaker:Phong #sprite:phong_exhaust
     Phải quay lại thảo luận với Phong thôi. #speaker:Nam #sprite:nam_exhaust
     ->DONE
 -else:
-    Quay lại với Phong thảo luận tiếp thôi. #speaker:Nam #sprite:nam_exhaust
+    Quay lại với Phong thảo luận tiếp thôi. #speaker:Nam #sprite:nam_bored
     ->DONE
 }
 
 === hallway3_table1 ===
-{ hallway3_table1 :
--0:
+{ hallway3_table1:
+-1:
+    Trong Nam thoáng qua một suy nghĩ...
+    Bàn ghế được sắp xếp rất gọn trái lại với vẻ kỳ lạ buổi sáng.
+    ->DONE
+-else:
+    Quán vắng vẻ thật đấy. #speaker:Nam #sprite:nam_thinking
+    ->DONE
+}
+
+=== hallway3_table2 ===
+{ hallway3_table2:
+-1:
     ...
     ...
     Sau một thời gian Nam để ý cái bàn.
@@ -433,19 +429,10 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     ->DONE
 }
 
-=== hallway3_table2 ===
-{ hallway3_table2:
--0:
-    Trong Nam thoáng qua một suy nghĩ...
-    Bàn ghế được sắp xếp rất gọn trái lại với vẻ kỳ lại buổi sáng.
-    ->DONE
--else:
-    Quán vắng vẻ thật đấy. #speaker:Nam #sprite:nam_thinking
-    ->DONE
-}
 
 === ch2_cutscene2 ===
 #cg:laptop_screen,2,full #sfx:8_bit
+#cg:black,1,full
 #bgm:vn_theme
 #bg:coffee_shop_evening
 Nào, chứng kiến thời khắc huy hoàng nào anh bạn. #speaker:Nam #sprite:nam_excited
