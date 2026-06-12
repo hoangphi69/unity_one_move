@@ -83,6 +83,9 @@ Nam với lấy áo khoác trên móc cửa.
     
 // ----------- Tại lobby tương tác với điện thoại ----------
 === lobby1_phone ===
+// REMOVE
+Ngầu vl
+-> DONE
 {ch1_lobby_door_Interacted == false:
     -> phone_date
 - else:
@@ -271,6 +274,9 @@ Kay. #speaker:Nam #sprite:nam_talk1
 
 
 === hallway2_bookshelf ===
+// REMOVE
+Ngầu
+-> DONE
 { ch1_hallway2_bookshelf == false:
     ~ ch1_hallway2_bookshelf = true
     Mùi giấy cũ thoang thoảng trong không khí.
@@ -385,6 +391,9 @@ Nam nhìn cuốn sách vừa cầm trên tay.
 
 // ----------- Trong map1 hallway3 ----------
 === hallway3_librarian ===
+// REMOVE
+Chất vc
+-> DONE
 { ch1_hallway3_librarian == false:
     ~ ch1_hallway3_librarian = true
     Em kiếm được sách của em chưa? #speaker:Thủ thư #sprite:libarian_talk
@@ -453,7 +462,7 @@ Một tờ phiếu nhỏ. Chữ in đã hơi mờ.
 
 // ----------- Cutscene sau khi chơi game xong tại phòng trọ ----------
 === ch1_cutscene3 ===
-#cg: timeskip_afternoon,5,full #sfx: clock_ticking
+#cg:timeskip_afternoon,5,full #sfx:clock_ticking
 #bgm:vn_theme
 #bg:dom_friend_afternoon
 

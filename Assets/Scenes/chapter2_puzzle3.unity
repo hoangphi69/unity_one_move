@@ -4739,6 +4739,18 @@ PrefabInstance:
       propertyPath: id
       value: freeze
       objectReference: {fileID: 0}
+    - target: {fileID: 6276306921833130228, guid: d6615e4b01da67742a0c32339107f2f0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276306921833130228, guid: d6615e4b01da67742a0c32339107f2f0, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276306921833130228, guid: d6615e4b01da67742a0c32339107f2f0, type: 3}
+      propertyPath: outlineWidth
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5723,7 +5735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6054517404125618692, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6731665939129648108, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       propertyPath: cutscene
@@ -5735,12 +5747,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6731665939129648108, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       propertyPath: _nextStage.m_SceneName
-      value: chapter2_lobby
+      value: chapter1_lobby
       objectReference: {fileID: 0}
     - target: {fileID: 6731665939129648108, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       propertyPath: _nextStage.m_SceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: acd4710be45528347bb3777645f68976, type: 3}
+      objectReference: {fileID: 102900000, guid: 9d35536fcc265424ca9c9bb85c0033bf, type: 3}
     - target: {fileID: 6867469554636011710, guid: 3c82ce2dc08db6846950a487f616fddf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.5
@@ -7374,21 +7386,9 @@ MonoBehaviour:
   <SpawnPoint>k__BackingField: {fileID: 2006461066}
   cameraA: {fileID: 504955795}
   cameraB: {fileID: 531311610}
-  ambienceTrack:
-    Guid:
-      Data1: -1900782760
-      Data2: 1328335181
-      Data3: 1340263323
-      Data4: -669251955
-    Path: event:/DormAfternoon
-  musicTrack:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  musicTrackParameter: 0
+  ambienceTrack: 5
+  musicTrack: 4
+  musicTrackParameter: 4
 --- !u!156049354 &1548825873
 Grid:
   m_ObjectHideFlags: 0

@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 95105c339c643894bb0beca6a7cf9b91, type: 3}
       propertyPath: m_Name
-      value: playerVer03
+      value: player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -165,7 +165,7 @@ MonoBehaviour:
   showRaycast: 0
   showTrail: 0
   maxTrails: 2
-  onSkipTile: 0
+  collectedItems: []
 --- !u!114 &2153870929624611512
 MonoBehaviour:
   m_ObjectHideFlags: 0

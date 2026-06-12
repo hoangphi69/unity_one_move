@@ -2014,7 +2014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractPoint
   targetID: phone1
   bubble: 1
-  bubblePrefab: {fileID: 4310547284113562885, guid: 1479c27cadc3812478e9f2f33d578e99, type: 3}
+  bubblePrefab: {fileID: 1720124860156716423, guid: 91391a7450ec4834aa1f313ca317cbbe, type: 3}
   bubbleSpawnPoint: {fileID: 1733545490}
 --- !u!114 &696593006
 MonoBehaviour:
@@ -6009,7 +6009,7 @@ Transform:
   m_GameObject: {fileID: 1733545489}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.11917076, z: -0, w: 0.99287385}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.182, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7734,6 +7734,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 90934104487386646, guid: a2b773fada16d90489756a911d3e4e6d, type: 3}
+      propertyPath: bubblePrefab
+      value: 
+      objectReference: {fileID: 6787818325001418262, guid: f67d79f076c33c547b8fe6001ecda398, type: 3}
     - target: {fileID: 393432724374552601, guid: a2b773fada16d90489756a911d3e4e6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5

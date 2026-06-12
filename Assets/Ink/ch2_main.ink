@@ -8,6 +8,9 @@ VAR ch2_missed_report = false
 VAR ch2_hallway1_talk_to_phong = 0
 
 === ch2_l2_phone ===
+// REMOVE
+Adu ngầu
+-> DONE
 { ch2_lobby2_phone == false:
     -> phone_notification
 - else:
@@ -59,8 +62,8 @@ Nam ngồi dậy.
 
 
 === ch2_cutscene1 ===
-//Kohii coffee
-#sfx:collect #cg:chapter2,3,full
+#cg:chapter2,3,full #sfx:collect
+#cg:black,2,full
 #bgm:vn_theme
 #bg:coffee_shop_morning
 
@@ -130,7 +133,7 @@ Khéo nguyên nhân từ bên ông mà ra ấy. #speaker:Phong #sprite:phong_ang
 ...
 
 + [Tiếp tục ý kiến]
-    #bg:coffe_shop_morning
+    #bg:coffee_shop_morning
 
     ~ ch2_missed_report = true
     Nam thở dài.
@@ -142,7 +145,7 @@ Khéo nguyên nhân từ bên ông mà ra ấy. #speaker:Phong #sprite:phong_ang
     -> DONE
 
 + [...]
-    #bg:coffe_shop_morning
+    #bg:coffee_shop_morning
     Phong bỗng ngừng lại.
     Tôi với ông có quên gì không? #speaker:Phong #sprite:phong_thinking
     Nam nhìn Phong.
@@ -186,7 +189,7 @@ Khổ vì mấy đứa quá rồi đấy! #speaker:GV
 // Sau cuộc họp
 #cg:dark,2,full #sfx:clock_ticking
 #bgm:vn_theme
-#bg:coffe_shop_morning
+#bg:coffee_shop_morning
 
 Quán vẫn thế.
 Ánh nắng vẫn còn đó.
