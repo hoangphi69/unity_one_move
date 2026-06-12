@@ -72,6 +72,8 @@ public class GameAudioManager : MonoBehaviour
 
   void OnDestroy()
   {
+    StopMusic();
+    StopAmbience();
     foreach (var instance in eventInstances)
     {
       if (instance.isValid())
