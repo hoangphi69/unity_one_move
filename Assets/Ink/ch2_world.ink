@@ -42,7 +42,7 @@ Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #
 { ch2_h1_table1:
 -1: 
     Hiện tại vật lý đang trong quá trình cập nhật.
-    Nếu bạn thấy <voffset=15px><rotate="20">vật thể</voffset></rotate> đang lơ lửng.
+    Nếu bạn thấy <voffset=15px><rotate="20">vật thể</voffset></rotate> đang không đúng vị trí.
     Có thể hiểu rằng vật lý hiện tại đang không tồn tại.
     Xin vui lòng chờ.
     -> DONE

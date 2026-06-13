@@ -226,7 +226,8 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     Ông dựng lại cái quán này trong game. #speaker:Nam #sprite:nam_surprised
     Ừ, quen thuộc thì dựng dễ hơn. #speaker:Phong #sprite:phong_smile
 
-    Một cái ghế đang xoay chậm chạp cách sàn hai mét.
+    Một cái ghế đang nằm trên mặt bàn kể cả khi cái ghế đang đặt đúng vị trí.
+    Còn cái ghế dài đâm xuyên qua tường làm như cái tường không hề tồn tại.
 
     Sao nhiều model mất hết texture đấy? #speaker:Nam #sprite:nam_confused
     Giờ ưu tiên sửa lỗi toạ độ trước đã, object cứ lung tung thế này tôi không code tiếp được. #speaker:Phong #sprite:phong_talk
@@ -235,19 +236,12 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     -> DONE
 
 - 2:
-    À này tôi quên nói. #speaker:Phong #sprite:phong_talk
-    Tôi có thêm chức năng mới là cái vũng nước. #speaker:Phong #sprite:phong_talk
-    Đáng lẽ bước vào thì trượt lên 2 ô, nhưng bằng cách nào đó nó đang lỗi — trượt hết cả đường về phía trước. #speaker:Phong #sprite:phong_talk
-    Tôi cũng lỡ đặt vào mấy map giải đố rồi. #speaker:Phong #sprite:phong_talk
-    Nhớ lưu ý nhá. #speaker:Phong #sprite:phong_talk
-
+    Sao lại có mấy cái <nobr><uppercase>máy tính cổ lỗ sĩ</uppercase></nobr> trong mấy cái map thế này. #speaker:Nam #sprite:nam_confused
+    Tôi nghĩ để đấy nó sẽ thú vị. #speaker:Phong #sprite:phong_excited
+    Nó là cái <color="red">"Red Herring"</color> đấy, nghĩa của nó là <color="red">"mồi nhử"</color> thì phải. #speaker:Phong #sprite:phong_talk
+    Tôi định đặt đấy để <b>"người chơi tương tác với nó"</b> nhưng thật tế không có gì xảy ra. #speaker:Phong #sprite:phong_talk
+    Nhưng mà cứ map nào đặt cái máy tính đấy đều bị lỗi cả. #speaker:Phong #sprite:phong_angry
     Nam không nói gì ngay.
-
-    Ông.... #speaker:Nam #sprite:nam_talk1
-    Trượt hết cả đường về phía trước nghĩa là sao? #speaker:Nam #sprite:nam_talk1
-    Nghĩa là... trượt hết về phía trước. #speaker:Phong #sprite:phong_talk
-    ...Tới tường à? #speaker:Nam #sprite:nam_talk1
-    Tới tường. #speaker:Phong #sprite:phong_smile
 
     Ông biết không, tôi tin ở ông lắm đấy. #speaker:Phong #sprite:phong_smile
     Sửa hộ tôi nhá. #speaker:Phong #sprite:phong_smile
@@ -294,7 +288,7 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     OK bro. #speaker:Phong #sprite:phong_talk
     -> DONE
 -else:
-    Kiểm tra thử mấy cái vật bị lỗi phòng kế bên nhá. #speaker:Phong #sprite:phong_talk
+    Kiểm tra thử mấy vật bị lỗi phòng kế bên nhá. #speaker:Phong #sprite:phong_talk
     ->DONE
 }
 
@@ -316,19 +310,12 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
     Lỗi position sửa xong rồi. #speaker:Nam #sprite:nam_talk1
     Object đặt đúng chỗ hết rồi đấy. #speaker:Nam #sprite:nam_talk1
     Tốt. #speaker:Phong #sprite:phong_talk
-    Ông kiểm tra cho tôi map nhà kho đi nhá.
-    Map đấy thiên về kỹ thuật hơn ông sửa được không.
+    Tôi mới sửa lại code ở đoạn nhà kho đấy. #speaker:Phong #sprite:phong_talk
+    Cơ mà nó vẫn còn glitch một tí. #speaker:Phong #sprite:phong_talk
+    Ông kiểm tra giúp tôi map nhà kho nhá. #speaker:Phong #sprite:phong_talk
+    Map đấy thiên về kỹ thuật hơn ông sửa được không. #speaker:Phong #sprite:phong_talk
     ... #speaker:Nam #sprite:nam_thinking
     Được chứ. #speaker:Nam #sprite:nam_excited
-
-    Chị nhân viên từ quán nhìn về phía hai đứa.
-    Helo Phong nha! #speaker:Owner #sprite:owner_smile
-    Hôm nay cũng ra đây làm việc à? #speaker:Owner #sprite:owner_smile
-    Đúng rồi ạ, hôm nay tụi em ra đây ngồi làm đồ án. #speaker:Phong #sprite:phong_smile
-    Ngày nào cũng thấy Phong ở đây nha. #speaker:Owner #sprite:owner_talk
-    Vậy thì hôm nay chị đãi em một món nhé. #speaker:Owner #sprite:owner_smile
-    Xịn vậy chị ơi. #speaker:Phong #sprite:phong_talk
-    Khách ruột của chị mà. #speaker:Owner #sprite:owner_smile
     -> DONE
 
 - else:
@@ -350,34 +337,155 @@ Bà ấy không sửa bug thay mình được đâu. #speaker:Phong #sprite:phon
 
 
 
+// === ch2_cutscene2 ===
+// #cg:laptop_screen,2,full #sfx:8_bit
+// #cg:black,1,full
+// #bgm:vn_theme
+// #bg:coffee_shop_evening
+// Nào, chứng kiến thời khắc huy hoàng nào anh bạn. #speaker:Nam #sprite:nam_excited
+// //Màn hình loading buid success
+// ...
+// ...
+// Nó đang chạy này. #speaker:Nam #sprite:nam_talk1
+// Nó chạy được rồi này. #speaker:Nam #sprite:nam_smile
+// NÓ CHẠY ĐƯỢC RỒI NÀY. #speaker:Phong #sprite:phong_smile
+// TÔI VỚI ÔNG LÀM ĐƯỢC RỒI. #speaker:Nam & Phong
+// WOOOOOHOOOOO!!!! #speaker:Nam & Phong
+// LÊN NÀO BRO. #speaker:Nam #sprite:nam_excited
+// #cg:high_five,2,full #sfx:clap
+// #bg:coffee_shop_evening
+// Hai đứa cố gắng thật đấy chứ. #speaker:Owner #sprite:owner_talk
+// Trời tối thế này rồi hai đứa vẫn không nhận ra cơ mà. #speaker:Owner #sprite:owner_talk
+// Khách chị còn lại mỗi hai em thôi đấy. #speaker:Owner #sprite:owner_talk
+// Hehe, bọn em tập trung quá không nhận ra. #speaker:Phong #sprite:phong_smile
+// Bọn em làm phiền chị rồi. #speaker:Nam #sprite:nam_talk1
+// Không sao, bình thường chỉ có Phong ở lại nói chuyện với chị. #speaker:Owner #sprite:owner_talk
+// Mai hai đứa tới ủng hộ chị tiếp nha. #speaker:Owner #sprite:owner_talk
+// Càng đông càng vui mà. #speaker:Owner #sprite:owner_smile
+
+// Chị chủ quán nhiệt tình quá ông ơi. #speaker:Nam #sprite:nam_smile
+// Ông hiểu tại sao tôi thích quán này rồi đấy, dù ông là ngưởi giới thiệu cho tôi. #speaker:Phong #sprite:phong_smile
+// -> DONE
+
 === ch2_cutscene2 ===
 #cg:laptop_screen,2,full #sfx:8_bit
 #cg:black,1,full
 #bgm:vn_theme
 #bg:coffee_shop_evening
-Nào, chứng kiến thời khắc huy hoàng nào anh bạn. #speaker:Nam #sprite:nam_excited
-//Màn hình loading buid success
 ...
+....
+<i>[BUILD SUCCESSFUL]</i>
+Nam! Được rồi! #speaker:Phong #sprite:phong_smile
+Hả?! Chạy thật rồi à?! #speaker:Nam #sprite:nam_excited
+Chạy rồi! Nhìn này! #speaker:Phong #sprite:phong_smile
+Nhân vật di chuyển bình thường luôn! #speaker:Phong #sprite:phong_smile
+Vũng nước thì sao? #speaker:Nam #sprite:nam_talk1
+Còn trượt tới cuối bản đồ không? #speaker:Nam #sprite:nam_smile
+Hết rồi! #speaker:Phong #sprite:phong_smile
+Texture cũng lên đầy đủ luôn! #speaker:Phong #sprite:phong_smile
 ...
-Nó đang chạy này. #speaker:Nam #sprite:nam_talk1
-Nó chạy được rồi này. #speaker:Nam #sprite:nam_smile
-NÓ CHẠY ĐƯỢC RỒI NÀY. #speaker:Phong #sprite:phong_smile
-TÔI VỚI ÔNG LÀM ĐƯỢC RỒI. #speaker:Nam & Phong
+NÓ CHẠY ĐƯỢC RỒI! #speaker:Nam #sprite:nam_excited
+HAHAHAHA! #speaker:Phong #sprite:phong_smile
+TÔI VỚI ÔNG LÀM ĐƯỢC RỒI! #speaker:Nam & Phong
 WOOOOOHOOOOO!!!! #speaker:Nam & Phong
-LÊN NÀO BRO. #speaker:Nam #sprite:nam_excited
-#cg:high_five,2,full #sfx:clap
-#bg:coffee_shop_evening
-Hai đứa cố gắng thật đấy chứ. #speaker:Owner #sprite:owner_talk
-Trời tối thế này rồi hai đứa vẫn không nhận ra cơ mà. #speaker:Owner #sprite:owner_talk
-Khách chị còn lại mỗi hai em thôi đấy. #speaker:Owner #sprite:owner_talk
-Hehe, bọn em tập trung quá không nhận ra. #speaker:Phong #sprite:phong_smile
-Bọn em làm phiền chị rồi. #speaker:Nam #sprite:nam_talk1
-Không sao, bình thường chỉ có Phong ở lại nói chuyện với chị. #speaker:Owner #sprite:owner_talk
-Mai hai đứa tới ủng hộ chị tiếp nha. #speaker:Owner #sprite:owner_talk
-Càng đông càng vui mà. #speaker:Owner #sprite:owner_smile
+LÊN NÀO BRO!!! #speaker:Nam #sprite:nam_excited
+#cg:high_five,1,full #sfx:clap
 
-Chị chủ quán nhiệt tình quá ông ơi. #speaker:Nam #sprite:nam_smile
-Ông hiểu tại sao tôi thích quán này rồi đấy, dù ông là ngưởi giới thiệu cho tôi. #speaker:Phong #sprite:phong_smile
+Hôm nay phải ăn mừng mới được. #speaker:Phong #sprite:phong_excited
+#bg:coffee_shop_evening
+Có tiếng bước chân tiến lại gần.
+Lần đầu chị thấy hai đứa cười lớn vậy luôn đó. #speaker:Owner #sprite:owner_smile
+Bọn em build chạy được rồi chị ơi! #speaker:Phong #sprite:phong_smile
+Thật hả? #speaker:Owner #sprite:owner_smile
+Chúc mừng hai đứa nha. #speaker:Owner #sprite:owner_talk
+Vậy lần này chị đãi bánh cho hai đứa đấy nhá. #speaker:Owner #sprite:owner_smile
+
+Dạ, tụi em cảm ơn chị. #speaker:Nam #sprite:nam_smile
+Hai đứa làm chị nhớ đến lần đầu mở quán cà phê đấy chứ.
+CHị tưởng chuẩn bị xong hết rồi, ai ngờ tới ngày khai trương lại phát sinh đủ thứ chuyện. #speaker:Owner #sprite:owner_talk
+
+Vậy rồi sao chị? #speaker:Phong #sprite:phong_talk
+Thì giải quyết từng chuyện một thôi. #speaker:Owner #sprite:owner_smile
+Lúc đấy chị phải xoay đi xoay lại quá chời mà. #speaker:Owner #sprite:owner_smile
+Phải vất vả lắm mới làm vượt qua được. #speaker:Owner #sprite:owner_smile
+Ohhhh...#speaker:Phong #sprite:phong_surprise
+Hay vậy chị. #speaker:Nam #sprite:nam_talk1
+Hihi! #speaker:Owner #sprite:owner_smile
+Hai đứa cố gắng nha. #speaker:Owner #sprite:owner_smile
+Dạ. #speaker:Nam #sprite:nam_smile
+Chị Mai quay trở về quầy pha chế.
+
+
+Cũng trễ rồi, giờ này về thôi. #speaker:Phong #sprite:phong_talk
+Oke. #speaker:Nam #sprite:nam_talk1
+
+Phong lúc này đóng Unity.
+Đóng Visual Studio.
+Đóng thư mục project.
+...
+Rồi dừng lại ở một tab vẫn đang mở.
+...
+...
+<i>[TASK DO:.]. </i>
+<i>[TASK DO:..]. </i>
+<i>[TASK DO:...]. </i>
+<i>[TASK DO:03...]. </i>
+...
+
+Ông chưa tắt máy à? #speaker:Nam #sprite:nam_talk1
+
+Mai tính tiếp. #speaker:Phong #sprite:phong_talk
+
+Nam nghiêng người nhìn sang.
+
+Cái gì vậy? #speaker:Nam #sprite:nam_confused
+
+Không có gì. #speaker:Phong #sprite:phong_talk
+
+Mai tính tiếp. #speaker:Phong #sprite:phong_talk
+
+...
+
+Nam với tay kéo nhẹ laptop lại.
+
+Màn hình hiển thị danh sách công việc.
+...
+□ Thiết kế map
+□ Puzzle mới
+□ UI
+□ Save / Load
+□ Audio
+□ Cutscene
+□ Testing
+□ ...
+□ ...
+
+Nam lướt xuống.
+Rồi lướt xuống thêm lần nữa.
+...
+Sao còn nhiều vậy? #speaker:Nam #sprite:nam_confused
+...
+Phong không trả lời.
+...
+Nam cũng im lặng.
+
+Có 1 sự yên tĩnh vang dội trong tâm trí Nam và Phong.
+Tiếng đánh máy từ bàn bên cạnh đã biến mất từ lúc nào.
+Ngoài cửa kính, trời đã tối.
+...
+Mai mấy giờ? #speaker:Phong #sprite:phong_talk
+Bảy giờ. #speaker:Nam #sprite:nam_talk1
+Lại Kohii? #speaker:Phong #sprite:phong_talk
+Lại Kohii. #speaker:Nam #sprite:nam_talk1
+...
+Phong gập laptop lại.
+
+Về thôi. #speaker:Phong #sprite:phong_smile
+Ừ. #speaker:Nam #sprite:nam_smile
+...
+...
+...
+<b>[TASK DO: 03 | SUCCESSFULL TASK: 02]</b>
 -> DONE
 
 thêm lời thoại giải thích macintosh.
