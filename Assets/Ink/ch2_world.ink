@@ -16,7 +16,7 @@
   - Trên bàn ngổn ngang nhiều loại giấy tờ, một số còn rải rác lộn xộn dưới sàn.
     Toàn bộ là tài liệu Nam tổng hợp được trong mấy tuần qua phục vụ cho đồ án mà cả hai đang làm.
 }
-Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #nam_silent
+Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #sprite:nam_silent
 -> DONE
 
 
@@ -25,8 +25,8 @@ Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #
   - Chiếu qua cửa sổ là ánh nắng của buổi sáng mang theo sức sống của cảnh vật.
     Tiếng chim hót líu lo cùng tiếng gió lao xao qua kẽ lá tạo nên khúc âm hưởng của một buổi sáng sớm.
     ...Đâu đó có tiếng cãi cọ của hàng xóm vang vọng khắp khu nhà trọ.
-    Mới sáng sớm mà họ đã om sòm thế nhỉ. #speaker:Nam #nam_exhaust
-  - Chắc mai mốt mình phải lắp cách âm vào mới được. #speaker:Nam #nam_silent
+    Mới sáng sớm mà họ đã om sòm thế nhỉ. #speaker:Nam #sprite:nam_exhaust
+  - Chắc mai mốt mình phải lắp cách âm vào mới được. #speaker:Nam #sprite:nam_silent
 }
 -> DONE
 
@@ -53,20 +53,20 @@ Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #
 }
 
 === ch2_h1_npc_maid ===
-{!Nhân viên hiện tại là một cô gái trạc tuổi Nam, trong bộ trang phục hầu gái "moe" thường thấy ở Nhật.}
+{!Nhân viên hiện tại là một cô gái trạc tuổi Nam, trong bộ trang phục hầu gái "moe" thường thấy ở Nhật Bản.}
 { ch2_h1_npc_maid > 2: Cậu muốn gì?| Quý khách muốn gì ạ?} #speaker:Hầu gái
   + [Nói về vết đổ nước trên sàn]
     { stopping:
-      - Ừm... Mình lỡ làm đổ nước lên sàn, cậu có thể cho tôi mượn khăn lau... hay đại loại gì đó được không? #speaker:Nam #nam_thinking
+      - Ừm... Mình lỡ làm đổ nước lên sàn, cậu có thể cho tôi mượn khăn lau... hay đại loại gì đó được không? #speaker:Nam #sprite:nam_silent
         Nàng hầu gái trầm ngâm một lúc.
         Cậu cứ để đó đi, chốc nữa tôi sẽ dọn cho. #speaker:Hầu gái
-        Vậy sao, c-cảm ơn cậu nhiều. #speaker:Nam
+        Vậy sao, c-cảm ơn cậu nhiều. #speaker:Nam #sprite:nam_agree
         -> DONE
       - -> laidback
     }
   + [Nói về bàn ghế bị lỗi toạ độ]
     { stopping:
-      - Ừm... Hình như bàn ghế ở góc có gì đó không đúng thì phải. #speaker:Nam
+      - Ừm... Hình như bàn ghế ở góc có gì đó không đúng thì phải. #speaker:Nam #sprite:nam_talk1
         Nàng hầu gái trầm ngâm một lúc.
         À, khu đó bọn nhóc vừa mới ra về. #speaker:Hầu gái
         Cứ để đó đi, tôi sẽ xử lý sau. #speaker:Hầu gái
@@ -125,11 +125,11 @@ Phải mua chiếc bàn này ngay mới được. #speaker:Tổng tài
     ...
     ...
     ...
-    Chỉ là một cái bàn. #speaker:Nam #sprite:nam_thinking
+    Chỉ là một cái bàn. #speaker:Nam #sprite:nam_talk2
     -> DONE
 -else:
     Vẫn là một cái bàn bình thường.
-    Không có gì để xem ở đây. #speaker:Nam #sprite:nam_thinking
+    Không có gì để xem ở đây. #speaker:Nam #sprite:nam_talk2
     -> DONE
 }
 
@@ -148,24 +148,24 @@ Có tiền là tôi mua luôn. #speaker:Tổng tài
     { stopping: 
       - Cô gái ca trước hả? Chà... mặc cho vẻ ngoài sống chậm của cô ấy, #speaker:"Quản gia"
         Có thể nói cô ấy là nhân viên chăm chỉ nhất quán đấy. #speaker:"Quản gia"
-        Thật ư? #speaker:Nam
+        Thật ư? #speaker:Nam #sprite:nam_confused
         Chắc chắn mà. #speaker:"Quản gia"
       - Mọi người còn gọi cô ấy là... "cô gái thư giãn". #speaker:"Quản gia"
     }
     -> ask
   + (doubt) [Hỏi về bộ ria mép]
     { stopping:
-      - Bộ ria đó... là hàng giả đúng không? #speaker:Nam
+      - Bộ ria đó... là hàng giả đúng không? #speaker:Nam #sprite:nam_talk2
         ... #speaker:"Quản gia"
         ...... #speaker:"Quản gia"
         Em bé. #speaker:"Quản gia"
-        Hả- #speaker:Nam
+        Hả- #speaker:Nam #sprite:nam_confused
         Em bé cái mồm thôi. #speaker:"Quản gia"
       - Im lặng nào, "cậu chủ nhỏ" của ta. #speaker:"Quản gia"
     }
     -> DONE
   * {doubt} [Hỏi tuổi]
-    Khoan đã, anh bạn có đủ tuổi để đi làm không vậy? #speaker:Nam
+    Khoan đã, anh bạn có đủ tuổi để đi làm không vậy? #speaker:Nam #sprite:nam_talk2
     ... #speaker:"Quản gia"
     Có những thứ cậu không nên tìm hiểu đâu, chàng trai trẻ ạ. #speaker:"Quản gia"
     Biết hỏi trực tiếp là vô dụng, Nam quyết định lờ đi.
@@ -212,14 +212,14 @@ VAR voucher = false
     -> secret_encounter
   + [Hỏi về trang phục]
     { stopping:
-      - Tại sao đồng phục nhân viên ở đây lại phỏng theo phong cách hầu gái \(và quản gia\) vậy chị? #speaker:Nam
+      - Tại sao đồng phục nhân viên ở đây lại phỏng theo phong cách hầu gái \(và quản gia\) vậy chị? #speaker:Nam #sprite:nam_confused
         Hừmmm... thực ra thì... #speaker:Mai
         Quán không có đồng phục, là nhân viên HỌ tự quyết định trang phục thôi. #speaker:Mai
-        Nhưng... tại sao lại là hầu gái \(và quản gia\)??? #speaker:Nam
+        Nhưng... tại sao lại là hầu gái \(và quản gia\)??? #speaker:Nam #sprite:nam_confused
         ...Ừmmm, chắc do sở thích của họ giống chị :D #speaker:Mai
-        ...Hả? Đơn giản vậy thôi ư? #speaker:Nam
+        ...Hả? Đơn giản vậy thôi ư? #speaker:Nam #sprite:nam_surprise
         Em không hài lòng với phong cách này sao? #speaker:Mai
-        À- Không phải như vậy, em thích lắm chứ- #speaker:Nam
+        À- Không phải như vậy, em thích lắm chứ- #speaker:Nam #sprite:nam_excited
         Vậy sao? Em thích là tốt rồi. #speaker:Mai
       - Sở thích của chị là trang phục hầu gái. #speaker:Mai
     }

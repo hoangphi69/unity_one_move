@@ -11,7 +11,7 @@ Chợp mắt một chút?
   -> leave
 + [Bỏ đi]
   -> leave
-- (leave) Mình nên đi ra ngoài thì hơn #speaker:Nam #nam_thinking
+- (leave) Mình nên đi ra ngoài thì hơn #speaker:Nam #sprite:nam_exhaust
   -> DONE
 
 
@@ -29,7 +29,7 @@ Tiếp tục chơi game?
   -> leave
 + [Bỏ đi]
   -> leave
-- (leave) Mình nên đi ra ngoài thì hơn #speaker:Nam #nam_thinking
+- (leave) Mình nên đi ra ngoài thì hơn #speaker:Nam #sprite:nam_exhaust
   -> DONE
 
 
@@ -40,7 +40,7 @@ Tiếp tục chơi game?
     Khung cảnh bên ngoài trông thật thơ và trữ tình...
     ...Nếu như không có cảnh hàng xóm đang cãi nhau.
 }
-Có lẽ mình nên lắp cái rèm vào. #speaker:Nam #nam_thinking
+Có lẽ mình nên lắp cái rèm vào. #speaker:Nam #sprite:nam_silent
 -> DONE
 
 

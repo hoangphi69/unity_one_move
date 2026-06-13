@@ -182,27 +182,27 @@ Giữa hai người là một tờ giấy, vài ý tưởng được gạch đ�
 Nhưng không cái nào có vẻ đúng.
 
 
-Đồ án làm thử AI không? #speaker:Phong #sprite:phong_talk
+Đồ án làm thử AI không? #speaker:Phong #sprite:phong_talk2
 
 Hả? Làm thử? Cậu tính làm thử AI á? #speaker:Nam #sprite:nam_talk2
-Làm AI chắc cũng đơn giản mà nhỉ?  #speaker:Phong #sprite:phong_talk
+Làm AI chắc cũng đơn giản mà nhỉ?  #speaker:Phong #sprite:phong_talk1
 Từ lọc cả ngàn ảnh, đánh dấu vật thể, gắn tag cho từng ảnh thì chắc đơn giản với mỗi cậu. #speaker:Nam #sprite:nam_talk2
 Chưa tính đến code hay ý tưởng đề tài phải thật sáng tạo thì cậu nhắm 2 đứa làm nổi không? #speaker:Nam #sprite:nam_talk2
 ...
-Cậu nói đúng. #speaker:Phong #sprite:phong_talk
-Còn ý tưởng nào khác không? #speaker:Phong #sprite:phong_talk
+Cậu nói đúng. #speaker:Phong #sprite:phong_bored
+Còn ý tưởng nào khác không? #speaker:Phong #sprite:phong_bored
 
-Thế sao hai đứa không thử làm Web? #speaker:Nam #sprite:nam_thinking
-Ờ, rồi làm giống mấy chục nhóm khác. #speaker:Phong #sprite:phong_talk
-Xong mang lên hội đồng so xem ai đẹp hơn à? #speaker:Phong #sprite:phong_talk
+Thế sao hai đứa không thử làm Web? #speaker:Nam #sprite:nam_idea
+Ờ, rồi làm giống mấy chục nhóm khác. #speaker:Phong #sprite:phong_bored
+Xong mang lên hội đồng so xem ai đẹp hơn à? #speaker:Phong #sprite:phong_angry
 Chán lắm, đổi món đi!! #speaker:Phong #sprite:phong_bored
 
 
-Thế Blockchain thì sao? #speaker:Phong #sprite:phong_talk
+Thế Blockchain thì sao? #speaker:Phong #sprite:phong_thinking1
 Lỡ mà thành công thì hai thằng tung luôn coin ra thị trường luôn. #speaker:Phong #sprite:phong_smile
 Vừa có đồ án tốt nghiệp vừa có dự án khởi nghiệp. #speaker:Phong #sprite:phong_smile
-Hehe #speaker:Phong #sprite:phong_smile
-Nghe vui đấy. #speaker:Nam #sprite:nam_confused
+Hehe #speaker:Phong #sprite:phong_excited
+Nghe vui đấy. #speaker:Nam #sprite:nam_smile
 Vậy để mở đầu dự án Blockchain thì tôi BlockIdea cậu đã nhé. #speaker:Nam #sprite:nam_confused
 Hai đứa chả biết gì về Blockchain cả. #speaker:Nam #sprite:nam_talk2
 Thì cậu tính hai đứa làm đồ án kiểu gì? #speaker:Nam #sprite:nam_talk2
@@ -223,11 +223,11 @@ Tờ giấy vẫn như cũ.
 ...
 ...
 Không được rồi, cứ thế này không ổn. #speaker:Phong #sprite:phong_exhaust
-Chả có đề tài nào vừa ý anh em mình. #speaker:Phong #sprite:phong_talk
+Chả có đề tài nào vừa ý anh em mình. #speaker:Phong #sprite:phong_bored
 Nếu vậy thì đi kiếm đề tài thôi. #speaker:Nam #sprite:nam_talk2
 Để tôi lên thư viện kiếm ý tưởng. #speaker:Nam #sprite:nam_talk1
 Cậu ở nhà lên mạng kiếm đê, biết đâu kiếm được ý tưởng hay thì sao? #speaker:Nam #sprite:nam_talk1
-Oke! Kiếm được gì hay tôi báo cho cậu. #speaker:Phong #sprite:phong_bored
+Oke! Kiếm được gì hay tôi báo cho cậu. #speaker:Phong #sprite:phong_thinking2
 Kay. #speaker:Nam #sprite:nam_talk1
 -> DONE
 
@@ -340,7 +340,7 @@ Sao rồi? #speaker:Nam #sprite:nam_surprise
 Nghe nói game lần này giải đố nhiều lắm đấy! #speaker:Phong 
 ...
 Nam nhìn cuốn sách vừa cầm trên tay.
-"Tôi về liền." #speaker:Nam #sprite:nam_smile
+"Tôi về liền." #speaker:Nam #sprite:nam_excited
 "Ai thua bao kèo đi ăn." #speaker:Nam #sprite:nam_angry
 <i>"Oke tôi lại chấp cậu luôn cơ!"</i> #speaker:Phong
 -> DONE
@@ -453,36 +453,36 @@ Một tờ phiếu nhỏ. Chữ in đã hơi mờ.
 
 Màn hình tắt.
 Tiêu đề trò chơi hiện ra.
-<b><i>[GAME CLEAR]<i/></b>
+<b><i>[GAME CLEAR]</i></b>
 
 Cuốn thật. #speaker:Nam #sprite:nam_smile
-Nhìn đơn giản mà căng phết. #speaker:Phong #sprite:phong_surprise
+Nhìn đơn giản mà căng phết. #speaker:Phong #sprite:phong_smile
 Ừ. #speaker:Nam #sprite:nam_smile
 
 Phong đặt tay cầm xuống bàn.
-Tôi lại thích kiểu puzzle nhanh gọn hơn. #speaker:Phong #sprite:phong_smile
+Tôi lại thích kiểu puzzle nhanh gọn hơn. #speaker:Phong #sprite:phong_thinking2
 Mỗi màn một cái là xong. #speaker:Phong #sprite:phong_smile
 
 Nam gật đầu nhẹ.
-Giống tôi. #speaker:Nam #sprite:nam_angry
+Giống tôi. #speaker:Nam #sprite:nam_agree
 
 ...
 
 À mà. #speaker:Nam #sprite:nam_thinking
 Phong nhìn sang.
 Hôm nay tôi lên thư viện. #speaker:Nam #sprite:nam_talk1
-Kiếm được gì không? #speaker:Phong #sprite:phong_talk
+Kiếm được gì không? #speaker:Phong #sprite:phong_talk1
 Ban đầu toàn sách linh tinh. #speaker:Nam #sprite:nam_talk1
 
 {ch1_hallway2_bookshelf_book2:
-    Cơ mà nãy tôi kiếm được 1 câu cũng hay. #speaker:Nam #sprite:nam_talk1
-    <i>"Nếu muốn sáng tạo, hãy làm thứ mà mình thật sự thích."</i> #speaker:Nam #sprite:nam_talk1
+    Nhưng mà có 1 cuốn sách khiến tôi chú ý. #speaker:Nam #sprite:nam_talk1
+    Nó nói <i>"Nếu muốn sáng tạo, hãy làm thứ mà mình thật sự thích."</i> #speaker:Nam #sprite:nam_talk1
     Ban đầu nó không liên quan tới đồ án nên tôi cũng không để tâm lắm. #speaker:Nam #sprite:nam_talk1
     Giờ nghĩ lại thì câu đấy nó lại đúng... #speaker:Nam #sprite:nam_talk1
-    ... #speaker:Phong #sprite:phong_thinking
+    ... #speaker:Phong #sprite:phong_thinking2
 }
 
-Trong đống linh tinh đấy thì tui kiếm được cuốn hướng dẫn lập trình game. #speaker:Nam #sprite:nam_talk1
+Trong đống linh tinh đấy thì tui kiếm được cuốn hướng dẫn lập trình game. #speaker:Nam #sprite:nam_idea
 Thấy thú vị thì tui mang về xem thử. #speaker:Nam #sprite:nam_talk2
 À mà nhắc mới nhớ. #speaker:Nam #sprite:nam_surprise
 Chị thủ thư kể khoá trước cũng có nhóm làm đồ án game. #speaker:Nam #sprite:nam_talk1
@@ -498,20 +498,20 @@ Những đáp án được ghép lại từng chút một.
 //chuyển sang bgm_warm_discovery
 #bgm:vn_theme
 Anh em mình chơi game cũng lâu rồi nhỉ. #speaker:Nam #sprite:nam_talk1
-Ừ thì... #speaker:Phong #sprite:phong_talk
-Cày nát bao nhiêu game rồi còn gì. #speaker:Phong #sprite:phong_talk
-Vậy nếu tụi mình thử làm một trò chơi thì sao? #speaker:Nam #sprite:nam_smile
+Ừ thì... #speaker:Phong #sprite:phong_talk2
+Cày nát bao nhiêu game rồi còn gì. #speaker:Phong #sprite:phong_smile
+Vậy nếu tụi mình thử làm một trò chơi thì sao? #speaker:Nam #sprite:nam_idea
 
-Game? #speaker:Phong #sprite:phong_thinking
+Game? #speaker:Phong #sprite:phong_surprise
 
-Ừ. #speaker:Nam #sprite:nam_talk1
+Ừ. #speaker:Nam #sprite:nam_agree
 Puzzle. #speaker:Nam #sprite:nam_talk1
 Theo kiểu tụi mình thích. #speaker:Nam #sprite:nam_talk1
 
 Căn phòng im lặng vài giây.
 
-... #speaker:Phong #sprite:phong_thinking
-... #speaker:Phong #sprite:phong_surprise
+... #speaker:Phong #sprite:phong_thinking1
+... #speaker:Phong #sprite:phong_thinking2
 
 Nghe được đấy. #speaker:Phong #sprite:phong_surprise
 Biết đâu sau này có người chơi game của tụi mình. #speaker:Phong #sprite:phong_smile
@@ -521,10 +521,10 @@ Quyển sách được mang về chỉ vì tò mò.
 Không hiểu sao.
 Mọi thứ bỗng nhiên kết nối lại với nhau.
 
-Thế...bắt đầu từ đâu đây? #speaker:Phong #sprite:phong_exhaust
+Thế...bắt đầu từ đâu đây? #speaker:Phong #sprite:phong_talk2
 
-Gameplay trước. #speaker:Nam #sprite:nam_smile
-Sau đó mới tới map với cốt truyện. #speaker:Nam #sprite:nam_thinking
+Gameplay trước. #speaker:Nam #sprite:nam_idea
+Sau đó mới tới map với cốt truyện. #speaker:Nam #sprite:nam_smile
 
 Cả Nam và Phong gật gù đồng ý.
 -> DONE
