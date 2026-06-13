@@ -496,7 +496,7 @@ public class CutsceneUIController : MonoBehaviour
       foreach (string tag in tags)
       {
         string[] splitTag = tag.Split(':');
-        if (splitTag.Length >= 2 && splitTag[0].Trim() == InkTag.Speaker.ToString())
+        if (splitTag.Length >= 2 && splitTag[0].Trim() == InkTag.Speaker.ToString().ToLower())
         {
           speakerName = splitTag[1].Trim();
           break;
