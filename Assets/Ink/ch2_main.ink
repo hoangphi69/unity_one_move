@@ -341,21 +341,25 @@ Nam! Được rồi! #speaker:Phong #sprite:phong_surprise
 Hả?! Chạy thật rồi à?! #speaker:Nam #sprite:nam_surprise
 Chạy rồi! Nhìn này! #speaker:Phong #sprite:phong_surprise2
 Nhân vật di chuyển bình thường luôn! #speaker:Phong #sprite:phong_surprise2
-Texture cũng lên đầy đủ luôn! #speaker:Phong #sprite:phong_surprise2
-...
+Texture cũng lên đầy đủ luôn! #speaker:Phong #sprite:phong_excited
+Nam nhìn sang laptop của Phong.
+... #speaker:Nam #sprite:nam_thinking
 NÓ CHẠY ĐƯỢC RỒI! #speaker:Nam #sprite:nam_excited
 HAHAHAHA! #speaker:Phong #sprite:phong_excited
-TÔI VỚI CẬU LÀM ĐƯỢC RỒI! #speaker:Phong #sprite:phong_excited
 LÊN NÀO BRO!!! #speaker:Nam #sprite:nam_excited
-#cg:high_five,1,full #sfx:clap
 
-Hôm nay phải ăn mừng mới được. #speaker:Phong #sprite:phong_excited
+#sfx:toast #cg:high_five,3,full 
+TÔI VỚI CẬU LÀM ĐƯỢC RỒI! #speaker:Phong
+Hôm nay phải ăn mừng mới được. #speaker:Phong
+Cuối cùng anh em mình cũng giải quyết xong cả mớ rắc rối này rồi!!! #speaker:Nam
+Anh em mình quá đỉnh!! #speaker:Nam & Phong
+
 #bg:coffee_shop_evening
 ...
 ...
-Sau khi hò reo ăn mừng, Nam và Phong nhận ra xung quanh không còn ai ngoài chị nhân viên đứng ở quầy.
-Cũng trễ rồi, giờ này về thôi. #speaker:Phong #sprite:phong_talk
-Oke. #speaker:Nam #sprite:nam_talk1
+Ngay sau khi hò reo ăn mừng, Nam và Phong nhận ra xung quanh không còn ai ngoài chị nhân viên đứng ở quầy.
+Chà... cũng trễ rồi, giờ này về thôi. #speaker:Phong #sprite:phong_talk1
+Oke. #speaker:Nam #sprite:nam_smile
 
 Phong lúc này đóng phần mềm giả lập.
 Đóng phần mềm lập trình.
@@ -363,27 +367,27 @@ Phong lúc này đóng phần mềm giả lập.
 Rồi dừng lại ở một tab vẫn đang mở.
 ...
 ...
-<i>[TASK DO:.]. </i>
 <i>[TASK DO:..]. </i>
 <i>[TASK DO:...]. </i>
+<i>[TASK DO:....]. </i>
 <i>[TASK DO:03...]. </i>
 ...
 
 Cậu chưa tắt máy à? #speaker:Nam #sprite:nam_talk1
 
-....À ..Ừ. #speaker:Phong #sprite:phong_talk
+....À ..Ừ. #speaker:Phong #sprite:phong_talk3
 
 Nam nghiêng người nhìn sang.
 
 Cái gì vậy? #speaker:Nam #sprite:nam_confused
 
-Không có gì. #speaker:Phong #sprite:phong_talk
+Không có gì. #speaker:Phong #sprite:phong_bored
 
-Mai tính tiếp. #speaker:Phong #sprite:phong_talk
+Mai tính tiếp. #speaker:Phong #sprite:phong_bored
 
 ...
 
-Nam xoay nhẹ laptop lại về phía mình.
+Nam xoay nhẹ laptop của Phong lại về phía mình.
 
 Màn hình hiển thị danh sách công việc.
 ...
@@ -407,11 +411,11 @@ Nam cũng im lặng.
 Sự bất ngờ xen lẫn cảm xúc "tụt mood" mang lại sự yên tĩnh tràn ngập trong tâm trí Nam và Phong. 
 Ngoài cửa kính, trời đã muộn.
 ...
-Mai lại làm thôi. #speaker:Nam #sprite:nam_talk
-Mai mấy giờ? #speaker:Phong #sprite:phong_talk
-Bảy giờ. #speaker:Nam #sprite:nam_talk1
-Lại Kohii? #speaker:Phong #sprite:phong_talk
-Lại Kohii. #speaker:Nam #sprite:nam_talk1
+Mai lại làm thôi. #speaker:Nam #sprite:nam_bored
+Mai mấy giờ? #speaker:Phong #sprite:phong_bored
+Bảy giờ. #speaker:Nam #sprite:nam_exhaust
+Lại Kohii? #speaker:Phong #sprite:phong_exhaust
+Lại Kohii. #speaker:Nam #sprite:nam_exhaust
 ...
 Phong gập laptop lại.
 Thu dọn đồ đạc cùng Nam.
@@ -421,5 +425,6 @@ Về thôi. #speaker:Phong #sprite:phong_smile
 ...
 ...
 ...
-<b>[TASK DO: 03 \| TASK DONE: 02]</b>
+<b>[TODO TASK: 03]</b>
+<b>[TASK COMPLETED: <color='red'>02</color>]</b>
 -> DONE

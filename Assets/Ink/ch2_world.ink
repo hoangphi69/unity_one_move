@@ -252,13 +252,13 @@ VAR voucher = false
 
 = secret_encounter
 Làm sao mà em có được voucher này vậy? #speaker:Mai
-Ừmm... em tìm thấy nó ở thư viện, nhờ vậy mà em cũng biết tới quán của chị. #speaker:Nam
+Ừmm... em tìm thấy nó ở thư viện, nhờ vậy mà em cũng biết tới quán của chị. #speaker:Nam #sprite:nam_idea
 Vậy sao? Có điều... voucher này hết hạn từ lâu rồi em ạ. #speaker:Mai
-À-à vậy hả chị? Tiếc thật chứ- #speaker:Nam
-Không sao, chỉ lần này thôi, chị sẽ đặc cách cho hai "chủ nhân nhỏ" của chị. #speaker:Mai
+À-à vậy hả chị? Tiếc thật chứ- #speaker:Nam #sprite:nam_bored
+Không sao, chỉ lần này thôi, chị sẽ đặc cách cho hai "chủ nhân" của chị. #speaker:Mai
 "Chủ nhân" muốn gọi gì nào? #speaker:Mai
-* [Bạc xỉu không sữa] 2 bạc xỉu không sữa ạ. #speaker:Nam
-* [Cacao nóng nhiều đá] 2 cacao nóng nhiều đá ạ. #speaker:Nam
-* [Bánh sừng tê giác] 2 bánh sừng tê giác ạ. #speaker:Nam
+* [Bạc xỉu không sữa] 2 bạc xỉu không sữa ạ. #speaker:Nam #sprite:nam_idea
+* [Cacao nóng nhiều đá] 2 cacao nóng nhiều đá ạ. #speaker:Nam #sprite:nam_idea
+* [Bánh sừng tê giác] 2 bánh sừng tê giác ạ. #speaker:Nam #sprite:nam_idea
 - Chủ nhân vui lòng chờ ít phút nhé. #speaker:Mai
 -> DONE
