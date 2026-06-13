@@ -5,8 +5,8 @@
 { stopping:
   - Chiếc giường trông thật bừa bộn.
     Tuy nhiên đó là lẽ thường tình với bất cứ ai sống một mình, kể cả Nam.
-    Mình sẽ dọn giường sau vậy. #speaker:Nam #nam_thinking
-  - Dọn giường để sau vậy. #speaker:Nam #nam_thinking
+    Mình sẽ dọn giường sau vậy. #speaker:Nam #sprite:nam_exhaust
+  - Dọn giường để sau vậy. #speaker:Nam #sprite:nam_exhaust
 }
 -> DONE
 
@@ -16,7 +16,7 @@
   - Trên bàn ngổn ngang nhiều loại giấy tờ, một số còn rải rác lộn xộn dưới sàn.
     Toàn bộ là tài liệu Nam tổng hợp được trong mấy tuần qua phục vụ cho đồ án mà cả hai đang làm.
 }
-Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #nam_thinking
+Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #nam_silent
 -> DONE
 
 
@@ -25,8 +25,8 @@ Nhìn bừa bộn quá, mình phải sắp xếp lại sau thôi. #speaker:Nam #
   - Chiếu qua cửa sổ là ánh nắng của buổi sáng mang theo sức sống của cảnh vật.
     Tiếng chim hót líu lo cùng tiếng gió lao xao qua kẽ lá tạo nên khúc âm hưởng của một buổi sáng sớm.
     ...Đâu đó có tiếng cãi cọ của hàng xóm vang vọng khắp khu nhà trọ.
-    Mới sáng sớm mà họ đã om sòm thế nhỉ. #speaker:Nam #nam_thinking
-  - Chắc mai mốt mình phải lắp cách âm vào mới được. #speaker:Nam #nam_thinking
+    Mới sáng sớm mà họ đã om sòm thế nhỉ. #speaker:Nam #nam_exhaust
+  - Chắc mai mốt mình phải lắp cách âm vào mới được. #speaker:Nam #nam_silent
 }
 -> DONE
 

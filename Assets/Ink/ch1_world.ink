@@ -68,8 +68,8 @@ Chọn một cuốn sách?
   "<i>Hành trình trở thành tổng tài sống ảo, phông bạt cuộc đời từ hai bàn tay trắng. Phần 3</i>"
 + [Bỏ đi]
 - { stopping:
-  - Nghe nhảm nhí quá, ai lại viết ra mấy đầu sách này nhỉ? #speaker:Nam #nam_thinking
-  - Mấy cuốn sách này không phù hợp với mình. #speaker:Nam #nam_thinking
+  - Nghe nhảm nhí quá, ai lại viết ra mấy đầu sách này nhỉ? #speaker:Nam #sprite:nam_confused
+  - Mấy cuốn sách này không phù hợp với mình. #speaker:Nam #sprite:nam_talk2
 }
 -> DONE
 
@@ -79,10 +79,10 @@ Chọn một cuốn sách?
   - Một dãy các tủ cá nhân để bạn cất đồ của mình trước khi vào thư viện.
     Tuy nhiên do thư viện không đánh số tủ nên rất nhiều người đã gặp khó khăn trong việc tìm đồ của mình, trong đó có Nam.
     Nhận thức được sự hạn chế của trí nhớ ngắn hạn của bản thân, cậu tự nhủ sẽ không bao giờ dùng tủ cá nhân của thư viện.
-  - ... #speaker:Nam
-    Khoan đã, đồ của mình ở tủ nào nhỉ? #speaker:Nam
-    ...À, hôm nay mình không đem đồ cá nhân lên thư viện. #speaker:Nam
-  - Mình không đem đồ cá nhân lên thư viện. #speaker:Nam
+  - ... #speaker:Nam #sprite:nam_talk2
+    Khoan đã, đồ của mình ở tủ nào nhỉ? #speaker:Nam #sprite:nam_surprise
+    ...À, hôm nay mình không đem đồ cá nhân lên thư viện. #speaker:Nam #sprite:nam_confused
+  - Mình không đem đồ cá nhân lên thư viện. #speaker:Nam #sprite:talk1
 }
 -> DONE
 
@@ -100,8 +100,8 @@ Balo của mình cất ở tủ nào nhỉ??? #speaker:Gái mất đồ
   - Khu vực này bao gồm các loại sách giáo khoa, giáo trình và ngoại ngữ phổ thông.
     Tuy nhiên trình độ học vấn của cậu đã vượt xa các kiến thức mà những cuốn sách này có thể đem lại.
     Ít nhất là cậu nghĩ thế.
-    Ý tưởng không có ở đây rồi #speaker:Nam #nam_thinking
-  - Mình nên đi tìm tủ sách khác. #speaker:Nam #nam_thinking
+    Ý tưởng không có ở đây rồi #speaker:Nam #sprite:nam_silent
+  - Mình nên đi tìm tủ sách khác. #speaker:Nam #sprite:nam_confused
 }
 -> DONE
 
@@ -111,8 +111,8 @@ Balo của mình cất ở tủ nào nhỉ??? #speaker:Gái mất đồ
   - Khu vực này bao gồm các loại sách văn học nước ngoài.
     Rất nhiều các tác phẩm và tiểu thuyết nổi tiếng của các quốc gia phương Tây và phương Đông được sắp xếp ngay ngắn trên tủ.
     Điều khiến Nam chú ý đó là một lượng lớn các tiểu thuyết ngắn Nhật bị thiếu trên kệ.
-    Ý tưởng không có ở đây rồi. #speaker:Nam #nam_thinking
-  - Mình nên đi tìm tủ sách khác. #speaker:Nam #nam_thinking
+    Ý tưởng không có ở đây rồi. #speaker:Nam #sprite:nam_confused
+  - Mình nên đi tìm tủ sách khác. #speaker:Nam #sprite:nam_confused
 }
 -> DONE
 
@@ -121,7 +121,7 @@ Balo của mình cất ở tủ nào nhỉ??? #speaker:Gái mất đồ
   - Cậu học sinh đang miệt mài gõ phím trước một chiếc máy tính cũ kỹ.
     Màn hình trước mặt cậu ta hiển thị những dòng code bị gạch chân đỏ lòm.
 }
-Có lẽ mình không nên làm phiền cậu ta #speaker:Nam #nam_thinking
+Có lẽ mình không nên làm phiền cậu ta. #speaker:Nam #sprite:nam_talk
 -> DONE
 
 === ch1_h2_npc_drop_books ===
@@ -130,7 +130,7 @@ Có lẽ mình không nên làm phiền cậu ta #speaker:Nam #nam_thinking
     Có lẽ một trong hai người họ vừa làm đổ sách của thư viện.
     Vì ưu tiên việc tìm kiếm ý tưởng, Nam lờ đi như chưa thấy gì.
     Hoặc do cậu không dám chủ động nói chuyện với con gái.
-  - Mình nên tìm kiếm ý tưởng thôi. #speaker:Nam #nam_thinking
+  - Mình nên tìm kiếm ý tưởng thôi. #speaker:Nam #sprite:nam_silent
 }
 -> DONE
 
