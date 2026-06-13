@@ -354,7 +354,7 @@ Hôm nay phải ăn mừng mới được. #speaker:Phong
 Cuối cùng anh em mình cũng giải quyết xong cả mớ rắc rối này rồi!!! #speaker:Nam
 Anh em mình quá đỉnh!! #speaker:Nam & Phong
 
-#bg:coffee_shop_evening
+#sfx:camera_snap #bg:coffee_shop_evening
 ...
 ...
 Ngay sau khi hò reo ăn mừng, Nam và Phong nhận ra xung quanh không còn ai ngoài chị nhân viên đứng ở quầy.
@@ -367,10 +367,10 @@ Phong lúc này đóng phần mềm giả lập.
 Rồi dừng lại ở một tab vẫn đang mở.
 ...
 ...
-<i>[TASK DO:..]. </i>
-<i>[TASK DO:...]. </i>
-<i>[TASK DO:....]. </i>
-<i>[TASK DO:03...]. </i>
+<i>[TODO TASK: .]. </i>
+<i>[TODO TASK: ..]. </i>
+<i>[TODO TASK: ...]. </i>
+<i>[TODO TASK: 03]. </i>
 ...
 
 Cậu chưa tắt máy à? #speaker:Nam #sprite:nam_talk1
@@ -426,5 +426,5 @@ Về thôi. #speaker:Phong #sprite:phong_smile
 ...
 ...
 <b>[TODO TASK: 03]</b>
-<b>[TASK COMPLETED: <color='red'>02</color>]</b>
+<b>[TASK COMPLETED: <color="red">02</color>]</b>
 -> DONE
