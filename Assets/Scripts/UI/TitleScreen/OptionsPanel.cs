@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class OptionsPanel : NavigationPanel
 {
-  [Header("Graphics Settings UI")]
-  [SerializeField] private InputField qualityField;
-  [SerializeField] private HorizontalSelector qualitySelector;
+  // [Header("Graphics Settings UI")]
+  // [SerializeField] private InputField qualityField;
+  // [SerializeField] private HorizontalSelector qualitySelector;
 
   [SerializeField] private InputField resolutionField;
   [SerializeField] private HorizontalSelector resolutionSelector;
@@ -55,7 +55,7 @@ public class OptionsPanel : NavigationPanel
     InitializeInputs();
 
     // Listeners
-    qualitySelector.OnValueChanged.AddListener(val => { currentGraphics.QualityIndex = val; HandleGraphicsChange(); });
+    // qualitySelector.OnValueChanged.AddListener(val => { currentGraphics.QualityIndex = val; HandleGraphicsChange(); });
     resolutionSelector.OnValueChanged.AddListener(val => { currentGraphics.ResolutionIndex = val; HandleGraphicsChange(); });
     fullscreenToggle.OnValueChanged.AddListener(val => { currentGraphics.IsFullscreen = val; HandleGraphicsChange(); });
 
@@ -73,7 +73,7 @@ public class OptionsPanel : NavigationPanel
 
   void OnDisable()
   {
-    qualitySelector.OnValueChanged.RemoveAllListeners();
+    // qualitySelector.OnValueChanged.RemoveAllListeners();
     resolutionSelector.OnValueChanged.RemoveAllListeners();
     fullscreenToggle.OnValueChanged.RemoveAllListeners();
 
@@ -89,7 +89,7 @@ public class OptionsPanel : NavigationPanel
 
   private void InitializeInputs()
   {
-    qualitySelector.Setup(QualitySettings.names.ToList(), currentGraphics.QualityIndex);
+    // qualitySelector.Setup(QualitySettings.names.ToList(), currentGraphics.QualityIndex);
 
     var resolutions = GameSettingsManager.Instance.Graphics.AvailableResolutions;
     List<string> resStrings = new List<string>();
@@ -147,7 +147,7 @@ public class OptionsPanel : NavigationPanel
   private void RevertToDefault()
   {
     currentGraphics = defaultGraphics.Clone();
-    qualitySelector.SetValueWithoutNotify(currentGraphics.QualityIndex);
+    // qualitySelector.SetValueWithoutNotify(currentGraphics.QualityIndex);
     resolutionSelector.SetValueWithoutNotify(currentGraphics.ResolutionIndex);
     fullscreenToggle.SetValueWithoutNotify(currentGraphics.IsFullscreen);
     HandleGraphicsChange();
@@ -162,7 +162,7 @@ public class OptionsPanel : NavigationPanel
 
   private void UpdateUI()
   {
-    qualityField.SetHighlight(currentGraphics.QualityIndex != defaultGraphics.QualityIndex);
+    // qualityField.SetHighlight(currentGraphics.QualityIndex != defaultGraphics.QualityIndex);
     resolutionField.SetHighlight(currentGraphics.ResolutionIndex != defaultGraphics.ResolutionIndex);
     fullscreenField.SetHighlight(currentGraphics.IsFullscreen != defaultGraphics.IsFullscreen);
 

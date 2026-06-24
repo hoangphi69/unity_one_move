@@ -1289,8 +1289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f574f8799739f418725afbca33f92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OptionsPanel
-  qualityField: {fileID: 3220157294481518424}
-  qualitySelector: {fileID: 6838873138309490308}
   resolutionField: {fileID: 2230462556444975519}
   resolutionSelector: {fileID: 6032276160142351429}
   fullscreenField: {fileID: 1672582739895671003}
@@ -1749,7 +1747,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 72, y: -216.46411}
-  m_SizeDelta: {x: 0, y: 72.4641}
+  m_SizeDelta: {x: 215.91, y: 72.4641}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6861649946869145221
 CanvasRenderer:
@@ -2944,7 +2942,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 72, y: -72}
-  m_SizeDelta: {x: 0, y: 72.4641}
+  m_SizeDelta: {x: 188.12, y: 72.4641}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8890277970511250905
 CanvasRenderer:
@@ -4831,6 +4829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brightness
       objectReference: {fileID: 0}
+    - target: {fileID: 1771345069487047879, guid: 154a45ffb9e318a438571b7377db296b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4238793482926292056, guid: 154a45ffb9e318a438571b7377db296b, type: 3}
       propertyPath: m_text
       value: Brightness
@@ -5189,6 +5191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quality
       objectReference: {fileID: 0}
+    - target: {fileID: 1771345069487047879, guid: 154a45ffb9e318a438571b7377db296b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4238793482926292056, guid: 154a45ffb9e318a438571b7377db296b, type: 3}
       propertyPath: m_text
       value: Quality
@@ -5329,17 +5335,6 @@ PrefabInstance:
       addedObject: {fileID: 3578539931667260784}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 154a45ffb9e318a438571b7377db296b, type: 3}
---- !u!114 &3220157294481518424 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4075648646104625105, guid: 154a45ffb9e318a438571b7377db296b, type: 3}
-  m_PrefabInstance: {fileID: 1459121363006128265}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 280e22ca527360f46b830ad3270e6e3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputField
 --- !u!224 &6181317797166087725 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4753449279354863268, guid: 154a45ffb9e318a438571b7377db296b, type: 3}
@@ -5904,17 +5899,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3245644012960178058, guid: 85c81cd8e0eefad4bbb320f3c11083fc, type: 3}
   m_PrefabInstance: {fileID: 2063597590453074682}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6838873138309490308 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4777142665234570366, guid: 85c81cd8e0eefad4bbb320f3c11083fc, type: 3}
-  m_PrefabInstance: {fileID: 2063597590453074682}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5e5f21c13561bb42bf56d9418234f91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HorizontalSelector
 --- !u!1001 &2428088270270173961
 PrefabInstance:
   m_ObjectHideFlags: 0

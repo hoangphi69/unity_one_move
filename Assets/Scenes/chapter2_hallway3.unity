@@ -15205,7 +15205,7 @@ MonoBehaviour:
   lockedDialogue: ch2_h3_door
   bubble: 1
   hideFirstTime: 1
-  bubblePrefab: {fileID: 4310547284113562885, guid: 78f390fb863edb94689284adb5d9f5ee, type: 3}
+  bubblePrefab: {fileID: 6787818325001418262, guid: f67d79f076c33c547b8fe6001ecda398, type: 3}
   bubbleSpawnPoint: {fileID: 678774564}
 --- !u!4 &2058061792 stripped
 Transform:
